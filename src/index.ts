@@ -1,7 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server';
-
 import { PrismaClient } from './config/prisma-client';
-
 import { ContadorTypeDefs, EmpresaTypeDefs, UserTypeDefs } from './graphql/typeDefs';
 import { ContadorResolvers, EmpresaResolvers, UserResolvers } from './graphql/resolvers';
 
