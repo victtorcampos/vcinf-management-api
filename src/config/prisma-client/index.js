@@ -153,7 +153,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\APP\\tech.vcinf.app\\vcinf-management-api\\src\\config\\prisma-client",
+      "value": "D:\\app\\tech.vcinf.app\\vcinf-management-api\\src\\config\\prisma-client",
       "fromEnvVar": null
     },
     "config": {
@@ -167,12 +167,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\APP\\tech.vcinf.app\\vcinf-management-api\\prisma\\schema.prisma",
+    "sourceFilePath": "D:\\app\\tech.vcinf.app\\vcinf-management-api\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "5.17.0",
