@@ -12,6 +12,5 @@ const server = new ApolloServer({ typeDefs, resolvers, context: ({ req }) => { r
 server.listen().then(({ url }) => {
 
     console.log(`🚀 Server ready at ${url}`);
-   
-    
+
 });
