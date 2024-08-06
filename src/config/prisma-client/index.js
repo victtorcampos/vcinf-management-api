@@ -153,7 +153,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\APP\\tech.vcinf.app\\user-management-api\\src\\config\\prisma-client",
+      "value": "D:\\APP\\tech.vcinf.app\\vcinf-management-api\\src\\config\\prisma-client",
       "fromEnvVar": null
     },
     "config": {
@@ -167,7 +167,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\APP\\tech.vcinf.app\\user-management-api\\prisma\\schema.prisma",
+    "sourceFilePath": "D:\\APP\\tech.vcinf.app\\vcinf-management-api\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -181,6 +181,7 @@ const config = {
     "db"
   ],
   "activeProvider": "mongodb",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
