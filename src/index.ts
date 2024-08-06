@@ -10,7 +10,5 @@ const resolvers = [ContadorResolvers, UserResolvers, EmpresaResolvers]
 const server = new ApolloServer({ typeDefs, resolvers, context: ({ req }) => { return { prisma, req, }; }, });
 
 server.listen().then(({ url }) => {
-
     console.log(`🚀 Server ready at ${url}`);
-
 });
