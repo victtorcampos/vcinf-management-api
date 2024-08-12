@@ -14,6 +14,7 @@ export const isAdminAuth = (user: any) => {
         throw new AuthenticationError('Not authorized as admin');
     }
 };
+
 export const generateToken = async (user: TypeUser): Promise<string> => await sign({ userId: user.id, role: user.role }, process.env.JWT_SECRET!, { expiresIn: '1d' });
 export const verifyToken = (token: string, JWT_SECRET: string) => {
     const { userId, role } = verify(token, JWT_SECRET) as { userId: string; role: string };
