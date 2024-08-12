@@ -138,7 +138,7 @@ exports.Prisma.UserContadorScalarFieldEnum = {
   contadorId: 'contadorId'
 };
 
-exports.Prisma.EmpresaScalarFieldEnum = {
+exports.Prisma.EmitenteScalarFieldEnum = {
   id: 'id',
   cod_dominio: 'cod_dominio',
   nome: 'nome',
@@ -171,7 +171,7 @@ exports.Prisma.ModelName = {
   User: 'User',
   Contador: 'Contador',
   UserContador: 'UserContador',
-  Empresa: 'Empresa'
+  Emitente: 'Emitente'
 };
 
 /**

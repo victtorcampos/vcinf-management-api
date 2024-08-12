@@ -32,7 +32,7 @@ model Contador {
   telefone  String?
   email     String?
   usuarios  UserContador[]
-  Empresa   Empresa[]
+  Emitentes   Emitente[]
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
 }
@@ -49,7 +49,7 @@ model UserContador {
   @@unique([userId, contadorId])
 }
 
-model Empresa {
+model Emitente {
   id           String    @id @default(auto()) @map("_id") @db.ObjectId
   cod_dominio  String?
   nome         String

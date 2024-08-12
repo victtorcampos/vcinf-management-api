@@ -29,10 +29,10 @@ export type Contador = $Result.DefaultSelection<Prisma.$ContadorPayload>
  */
 export type UserContador = $Result.DefaultSelection<Prisma.$UserContadorPayload>
 /**
- * Model Empresa
+ * Model Emitente
  * 
  */
-export type Empresa = $Result.DefaultSelection<Prisma.$EmpresaPayload>
+export type Emitente = $Result.DefaultSelection<Prisma.$EmitentePayload>
 
 /**
  * Enums
@@ -174,14 +174,14 @@ export class PrismaClient<
   get userContador(): Prisma.UserContadorDelegate<ExtArgs>;
 
   /**
-   * `prisma.empresa`: Exposes CRUD operations for the **Empresa** model.
+   * `prisma.emitente`: Exposes CRUD operations for the **Emitente** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Empresas
-    * const empresas = await prisma.empresa.findMany()
+    * // Fetch zero or more Emitentes
+    * const emitentes = await prisma.emitente.findMany()
     * ```
     */
-  get empresa(): Prisma.EmpresaDelegate<ExtArgs>;
+  get emitente(): Prisma.EmitenteDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -662,7 +662,7 @@ export namespace Prisma {
     User: 'User',
     Contador: 'Contador',
     UserContador: 'UserContador',
-    Empresa: 'Empresa'
+    Emitente: 'Emitente'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -678,7 +678,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "contador" | "userContador" | "empresa"
+      modelProps: "user" | "contador" | "userContador" | "emitente"
       txIsolationLevel: never
     }
     model: {
@@ -904,77 +904,77 @@ export namespace Prisma {
           }
         }
       }
-      Empresa: {
-        payload: Prisma.$EmpresaPayload<ExtArgs>
-        fields: Prisma.EmpresaFieldRefs
+      Emitente: {
+        payload: Prisma.$EmitentePayload<ExtArgs>
+        fields: Prisma.EmitenteFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.EmpresaFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmpresaPayload> | null
+            args: Prisma.EmitenteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmitentePayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.EmpresaFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmpresaPayload>
+            args: Prisma.EmitenteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmitentePayload>
           }
           findFirst: {
-            args: Prisma.EmpresaFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmpresaPayload> | null
+            args: Prisma.EmitenteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmitentePayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.EmpresaFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmpresaPayload>
+            args: Prisma.EmitenteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmitentePayload>
           }
           findMany: {
-            args: Prisma.EmpresaFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmpresaPayload>[]
+            args: Prisma.EmitenteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmitentePayload>[]
           }
           create: {
-            args: Prisma.EmpresaCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmpresaPayload>
+            args: Prisma.EmitenteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmitentePayload>
           }
           createMany: {
-            args: Prisma.EmpresaCreateManyArgs<ExtArgs>
+            args: Prisma.EmitenteCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.EmpresaDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmpresaPayload>
+            args: Prisma.EmitenteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmitentePayload>
           }
           update: {
-            args: Prisma.EmpresaUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmpresaPayload>
+            args: Prisma.EmitenteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmitentePayload>
           }
           deleteMany: {
-            args: Prisma.EmpresaDeleteManyArgs<ExtArgs>
+            args: Prisma.EmitenteDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.EmpresaUpdateManyArgs<ExtArgs>
+            args: Prisma.EmitenteUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.EmpresaUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$EmpresaPayload>
+            args: Prisma.EmitenteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmitentePayload>
           }
           aggregate: {
-            args: Prisma.EmpresaAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateEmpresa>
+            args: Prisma.EmitenteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmitente>
           }
           groupBy: {
-            args: Prisma.EmpresaGroupByArgs<ExtArgs>
-            result: $Utils.Optional<EmpresaGroupByOutputType>[]
+            args: Prisma.EmitenteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmitenteGroupByOutputType>[]
           }
           findRaw: {
-            args: Prisma.EmpresaFindRawArgs<ExtArgs>
+            args: Prisma.EmitenteFindRawArgs<ExtArgs>
             result: JsonObject
           }
           aggregateRaw: {
-            args: Prisma.EmpresaAggregateRawArgs<ExtArgs>
+            args: Prisma.EmitenteAggregateRawArgs<ExtArgs>
             result: JsonObject
           }
           count: {
-            args: Prisma.EmpresaCountArgs<ExtArgs>
-            result: $Utils.Optional<EmpresaCountAggregateOutputType> | number
+            args: Prisma.EmitenteCountArgs<ExtArgs>
+            result: $Utils.Optional<EmitenteCountAggregateOutputType> | number
           }
         }
       }
@@ -1158,12 +1158,12 @@ export namespace Prisma {
 
   export type ContadorCountOutputType = {
     usuarios: number
-    Empresa: number
+    Emitentes: number
   }
 
   export type ContadorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuarios?: boolean | ContadorCountOutputTypeCountUsuariosArgs
-    Empresa?: boolean | ContadorCountOutputTypeCountEmpresaArgs
+    Emitentes?: boolean | ContadorCountOutputTypeCountEmitentesArgs
   }
 
   // Custom InputTypes
@@ -1187,8 +1187,8 @@ export namespace Prisma {
   /**
    * ContadorCountOutputType without action
    */
-  export type ContadorCountOutputTypeCountEmpresaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmpresaWhereInput
+  export type ContadorCountOutputTypeCountEmitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmitenteWhereInput
   }
 
 
@@ -2347,7 +2347,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
-    Empresa?: boolean | Contador$EmpresaArgs<ExtArgs>
+    Emitentes?: boolean | Contador$EmitentesArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contador"]>
 
@@ -2365,7 +2365,7 @@ export namespace Prisma {
 
   export type ContadorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
-    Empresa?: boolean | Contador$EmpresaArgs<ExtArgs>
+    Emitentes?: boolean | Contador$EmitentesArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2373,7 +2373,7 @@ export namespace Prisma {
     name: "Contador"
     objects: {
       usuarios: Prisma.$UserContadorPayload<ExtArgs>[]
-      Empresa: Prisma.$EmpresaPayload<ExtArgs>[]
+      Emitentes: Prisma.$EmitentePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2748,7 +2748,7 @@ export namespace Prisma {
   export interface Prisma__ContadorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     usuarios<T extends Contador$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findMany"> | Null>
-    Empresa<T extends Contador$EmpresaArgs<ExtArgs> = {}>(args?: Subset<T, Contador$EmpresaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findMany"> | Null>
+    Emitentes<T extends Contador$EmitentesArgs<ExtArgs> = {}>(args?: Subset<T, Contador$EmitentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3132,23 +3132,23 @@ export namespace Prisma {
   }
 
   /**
-   * Contador.Empresa
+   * Contador.Emitentes
    */
-  export type Contador$EmpresaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Contador$EmitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
-    where?: EmpresaWhereInput
-    orderBy?: EmpresaOrderByWithRelationInput | EmpresaOrderByWithRelationInput[]
-    cursor?: EmpresaWhereUniqueInput
+    include?: EmitenteInclude<ExtArgs> | null
+    where?: EmitenteWhereInput
+    orderBy?: EmitenteOrderByWithRelationInput | EmitenteOrderByWithRelationInput[]
+    cursor?: EmitenteWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: EmpresaScalarFieldEnum | EmpresaScalarFieldEnum[]
+    distinct?: EmitenteScalarFieldEnum | EmitenteScalarFieldEnum[]
   }
 
   /**
@@ -4078,16 +4078,16 @@ export namespace Prisma {
 
 
   /**
-   * Model Empresa
+   * Model Emitente
    */
 
-  export type AggregateEmpresa = {
-    _count: EmpresaCountAggregateOutputType | null
-    _min: EmpresaMinAggregateOutputType | null
-    _max: EmpresaMaxAggregateOutputType | null
+  export type AggregateEmitente = {
+    _count: EmitenteCountAggregateOutputType | null
+    _min: EmitenteMinAggregateOutputType | null
+    _max: EmitenteMaxAggregateOutputType | null
   }
 
-  export type EmpresaMinAggregateOutputType = {
+  export type EmitenteMinAggregateOutputType = {
     id: string | null
     cod_dominio: string | null
     nome: string | null
@@ -4100,7 +4100,7 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type EmpresaMaxAggregateOutputType = {
+  export type EmitenteMaxAggregateOutputType = {
     id: string | null
     cod_dominio: string | null
     nome: string | null
@@ -4113,7 +4113,7 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type EmpresaCountAggregateOutputType = {
+  export type EmitenteCountAggregateOutputType = {
     id: number
     cod_dominio: number
     nome: number
@@ -4128,7 +4128,7 @@ export namespace Prisma {
   }
 
 
-  export type EmpresaMinAggregateInputType = {
+  export type EmitenteMinAggregateInputType = {
     id?: true
     cod_dominio?: true
     nome?: true
@@ -4141,7 +4141,7 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type EmpresaMaxAggregateInputType = {
+  export type EmitenteMaxAggregateInputType = {
     id?: true
     cod_dominio?: true
     nome?: true
@@ -4154,7 +4154,7 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type EmpresaCountAggregateInputType = {
+  export type EmitenteCountAggregateInputType = {
     id?: true
     cod_dominio?: true
     nome?: true
@@ -4168,79 +4168,79 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type EmpresaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Empresa to aggregate.
+     * Filter which Emitente to aggregate.
      */
-    where?: EmpresaWhereInput
+    where?: EmitenteWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Empresas to fetch.
+     * Determine the order of Emitentes to fetch.
      */
-    orderBy?: EmpresaOrderByWithRelationInput | EmpresaOrderByWithRelationInput[]
+    orderBy?: EmitenteOrderByWithRelationInput | EmitenteOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: EmpresaWhereUniqueInput
+    cursor?: EmitenteWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Empresas from the position of the cursor.
+     * Take `±n` Emitentes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Empresas.
+     * Skip the first `n` Emitentes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Empresas
+     * Count returned Emitentes
     **/
-    _count?: true | EmpresaCountAggregateInputType
+    _count?: true | EmitenteCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: EmpresaMinAggregateInputType
+    _min?: EmitenteMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: EmpresaMaxAggregateInputType
+    _max?: EmitenteMaxAggregateInputType
   }
 
-  export type GetEmpresaAggregateType<T extends EmpresaAggregateArgs> = {
-        [P in keyof T & keyof AggregateEmpresa]: P extends '_count' | 'count'
+  export type GetEmitenteAggregateType<T extends EmitenteAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmitente]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateEmpresa[P]>
-      : GetScalarType<T[P], AggregateEmpresa[P]>
+        : GetScalarType<T[P], AggregateEmitente[P]>
+      : GetScalarType<T[P], AggregateEmitente[P]>
   }
 
 
 
 
-  export type EmpresaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmpresaWhereInput
-    orderBy?: EmpresaOrderByWithAggregationInput | EmpresaOrderByWithAggregationInput[]
-    by: EmpresaScalarFieldEnum[] | EmpresaScalarFieldEnum
-    having?: EmpresaScalarWhereWithAggregatesInput
+  export type EmitenteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmitenteWhereInput
+    orderBy?: EmitenteOrderByWithAggregationInput | EmitenteOrderByWithAggregationInput[]
+    by: EmitenteScalarFieldEnum[] | EmitenteScalarFieldEnum
+    having?: EmitenteScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: EmpresaCountAggregateInputType | true
-    _min?: EmpresaMinAggregateInputType
-    _max?: EmpresaMaxAggregateInputType
+    _count?: EmitenteCountAggregateInputType | true
+    _min?: EmitenteMinAggregateInputType
+    _max?: EmitenteMaxAggregateInputType
   }
 
-  export type EmpresaGroupByOutputType = {
+  export type EmitenteGroupByOutputType = {
     id: string
     cod_dominio: string | null
     nome: string
@@ -4251,26 +4251,26 @@ export namespace Prisma {
     contadorId: string | null
     createdAt: Date
     updatedAt: Date
-    _count: EmpresaCountAggregateOutputType | null
-    _min: EmpresaMinAggregateOutputType | null
-    _max: EmpresaMaxAggregateOutputType | null
+    _count: EmitenteCountAggregateOutputType | null
+    _min: EmitenteMinAggregateOutputType | null
+    _max: EmitenteMaxAggregateOutputType | null
   }
 
-  type GetEmpresaGroupByPayload<T extends EmpresaGroupByArgs> = Prisma.PrismaPromise<
+  type GetEmitenteGroupByPayload<T extends EmitenteGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<EmpresaGroupByOutputType, T['by']> &
+      PickEnumerable<EmitenteGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof EmpresaGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof EmitenteGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], EmpresaGroupByOutputType[P]>
-            : GetScalarType<T[P], EmpresaGroupByOutputType[P]>
+              : GetScalarType<T[P], EmitenteGroupByOutputType[P]>
+            : GetScalarType<T[P], EmitenteGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type EmpresaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type EmitenteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     cod_dominio?: boolean
     nome?: boolean
@@ -4281,11 +4281,11 @@ export namespace Prisma {
     contadorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    contador?: boolean | Empresa$contadorArgs<ExtArgs>
-  }, ExtArgs["result"]["empresa"]>
+    contador?: boolean | Emitente$contadorArgs<ExtArgs>
+  }, ExtArgs["result"]["emitente"]>
 
 
-  export type EmpresaSelectScalar = {
+  export type EmitenteSelectScalar = {
     id?: boolean
     cod_dominio?: boolean
     nome?: boolean
@@ -4298,12 +4298,12 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type EmpresaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    contador?: boolean | Empresa$contadorArgs<ExtArgs>
+  export type EmitenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contador?: boolean | Emitente$contadorArgs<ExtArgs>
   }
 
-  export type $EmpresaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Empresa"
+  export type $EmitentePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Emitente"
     objects: {
       contador: Prisma.$ContadorPayload<ExtArgs> | null
     }
@@ -4318,143 +4318,143 @@ export namespace Prisma {
       contadorId: string | null
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["empresa"]>
+    }, ExtArgs["result"]["emitente"]>
     composites: {}
   }
 
-  type EmpresaGetPayload<S extends boolean | null | undefined | EmpresaDefaultArgs> = $Result.GetResult<Prisma.$EmpresaPayload, S>
+  type EmitenteGetPayload<S extends boolean | null | undefined | EmitenteDefaultArgs> = $Result.GetResult<Prisma.$EmitentePayload, S>
 
-  type EmpresaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<EmpresaFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: EmpresaCountAggregateInputType | true
+  type EmitenteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<EmitenteFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: EmitenteCountAggregateInputType | true
     }
 
-  export interface EmpresaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Empresa'], meta: { name: 'Empresa' } }
+  export interface EmitenteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Emitente'], meta: { name: 'Emitente' } }
     /**
-     * Find zero or one Empresa that matches the filter.
-     * @param {EmpresaFindUniqueArgs} args - Arguments to find a Empresa
+     * Find zero or one Emitente that matches the filter.
+     * @param {EmitenteFindUniqueArgs} args - Arguments to find a Emitente
      * @example
-     * // Get one Empresa
-     * const empresa = await prisma.empresa.findUnique({
+     * // Get one Emitente
+     * const emitente = await prisma.emitente.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends EmpresaFindUniqueArgs>(args: SelectSubset<T, EmpresaFindUniqueArgs<ExtArgs>>): Prisma__EmpresaClient<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    findUnique<T extends EmitenteFindUniqueArgs>(args: SelectSubset<T, EmitenteFindUniqueArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Empresa that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Emitente that matches the filter or throw an error with `error.code='P2025'` 
      * if no matches were found.
-     * @param {EmpresaFindUniqueOrThrowArgs} args - Arguments to find a Empresa
+     * @param {EmitenteFindUniqueOrThrowArgs} args - Arguments to find a Emitente
      * @example
-     * // Get one Empresa
-     * const empresa = await prisma.empresa.findUniqueOrThrow({
+     * // Get one Emitente
+     * const emitente = await prisma.emitente.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends EmpresaFindUniqueOrThrowArgs>(args: SelectSubset<T, EmpresaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmpresaClient<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    findUniqueOrThrow<T extends EmitenteFindUniqueOrThrowArgs>(args: SelectSubset<T, EmitenteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
 
     /**
-     * Find the first Empresa that matches the filter.
+     * Find the first Emitente that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmpresaFindFirstArgs} args - Arguments to find a Empresa
+     * @param {EmitenteFindFirstArgs} args - Arguments to find a Emitente
      * @example
-     * // Get one Empresa
-     * const empresa = await prisma.empresa.findFirst({
+     * // Get one Emitente
+     * const emitente = await prisma.emitente.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends EmpresaFindFirstArgs>(args?: SelectSubset<T, EmpresaFindFirstArgs<ExtArgs>>): Prisma__EmpresaClient<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    findFirst<T extends EmitenteFindFirstArgs>(args?: SelectSubset<T, EmitenteFindFirstArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
 
     /**
-     * Find the first Empresa that matches the filter or
+     * Find the first Emitente that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmpresaFindFirstOrThrowArgs} args - Arguments to find a Empresa
+     * @param {EmitenteFindFirstOrThrowArgs} args - Arguments to find a Emitente
      * @example
-     * // Get one Empresa
-     * const empresa = await prisma.empresa.findFirstOrThrow({
+     * // Get one Emitente
+     * const emitente = await prisma.emitente.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends EmpresaFindFirstOrThrowArgs>(args?: SelectSubset<T, EmpresaFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmpresaClient<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    findFirstOrThrow<T extends EmitenteFindFirstOrThrowArgs>(args?: SelectSubset<T, EmitenteFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
 
     /**
-     * Find zero or more Empresas that matches the filter.
+     * Find zero or more Emitentes that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmpresaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {EmitenteFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Empresas
-     * const empresas = await prisma.empresa.findMany()
+     * // Get all Emitentes
+     * const emitentes = await prisma.emitente.findMany()
      * 
-     * // Get first 10 Empresas
-     * const empresas = await prisma.empresa.findMany({ take: 10 })
+     * // Get first 10 Emitentes
+     * const emitentes = await prisma.emitente.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const empresaWithIdOnly = await prisma.empresa.findMany({ select: { id: true } })
+     * const emitenteWithIdOnly = await prisma.emitente.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends EmpresaFindManyArgs>(args?: SelectSubset<T, EmpresaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "findMany">>
+    findMany<T extends EmitenteFindManyArgs>(args?: SelectSubset<T, EmitenteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findMany">>
 
     /**
-     * Create a Empresa.
-     * @param {EmpresaCreateArgs} args - Arguments to create a Empresa.
+     * Create a Emitente.
+     * @param {EmitenteCreateArgs} args - Arguments to create a Emitente.
      * @example
-     * // Create one Empresa
-     * const Empresa = await prisma.empresa.create({
+     * // Create one Emitente
+     * const Emitente = await prisma.emitente.create({
      *   data: {
-     *     // ... data to create a Empresa
+     *     // ... data to create a Emitente
      *   }
      * })
      * 
      */
-    create<T extends EmpresaCreateArgs>(args: SelectSubset<T, EmpresaCreateArgs<ExtArgs>>): Prisma__EmpresaClient<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    create<T extends EmitenteCreateArgs>(args: SelectSubset<T, EmitenteCreateArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "create">, never, ExtArgs>
 
     /**
-     * Create many Empresas.
-     * @param {EmpresaCreateManyArgs} args - Arguments to create many Empresas.
+     * Create many Emitentes.
+     * @param {EmitenteCreateManyArgs} args - Arguments to create many Emitentes.
      * @example
-     * // Create many Empresas
-     * const empresa = await prisma.empresa.createMany({
+     * // Create many Emitentes
+     * const emitente = await prisma.emitente.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends EmpresaCreateManyArgs>(args?: SelectSubset<T, EmpresaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends EmitenteCreateManyArgs>(args?: SelectSubset<T, EmitenteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Empresa.
-     * @param {EmpresaDeleteArgs} args - Arguments to delete one Empresa.
+     * Delete a Emitente.
+     * @param {EmitenteDeleteArgs} args - Arguments to delete one Emitente.
      * @example
-     * // Delete one Empresa
-     * const Empresa = await prisma.empresa.delete({
+     * // Delete one Emitente
+     * const Emitente = await prisma.emitente.delete({
      *   where: {
-     *     // ... filter to delete one Empresa
+     *     // ... filter to delete one Emitente
      *   }
      * })
      * 
      */
-    delete<T extends EmpresaDeleteArgs>(args: SelectSubset<T, EmpresaDeleteArgs<ExtArgs>>): Prisma__EmpresaClient<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    delete<T extends EmitenteDeleteArgs>(args: SelectSubset<T, EmitenteDeleteArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "delete">, never, ExtArgs>
 
     /**
-     * Update one Empresa.
-     * @param {EmpresaUpdateArgs} args - Arguments to update one Empresa.
+     * Update one Emitente.
+     * @param {EmitenteUpdateArgs} args - Arguments to update one Emitente.
      * @example
-     * // Update one Empresa
-     * const empresa = await prisma.empresa.update({
+     * // Update one Emitente
+     * const emitente = await prisma.emitente.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4464,30 +4464,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends EmpresaUpdateArgs>(args: SelectSubset<T, EmpresaUpdateArgs<ExtArgs>>): Prisma__EmpresaClient<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    update<T extends EmitenteUpdateArgs>(args: SelectSubset<T, EmitenteUpdateArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "update">, never, ExtArgs>
 
     /**
-     * Delete zero or more Empresas.
-     * @param {EmpresaDeleteManyArgs} args - Arguments to filter Empresas to delete.
+     * Delete zero or more Emitentes.
+     * @param {EmitenteDeleteManyArgs} args - Arguments to filter Emitentes to delete.
      * @example
-     * // Delete a few Empresas
-     * const { count } = await prisma.empresa.deleteMany({
+     * // Delete a few Emitentes
+     * const { count } = await prisma.emitente.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends EmpresaDeleteManyArgs>(args?: SelectSubset<T, EmpresaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends EmitenteDeleteManyArgs>(args?: SelectSubset<T, EmitenteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Empresas.
+     * Update zero or more Emitentes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmpresaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {EmitenteUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Empresas
-     * const empresa = await prisma.empresa.updateMany({
+     * // Update many Emitentes
+     * const emitente = await prisma.emitente.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -4497,79 +4497,79 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends EmpresaUpdateManyArgs>(args: SelectSubset<T, EmpresaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends EmitenteUpdateManyArgs>(args: SelectSubset<T, EmitenteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Empresa.
-     * @param {EmpresaUpsertArgs} args - Arguments to update or create a Empresa.
+     * Create or update one Emitente.
+     * @param {EmitenteUpsertArgs} args - Arguments to update or create a Emitente.
      * @example
-     * // Update or create a Empresa
-     * const empresa = await prisma.empresa.upsert({
+     * // Update or create a Emitente
+     * const emitente = await prisma.emitente.upsert({
      *   create: {
-     *     // ... data to create a Empresa
+     *     // ... data to create a Emitente
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Empresa we want to update
+     *     // ... the filter for the Emitente we want to update
      *   }
      * })
      */
-    upsert<T extends EmpresaUpsertArgs>(args: SelectSubset<T, EmpresaUpsertArgs<ExtArgs>>): Prisma__EmpresaClient<$Result.GetResult<Prisma.$EmpresaPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+    upsert<T extends EmitenteUpsertArgs>(args: SelectSubset<T, EmitenteUpsertArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
 
     /**
-     * Find zero or more Empresas that matches the filter.
-     * @param {EmpresaFindRawArgs} args - Select which filters you would like to apply.
+     * Find zero or more Emitentes that matches the filter.
+     * @param {EmitenteFindRawArgs} args - Select which filters you would like to apply.
      * @example
-     * const empresa = await prisma.empresa.findRaw({
+     * const emitente = await prisma.emitente.findRaw({
      *   filter: { age: { $gt: 25 } } 
      * })
      */
-    findRaw(args?: EmpresaFindRawArgs): Prisma.PrismaPromise<JsonObject>
+    findRaw(args?: EmitenteFindRawArgs): Prisma.PrismaPromise<JsonObject>
 
     /**
-     * Perform aggregation operations on a Empresa.
-     * @param {EmpresaAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * Perform aggregation operations on a Emitente.
+     * @param {EmitenteAggregateRawArgs} args - Select which aggregations you would like to apply.
      * @example
-     * const empresa = await prisma.empresa.aggregateRaw({
+     * const emitente = await prisma.emitente.aggregateRaw({
      *   pipeline: [
      *     { $match: { status: "registered" } },
      *     { $group: { _id: "$country", total: { $sum: 1 } } }
      *   ]
      * })
      */
-    aggregateRaw(args?: EmpresaAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+    aggregateRaw(args?: EmitenteAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
 
 
     /**
-     * Count the number of Empresas.
+     * Count the number of Emitentes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmpresaCountArgs} args - Arguments to filter Empresas to count.
+     * @param {EmitenteCountArgs} args - Arguments to filter Emitentes to count.
      * @example
-     * // Count the number of Empresas
-     * const count = await prisma.empresa.count({
+     * // Count the number of Emitentes
+     * const count = await prisma.emitente.count({
      *   where: {
-     *     // ... the filter for the Empresas we want to count
+     *     // ... the filter for the Emitentes we want to count
      *   }
      * })
     **/
-    count<T extends EmpresaCountArgs>(
-      args?: Subset<T, EmpresaCountArgs>,
+    count<T extends EmitenteCountArgs>(
+      args?: Subset<T, EmitenteCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], EmpresaCountAggregateOutputType>
+          : GetScalarType<T['select'], EmitenteCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Empresa.
+     * Allows you to perform aggregations operations on a Emitente.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmpresaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {EmitenteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -4589,13 +4589,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends EmpresaAggregateArgs>(args: Subset<T, EmpresaAggregateArgs>): Prisma.PrismaPromise<GetEmpresaAggregateType<T>>
+    aggregate<T extends EmitenteAggregateArgs>(args: Subset<T, EmitenteAggregateArgs>): Prisma.PrismaPromise<GetEmitenteAggregateType<T>>
 
     /**
-     * Group by Empresa.
+     * Group by Emitente.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {EmpresaGroupByArgs} args - Group by arguments.
+     * @param {EmitenteGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -4610,14 +4610,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends EmpresaGroupByArgs,
+      T extends EmitenteGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: EmpresaGroupByArgs['orderBy'] }
-        : { orderBy?: EmpresaGroupByArgs['orderBy'] },
+        ? { orderBy: EmitenteGroupByArgs['orderBy'] }
+        : { orderBy?: EmitenteGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -4666,22 +4666,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, EmpresaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmpresaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, EmitenteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmitenteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Empresa model
+   * Fields of the Emitente model
    */
-  readonly fields: EmpresaFieldRefs;
+  readonly fields: EmitenteFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Empresa.
+   * The delegate class that acts as a "Promise-like" for Emitente.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__EmpresaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__EmitenteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    contador<T extends Empresa$contadorArgs<ExtArgs> = {}>(args?: Subset<T, Empresa$contadorArgs<ExtArgs>>): Prisma__ContadorClient<$Result.GetResult<Prisma.$ContadorPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    contador<T extends Emitente$contadorArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$contadorArgs<ExtArgs>>): Prisma__ContadorClient<$Result.GetResult<Prisma.$ContadorPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4708,320 +4708,320 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Empresa model
+   * Fields of the Emitente model
    */ 
-  interface EmpresaFieldRefs {
-    readonly id: FieldRef<"Empresa", 'String'>
-    readonly cod_dominio: FieldRef<"Empresa", 'String'>
-    readonly nome: FieldRef<"Empresa", 'String'>
-    readonly razao_social: FieldRef<"Empresa", 'String'>
-    readonly cnpj: FieldRef<"Empresa", 'String'>
-    readonly telefone: FieldRef<"Empresa", 'String'>
-    readonly email: FieldRef<"Empresa", 'String'>
-    readonly contadorId: FieldRef<"Empresa", 'String'>
-    readonly createdAt: FieldRef<"Empresa", 'DateTime'>
-    readonly updatedAt: FieldRef<"Empresa", 'DateTime'>
+  interface EmitenteFieldRefs {
+    readonly id: FieldRef<"Emitente", 'String'>
+    readonly cod_dominio: FieldRef<"Emitente", 'String'>
+    readonly nome: FieldRef<"Emitente", 'String'>
+    readonly razao_social: FieldRef<"Emitente", 'String'>
+    readonly cnpj: FieldRef<"Emitente", 'String'>
+    readonly telefone: FieldRef<"Emitente", 'String'>
+    readonly email: FieldRef<"Emitente", 'String'>
+    readonly contadorId: FieldRef<"Emitente", 'String'>
+    readonly createdAt: FieldRef<"Emitente", 'DateTime'>
+    readonly updatedAt: FieldRef<"Emitente", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Empresa findUnique
+   * Emitente findUnique
    */
-  export type EmpresaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
     /**
-     * Filter, which Empresa to fetch.
+     * Filter, which Emitente to fetch.
      */
-    where: EmpresaWhereUniqueInput
+    where: EmitenteWhereUniqueInput
   }
 
   /**
-   * Empresa findUniqueOrThrow
+   * Emitente findUniqueOrThrow
    */
-  export type EmpresaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
     /**
-     * Filter, which Empresa to fetch.
+     * Filter, which Emitente to fetch.
      */
-    where: EmpresaWhereUniqueInput
+    where: EmitenteWhereUniqueInput
   }
 
   /**
-   * Empresa findFirst
+   * Emitente findFirst
    */
-  export type EmpresaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
     /**
-     * Filter, which Empresa to fetch.
+     * Filter, which Emitente to fetch.
      */
-    where?: EmpresaWhereInput
+    where?: EmitenteWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Empresas to fetch.
+     * Determine the order of Emitentes to fetch.
      */
-    orderBy?: EmpresaOrderByWithRelationInput | EmpresaOrderByWithRelationInput[]
+    orderBy?: EmitenteOrderByWithRelationInput | EmitenteOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Empresas.
+     * Sets the position for searching for Emitentes.
      */
-    cursor?: EmpresaWhereUniqueInput
+    cursor?: EmitenteWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Empresas from the position of the cursor.
+     * Take `±n` Emitentes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Empresas.
+     * Skip the first `n` Emitentes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Empresas.
+     * Filter by unique combinations of Emitentes.
      */
-    distinct?: EmpresaScalarFieldEnum | EmpresaScalarFieldEnum[]
+    distinct?: EmitenteScalarFieldEnum | EmitenteScalarFieldEnum[]
   }
 
   /**
-   * Empresa findFirstOrThrow
+   * Emitente findFirstOrThrow
    */
-  export type EmpresaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
     /**
-     * Filter, which Empresa to fetch.
+     * Filter, which Emitente to fetch.
      */
-    where?: EmpresaWhereInput
+    where?: EmitenteWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Empresas to fetch.
+     * Determine the order of Emitentes to fetch.
      */
-    orderBy?: EmpresaOrderByWithRelationInput | EmpresaOrderByWithRelationInput[]
+    orderBy?: EmitenteOrderByWithRelationInput | EmitenteOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Empresas.
+     * Sets the position for searching for Emitentes.
      */
-    cursor?: EmpresaWhereUniqueInput
+    cursor?: EmitenteWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Empresas from the position of the cursor.
+     * Take `±n` Emitentes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Empresas.
+     * Skip the first `n` Emitentes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Empresas.
+     * Filter by unique combinations of Emitentes.
      */
-    distinct?: EmpresaScalarFieldEnum | EmpresaScalarFieldEnum[]
+    distinct?: EmitenteScalarFieldEnum | EmitenteScalarFieldEnum[]
   }
 
   /**
-   * Empresa findMany
+   * Emitente findMany
    */
-  export type EmpresaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
     /**
-     * Filter, which Empresas to fetch.
+     * Filter, which Emitentes to fetch.
      */
-    where?: EmpresaWhereInput
+    where?: EmitenteWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Empresas to fetch.
+     * Determine the order of Emitentes to fetch.
      */
-    orderBy?: EmpresaOrderByWithRelationInput | EmpresaOrderByWithRelationInput[]
+    orderBy?: EmitenteOrderByWithRelationInput | EmitenteOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Empresas.
+     * Sets the position for listing Emitentes.
      */
-    cursor?: EmpresaWhereUniqueInput
+    cursor?: EmitenteWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Empresas from the position of the cursor.
+     * Take `±n` Emitentes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Empresas.
+     * Skip the first `n` Emitentes.
      */
     skip?: number
-    distinct?: EmpresaScalarFieldEnum | EmpresaScalarFieldEnum[]
+    distinct?: EmitenteScalarFieldEnum | EmitenteScalarFieldEnum[]
   }
 
   /**
-   * Empresa create
+   * Emitente create
    */
-  export type EmpresaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
     /**
-     * The data needed to create a Empresa.
+     * The data needed to create a Emitente.
      */
-    data: XOR<EmpresaCreateInput, EmpresaUncheckedCreateInput>
+    data: XOR<EmitenteCreateInput, EmitenteUncheckedCreateInput>
   }
 
   /**
-   * Empresa createMany
+   * Emitente createMany
    */
-  export type EmpresaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Empresas.
+     * The data used to create many Emitentes.
      */
-    data: EmpresaCreateManyInput | EmpresaCreateManyInput[]
+    data: EmitenteCreateManyInput | EmitenteCreateManyInput[]
   }
 
   /**
-   * Empresa update
+   * Emitente update
    */
-  export type EmpresaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
     /**
-     * The data needed to update a Empresa.
+     * The data needed to update a Emitente.
      */
-    data: XOR<EmpresaUpdateInput, EmpresaUncheckedUpdateInput>
+    data: XOR<EmitenteUpdateInput, EmitenteUncheckedUpdateInput>
     /**
-     * Choose, which Empresa to update.
+     * Choose, which Emitente to update.
      */
-    where: EmpresaWhereUniqueInput
+    where: EmitenteWhereUniqueInput
   }
 
   /**
-   * Empresa updateMany
+   * Emitente updateMany
    */
-  export type EmpresaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Empresas.
+     * The data used to update Emitentes.
      */
-    data: XOR<EmpresaUpdateManyMutationInput, EmpresaUncheckedUpdateManyInput>
+    data: XOR<EmitenteUpdateManyMutationInput, EmitenteUncheckedUpdateManyInput>
     /**
-     * Filter which Empresas to update
+     * Filter which Emitentes to update
      */
-    where?: EmpresaWhereInput
+    where?: EmitenteWhereInput
   }
 
   /**
-   * Empresa upsert
+   * Emitente upsert
    */
-  export type EmpresaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
     /**
-     * The filter to search for the Empresa to update in case it exists.
+     * The filter to search for the Emitente to update in case it exists.
      */
-    where: EmpresaWhereUniqueInput
+    where: EmitenteWhereUniqueInput
     /**
-     * In case the Empresa found by the `where` argument doesn't exist, create a new Empresa with this data.
+     * In case the Emitente found by the `where` argument doesn't exist, create a new Emitente with this data.
      */
-    create: XOR<EmpresaCreateInput, EmpresaUncheckedCreateInput>
+    create: XOR<EmitenteCreateInput, EmitenteUncheckedCreateInput>
     /**
-     * In case the Empresa was found with the provided `where` argument, update it with this data.
+     * In case the Emitente was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<EmpresaUpdateInput, EmpresaUncheckedUpdateInput>
+    update: XOR<EmitenteUpdateInput, EmitenteUncheckedUpdateInput>
   }
 
   /**
-   * Empresa delete
+   * Emitente delete
    */
-  export type EmpresaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
     /**
-     * Filter which Empresa to delete.
+     * Filter which Emitente to delete.
      */
-    where: EmpresaWhereUniqueInput
+    where: EmitenteWhereUniqueInput
   }
 
   /**
-   * Empresa deleteMany
+   * Emitente deleteMany
    */
-  export type EmpresaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Empresas to delete
+     * Filter which Emitentes to delete
      */
-    where?: EmpresaWhereInput
+    where?: EmitenteWhereInput
   }
 
   /**
-   * Empresa findRaw
+   * Emitente findRaw
    */
-  export type EmpresaFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
      */
@@ -5033,9 +5033,9 @@ export namespace Prisma {
   }
 
   /**
-   * Empresa aggregateRaw
+   * Emitente aggregateRaw
    */
-  export type EmpresaAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
      */
@@ -5047,9 +5047,9 @@ export namespace Prisma {
   }
 
   /**
-   * Empresa.contador
+   * Emitente.contador
    */
-  export type Empresa$contadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Emitente$contadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Contador
      */
@@ -5062,17 +5062,17 @@ export namespace Prisma {
   }
 
   /**
-   * Empresa without action
+   * Emitente without action
    */
-  export type EmpresaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmitenteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Empresa
+     * Select specific fields to fetch from the Emitente
      */
-    select?: EmpresaSelect<ExtArgs> | null
+    select?: EmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmpresaInclude<ExtArgs> | null
+    include?: EmitenteInclude<ExtArgs> | null
   }
 
 
@@ -5115,7 +5115,7 @@ export namespace Prisma {
   export type UserContadorScalarFieldEnum = (typeof UserContadorScalarFieldEnum)[keyof typeof UserContadorScalarFieldEnum]
 
 
-  export const EmpresaScalarFieldEnum: {
+  export const EmitenteScalarFieldEnum: {
     id: 'id',
     cod_dominio: 'cod_dominio',
     nome: 'nome',
@@ -5128,7 +5128,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type EmpresaScalarFieldEnum = (typeof EmpresaScalarFieldEnum)[keyof typeof EmpresaScalarFieldEnum]
+  export type EmitenteScalarFieldEnum = (typeof EmitenteScalarFieldEnum)[keyof typeof EmitenteScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5284,7 +5284,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UserContadorListRelationFilter
-    Empresa?: EmpresaListRelationFilter
+    Emitentes?: EmitenteListRelationFilter
   }
 
   export type ContadorOrderByWithRelationInput = {
@@ -5297,7 +5297,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usuarios?: UserContadorOrderByRelationAggregateInput
-    Empresa?: EmpresaOrderByRelationAggregateInput
+    Emitentes?: EmitenteOrderByRelationAggregateInput
   }
 
   export type ContadorWhereUniqueInput = Prisma.AtLeast<{
@@ -5313,7 +5313,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UserContadorListRelationFilter
-    Empresa?: EmpresaListRelationFilter
+    Emitentes?: EmitenteListRelationFilter
   }, "id" | "cpf" | "regcrc">
 
   export type ContadorOrderByWithAggregationInput = {
@@ -5393,24 +5393,24 @@ export namespace Prisma {
     contadorId?: StringWithAggregatesFilter<"UserContador"> | string
   }
 
-  export type EmpresaWhereInput = {
-    AND?: EmpresaWhereInput | EmpresaWhereInput[]
-    OR?: EmpresaWhereInput[]
-    NOT?: EmpresaWhereInput | EmpresaWhereInput[]
-    id?: StringFilter<"Empresa"> | string
-    cod_dominio?: StringNullableFilter<"Empresa"> | string | null
-    nome?: StringFilter<"Empresa"> | string
-    razao_social?: StringFilter<"Empresa"> | string
-    cnpj?: StringFilter<"Empresa"> | string
-    telefone?: StringNullableFilter<"Empresa"> | string | null
-    email?: StringNullableFilter<"Empresa"> | string | null
-    contadorId?: StringNullableFilter<"Empresa"> | string | null
-    createdAt?: DateTimeFilter<"Empresa"> | Date | string
-    updatedAt?: DateTimeFilter<"Empresa"> | Date | string
+  export type EmitenteWhereInput = {
+    AND?: EmitenteWhereInput | EmitenteWhereInput[]
+    OR?: EmitenteWhereInput[]
+    NOT?: EmitenteWhereInput | EmitenteWhereInput[]
+    id?: StringFilter<"Emitente"> | string
+    cod_dominio?: StringNullableFilter<"Emitente"> | string | null
+    nome?: StringFilter<"Emitente"> | string
+    razao_social?: StringFilter<"Emitente"> | string
+    cnpj?: StringFilter<"Emitente"> | string
+    telefone?: StringNullableFilter<"Emitente"> | string | null
+    email?: StringNullableFilter<"Emitente"> | string | null
+    contadorId?: StringNullableFilter<"Emitente"> | string | null
+    createdAt?: DateTimeFilter<"Emitente"> | Date | string
+    updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
   }
 
-  export type EmpresaOrderByWithRelationInput = {
+  export type EmitenteOrderByWithRelationInput = {
     id?: SortOrder
     cod_dominio?: SortOrder
     nome?: SortOrder
@@ -5424,24 +5424,24 @@ export namespace Prisma {
     contador?: ContadorOrderByWithRelationInput
   }
 
-  export type EmpresaWhereUniqueInput = Prisma.AtLeast<{
+  export type EmitenteWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     cnpj?: string
-    AND?: EmpresaWhereInput | EmpresaWhereInput[]
-    OR?: EmpresaWhereInput[]
-    NOT?: EmpresaWhereInput | EmpresaWhereInput[]
-    cod_dominio?: StringNullableFilter<"Empresa"> | string | null
-    nome?: StringFilter<"Empresa"> | string
-    razao_social?: StringFilter<"Empresa"> | string
-    telefone?: StringNullableFilter<"Empresa"> | string | null
-    email?: StringNullableFilter<"Empresa"> | string | null
-    contadorId?: StringNullableFilter<"Empresa"> | string | null
-    createdAt?: DateTimeFilter<"Empresa"> | Date | string
-    updatedAt?: DateTimeFilter<"Empresa"> | Date | string
+    AND?: EmitenteWhereInput | EmitenteWhereInput[]
+    OR?: EmitenteWhereInput[]
+    NOT?: EmitenteWhereInput | EmitenteWhereInput[]
+    cod_dominio?: StringNullableFilter<"Emitente"> | string | null
+    nome?: StringFilter<"Emitente"> | string
+    razao_social?: StringFilter<"Emitente"> | string
+    telefone?: StringNullableFilter<"Emitente"> | string | null
+    email?: StringNullableFilter<"Emitente"> | string | null
+    contadorId?: StringNullableFilter<"Emitente"> | string | null
+    createdAt?: DateTimeFilter<"Emitente"> | Date | string
+    updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
   }, "id" | "cnpj">
 
-  export type EmpresaOrderByWithAggregationInput = {
+  export type EmitenteOrderByWithAggregationInput = {
     id?: SortOrder
     cod_dominio?: SortOrder
     nome?: SortOrder
@@ -5452,25 +5452,25 @@ export namespace Prisma {
     contadorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: EmpresaCountOrderByAggregateInput
-    _max?: EmpresaMaxOrderByAggregateInput
-    _min?: EmpresaMinOrderByAggregateInput
+    _count?: EmitenteCountOrderByAggregateInput
+    _max?: EmitenteMaxOrderByAggregateInput
+    _min?: EmitenteMinOrderByAggregateInput
   }
 
-  export type EmpresaScalarWhereWithAggregatesInput = {
-    AND?: EmpresaScalarWhereWithAggregatesInput | EmpresaScalarWhereWithAggregatesInput[]
-    OR?: EmpresaScalarWhereWithAggregatesInput[]
-    NOT?: EmpresaScalarWhereWithAggregatesInput | EmpresaScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Empresa"> | string
-    cod_dominio?: StringNullableWithAggregatesFilter<"Empresa"> | string | null
-    nome?: StringWithAggregatesFilter<"Empresa"> | string
-    razao_social?: StringWithAggregatesFilter<"Empresa"> | string
-    cnpj?: StringWithAggregatesFilter<"Empresa"> | string
-    telefone?: StringNullableWithAggregatesFilter<"Empresa"> | string | null
-    email?: StringNullableWithAggregatesFilter<"Empresa"> | string | null
-    contadorId?: StringNullableWithAggregatesFilter<"Empresa"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Empresa"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Empresa"> | Date | string
+  export type EmitenteScalarWhereWithAggregatesInput = {
+    AND?: EmitenteScalarWhereWithAggregatesInput | EmitenteScalarWhereWithAggregatesInput[]
+    OR?: EmitenteScalarWhereWithAggregatesInput[]
+    NOT?: EmitenteScalarWhereWithAggregatesInput | EmitenteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Emitente"> | string
+    cod_dominio?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
+    nome?: StringWithAggregatesFilter<"Emitente"> | string
+    razao_social?: StringWithAggregatesFilter<"Emitente"> | string
+    cnpj?: StringWithAggregatesFilter<"Emitente"> | string
+    telefone?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
+    email?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
+    contadorId?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -5546,7 +5546,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
-    Empresa?: EmpresaCreateNestedManyWithoutContadorInput
+    Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateInput = {
@@ -5559,7 +5559,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
-    Empresa?: EmpresaUncheckedCreateNestedManyWithoutContadorInput
+    Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorUpdateInput = {
@@ -5571,7 +5571,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
-    Empresa?: EmpresaUpdateManyWithoutContadorNestedInput
+    Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateInput = {
@@ -5583,7 +5583,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
-    Empresa?: EmpresaUncheckedUpdateManyWithoutContadorNestedInput
+    Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
   }
 
   export type ContadorCreateManyInput = {
@@ -5654,7 +5654,7 @@ export namespace Prisma {
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type EmpresaCreateInput = {
+  export type EmitenteCreateInput = {
     id?: string
     cod_dominio?: string | null
     nome: string
@@ -5664,10 +5664,10 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    contador?: ContadorCreateNestedOneWithoutEmpresaInput
+    contador?: ContadorCreateNestedOneWithoutEmitentesInput
   }
 
-  export type EmpresaUncheckedCreateInput = {
+  export type EmitenteUncheckedCreateInput = {
     id?: string
     cod_dominio?: string | null
     nome: string
@@ -5680,7 +5680,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type EmpresaUpdateInput = {
+  export type EmitenteUpdateInput = {
     cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
@@ -5689,10 +5689,10 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contador?: ContadorUpdateOneWithoutEmpresaNestedInput
+    contador?: ContadorUpdateOneWithoutEmitentesNestedInput
   }
 
-  export type EmpresaUncheckedUpdateInput = {
+  export type EmitenteUncheckedUpdateInput = {
     cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
@@ -5704,7 +5704,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmpresaCreateManyInput = {
+  export type EmitenteCreateManyInput = {
     id?: string
     cod_dominio?: string | null
     nome: string
@@ -5717,7 +5717,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type EmpresaUpdateManyMutationInput = {
+  export type EmitenteUpdateManyMutationInput = {
     cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
@@ -5728,7 +5728,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmpresaUncheckedUpdateManyInput = {
+  export type EmitenteUncheckedUpdateManyInput = {
     cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
@@ -5868,13 +5868,13 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type EmpresaListRelationFilter = {
-    every?: EmpresaWhereInput
-    some?: EmpresaWhereInput
-    none?: EmpresaWhereInput
+  export type EmitenteListRelationFilter = {
+    every?: EmitenteWhereInput
+    some?: EmitenteWhereInput
+    none?: EmitenteWhereInput
   }
 
-  export type EmpresaOrderByRelationAggregateInput = {
+  export type EmitenteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -5968,7 +5968,7 @@ export namespace Prisma {
     isNot?: ContadorWhereInput | null
   }
 
-  export type EmpresaCountOrderByAggregateInput = {
+  export type EmitenteCountOrderByAggregateInput = {
     id?: SortOrder
     cod_dominio?: SortOrder
     nome?: SortOrder
@@ -5981,7 +5981,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type EmpresaMaxOrderByAggregateInput = {
+  export type EmitenteMaxOrderByAggregateInput = {
     id?: SortOrder
     cod_dominio?: SortOrder
     nome?: SortOrder
@@ -5994,7 +5994,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type EmpresaMinOrderByAggregateInput = {
+  export type EmitenteMinOrderByAggregateInput = {
     id?: SortOrder
     cod_dominio?: SortOrder
     nome?: SortOrder
@@ -6068,11 +6068,11 @@ export namespace Prisma {
     connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
   }
 
-  export type EmpresaCreateNestedManyWithoutContadorInput = {
-    create?: XOR<EmpresaCreateWithoutContadorInput, EmpresaUncheckedCreateWithoutContadorInput> | EmpresaCreateWithoutContadorInput[] | EmpresaUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EmpresaCreateOrConnectWithoutContadorInput | EmpresaCreateOrConnectWithoutContadorInput[]
-    createMany?: EmpresaCreateManyContadorInputEnvelope
-    connect?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
+  export type EmitenteCreateNestedManyWithoutContadorInput = {
+    create?: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput> | EmitenteCreateWithoutContadorInput[] | EmitenteUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: EmitenteCreateOrConnectWithoutContadorInput | EmitenteCreateOrConnectWithoutContadorInput[]
+    createMany?: EmitenteCreateManyContadorInputEnvelope
+    connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
   }
 
   export type UserContadorUncheckedCreateNestedManyWithoutContadorInput = {
@@ -6082,11 +6082,11 @@ export namespace Prisma {
     connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
   }
 
-  export type EmpresaUncheckedCreateNestedManyWithoutContadorInput = {
-    create?: XOR<EmpresaCreateWithoutContadorInput, EmpresaUncheckedCreateWithoutContadorInput> | EmpresaCreateWithoutContadorInput[] | EmpresaUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EmpresaCreateOrConnectWithoutContadorInput | EmpresaCreateOrConnectWithoutContadorInput[]
-    createMany?: EmpresaCreateManyContadorInputEnvelope
-    connect?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
+  export type EmitenteUncheckedCreateNestedManyWithoutContadorInput = {
+    create?: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput> | EmitenteCreateWithoutContadorInput[] | EmitenteUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: EmitenteCreateOrConnectWithoutContadorInput | EmitenteCreateOrConnectWithoutContadorInput[]
+    createMany?: EmitenteCreateManyContadorInputEnvelope
+    connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -6108,18 +6108,18 @@ export namespace Prisma {
     deleteMany?: UserContadorScalarWhereInput | UserContadorScalarWhereInput[]
   }
 
-  export type EmpresaUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<EmpresaCreateWithoutContadorInput, EmpresaUncheckedCreateWithoutContadorInput> | EmpresaCreateWithoutContadorInput[] | EmpresaUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EmpresaCreateOrConnectWithoutContadorInput | EmpresaCreateOrConnectWithoutContadorInput[]
-    upsert?: EmpresaUpsertWithWhereUniqueWithoutContadorInput | EmpresaUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: EmpresaCreateManyContadorInputEnvelope
-    set?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
-    disconnect?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
-    delete?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
-    connect?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
-    update?: EmpresaUpdateWithWhereUniqueWithoutContadorInput | EmpresaUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: EmpresaUpdateManyWithWhereWithoutContadorInput | EmpresaUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: EmpresaScalarWhereInput | EmpresaScalarWhereInput[]
+  export type EmitenteUpdateManyWithoutContadorNestedInput = {
+    create?: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput> | EmitenteCreateWithoutContadorInput[] | EmitenteUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: EmitenteCreateOrConnectWithoutContadorInput | EmitenteCreateOrConnectWithoutContadorInput[]
+    upsert?: EmitenteUpsertWithWhereUniqueWithoutContadorInput | EmitenteUpsertWithWhereUniqueWithoutContadorInput[]
+    createMany?: EmitenteCreateManyContadorInputEnvelope
+    set?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+    disconnect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+    delete?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+    connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+    update?: EmitenteUpdateWithWhereUniqueWithoutContadorInput | EmitenteUpdateWithWhereUniqueWithoutContadorInput[]
+    updateMany?: EmitenteUpdateManyWithWhereWithoutContadorInput | EmitenteUpdateManyWithWhereWithoutContadorInput[]
+    deleteMany?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
   }
 
   export type UserContadorUncheckedUpdateManyWithoutContadorNestedInput = {
@@ -6136,18 +6136,18 @@ export namespace Prisma {
     deleteMany?: UserContadorScalarWhereInput | UserContadorScalarWhereInput[]
   }
 
-  export type EmpresaUncheckedUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<EmpresaCreateWithoutContadorInput, EmpresaUncheckedCreateWithoutContadorInput> | EmpresaCreateWithoutContadorInput[] | EmpresaUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EmpresaCreateOrConnectWithoutContadorInput | EmpresaCreateOrConnectWithoutContadorInput[]
-    upsert?: EmpresaUpsertWithWhereUniqueWithoutContadorInput | EmpresaUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: EmpresaCreateManyContadorInputEnvelope
-    set?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
-    disconnect?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
-    delete?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
-    connect?: EmpresaWhereUniqueInput | EmpresaWhereUniqueInput[]
-    update?: EmpresaUpdateWithWhereUniqueWithoutContadorInput | EmpresaUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: EmpresaUpdateManyWithWhereWithoutContadorInput | EmpresaUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: EmpresaScalarWhereInput | EmpresaScalarWhereInput[]
+  export type EmitenteUncheckedUpdateManyWithoutContadorNestedInput = {
+    create?: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput> | EmitenteCreateWithoutContadorInput[] | EmitenteUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: EmitenteCreateOrConnectWithoutContadorInput | EmitenteCreateOrConnectWithoutContadorInput[]
+    upsert?: EmitenteUpsertWithWhereUniqueWithoutContadorInput | EmitenteUpsertWithWhereUniqueWithoutContadorInput[]
+    createMany?: EmitenteCreateManyContadorInputEnvelope
+    set?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+    disconnect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+    delete?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+    connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+    update?: EmitenteUpdateWithWhereUniqueWithoutContadorInput | EmitenteUpdateWithWhereUniqueWithoutContadorInput[]
+    updateMany?: EmitenteUpdateManyWithWhereWithoutContadorInput | EmitenteUpdateManyWithWhereWithoutContadorInput[]
+    deleteMany?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutContadoresInput = {
@@ -6178,20 +6178,20 @@ export namespace Prisma {
     update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutUsuariosInput, ContadorUpdateWithoutUsuariosInput>, ContadorUncheckedUpdateWithoutUsuariosInput>
   }
 
-  export type ContadorCreateNestedOneWithoutEmpresaInput = {
-    create?: XOR<ContadorCreateWithoutEmpresaInput, ContadorUncheckedCreateWithoutEmpresaInput>
-    connectOrCreate?: ContadorCreateOrConnectWithoutEmpresaInput
+  export type ContadorCreateNestedOneWithoutEmitentesInput = {
+    create?: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
+    connectOrCreate?: ContadorCreateOrConnectWithoutEmitentesInput
     connect?: ContadorWhereUniqueInput
   }
 
-  export type ContadorUpdateOneWithoutEmpresaNestedInput = {
-    create?: XOR<ContadorCreateWithoutEmpresaInput, ContadorUncheckedCreateWithoutEmpresaInput>
-    connectOrCreate?: ContadorCreateOrConnectWithoutEmpresaInput
-    upsert?: ContadorUpsertWithoutEmpresaInput
+  export type ContadorUpdateOneWithoutEmitentesNestedInput = {
+    create?: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
+    connectOrCreate?: ContadorCreateOrConnectWithoutEmitentesInput
+    upsert?: ContadorUpsertWithoutEmitentesInput
     disconnect?: boolean
     delete?: ContadorWhereInput | boolean
     connect?: ContadorWhereUniqueInput
-    update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutEmpresaInput, ContadorUpdateWithoutEmpresaInput>, ContadorUncheckedUpdateWithoutEmpresaInput>
+    update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutEmitentesInput, ContadorUpdateWithoutEmitentesInput>, ContadorUncheckedUpdateWithoutEmitentesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -6386,7 +6386,7 @@ export namespace Prisma {
     data: UserContadorCreateManyContadorInput | UserContadorCreateManyContadorInput[]
   }
 
-  export type EmpresaCreateWithoutContadorInput = {
+  export type EmitenteCreateWithoutContadorInput = {
     id?: string
     cod_dominio?: string | null
     nome: string
@@ -6398,7 +6398,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type EmpresaUncheckedCreateWithoutContadorInput = {
+  export type EmitenteUncheckedCreateWithoutContadorInput = {
     id?: string
     cod_dominio?: string | null
     nome: string
@@ -6410,13 +6410,13 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type EmpresaCreateOrConnectWithoutContadorInput = {
-    where: EmpresaWhereUniqueInput
-    create: XOR<EmpresaCreateWithoutContadorInput, EmpresaUncheckedCreateWithoutContadorInput>
+  export type EmitenteCreateOrConnectWithoutContadorInput = {
+    where: EmitenteWhereUniqueInput
+    create: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput>
   }
 
-  export type EmpresaCreateManyContadorInputEnvelope = {
-    data: EmpresaCreateManyContadorInput | EmpresaCreateManyContadorInput[]
+  export type EmitenteCreateManyContadorInputEnvelope = {
+    data: EmitenteCreateManyContadorInput | EmitenteCreateManyContadorInput[]
   }
 
   export type UserContadorUpsertWithWhereUniqueWithoutContadorInput = {
@@ -6435,36 +6435,36 @@ export namespace Prisma {
     data: XOR<UserContadorUpdateManyMutationInput, UserContadorUncheckedUpdateManyWithoutContadorInput>
   }
 
-  export type EmpresaUpsertWithWhereUniqueWithoutContadorInput = {
-    where: EmpresaWhereUniqueInput
-    update: XOR<EmpresaUpdateWithoutContadorInput, EmpresaUncheckedUpdateWithoutContadorInput>
-    create: XOR<EmpresaCreateWithoutContadorInput, EmpresaUncheckedCreateWithoutContadorInput>
+  export type EmitenteUpsertWithWhereUniqueWithoutContadorInput = {
+    where: EmitenteWhereUniqueInput
+    update: XOR<EmitenteUpdateWithoutContadorInput, EmitenteUncheckedUpdateWithoutContadorInput>
+    create: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput>
   }
 
-  export type EmpresaUpdateWithWhereUniqueWithoutContadorInput = {
-    where: EmpresaWhereUniqueInput
-    data: XOR<EmpresaUpdateWithoutContadorInput, EmpresaUncheckedUpdateWithoutContadorInput>
+  export type EmitenteUpdateWithWhereUniqueWithoutContadorInput = {
+    where: EmitenteWhereUniqueInput
+    data: XOR<EmitenteUpdateWithoutContadorInput, EmitenteUncheckedUpdateWithoutContadorInput>
   }
 
-  export type EmpresaUpdateManyWithWhereWithoutContadorInput = {
-    where: EmpresaScalarWhereInput
-    data: XOR<EmpresaUpdateManyMutationInput, EmpresaUncheckedUpdateManyWithoutContadorInput>
+  export type EmitenteUpdateManyWithWhereWithoutContadorInput = {
+    where: EmitenteScalarWhereInput
+    data: XOR<EmitenteUpdateManyMutationInput, EmitenteUncheckedUpdateManyWithoutContadorInput>
   }
 
-  export type EmpresaScalarWhereInput = {
-    AND?: EmpresaScalarWhereInput | EmpresaScalarWhereInput[]
-    OR?: EmpresaScalarWhereInput[]
-    NOT?: EmpresaScalarWhereInput | EmpresaScalarWhereInput[]
-    id?: StringFilter<"Empresa"> | string
-    cod_dominio?: StringNullableFilter<"Empresa"> | string | null
-    nome?: StringFilter<"Empresa"> | string
-    razao_social?: StringFilter<"Empresa"> | string
-    cnpj?: StringFilter<"Empresa"> | string
-    telefone?: StringNullableFilter<"Empresa"> | string | null
-    email?: StringNullableFilter<"Empresa"> | string | null
-    contadorId?: StringNullableFilter<"Empresa"> | string | null
-    createdAt?: DateTimeFilter<"Empresa"> | Date | string
-    updatedAt?: DateTimeFilter<"Empresa"> | Date | string
+  export type EmitenteScalarWhereInput = {
+    AND?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
+    OR?: EmitenteScalarWhereInput[]
+    NOT?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
+    id?: StringFilter<"Emitente"> | string
+    cod_dominio?: StringNullableFilter<"Emitente"> | string | null
+    nome?: StringFilter<"Emitente"> | string
+    razao_social?: StringFilter<"Emitente"> | string
+    cnpj?: StringFilter<"Emitente"> | string
+    telefone?: StringNullableFilter<"Emitente"> | string | null
+    email?: StringNullableFilter<"Emitente"> | string | null
+    contadorId?: StringNullableFilter<"Emitente"> | string | null
+    createdAt?: DateTimeFilter<"Emitente"> | Date | string
+    updatedAt?: DateTimeFilter<"Emitente"> | Date | string
   }
 
   export type UserCreateWithoutContadoresInput = {
@@ -6499,7 +6499,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Empresa?: EmpresaCreateNestedManyWithoutContadorInput
+    Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateWithoutUsuariosInput = {
@@ -6511,7 +6511,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Empresa?: EmpresaUncheckedCreateNestedManyWithoutContadorInput
+    Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorCreateOrConnectWithoutUsuariosInput = {
@@ -6565,7 +6565,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Empresa?: EmpresaUpdateManyWithoutContadorNestedInput
+    Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateWithoutUsuariosInput = {
@@ -6576,10 +6576,10 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Empresa?: EmpresaUncheckedUpdateManyWithoutContadorNestedInput
+    Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
   }
 
-  export type ContadorCreateWithoutEmpresaInput = {
+  export type ContadorCreateWithoutEmitentesInput = {
     id?: string
     nome: string
     cpf: string
@@ -6591,7 +6591,7 @@ export namespace Prisma {
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
   }
 
-  export type ContadorUncheckedCreateWithoutEmpresaInput = {
+  export type ContadorUncheckedCreateWithoutEmitentesInput = {
     id?: string
     nome: string
     cpf: string
@@ -6603,23 +6603,23 @@ export namespace Prisma {
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
   }
 
-  export type ContadorCreateOrConnectWithoutEmpresaInput = {
+  export type ContadorCreateOrConnectWithoutEmitentesInput = {
     where: ContadorWhereUniqueInput
-    create: XOR<ContadorCreateWithoutEmpresaInput, ContadorUncheckedCreateWithoutEmpresaInput>
+    create: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
   }
 
-  export type ContadorUpsertWithoutEmpresaInput = {
-    update: XOR<ContadorUpdateWithoutEmpresaInput, ContadorUncheckedUpdateWithoutEmpresaInput>
-    create: XOR<ContadorCreateWithoutEmpresaInput, ContadorUncheckedCreateWithoutEmpresaInput>
+  export type ContadorUpsertWithoutEmitentesInput = {
+    update: XOR<ContadorUpdateWithoutEmitentesInput, ContadorUncheckedUpdateWithoutEmitentesInput>
+    create: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
     where?: ContadorWhereInput
   }
 
-  export type ContadorUpdateToOneWithWhereWithoutEmpresaInput = {
+  export type ContadorUpdateToOneWithWhereWithoutEmitentesInput = {
     where?: ContadorWhereInput
-    data: XOR<ContadorUpdateWithoutEmpresaInput, ContadorUncheckedUpdateWithoutEmpresaInput>
+    data: XOR<ContadorUpdateWithoutEmitentesInput, ContadorUncheckedUpdateWithoutEmitentesInput>
   }
 
-  export type ContadorUpdateWithoutEmpresaInput = {
+  export type ContadorUpdateWithoutEmitentesInput = {
     nome?: StringFieldUpdateOperationsInput | string
     cpf?: StringFieldUpdateOperationsInput | string
     regcrc?: StringFieldUpdateOperationsInput | string
@@ -6630,7 +6630,7 @@ export namespace Prisma {
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
   }
 
-  export type ContadorUncheckedUpdateWithoutEmpresaInput = {
+  export type ContadorUncheckedUpdateWithoutEmitentesInput = {
     nome?: StringFieldUpdateOperationsInput | string
     cpf?: StringFieldUpdateOperationsInput | string
     regcrc?: StringFieldUpdateOperationsInput | string
@@ -6663,7 +6663,7 @@ export namespace Prisma {
     userId: string
   }
 
-  export type EmpresaCreateManyContadorInput = {
+  export type EmitenteCreateManyContadorInput = {
     id?: string
     cod_dominio?: string | null
     nome: string
@@ -6687,7 +6687,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type EmpresaUpdateWithoutContadorInput = {
+  export type EmitenteUpdateWithoutContadorInput = {
     cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
@@ -6698,7 +6698,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmpresaUncheckedUpdateWithoutContadorInput = {
+  export type EmitenteUncheckedUpdateWithoutContadorInput = {
     cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
@@ -6709,7 +6709,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type EmpresaUncheckedUpdateManyWithoutContadorInput = {
+  export type EmitenteUncheckedUpdateManyWithoutContadorInput = {
     cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
@@ -6746,9 +6746,9 @@ export namespace Prisma {
      */
     export type UserContadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserContadorDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use EmpresaDefaultArgs instead
+     * @deprecated Use EmitenteDefaultArgs instead
      */
-    export type EmpresaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EmpresaDefaultArgs<ExtArgs>
+    export type EmitenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EmitenteDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
