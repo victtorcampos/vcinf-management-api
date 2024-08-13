@@ -1,3 +1,3 @@
 export * from './ContadorController';
-export * from './EmpresaController';
+export * from './EmitenteController';
 export * from './UserController';

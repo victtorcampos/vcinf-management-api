@@ -144,11 +144,28 @@ exports.Prisma.EmitenteScalarFieldEnum = {
   nome: 'nome',
   razao_social: 'razao_social',
   cnpj: 'cnpj',
-  telefone: 'telefone',
-  email: 'email',
+  cpf: 'cpf',
+  codId: 'codId',
   contadorId: 'contadorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EnderecoScalarFieldEnum = {
+  id: 'id',
+  tipo: 'tipo',
+  logradouro: 'logradouro',
+  nro: 'nro',
+  complemento: 'complemento',
+  bairro: 'bairro',
+  cep: 'cep',
+  nome_cidade: 'nome_cidade',
+  codigoIBGEcidade: 'codigoIBGEcidade',
+  nome_estado: 'nome_estado',
+  uf: 'uf',
+  codigoIBGEestado: 'codigoIBGEestado',
+  contadorId: 'contadorId',
+  emitenteId: 'emitenteId'
 };
 
 exports.Prisma.SortOrder = {
@@ -171,7 +188,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Contador: 'Contador',
   UserContador: 'UserContador',
-  Emitente: 'Emitente'
+  Emitente: 'Emitente',
+  Endereco: 'Endereco'
 };
 
 /**

@@ -32,35 +32,57 @@ model Contador {
   telefone  String?
   email     String?
   usuarios  UserContador[]
-  Emitentes   Emitente[]
+  Emitentes Emitente[]
+  enderecos Endereco[]
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
 }
 
-// Tabela de ligação para o relacionamento many-to-many
 model UserContador {
-  id         String @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String @db.ObjectId
-  contadorId String @db.ObjectId
-
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  contador Contador @relation(fields: [contadorId], references: [id], onDelete: Cascade)
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  contadorId String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  contador   Contador @relation(fields: [contadorId], references: [id], onDelete: Cascade)
 
   @@unique([userId, contadorId])
 }
 
 model Emitente {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
   cod_dominio  String?
   nome         String
   razao_social String
-  cnpj         String    @unique
-  telefone     String?
-  email        String?
-  contador     Contador? @relation(fields: [contadorId], references: [id], onDelete: Cascade)
-  contadorId   String?   @db.ObjectId
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  cnpj         String?
+  cpf          String?
+  codId        String
+  enderecos    Endereco[]
+  contador     Contador?  @relation(fields: [contadorId], references: [id], onDelete: Cascade)
+  contadorId   String?    @db.ObjectId
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([cnpj, codId])
+  @@unique([cpf, codId])
+}
+
+model Endereco {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  tipo             String    @default("PRINCIPAL") // Nome padrão "PRINCIPAL"
+  logradouro       String
+  nro              String
+  complemento      String?
+  bairro           String
+  cep              String
+  nome_cidade      String
+  codigoIBGEcidade String
+  nome_estado      String
+  uf               String
+  codigoIBGEestado String
+  contador         Contador? @relation(fields: [contadorId], references: [id], onDelete: Cascade)
+  contadorId       String?   @db.ObjectId
+  emitente         Emitente? @relation(fields: [emitenteId], references: [id], onDelete: Cascade)
+  emitenteId       String?   @db.ObjectId
 }
 
 enum Role {
