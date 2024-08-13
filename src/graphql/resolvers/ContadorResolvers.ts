@@ -3,7 +3,8 @@ import type { $Enums } from "../../config/prisma-client";
 import { createContador, deleteContador, updateContador } from "../../controller";
 import type { ApiResponse } from "../../utils";
 
-interface CreateContadorData { nome: string; cpf: string; regcrc: string; telefone: string; email: string; }
+interface CreateContadorData { nome: string; cpf: string; regcrc: string; telefone: string; email: string; enderecos: CreateEnderecoData[]; }
+interface CreateEnderecoData { tipo?: string; logradouro: string; nro: string; complemento?: string; bairro: string; cep: string; nome_cidade: string; codigoIBGEcidade: string; nome_estado: string; uf: string; codigoIBGEestado: string; }
 interface Contador { id: string; nome: string; cpf: string; usuarios: User[]; };
 interface User { id: string; email: string; role: $Enums.Role; };
 interface UpdateContadorData { nome: string; cpf: string; }
