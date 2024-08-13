@@ -4,7 +4,8 @@ import { handleError, handleSuccess, type ApiResponse } from "../utils/responseH
 
 const prisma = new PrismaClient().contador;
 
-interface CreateContadorData { nome: string; cpf: string; regcrc: string; telefone: string; email: string; }
+interface CreateContadorData { nome: string; cpf: string; regcrc: string; telefone: string; email: string; enderecos: CreateEnderecoData[]; }
+interface CreateEnderecoData { tipo?: string; logradouro: string; nro: string; complemento?: string; bairro: string; cep: string; nome_cidade: string; codigoIBGEcidade: string; nome_estado: string; uf: string; codigoIBGEestado: string; }
 interface Contador { id: string; nome: string; cpf: string; usuarios: User[]; }
 interface User { id: string; email: string; role: $Enums.Role; }
 
@@ -13,10 +14,24 @@ export const createContador = async (data: CreateContadorData, context: any): Pr
         const user = getUserAuth(context.req);
         isAdminAuth(user);
 
-        const { nome, cpf, regcrc, telefone, email } = data;
+        const { nome, cpf, regcrc, telefone, email, enderecos } = data;
         const neWcontador = await prisma.create({
             data: {
-                nome, cpf, regcrc, telefone, email, usuarios: { create: { userId: user.userId, }, },
+                nome, cpf, regcrc, telefone, email, usuarios: { create: { userId: user.userId, }, }, enderecos: {
+                    create: enderecos.map((endereco) => ({
+                        tipo: endereco.tipo || "PRINCIPAL",
+                        logradouro: endereco.logradouro,
+                        nro: endereco.nro,
+                        complemento: endereco.complemento,
+                        bairro: endereco.bairro,
+                        cep: endereco.cep,
+                        nome_cidade: endereco.nome_cidade,
+                        codigoIBGEcidade: endereco.codigoIBGEcidade,
+                        nome_estado: endereco.nome_estado,
+                        uf: endereco.uf,
+                        codigoIBGEestado: endereco.codigoIBGEestado
+                    }))
+                },
             }, include: { usuarios: { include: { user: { select: { id: true, email: true, role: true, }, }, }, }, },
         });
 

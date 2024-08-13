@@ -18,6 +18,22 @@ type Contador {
   nome: String!
   cpf: String!
   usuarios: [User!]!
+  enderecos: [Endereco!]!
+}
+
+type Endereco {
+  id: ID!
+  tipo: String!
+  logradouro: String!
+  nro: String!
+  complemento: String
+  bairro: String!
+  cep: String!
+  nome_cidade: String!
+  codigoIBGEcidade: String!
+  nome_estado: String!
+  uf: String!
+  codigoIBGEestado: String!
 }
 
 # Definição das respostas padronizadas
@@ -49,6 +65,22 @@ input CreateContadorInput {
   regcrc: String!
   telefone: String!
   email: String!
+  enderecos: [CreateEnderecoInput!]!
+}
+
+# Definição dos inputs
+input CreateEnderecoInput {
+  tipo: String
+  logradouro: String!
+  nro: String!
+  complemento: String
+  bairro: String!
+  cep: String!
+  nome_cidade: String!
+  codigoIBGEcidade: String!
+  nome_estado: String!
+  uf: String!
+  codigoIBGEestado: String!
 }
 
 input UpdateContadorInput {
