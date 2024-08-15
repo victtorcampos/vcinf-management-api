@@ -1,9 +1,35 @@
-import { ApiResponse, handleError } from "../utils";
+import { ApiResponse, handleError, handleSuccess } from "../utils";
 
-export const createEmitente = async (data: any, context: any): Promise<ApiResponse<any>> => {
+
+export interface EmitenteData {
+    id: string,
+    cod_dominio: string,
+    nome: string,
+    razao_social: string,
+    cnpj: string,
+    cpf: string,
+    ie: string
+    enderecos: EnderecoData[]
+}
+
+interface EnderecoData {
+    id: string,
+    tipo: string,
+    logradouro: string,
+    nro: string,
+    complemento: string,
+    bairro: string,
+    cep: string,
+    nome_cidade: string,
+    codigoIBGEcidade: string,
+    nome_estado: string,
+    uf: string,
+    codigoIBGEestado: string
+}
+
+export const createEmitente = async (data: EmitenteData, context: any): Promise<ApiResponse<EmitenteData>> => {
     try {
-        console.log(data);
-        return data;
+        return handleSuccess(data)
     } catch (error) {
         return handleError('Erro desconhecido.');
     }

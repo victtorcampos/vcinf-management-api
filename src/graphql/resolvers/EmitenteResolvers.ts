@@ -1,13 +1,5 @@
-import { createEmitente } from "../../controller";
+import { createEmitente, EmitenteData } from "../../controller";
 import { ApiResponse } from "../../utils";
-
-interface CreateEmitenteData {
-
-};
-
-interface Emitente {
-
-};
 
 type Context = { req: Request; };
 
@@ -17,7 +9,7 @@ export const EmitenteResolvers = {
     },
     Mutation: {
 
-        createEmitente: async (_: any, { data }: { data: CreateEmitenteData }, context: Context): Promise<ApiResponse<Emitente>> => await createEmitente(data, context),
+        emitente: async (_: any, { data }: { data: EmitenteData }, context: Context): Promise<ApiResponse<EmitenteData>> => await createEmitente(data, context),
 
     },
 }

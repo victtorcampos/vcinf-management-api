@@ -74,7 +74,7 @@ type ErrorResponse {
 
 
 type Mutation {
-    createEmitente(data:CreateEmitenteInput!): EmitenteResponse!
+    emitente(data:CreateEmitenteInput!): EmitenteResponse!
     updateEmitente(id: ID!) : String
     deleteEmitente(id: ID!) : String
   }
