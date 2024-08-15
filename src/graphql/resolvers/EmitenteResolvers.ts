@@ -1,14 +1,23 @@
+import { createEmitente } from "../../controller";
+import { ApiResponse } from "../../utils";
+
+interface CreateEmitenteData {
+
+};
+
+interface Emitente {
+
+};
+
+type Context = { req: Request; };
+
 export const EmitenteResolvers = {
     Query: {
 
     },
     Mutation: {
- 
-        createEmitente: async (_: any,) => { },
-        updateEmitente: async (_: any,) => { },
-        deleteEmitente: async (_: any,) => { },
 
-        // selectContadorAndUpdateToken: async (_: any,) => { },
-        // selectEmitenteAndUpdateToken: async (_: any,) => { },
+        createEmitente: async (_: any, { data }: { data: CreateEmitenteData }, context: Context): Promise<ApiResponse<Emitente>> => await createEmitente(data, context),
+
     },
 }
