@@ -1,1 +1,1 @@
-export const createEmitente = () => { };
+export const createEmitente = () => { }; 

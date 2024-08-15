@@ -55,15 +55,15 @@ model Emitente {
   razao_social String
   cnpj         String?
   cpf          String?
-  codId        String
+  IE        String
   enderecos    Endereco[]
   contador     Contador?  @relation(fields: [contadorId], references: [id], onDelete: Cascade)
   contadorId   String?    @db.ObjectId
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 
-  @@unique([cnpj, codId])
-  @@unique([cpf, codId])
+  @@unique([cnpj, IE])
+  @@unique([cpf, IE])
 }
 
 model Endereco {

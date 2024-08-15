@@ -3,7 +3,7 @@ export const EmitenteResolvers = {
 
     },
     Mutation: {
-
+ 
         createEmitente: async (_: any,) => { },
         updateEmitente: async (_: any,) => { },
         deleteEmitente: async (_: any,) => { },
