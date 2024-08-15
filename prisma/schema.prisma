@@ -68,7 +68,7 @@ model Emitente {
 
 model Endereco {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
-  tipo             String    @default("PRINCIPAL") // Nome padrão "PRINCIPAL"
+  tipo             String    @default("PRINCIPAL")
   logradouro       String
   nro              String
   complemento      String?
