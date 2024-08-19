@@ -71,7 +71,6 @@ model Emitente {
   contadorId   String?    @db.ObjectId
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-
   @@unique([cnpj, IE])
   @@unique([cpf, IE])
 }
