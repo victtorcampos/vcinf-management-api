@@ -25,17 +25,27 @@ model User {
 }
 
 model Contador {
-  id        String         @id @default(auto()) @map("_id") @db.ObjectId
-  nome      String
-  cpf       String         @unique
-  regcrc    String         @unique
-  telefone  String?
-  email     String?
-  usuarios  UserContador[]
-  Emitentes Emitente[]
-  enderecos Endereco[]
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
+  id               String         @id @default(auto()) @map("_id") @db.ObjectId
+  nome             String
+  cpf              String         @unique
+  regcrc           String         @unique
+  telefone         String?
+  email            String?
+  usuarios         UserContador[]
+  Emitentes        Emitente[]
+  logradouro       String
+  nro              String
+  complemento      String?
+  bairro           String
+  cep              String
+  nome_cidade      String
+  codigoIBGEcidade String
+  nome_estado      String
+  uf               String
+  codigoIBGEestado String
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  Endereco         Endereco[]
 }
 
 model UserContador {
@@ -55,20 +65,20 @@ model Emitente {
   razao_social String
   cnpj         String?
   cpf          String?
-  codId        String
+  IE           String
   enderecos    Endereco[]
   contador     Contador?  @relation(fields: [contadorId], references: [id], onDelete: Cascade)
   contadorId   String?    @db.ObjectId
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 
-  @@unique([cnpj, codId])
-  @@unique([cpf, codId])
+  @@unique([cnpj, IE])
+  @@unique([cpf, IE])
 }
 
 model Endereco {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
-  tipo             String    @default("PRINCIPAL") // Nome padrão "PRINCIPAL"
+  tipo             String    @default("PRINCIPAL")
   logradouro       String
   nro              String
   complemento      String?
