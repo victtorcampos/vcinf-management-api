@@ -8,7 +8,7 @@ const typeDefs = [UserTypeDefs, ContadorTypeDefs, EmitenteTypeDefs];
 const resolvers = [ContadorResolvers, UserResolvers, EmitenteResolvers]
 
 const server = new ApolloServer({ typeDefs, resolvers, context: ({ req }) => { return { prisma, req, }; }, });
-//teste
+
 server.listen().then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`);
 });

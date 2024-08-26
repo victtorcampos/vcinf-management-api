@@ -32,11 +32,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.17.0
- * Query Engine version: 393aa359c9ad4a4bb28630fb5613f9c281cde053
+ * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
  */
 Prisma.prismaVersion = {
   client: "5.17.0",
-  engine: "393aa359c9ad4a4bb28630fb5613f9c281cde053"
+  engine: "4c784e32044a8a016d99474bd02a3b6123742169"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -181,7 +181,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\app\\tech.vcinf.app\\vcinf-management-api\\src\\config\\prisma-client",
+      "value": "C:\\Users\\victor\\Dev\\tech.vcinf.app\\vcinf-management-api\\src\\config\\prisma-client",
       "fromEnvVar": null
     },
     "config": {
@@ -195,7 +195,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\app\\tech.vcinf.app\\vcinf-management-api\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\victor\\Dev\\tech.vcinf.app\\vcinf-management-api\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -204,11 +204,12 @@ const config = {
   },
   "relativePath": "../../../prisma",
   "clientVersion": "5.17.0",
-  "engineVersion": "393aa359c9ad4a4bb28630fb5613f9c281cde053",
+  "engineVersion": "4c784e32044a8a016d99474bd02a3b6123742169",
   "datasourceNames": [
     "db"
   ],
   "activeProvider": "mongodb",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
