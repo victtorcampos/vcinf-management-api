@@ -1,6 +1,5 @@
 import { ApiResponse, handleError, handleSuccess } from "../utils";
 
-
 export interface EmitenteData {
     id: string,
     cod_dominio: string,

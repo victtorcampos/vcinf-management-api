@@ -2506,16 +2506,16 @@ export namespace Prisma {
     regcrc: string
     telefone: string | null
     email: string | null
-    logradouro: string
-    nro: string
+    logradouro: string | null
+    nro: string | null
     complemento: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro: string | null
+    cep: string | null
+    nome_cidade: string | null
+    codigoIBGEcidade: string | null
+    nome_estado: string | null
+    uf: string | null
+    codigoIBGEestado: string | null
     createdAt: Date
     updatedAt: Date
     _count: ContadorCountAggregateOutputType | null
@@ -2605,16 +2605,16 @@ export namespace Prisma {
       regcrc: string
       telefone: string | null
       email: string | null
-      logradouro: string
-      nro: string
+      logradouro: string | null
+      nro: string | null
       complemento: string | null
-      bairro: string
-      cep: string
-      nome_cidade: string
-      codigoIBGEcidade: string
-      nome_estado: string
-      uf: string
-      codigoIBGEestado: string
+      bairro: string | null
+      cep: string | null
+      nome_cidade: string | null
+      codigoIBGEcidade: string | null
+      nome_estado: string | null
+      uf: string | null
+      codigoIBGEestado: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["contador"]>
@@ -6663,16 +6663,16 @@ export namespace Prisma {
     regcrc?: StringFilter<"Contador"> | string
     telefone?: StringNullableFilter<"Contador"> | string | null
     email?: StringNullableFilter<"Contador"> | string | null
-    logradouro?: StringFilter<"Contador"> | string
-    nro?: StringFilter<"Contador"> | string
+    logradouro?: StringNullableFilter<"Contador"> | string | null
+    nro?: StringNullableFilter<"Contador"> | string | null
     complemento?: StringNullableFilter<"Contador"> | string | null
-    bairro?: StringFilter<"Contador"> | string
-    cep?: StringFilter<"Contador"> | string
-    nome_cidade?: StringFilter<"Contador"> | string
-    codigoIBGEcidade?: StringFilter<"Contador"> | string
-    nome_estado?: StringFilter<"Contador"> | string
-    uf?: StringFilter<"Contador"> | string
-    codigoIBGEestado?: StringFilter<"Contador"> | string
+    bairro?: StringNullableFilter<"Contador"> | string | null
+    cep?: StringNullableFilter<"Contador"> | string | null
+    nome_cidade?: StringNullableFilter<"Contador"> | string | null
+    codigoIBGEcidade?: StringNullableFilter<"Contador"> | string | null
+    nome_estado?: StringNullableFilter<"Contador"> | string | null
+    uf?: StringNullableFilter<"Contador"> | string | null
+    codigoIBGEestado?: StringNullableFilter<"Contador"> | string | null
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UserContadorListRelationFilter
@@ -6714,16 +6714,16 @@ export namespace Prisma {
     nome?: StringFilter<"Contador"> | string
     telefone?: StringNullableFilter<"Contador"> | string | null
     email?: StringNullableFilter<"Contador"> | string | null
-    logradouro?: StringFilter<"Contador"> | string
-    nro?: StringFilter<"Contador"> | string
+    logradouro?: StringNullableFilter<"Contador"> | string | null
+    nro?: StringNullableFilter<"Contador"> | string | null
     complemento?: StringNullableFilter<"Contador"> | string | null
-    bairro?: StringFilter<"Contador"> | string
-    cep?: StringFilter<"Contador"> | string
-    nome_cidade?: StringFilter<"Contador"> | string
-    codigoIBGEcidade?: StringFilter<"Contador"> | string
-    nome_estado?: StringFilter<"Contador"> | string
-    uf?: StringFilter<"Contador"> | string
-    codigoIBGEestado?: StringFilter<"Contador"> | string
+    bairro?: StringNullableFilter<"Contador"> | string | null
+    cep?: StringNullableFilter<"Contador"> | string | null
+    nome_cidade?: StringNullableFilter<"Contador"> | string | null
+    codigoIBGEcidade?: StringNullableFilter<"Contador"> | string | null
+    nome_estado?: StringNullableFilter<"Contador"> | string | null
+    uf?: StringNullableFilter<"Contador"> | string | null
+    codigoIBGEestado?: StringNullableFilter<"Contador"> | string | null
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UserContadorListRelationFilter
@@ -6765,16 +6765,16 @@ export namespace Prisma {
     regcrc?: StringWithAggregatesFilter<"Contador"> | string
     telefone?: StringNullableWithAggregatesFilter<"Contador"> | string | null
     email?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    logradouro?: StringWithAggregatesFilter<"Contador"> | string
-    nro?: StringWithAggregatesFilter<"Contador"> | string
+    logradouro?: StringNullableWithAggregatesFilter<"Contador"> | string | null
+    nro?: StringNullableWithAggregatesFilter<"Contador"> | string | null
     complemento?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    bairro?: StringWithAggregatesFilter<"Contador"> | string
-    cep?: StringWithAggregatesFilter<"Contador"> | string
-    nome_cidade?: StringWithAggregatesFilter<"Contador"> | string
-    codigoIBGEcidade?: StringWithAggregatesFilter<"Contador"> | string
-    nome_estado?: StringWithAggregatesFilter<"Contador"> | string
-    uf?: StringWithAggregatesFilter<"Contador"> | string
-    codigoIBGEestado?: StringWithAggregatesFilter<"Contador"> | string
+    bairro?: StringNullableWithAggregatesFilter<"Contador"> | string | null
+    cep?: StringNullableWithAggregatesFilter<"Contador"> | string | null
+    nome_cidade?: StringNullableWithAggregatesFilter<"Contador"> | string | null
+    codigoIBGEcidade?: StringNullableWithAggregatesFilter<"Contador"> | string | null
+    nome_estado?: StringNullableWithAggregatesFilter<"Contador"> | string | null
+    uf?: StringNullableWithAggregatesFilter<"Contador"> | string | null
+    codigoIBGEestado?: StringNullableWithAggregatesFilter<"Contador"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Contador"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Contador"> | Date | string
   }
@@ -7086,16 +7086,16 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro: string
-    nro: string
+    logradouro?: string | null
+    nro?: string | null
     complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro?: string | null
+    cep?: string | null
+    nome_cidade?: string | null
+    codigoIBGEcidade?: string | null
+    nome_estado?: string | null
+    uf?: string | null
+    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
@@ -7110,16 +7110,16 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro: string
-    nro: string
+    logradouro?: string | null
+    nro?: string | null
     complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro?: string | null
+    cep?: string | null
+    nome_cidade?: string | null
+    codigoIBGEcidade?: string | null
+    nome_estado?: string | null
+    uf?: string | null
+    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
@@ -7133,16 +7133,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
@@ -7156,16 +7156,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
@@ -7180,16 +7180,16 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro: string
-    nro: string
+    logradouro?: string | null
+    nro?: string | null
     complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro?: string | null
+    cep?: string | null
+    nome_cidade?: string | null
+    codigoIBGEcidade?: string | null
+    nome_estado?: string | null
+    uf?: string | null
+    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7200,16 +7200,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7220,16 +7220,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8532,16 +8532,16 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro: string
-    nro: string
+    logradouro?: string | null
+    nro?: string | null
     complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro?: string | null
+    cep?: string | null
+    nome_cidade?: string | null
+    codigoIBGEcidade?: string | null
+    nome_estado?: string | null
+    uf?: string | null
+    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
@@ -8555,16 +8555,16 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro: string
-    nro: string
+    logradouro?: string | null
+    nro?: string | null
     complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro?: string | null
+    cep?: string | null
+    nome_cidade?: string | null
+    codigoIBGEcidade?: string | null
+    nome_estado?: string | null
+    uf?: string | null
+    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
@@ -8620,16 +8620,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
@@ -8642,16 +8642,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
@@ -8706,16 +8706,16 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro: string
-    nro: string
+    logradouro?: string | null
+    nro?: string | null
     complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro?: string | null
+    cep?: string | null
+    nome_cidade?: string | null
+    codigoIBGEcidade?: string | null
+    nome_estado?: string | null
+    uf?: string | null
+    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
@@ -8729,16 +8729,16 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro: string
-    nro: string
+    logradouro?: string | null
+    nro?: string | null
     complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro?: string | null
+    cep?: string | null
+    nome_cidade?: string | null
+    codigoIBGEcidade?: string | null
+    nome_estado?: string | null
+    uf?: string | null
+    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
@@ -8783,16 +8783,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
@@ -8805,16 +8805,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
@@ -8828,16 +8828,16 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro: string
-    nro: string
+    logradouro?: string | null
+    nro?: string | null
     complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro?: string | null
+    cep?: string | null
+    nome_cidade?: string | null
+    codigoIBGEcidade?: string | null
+    nome_estado?: string | null
+    uf?: string | null
+    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
@@ -8851,16 +8851,16 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro: string
-    nro: string
+    logradouro?: string | null
+    nro?: string | null
     complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
+    bairro?: string | null
+    cep?: string | null
+    nome_cidade?: string | null
+    codigoIBGEcidade?: string | null
+    nome_estado?: string | null
+    uf?: string | null
+    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
@@ -8920,16 +8920,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
@@ -8942,16 +8942,16 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
+    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
+    nro?: NullableStringFieldUpdateOperationsInput | string | null
     complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    bairro?: NullableStringFieldUpdateOperationsInput | string | null
+    cep?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
+    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
+    uf?: NullableStringFieldUpdateOperationsInput | string | null
+    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
