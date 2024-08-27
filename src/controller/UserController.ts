@@ -25,6 +25,9 @@ export const createUser = async (data: TypeUser, context: any): Promise<ApiRespo
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
             return handleError('Usuário já existe.', error.code);
         };
+        if (error instanceof AuthenticationError) {
+            return handleError('Não tem permissão.', error.code);
+        };
         return handleError('Erro ao criar usuário.');
     }
 };

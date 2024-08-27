@@ -128,16 +128,6 @@ exports.Prisma.ContadorScalarFieldEnum = {
   regcrc: 'regcrc',
   telefone: 'telefone',
   email: 'email',
-  logradouro: 'logradouro',
-  nro: 'nro',
-  complemento: 'complemento',
-  bairro: 'bairro',
-  cep: 'cep',
-  nome_cidade: 'nome_cidade',
-  codigoIBGEcidade: 'codigoIBGEcidade',
-  nome_estado: 'nome_estado',
-  uf: 'uf',
-  codigoIBGEestado: 'codigoIBGEestado',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

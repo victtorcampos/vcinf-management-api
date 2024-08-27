@@ -25,27 +25,17 @@ model User {
 }
 
 model Contador {
-  id               String         @id @default(auto()) @map("_id") @db.ObjectId
-  nome             String
-  cpf              String         @unique
-  regcrc           String         @unique
-  telefone         String?
-  email            String?
-  usuarios         UserContador[]
-  Emitentes        Emitente[]
-  logradouro       String?
-  nro              String?
-  complemento      String?
-  bairro           String?
-  cep              String?
-  nome_cidade      String?
-  codigoIBGEcidade String?
-  nome_estado      String?
-  uf               String?
-  codigoIBGEestado String?
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  Endereco         Endereco[]
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  nome      String
+  cpf       String         @unique
+  regcrc    String         @unique
+  telefone  String?
+  email     String?
+  usuarios  UserContador[]
+  Emitentes Emitente[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  endereco  Endereco?
 }
 
 model UserContador {
@@ -90,7 +80,7 @@ model Endereco {
   uf               String
   codigoIBGEestado String
   contador         Contador? @relation(fields: [contadorId], references: [id], onDelete: Cascade)
-  contadorId       String?   @db.ObjectId
+  contadorId       String?   @unique @db.ObjectId
   emitente         Emitente? @relation(fields: [emitenteId], references: [id], onDelete: Cascade)
   emitenteId       String?   @db.ObjectId
 }

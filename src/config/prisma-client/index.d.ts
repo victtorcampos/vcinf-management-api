@@ -1249,13 +1249,11 @@ export namespace Prisma {
   export type ContadorCountOutputType = {
     usuarios: number
     Emitentes: number
-    Endereco: number
   }
 
   export type ContadorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuarios?: boolean | ContadorCountOutputTypeCountUsuariosArgs
     Emitentes?: boolean | ContadorCountOutputTypeCountEmitentesArgs
-    Endereco?: boolean | ContadorCountOutputTypeCountEnderecoArgs
   }
 
   // Custom InputTypes
@@ -1281,13 +1279,6 @@ export namespace Prisma {
    */
   export type ContadorCountOutputTypeCountEmitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmitenteWhereInput
-  }
-
-  /**
-   * ContadorCountOutputType without action
-   */
-  export type ContadorCountOutputTypeCountEnderecoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EnderecoWhereInput
   }
 
 
@@ -2305,16 +2296,6 @@ export namespace Prisma {
     regcrc: string | null
     telefone: string | null
     email: string | null
-    logradouro: string | null
-    nro: string | null
-    complemento: string | null
-    bairro: string | null
-    cep: string | null
-    nome_cidade: string | null
-    codigoIBGEcidade: string | null
-    nome_estado: string | null
-    uf: string | null
-    codigoIBGEestado: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2326,16 +2307,6 @@ export namespace Prisma {
     regcrc: string | null
     telefone: string | null
     email: string | null
-    logradouro: string | null
-    nro: string | null
-    complemento: string | null
-    bairro: string | null
-    cep: string | null
-    nome_cidade: string | null
-    codigoIBGEcidade: string | null
-    nome_estado: string | null
-    uf: string | null
-    codigoIBGEestado: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2347,16 +2318,6 @@ export namespace Prisma {
     regcrc: number
     telefone: number
     email: number
-    logradouro: number
-    nro: number
-    complemento: number
-    bairro: number
-    cep: number
-    nome_cidade: number
-    codigoIBGEcidade: number
-    nome_estado: number
-    uf: number
-    codigoIBGEestado: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2370,16 +2331,6 @@ export namespace Prisma {
     regcrc?: true
     telefone?: true
     email?: true
-    logradouro?: true
-    nro?: true
-    complemento?: true
-    bairro?: true
-    cep?: true
-    nome_cidade?: true
-    codigoIBGEcidade?: true
-    nome_estado?: true
-    uf?: true
-    codigoIBGEestado?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2391,16 +2342,6 @@ export namespace Prisma {
     regcrc?: true
     telefone?: true
     email?: true
-    logradouro?: true
-    nro?: true
-    complemento?: true
-    bairro?: true
-    cep?: true
-    nome_cidade?: true
-    codigoIBGEcidade?: true
-    nome_estado?: true
-    uf?: true
-    codigoIBGEestado?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2412,16 +2353,6 @@ export namespace Prisma {
     regcrc?: true
     telefone?: true
     email?: true
-    logradouro?: true
-    nro?: true
-    complemento?: true
-    bairro?: true
-    cep?: true
-    nome_cidade?: true
-    codigoIBGEcidade?: true
-    nome_estado?: true
-    uf?: true
-    codigoIBGEestado?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2506,16 +2437,6 @@ export namespace Prisma {
     regcrc: string
     telefone: string | null
     email: string | null
-    logradouro: string | null
-    nro: string | null
-    complemento: string | null
-    bairro: string | null
-    cep: string | null
-    nome_cidade: string | null
-    codigoIBGEcidade: string | null
-    nome_estado: string | null
-    uf: string | null
-    codigoIBGEestado: string | null
     createdAt: Date
     updatedAt: Date
     _count: ContadorCountAggregateOutputType | null
@@ -2544,21 +2465,11 @@ export namespace Prisma {
     regcrc?: boolean
     telefone?: boolean
     email?: boolean
-    logradouro?: boolean
-    nro?: boolean
-    complemento?: boolean
-    bairro?: boolean
-    cep?: boolean
-    nome_cidade?: boolean
-    codigoIBGEcidade?: boolean
-    nome_estado?: boolean
-    uf?: boolean
-    codigoIBGEestado?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
     Emitentes?: boolean | Contador$EmitentesArgs<ExtArgs>
-    Endereco?: boolean | Contador$EnderecoArgs<ExtArgs>
+    endereco?: boolean | Contador$enderecoArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contador"]>
 
@@ -2570,16 +2481,6 @@ export namespace Prisma {
     regcrc?: boolean
     telefone?: boolean
     email?: boolean
-    logradouro?: boolean
-    nro?: boolean
-    complemento?: boolean
-    bairro?: boolean
-    cep?: boolean
-    nome_cidade?: boolean
-    codigoIBGEcidade?: boolean
-    nome_estado?: boolean
-    uf?: boolean
-    codigoIBGEestado?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -2587,7 +2488,7 @@ export namespace Prisma {
   export type ContadorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
     Emitentes?: boolean | Contador$EmitentesArgs<ExtArgs>
-    Endereco?: boolean | Contador$EnderecoArgs<ExtArgs>
+    endereco?: boolean | Contador$enderecoArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2596,7 +2497,7 @@ export namespace Prisma {
     objects: {
       usuarios: Prisma.$UserContadorPayload<ExtArgs>[]
       Emitentes: Prisma.$EmitentePayload<ExtArgs>[]
-      Endereco: Prisma.$EnderecoPayload<ExtArgs>[]
+      endereco: Prisma.$EnderecoPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2605,16 +2506,6 @@ export namespace Prisma {
       regcrc: string
       telefone: string | null
       email: string | null
-      logradouro: string | null
-      nro: string | null
-      complemento: string | null
-      bairro: string | null
-      cep: string | null
-      nome_cidade: string | null
-      codigoIBGEcidade: string | null
-      nome_estado: string | null
-      uf: string | null
-      codigoIBGEestado: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["contador"]>
@@ -2982,7 +2873,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     usuarios<T extends Contador$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findMany"> | Null>
     Emitentes<T extends Contador$EmitentesArgs<ExtArgs> = {}>(args?: Subset<T, Contador$EmitentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findMany"> | Null>
-    Endereco<T extends Contador$EnderecoArgs<ExtArgs> = {}>(args?: Subset<T, Contador$EnderecoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany"> | Null>
+    endereco<T extends Contador$enderecoArgs<ExtArgs> = {}>(args?: Subset<T, Contador$enderecoArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3018,16 +2909,6 @@ export namespace Prisma {
     readonly regcrc: FieldRef<"Contador", 'String'>
     readonly telefone: FieldRef<"Contador", 'String'>
     readonly email: FieldRef<"Contador", 'String'>
-    readonly logradouro: FieldRef<"Contador", 'String'>
-    readonly nro: FieldRef<"Contador", 'String'>
-    readonly complemento: FieldRef<"Contador", 'String'>
-    readonly bairro: FieldRef<"Contador", 'String'>
-    readonly cep: FieldRef<"Contador", 'String'>
-    readonly nome_cidade: FieldRef<"Contador", 'String'>
-    readonly codigoIBGEcidade: FieldRef<"Contador", 'String'>
-    readonly nome_estado: FieldRef<"Contador", 'String'>
-    readonly uf: FieldRef<"Contador", 'String'>
-    readonly codigoIBGEestado: FieldRef<"Contador", 'String'>
     readonly createdAt: FieldRef<"Contador", 'DateTime'>
     readonly updatedAt: FieldRef<"Contador", 'DateTime'>
   }
@@ -3396,9 +3277,9 @@ export namespace Prisma {
   }
 
   /**
-   * Contador.Endereco
+   * Contador.endereco
    */
-  export type Contador$EnderecoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Contador$enderecoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Endereco
      */
@@ -3408,11 +3289,6 @@ export namespace Prisma {
      */
     include?: EnderecoInclude<ExtArgs> | null
     where?: EnderecoWhereInput
-    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
-    cursor?: EnderecoWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
   }
 
   /**
@@ -6451,16 +6327,6 @@ export namespace Prisma {
     regcrc: 'regcrc',
     telefone: 'telefone',
     email: 'email',
-    logradouro: 'logradouro',
-    nro: 'nro',
-    complemento: 'complemento',
-    bairro: 'bairro',
-    cep: 'cep',
-    nome_cidade: 'nome_cidade',
-    codigoIBGEcidade: 'codigoIBGEcidade',
-    nome_estado: 'nome_estado',
-    uf: 'uf',
-    codigoIBGEestado: 'codigoIBGEestado',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -6663,21 +6529,11 @@ export namespace Prisma {
     regcrc?: StringFilter<"Contador"> | string
     telefone?: StringNullableFilter<"Contador"> | string | null
     email?: StringNullableFilter<"Contador"> | string | null
-    logradouro?: StringNullableFilter<"Contador"> | string | null
-    nro?: StringNullableFilter<"Contador"> | string | null
-    complemento?: StringNullableFilter<"Contador"> | string | null
-    bairro?: StringNullableFilter<"Contador"> | string | null
-    cep?: StringNullableFilter<"Contador"> | string | null
-    nome_cidade?: StringNullableFilter<"Contador"> | string | null
-    codigoIBGEcidade?: StringNullableFilter<"Contador"> | string | null
-    nome_estado?: StringNullableFilter<"Contador"> | string | null
-    uf?: StringNullableFilter<"Contador"> | string | null
-    codigoIBGEestado?: StringNullableFilter<"Contador"> | string | null
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UserContadorListRelationFilter
     Emitentes?: EmitenteListRelationFilter
-    Endereco?: EnderecoListRelationFilter
+    endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
   }
 
   export type ContadorOrderByWithRelationInput = {
@@ -6687,21 +6543,11 @@ export namespace Prisma {
     regcrc?: SortOrder
     telefone?: SortOrder
     email?: SortOrder
-    logradouro?: SortOrder
-    nro?: SortOrder
-    complemento?: SortOrder
-    bairro?: SortOrder
-    cep?: SortOrder
-    nome_cidade?: SortOrder
-    codigoIBGEcidade?: SortOrder
-    nome_estado?: SortOrder
-    uf?: SortOrder
-    codigoIBGEestado?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usuarios?: UserContadorOrderByRelationAggregateInput
     Emitentes?: EmitenteOrderByRelationAggregateInput
-    Endereco?: EnderecoOrderByRelationAggregateInput
+    endereco?: EnderecoOrderByWithRelationInput
   }
 
   export type ContadorWhereUniqueInput = Prisma.AtLeast<{
@@ -6714,21 +6560,11 @@ export namespace Prisma {
     nome?: StringFilter<"Contador"> | string
     telefone?: StringNullableFilter<"Contador"> | string | null
     email?: StringNullableFilter<"Contador"> | string | null
-    logradouro?: StringNullableFilter<"Contador"> | string | null
-    nro?: StringNullableFilter<"Contador"> | string | null
-    complemento?: StringNullableFilter<"Contador"> | string | null
-    bairro?: StringNullableFilter<"Contador"> | string | null
-    cep?: StringNullableFilter<"Contador"> | string | null
-    nome_cidade?: StringNullableFilter<"Contador"> | string | null
-    codigoIBGEcidade?: StringNullableFilter<"Contador"> | string | null
-    nome_estado?: StringNullableFilter<"Contador"> | string | null
-    uf?: StringNullableFilter<"Contador"> | string | null
-    codigoIBGEestado?: StringNullableFilter<"Contador"> | string | null
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UserContadorListRelationFilter
     Emitentes?: EmitenteListRelationFilter
-    Endereco?: EnderecoListRelationFilter
+    endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
   }, "id" | "cpf" | "regcrc">
 
   export type ContadorOrderByWithAggregationInput = {
@@ -6738,16 +6574,6 @@ export namespace Prisma {
     regcrc?: SortOrder
     telefone?: SortOrder
     email?: SortOrder
-    logradouro?: SortOrder
-    nro?: SortOrder
-    complemento?: SortOrder
-    bairro?: SortOrder
-    cep?: SortOrder
-    nome_cidade?: SortOrder
-    codigoIBGEcidade?: SortOrder
-    nome_estado?: SortOrder
-    uf?: SortOrder
-    codigoIBGEestado?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ContadorCountOrderByAggregateInput
@@ -6765,16 +6591,6 @@ export namespace Prisma {
     regcrc?: StringWithAggregatesFilter<"Contador"> | string
     telefone?: StringNullableWithAggregatesFilter<"Contador"> | string | null
     email?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    logradouro?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    nro?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    complemento?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    bairro?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    cep?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    nome_cidade?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    codigoIBGEcidade?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    nome_estado?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    uf?: StringNullableWithAggregatesFilter<"Contador"> | string | null
-    codigoIBGEestado?: StringNullableWithAggregatesFilter<"Contador"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Contador"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Contador"> | Date | string
   }
@@ -6956,6 +6772,7 @@ export namespace Prisma {
 
   export type EnderecoWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    contadorId?: string
     AND?: EnderecoWhereInput | EnderecoWhereInput[]
     OR?: EnderecoWhereInput[]
     NOT?: EnderecoWhereInput | EnderecoWhereInput[]
@@ -6970,11 +6787,10 @@ export namespace Prisma {
     nome_estado?: StringFilter<"Endereco"> | string
     uf?: StringFilter<"Endereco"> | string
     codigoIBGEestado?: StringFilter<"Endereco"> | string
-    contadorId?: StringNullableFilter<"Endereco"> | string | null
     emitenteId?: StringNullableFilter<"Endereco"> | string | null
     contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
     emitente?: XOR<EmitenteNullableRelationFilter, EmitenteWhereInput> | null
-  }, "id">
+  }, "id" | "contadorId">
 
   export type EnderecoOrderByWithAggregationInput = {
     id?: SortOrder
@@ -7086,21 +6902,11 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro?: string | null
-    nro?: string | null
-    complemento?: string | null
-    bairro?: string | null
-    cep?: string | null
-    nome_cidade?: string | null
-    codigoIBGEcidade?: string | null
-    nome_estado?: string | null
-    uf?: string | null
-    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
-    Endereco?: EnderecoCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoCreateNestedOneWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateInput = {
@@ -7110,21 +6916,11 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro?: string | null
-    nro?: string | null
-    complemento?: string | null
-    bairro?: string | null
-    cep?: string | null
-    nome_cidade?: string | null
-    codigoIBGEcidade?: string | null
-    nome_estado?: string | null
-    uf?: string | null
-    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
-    Endereco?: EnderecoUncheckedCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
   }
 
   export type ContadorUpdateInput = {
@@ -7133,21 +6929,11 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
-    Endereco?: EnderecoUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateInput = {
@@ -7156,21 +6942,11 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
-    Endereco?: EnderecoUncheckedUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
   }
 
   export type ContadorCreateManyInput = {
@@ -7180,16 +6956,6 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro?: string | null
-    nro?: string | null
-    complemento?: string | null
-    bairro?: string | null
-    cep?: string | null
-    nome_cidade?: string | null
-    codigoIBGEcidade?: string | null
-    nome_estado?: string | null
-    uf?: string | null
-    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7200,16 +6966,6 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7220,16 +6976,6 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7608,17 +7354,12 @@ export namespace Prisma {
     none?: EmitenteWhereInput
   }
 
-  export type EnderecoListRelationFilter = {
-    every?: EnderecoWhereInput
-    some?: EnderecoWhereInput
-    none?: EnderecoWhereInput
+  export type EnderecoNullableRelationFilter = {
+    is?: EnderecoWhereInput | null
+    isNot?: EnderecoWhereInput | null
   }
 
   export type EmitenteOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type EnderecoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7629,16 +7370,6 @@ export namespace Prisma {
     regcrc?: SortOrder
     telefone?: SortOrder
     email?: SortOrder
-    logradouro?: SortOrder
-    nro?: SortOrder
-    complemento?: SortOrder
-    bairro?: SortOrder
-    cep?: SortOrder
-    nome_cidade?: SortOrder
-    codigoIBGEcidade?: SortOrder
-    nome_estado?: SortOrder
-    uf?: SortOrder
-    codigoIBGEestado?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7650,16 +7381,6 @@ export namespace Prisma {
     regcrc?: SortOrder
     telefone?: SortOrder
     email?: SortOrder
-    logradouro?: SortOrder
-    nro?: SortOrder
-    complemento?: SortOrder
-    bairro?: SortOrder
-    cep?: SortOrder
-    nome_cidade?: SortOrder
-    codigoIBGEcidade?: SortOrder
-    nome_estado?: SortOrder
-    uf?: SortOrder
-    codigoIBGEestado?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7671,16 +7392,6 @@ export namespace Prisma {
     regcrc?: SortOrder
     telefone?: SortOrder
     email?: SortOrder
-    logradouro?: SortOrder
-    nro?: SortOrder
-    complemento?: SortOrder
-    bairro?: SortOrder
-    cep?: SortOrder
-    nome_cidade?: SortOrder
-    codigoIBGEcidade?: SortOrder
-    nome_estado?: SortOrder
-    uf?: SortOrder
-    codigoIBGEestado?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7737,9 +7448,19 @@ export namespace Prisma {
     contadorId?: SortOrder
   }
 
+  export type EnderecoListRelationFilter = {
+    every?: EnderecoWhereInput
+    some?: EnderecoWhereInput
+    none?: EnderecoWhereInput
+  }
+
   export type ContadorNullableRelationFilter = {
     is?: ContadorWhereInput | null
     isNot?: ContadorWhereInput | null
+  }
+
+  export type EnderecoOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type EmitenteCnpjIECompoundUniqueInput = {
@@ -7915,11 +7636,10 @@ export namespace Prisma {
     connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
   }
 
-  export type EnderecoCreateNestedManyWithoutContadorInput = {
-    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput> | EnderecoCreateWithoutContadorInput[] | EnderecoUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput | EnderecoCreateOrConnectWithoutContadorInput[]
-    createMany?: EnderecoCreateManyContadorInputEnvelope
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+  export type EnderecoCreateNestedOneWithoutContadorInput = {
+    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput
+    connect?: EnderecoWhereUniqueInput
   }
 
   export type UserContadorUncheckedCreateNestedManyWithoutContadorInput = {
@@ -7936,11 +7656,10 @@ export namespace Prisma {
     connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
   }
 
-  export type EnderecoUncheckedCreateNestedManyWithoutContadorInput = {
-    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput> | EnderecoCreateWithoutContadorInput[] | EnderecoUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput | EnderecoCreateOrConnectWithoutContadorInput[]
-    createMany?: EnderecoCreateManyContadorInputEnvelope
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+  export type EnderecoUncheckedCreateNestedOneWithoutContadorInput = {
+    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput
+    connect?: EnderecoWhereUniqueInput
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -7976,18 +7695,14 @@ export namespace Prisma {
     deleteMany?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
   }
 
-  export type EnderecoUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput> | EnderecoCreateWithoutContadorInput[] | EnderecoUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput | EnderecoCreateOrConnectWithoutContadorInput[]
-    upsert?: EnderecoUpsertWithWhereUniqueWithoutContadorInput | EnderecoUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: EnderecoCreateManyContadorInputEnvelope
-    set?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    disconnect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    delete?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    update?: EnderecoUpdateWithWhereUniqueWithoutContadorInput | EnderecoUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: EnderecoUpdateManyWithWhereWithoutContadorInput | EnderecoUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+  export type EnderecoUpdateOneWithoutContadorNestedInput = {
+    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput
+    upsert?: EnderecoUpsertWithoutContadorInput
+    disconnect?: EnderecoWhereInput | boolean
+    delete?: EnderecoWhereInput | boolean
+    connect?: EnderecoWhereUniqueInput
+    update?: XOR<XOR<EnderecoUpdateToOneWithWhereWithoutContadorInput, EnderecoUpdateWithoutContadorInput>, EnderecoUncheckedUpdateWithoutContadorInput>
   }
 
   export type UserContadorUncheckedUpdateManyWithoutContadorNestedInput = {
@@ -8018,18 +7733,14 @@ export namespace Prisma {
     deleteMany?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
   }
 
-  export type EnderecoUncheckedUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput> | EnderecoCreateWithoutContadorInput[] | EnderecoUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput | EnderecoCreateOrConnectWithoutContadorInput[]
-    upsert?: EnderecoUpsertWithWhereUniqueWithoutContadorInput | EnderecoUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: EnderecoCreateManyContadorInputEnvelope
-    set?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    disconnect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    delete?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    update?: EnderecoUpdateWithWhereUniqueWithoutContadorInput | EnderecoUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: EnderecoUpdateManyWithWhereWithoutContadorInput | EnderecoUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+  export type EnderecoUncheckedUpdateOneWithoutContadorNestedInput = {
+    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput
+    upsert?: EnderecoUpsertWithoutContadorInput
+    disconnect?: EnderecoWhereInput | boolean
+    delete?: EnderecoWhereInput | boolean
+    connect?: EnderecoWhereUniqueInput
+    update?: XOR<XOR<EnderecoUpdateToOneWithWhereWithoutContadorInput, EnderecoUpdateWithoutContadorInput>, EnderecoUncheckedUpdateWithoutContadorInput>
   }
 
   export type UserCreateNestedOneWithoutContadoresInput = {
@@ -8414,10 +8125,6 @@ export namespace Prisma {
     create: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
   }
 
-  export type EnderecoCreateManyContadorInputEnvelope = {
-    data: EnderecoCreateManyContadorInput | EnderecoCreateManyContadorInput[]
-  }
-
   export type UserContadorUpsertWithWhereUniqueWithoutContadorInput = {
     where: UserContadorWhereUniqueInput
     update: XOR<UserContadorUpdateWithoutContadorInput, UserContadorUncheckedUpdateWithoutContadorInput>
@@ -8466,40 +8173,45 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
   }
 
-  export type EnderecoUpsertWithWhereUniqueWithoutContadorInput = {
-    where: EnderecoWhereUniqueInput
+  export type EnderecoUpsertWithoutContadorInput = {
     update: XOR<EnderecoUpdateWithoutContadorInput, EnderecoUncheckedUpdateWithoutContadorInput>
     create: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    where?: EnderecoWhereInput
   }
 
-  export type EnderecoUpdateWithWhereUniqueWithoutContadorInput = {
-    where: EnderecoWhereUniqueInput
+  export type EnderecoUpdateToOneWithWhereWithoutContadorInput = {
+    where?: EnderecoWhereInput
     data: XOR<EnderecoUpdateWithoutContadorInput, EnderecoUncheckedUpdateWithoutContadorInput>
   }
 
-  export type EnderecoUpdateManyWithWhereWithoutContadorInput = {
-    where: EnderecoScalarWhereInput
-    data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyWithoutContadorInput>
+  export type EnderecoUpdateWithoutContadorInput = {
+    tipo?: StringFieldUpdateOperationsInput | string
+    logradouro?: StringFieldUpdateOperationsInput | string
+    nro?: StringFieldUpdateOperationsInput | string
+    complemento?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    nome_cidade?: StringFieldUpdateOperationsInput | string
+    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
+    nome_estado?: StringFieldUpdateOperationsInput | string
+    uf?: StringFieldUpdateOperationsInput | string
+    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    emitente?: EmitenteUpdateOneWithoutEnderecosNestedInput
   }
 
-  export type EnderecoScalarWhereInput = {
-    AND?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
-    OR?: EnderecoScalarWhereInput[]
-    NOT?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
-    id?: StringFilter<"Endereco"> | string
-    tipo?: StringFilter<"Endereco"> | string
-    logradouro?: StringFilter<"Endereco"> | string
-    nro?: StringFilter<"Endereco"> | string
-    complemento?: StringNullableFilter<"Endereco"> | string | null
-    bairro?: StringFilter<"Endereco"> | string
-    cep?: StringFilter<"Endereco"> | string
-    nome_cidade?: StringFilter<"Endereco"> | string
-    codigoIBGEcidade?: StringFilter<"Endereco"> | string
-    nome_estado?: StringFilter<"Endereco"> | string
-    uf?: StringFilter<"Endereco"> | string
-    codigoIBGEestado?: StringFilter<"Endereco"> | string
-    contadorId?: StringNullableFilter<"Endereco"> | string | null
-    emitenteId?: StringNullableFilter<"Endereco"> | string | null
+  export type EnderecoUncheckedUpdateWithoutContadorInput = {
+    tipo?: StringFieldUpdateOperationsInput | string
+    logradouro?: StringFieldUpdateOperationsInput | string
+    nro?: StringFieldUpdateOperationsInput | string
+    complemento?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    nome_cidade?: StringFieldUpdateOperationsInput | string
+    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
+    nome_estado?: StringFieldUpdateOperationsInput | string
+    uf?: StringFieldUpdateOperationsInput | string
+    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateWithoutContadoresInput = {
@@ -8532,20 +8244,10 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro?: string | null
-    nro?: string | null
-    complemento?: string | null
-    bairro?: string | null
-    cep?: string | null
-    nome_cidade?: string | null
-    codigoIBGEcidade?: string | null
-    nome_estado?: string | null
-    uf?: string | null
-    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
-    Endereco?: EnderecoCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoCreateNestedOneWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateWithoutUsuariosInput = {
@@ -8555,20 +8257,10 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro?: string | null
-    nro?: string | null
-    complemento?: string | null
-    bairro?: string | null
-    cep?: string | null
-    nome_cidade?: string | null
-    codigoIBGEcidade?: string | null
-    nome_estado?: string | null
-    uf?: string | null
-    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
-    Endereco?: EnderecoUncheckedCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
   }
 
   export type ContadorCreateOrConnectWithoutUsuariosInput = {
@@ -8620,20 +8312,10 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
-    Endereco?: EnderecoUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateWithoutUsuariosInput = {
@@ -8642,20 +8324,10 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
-    Endereco?: EnderecoUncheckedUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
   }
 
   export type EnderecoCreateWithoutEmitenteInput = {
@@ -8706,20 +8378,10 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro?: string | null
-    nro?: string | null
-    complemento?: string | null
-    bairro?: string | null
-    cep?: string | null
-    nome_cidade?: string | null
-    codigoIBGEcidade?: string | null
-    nome_estado?: string | null
-    uf?: string | null
-    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
-    Endereco?: EnderecoCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoCreateNestedOneWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateWithoutEmitentesInput = {
@@ -8729,20 +8391,10 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro?: string | null
-    nro?: string | null
-    complemento?: string | null
-    bairro?: string | null
-    cep?: string | null
-    nome_cidade?: string | null
-    codigoIBGEcidade?: string | null
-    nome_estado?: string | null
-    uf?: string | null
-    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
-    Endereco?: EnderecoUncheckedCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
   }
 
   export type ContadorCreateOrConnectWithoutEmitentesInput = {
@@ -8766,6 +8418,26 @@ export namespace Prisma {
     data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyWithoutEmitenteInput>
   }
 
+  export type EnderecoScalarWhereInput = {
+    AND?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+    OR?: EnderecoScalarWhereInput[]
+    NOT?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+    id?: StringFilter<"Endereco"> | string
+    tipo?: StringFilter<"Endereco"> | string
+    logradouro?: StringFilter<"Endereco"> | string
+    nro?: StringFilter<"Endereco"> | string
+    complemento?: StringNullableFilter<"Endereco"> | string | null
+    bairro?: StringFilter<"Endereco"> | string
+    cep?: StringFilter<"Endereco"> | string
+    nome_cidade?: StringFilter<"Endereco"> | string
+    codigoIBGEcidade?: StringFilter<"Endereco"> | string
+    nome_estado?: StringFilter<"Endereco"> | string
+    uf?: StringFilter<"Endereco"> | string
+    codigoIBGEestado?: StringFilter<"Endereco"> | string
+    contadorId?: StringNullableFilter<"Endereco"> | string | null
+    emitenteId?: StringNullableFilter<"Endereco"> | string | null
+  }
+
   export type ContadorUpsertWithoutEmitentesInput = {
     update: XOR<ContadorUpdateWithoutEmitentesInput, ContadorUncheckedUpdateWithoutEmitentesInput>
     create: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
@@ -8783,20 +8455,10 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
-    Endereco?: EnderecoUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateWithoutEmitentesInput = {
@@ -8805,20 +8467,10 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
-    Endereco?: EnderecoUncheckedUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
   }
 
   export type ContadorCreateWithoutEnderecoInput = {
@@ -8828,16 +8480,6 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro?: string | null
-    nro?: string | null
-    complemento?: string | null
-    bairro?: string | null
-    cep?: string | null
-    nome_cidade?: string | null
-    codigoIBGEcidade?: string | null
-    nome_estado?: string | null
-    uf?: string | null
-    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
@@ -8851,16 +8493,6 @@ export namespace Prisma {
     regcrc: string
     telefone?: string | null
     email?: string | null
-    logradouro?: string | null
-    nro?: string | null
-    complemento?: string | null
-    bairro?: string | null
-    cep?: string | null
-    nome_cidade?: string | null
-    codigoIBGEcidade?: string | null
-    nome_estado?: string | null
-    uf?: string | null
-    codigoIBGEestado?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
@@ -8920,16 +8552,6 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
@@ -8942,16 +8564,6 @@ export namespace Prisma {
     regcrc?: StringFieldUpdateOperationsInput | string
     telefone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
-    logradouro?: NullableStringFieldUpdateOperationsInput | string | null
-    nro?: NullableStringFieldUpdateOperationsInput | string | null
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: NullableStringFieldUpdateOperationsInput | string | null
-    cep?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_cidade?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEcidade?: NullableStringFieldUpdateOperationsInput | string | null
-    nome_estado?: NullableStringFieldUpdateOperationsInput | string | null
-    uf?: NullableStringFieldUpdateOperationsInput | string | null
-    codigoIBGEestado?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
@@ -9027,22 +8639,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type EnderecoCreateManyContadorInput = {
-    id?: string
-    tipo?: string
-    logradouro: string
-    nro: string
-    complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
-    emitenteId?: string | null
-  }
-
   export type UserContadorUpdateWithoutContadorInput = {
     user?: UserUpdateOneRequiredWithoutContadoresNestedInput
   }
@@ -9088,51 +8684,6 @@ export namespace Prisma {
     IE?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type EnderecoUpdateWithoutContadorInput = {
-    tipo?: StringFieldUpdateOperationsInput | string
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
-    emitente?: EmitenteUpdateOneWithoutEnderecosNestedInput
-  }
-
-  export type EnderecoUncheckedUpdateWithoutContadorInput = {
-    tipo?: StringFieldUpdateOperationsInput | string
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
-    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EnderecoUncheckedUpdateManyWithoutContadorInput = {
-    tipo?: StringFieldUpdateOperationsInput | string
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
-    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EnderecoCreateManyEmitenteInput = {

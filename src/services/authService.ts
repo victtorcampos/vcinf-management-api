@@ -2,7 +2,7 @@ import { Request } from 'express';
 import { AuthenticationError } from "apollo-server";
 import type { TypeUser } from "../controller/UserController";
 import { sign, verify } from "jsonwebtoken";
-
+ 
 export const getUserAuth = (req: Request) => {
     const authorization = req.headers.authorization; if (authorization) {
         const token = authorization.replace('Bearer ', '');

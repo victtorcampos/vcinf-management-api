@@ -1,20 +1,42 @@
-
-import type { $Enums } from "../../config/prisma-client";
+import { type Contador as TypeContador, type Endereco as TypeEndereco, type $Enums, PrismaClient } from "../../config/prisma-client";
 import { createContador, deleteContador, updateContador } from "../../controller";
+import { getUserAuth, isAdminAuth } from "../../services/authService";
 import type { ApiResponse } from "../../utils";
 
-interface CreateContadorData { nome: string; cpf: string; regcrc: string; telefone: string; email: string; enderecos: CreateEnderecoData[]; }
-interface CreateEnderecoData { tipo?: string; logradouro: string; nro: string; complemento?: string; bairro: string; cep: string; nome_cidade: string; codigoIBGEcidade: string; nome_estado: string; uf: string; codigoIBGEestado: string; }
-interface Contador { id: string; nome: string; cpf: string; usuarios: User[]; };
-interface User { id: string; email: string; role: $Enums.Role; };
-interface UpdateContadorData { nome: string; cpf: string; }
+const prisma = new PrismaClient().contador;
 
-type Context = { req: Request; };
+export interface TypeContadorInput extends TypeContador {
+    endereco: TypeEndereco;
+}
+
 export const ContadorResolvers = {
     Mutation: {
-        updateContador: async (_: any, { id, data }: { id: string; data: UpdateContadorData }, context: Context): Promise<ApiResponse<Contador>> => await updateContador(id, data, context),
-        createContador: async (_: any, { data }: { data: CreateContadorData }, context: Context): Promise<ApiResponse<Contador>> => await createContador(data, context),
-        deleteContador: async (_: any, { id }: { id: string }, context: Context): Promise<ApiResponse<{ message: string }>> => await deleteContador(id, context),
+        createContador: async (_: any, args: { data: TypeContadorInput }, context: any) => {
+            const user = getUserAuth(context.req);
+            isAdminAuth(user);
+            
+            const resultCreate = await prisma.create({
+                data: {
+                    ...args.data, usuarios: {
+                        create: {
+                            userId: user.userId
+                        }
+                    },
+                    endereco: {
+                        create: {
+                            ...args.data.endereco
+                        }
+                    }
+                }
+            });
+
+            console.log(resultCreate);
+
+    
+
+
+            return { ...args.data, id: "1" };
+        },
     },
     Query: {
         // Defina os resolvers das queries se necessário

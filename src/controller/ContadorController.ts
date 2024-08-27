@@ -1,14 +1,14 @@
-import { Prisma, PrismaClient, type $Enums } from "../config/prisma-client";
+import { type Contador as TypeContador, Prisma, PrismaClient, type $Enums } from "../config/prisma-client";
 import { getUserAuth, isAdminAuth } from "../services/authService";
 import { handleError, handleSuccess, type ApiResponse, } from "../utils/responseHandler";
 
 const prisma = new PrismaClient().contador;
-
+ 
 interface CreateContadorData { nome: string; cpf: string; regcrc: string; telefone: string; email: string; }
 interface Contador { id: string; nome: string; cpf: string; usuarios: User[]; }
 interface User { id: string; email: string; role: $Enums.Role; }
 
-export const createContador = async (data: CreateContadorData, context: any): Promise<ApiResponse<Contador>> => {
+export const createContador = async (data: TypeContador, context: any): Promise<ApiResponse<Contador>> => {
   try {
     const user = getUserAuth(context.req);
     isAdminAuth(user);
