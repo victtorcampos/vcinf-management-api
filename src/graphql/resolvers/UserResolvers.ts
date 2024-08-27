@@ -2,7 +2,6 @@ import { $Enums } from "../../config/prisma-client";
 import { authenticateUser, createUser, deleteUser, findAllUsers, findUserById, updateUser, type TypeUser } from "../../controller";
 import type { ApiResponse } from "../../utils";
 
-
 export const UserResolvers = {
     Query: {
         users: async (): Promise<ApiResponse<TypeUser[]>> => { return await findAllUsers(); },
