@@ -14,25 +14,22 @@ export const findUserById = async (id: string): Promise<ApiResponse<PrismaUser |
 
 export const findUserByEmail = async (email: string): Promise<ApiResponse<PrismaUser | null>> => { try { const user = await prisma.findUnique({ where: { email } }); return handleSuccess(user); } catch (error) { return handleError(`Erro ao buscar usuário com email ${email}.`); } };
 
-export const createUser = async (data: { email: string; password: string; role: $Enums.Role }, context: any): Promise<ApiResponse<PrismaUser>> => {
+export const createUser = async (data: TypeUser, context: any): Promise<ApiResponse<PrismaUser>> => {
     try {
         const user = getUserAuth(context.req);
         isAdminAuth(user);
         const hashedPassword = await hash(data.password, 10);
-        const newUser = await prisma.create({ data: { email: data.email, password: hashedPassword, role: data.role, }, });
+        const newUser = await prisma.create({ data: { email: data.email, password: hashedPassword, role: data.role }, });
         return handleSuccess(newUser);
     } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
             return handleError('Usuário já existe.', error.code);
-        }
+        };
         return handleError('Erro ao criar usuário.');
     }
 };
 
-export const updateUser = async (
-    data: { id: string; email: string; password?: string; role: $Enums.Role },
-    context: any
-): Promise<ApiResponse<PrismaUser>> => {
+export const updateUser = async (data: { id: string; email: string; password?: string; role: $Enums.Role }, context: any): Promise<ApiResponse<PrismaUser>> => {
     try {
         if (!data.id) {
             throw new ValidationError('ID não fornecido.');
@@ -72,6 +69,8 @@ export const authenticateUser = async (email: string, password: string): Promise
             throw new AuthenticationError('Credenciais inválidas.');
         }
         const valid = await compare(password, user.password);
+
+
         if (!valid) {
             throw new AuthenticationError('Credenciais inválidas.');
         }
@@ -87,3 +86,5 @@ export const authenticateUser = async (email: string, password: string): Promise
         return handleError('Erro ao autenticar usuário.');
     }
 };
+
+
