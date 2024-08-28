@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.17.0
- * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
+ * Query Engine version: 393aa359c9ad4a4bb28630fb5613f9c281cde053
  */
 Prisma.prismaVersion = {
   client: "5.17.0",
-  engine: "4c784e32044a8a016d99474bd02a3b6123742169"
+  engine: "393aa359c9ad4a4bb28630fb5613f9c281cde053"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -112,7 +112,7 @@ Prisma.NullTypes = {
  * Enums
  */
 
-exports.Prisma.UserScalarFieldEnum = {
+exports.Prisma.UsuarioScalarFieldEnum = {
   id: 'id',
   email: 'email',
   password: 'password',
@@ -132,9 +132,9 @@ exports.Prisma.ContadorScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.UserContadorScalarFieldEnum = {
+exports.Prisma.UsuarioContadorScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  UsuarioId: 'UsuarioId',
   contadorId: 'contadorId'
 };
 
@@ -194,9 +194,9 @@ exports.Role = exports.$Enums.Role = {
 };
 
 exports.Prisma.ModelName = {
-  User: 'User',
+  Usuario: 'Usuario',
   Contador: 'Contador',
-  UserContador: 'UserContador',
+  UsuarioContador: 'UsuarioContador',
   Emitente: 'Emitente',
   Certificado: 'Certificado',
   Endereco: 'Endereco'

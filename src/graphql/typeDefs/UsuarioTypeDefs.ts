@@ -1,9 +1,9 @@
 import { gql } from 'apollo-server';
 
-export const ContadorTypeDefs = gql`
+export const UsuarioTypeDefs = gql`
 
 # Definição dos tipos de dados
-  type User {
+  type Usuario {
     id: ID!
     email: String!
     role: Role!
@@ -17,15 +17,15 @@ export const ContadorTypeDefs = gql`
   }
 
   # Definição das respostas padronizadas
-  type UserResponse {
+  type UsuarioResponse {
     success: Boolean!
-    data: User
+    data: Usuario
     error: ErrorResponse
   }
 
-  type UsersResponse {
+  type UsuariosResponse {
     success: Boolean!
-    data: [User!]
+    data: [Usuario!]
     error: ErrorResponse
   }
 
@@ -45,13 +45,13 @@ export const ContadorTypeDefs = gql`
   }
 
   # Definição dos inputs
-  input CreateUserInput {
+  input CreateUsuarioInput {
     email: String!
     password: String!
     role: String!
   }
 
-  input UpdateUserInput {
+  input UpdateUsuarioInput {
     id: ID!
     email: String!
     password: String
@@ -66,16 +66,16 @@ export const ContadorTypeDefs = gql`
 
   # Definição das mutações
   type Mutation {
-    createUser(data: CreateUserInput!): UserResponse!
-    updateUser(data: UpdateUserInput!): UserResponse!
-    deleteUser(id: ID!): DeleteResponse!
-    authenticateUser(email: String!, password: String!): AuthResponse!
+    createUsuario(data: CreateUsuarioInput!): UsuarioResponse!
+    updateUsuario(data: UpdateUsuarioInput!): UsuarioResponse!
+    deleteUsuario(id: ID!): DeleteResponse!
+    authenticateUsuario(email: String!, password: String!): AuthResponse!
   }
 
   # Definição das queries
   type Query {
-    users: UsersResponse!
-    user(id: ID!): UserResponse!
+    Usuarios: UsuariosResponse!
+    Usuario(id: ID!): UsuarioResponse!
   }
 
   # Definição do schema

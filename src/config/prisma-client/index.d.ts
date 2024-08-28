@@ -14,20 +14,20 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model User
+ * Model Usuario
  * 
  */
-export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+export type Usuario = $Result.DefaultSelection<Prisma.$UsuarioPayload>
 /**
  * Model Contador
  * 
  */
 export type Contador = $Result.DefaultSelection<Prisma.$ContadorPayload>
 /**
- * Model UserContador
+ * Model UsuarioContador
  * 
  */
-export type UserContador = $Result.DefaultSelection<Prisma.$UserContadorPayload>
+export type UsuarioContador = $Result.DefaultSelection<Prisma.$UsuarioContadorPayload>
 /**
  * Model Emitente
  * 
@@ -70,8 +70,8 @@ export const Role: typeof $Enums.Role
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Usuarios
+ * const usuarios = await prisma.usuario.findMany()
  * ```
  *
  * 
@@ -91,8 +91,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more Usuarios
+   * const usuarios = await prisma.usuario.findMany()
    * ```
    *
    * 
@@ -154,14 +154,14 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb, ExtArgs>
 
       /**
-   * `prisma.user`: Exposes CRUD operations for the **User** model.
+   * `prisma.usuario`: Exposes CRUD operations for the **Usuario** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Users
-    * const users = await prisma.user.findMany()
+    * // Fetch zero or more Usuarios
+    * const usuarios = await prisma.usuario.findMany()
     * ```
     */
-  get user(): Prisma.UserDelegate<ExtArgs>;
+  get usuario(): Prisma.UsuarioDelegate<ExtArgs>;
 
   /**
    * `prisma.contador`: Exposes CRUD operations for the **Contador** model.
@@ -174,14 +174,14 @@ export class PrismaClient<
   get contador(): Prisma.ContadorDelegate<ExtArgs>;
 
   /**
-   * `prisma.userContador`: Exposes CRUD operations for the **UserContador** model.
+   * `prisma.usuarioContador`: Exposes CRUD operations for the **UsuarioContador** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more UserContadors
-    * const userContadors = await prisma.userContador.findMany()
+    * // Fetch zero or more UsuarioContadors
+    * const usuarioContadors = await prisma.usuarioContador.findMany()
     * ```
     */
-  get userContador(): Prisma.UserContadorDelegate<ExtArgs>;
+  get usuarioContador(): Prisma.UsuarioContadorDelegate<ExtArgs>;
 
   /**
    * `prisma.emitente`: Exposes CRUD operations for the **Emitente** model.
@@ -270,7 +270,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 5.17.0
-   * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
+   * Query Engine version: 393aa359c9ad4a4bb28630fb5613f9c281cde053
    */
   export type PrismaVersion = {
     client: string
@@ -689,9 +689,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User',
+    Usuario: 'Usuario',
     Contador: 'Contador',
-    UserContador: 'UserContador',
+    UsuarioContador: 'UsuarioContador',
     Emitente: 'Emitente',
     Certificado: 'Certificado',
     Endereco: 'Endereco'
@@ -710,81 +710,81 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "contador" | "userContador" | "emitente" | "certificado" | "endereco"
+      modelProps: "usuario" | "contador" | "usuarioContador" | "emitente" | "certificado" | "endereco"
       txIsolationLevel: never
     }
     model: {
-      User: {
-        payload: Prisma.$UserPayload<ExtArgs>
-        fields: Prisma.UserFieldRefs
+      Usuario: {
+        payload: Prisma.$UsuarioPayload<ExtArgs>
+        fields: Prisma.UsuarioFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.UserFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            args: Prisma.UsuarioFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.UserFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.UsuarioFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           findFirst: {
-            args: Prisma.UserFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload> | null
+            args: Prisma.UsuarioFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.UserFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.UsuarioFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           findMany: {
-            args: Prisma.UserFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+            args: Prisma.UsuarioFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>[]
           }
           create: {
-            args: Prisma.UserCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.UsuarioCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           createMany: {
-            args: Prisma.UserCreateManyArgs<ExtArgs>
+            args: Prisma.UsuarioCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.UserDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.UsuarioDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           update: {
-            args: Prisma.UserUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.UsuarioUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           deleteMany: {
-            args: Prisma.UserDeleteManyArgs<ExtArgs>
+            args: Prisma.UsuarioDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.UserUpdateManyArgs<ExtArgs>
+            args: Prisma.UsuarioUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.UserUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserPayload>
+            args: Prisma.UsuarioUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           aggregate: {
-            args: Prisma.UserAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUser>
+            args: Prisma.UsuarioAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsuario>
           }
           groupBy: {
-            args: Prisma.UserGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UserGroupByOutputType>[]
+            args: Prisma.UsuarioGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioGroupByOutputType>[]
           }
           findRaw: {
-            args: Prisma.UserFindRawArgs<ExtArgs>
+            args: Prisma.UsuarioFindRawArgs<ExtArgs>
             result: JsonObject
           }
           aggregateRaw: {
-            args: Prisma.UserAggregateRawArgs<ExtArgs>
+            args: Prisma.UsuarioAggregateRawArgs<ExtArgs>
             result: JsonObject
           }
           count: {
-            args: Prisma.UserCountArgs<ExtArgs>
-            result: $Utils.Optional<UserCountAggregateOutputType> | number
+            args: Prisma.UsuarioCountArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioCountAggregateOutputType> | number
           }
         }
       }
@@ -862,77 +862,77 @@ export namespace Prisma {
           }
         }
       }
-      UserContador: {
-        payload: Prisma.$UserContadorPayload<ExtArgs>
-        fields: Prisma.UserContadorFieldRefs
+      UsuarioContador: {
+        payload: Prisma.$UsuarioContadorPayload<ExtArgs>
+        fields: Prisma.UsuarioContadorFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.UserContadorFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserContadorPayload> | null
+            args: Prisma.UsuarioContadorFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioContadorPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.UserContadorFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserContadorPayload>
+            args: Prisma.UsuarioContadorFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioContadorPayload>
           }
           findFirst: {
-            args: Prisma.UserContadorFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserContadorPayload> | null
+            args: Prisma.UsuarioContadorFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioContadorPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.UserContadorFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserContadorPayload>
+            args: Prisma.UsuarioContadorFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioContadorPayload>
           }
           findMany: {
-            args: Prisma.UserContadorFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserContadorPayload>[]
+            args: Prisma.UsuarioContadorFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioContadorPayload>[]
           }
           create: {
-            args: Prisma.UserContadorCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserContadorPayload>
+            args: Prisma.UsuarioContadorCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioContadorPayload>
           }
           createMany: {
-            args: Prisma.UserContadorCreateManyArgs<ExtArgs>
+            args: Prisma.UsuarioContadorCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.UserContadorDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserContadorPayload>
+            args: Prisma.UsuarioContadorDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioContadorPayload>
           }
           update: {
-            args: Prisma.UserContadorUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserContadorPayload>
+            args: Prisma.UsuarioContadorUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioContadorPayload>
           }
           deleteMany: {
-            args: Prisma.UserContadorDeleteManyArgs<ExtArgs>
+            args: Prisma.UsuarioContadorDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.UserContadorUpdateManyArgs<ExtArgs>
+            args: Prisma.UsuarioContadorUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.UserContadorUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UserContadorPayload>
+            args: Prisma.UsuarioContadorUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioContadorPayload>
           }
           aggregate: {
-            args: Prisma.UserContadorAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUserContador>
+            args: Prisma.UsuarioContadorAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsuarioContador>
           }
           groupBy: {
-            args: Prisma.UserContadorGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UserContadorGroupByOutputType>[]
+            args: Prisma.UsuarioContadorGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioContadorGroupByOutputType>[]
           }
           findRaw: {
-            args: Prisma.UserContadorFindRawArgs<ExtArgs>
+            args: Prisma.UsuarioContadorFindRawArgs<ExtArgs>
             result: JsonObject
           }
           aggregateRaw: {
-            args: Prisma.UserContadorAggregateRawArgs<ExtArgs>
+            args: Prisma.UsuarioContadorAggregateRawArgs<ExtArgs>
             result: JsonObject
           }
           count: {
-            args: Prisma.UserContadorCountArgs<ExtArgs>
-            result: $Utils.Optional<UserContadorCountAggregateOutputType> | number
+            args: Prisma.UsuarioContadorCountArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioContadorCountAggregateOutputType> | number
           }
         }
       }
@@ -1302,33 +1302,33 @@ export namespace Prisma {
 
 
   /**
-   * Count Type UserCountOutputType
+   * Count Type UsuarioCountOutputType
    */
 
-  export type UserCountOutputType = {
+  export type UsuarioCountOutputType = {
     contadores: number
   }
 
-  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    contadores?: boolean | UserCountOutputTypeCountContadoresArgs
+  export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contadores?: boolean | UsuarioCountOutputTypeCountContadoresArgs
   }
 
   // Custom InputTypes
   /**
-   * UserCountOutputType without action
+   * UsuarioCountOutputType without action
    */
-  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserCountOutputType
+     * Select specific fields to fetch from the UsuarioCountOutputType
      */
-    select?: UserCountOutputTypeSelect<ExtArgs> | null
+    select?: UsuarioCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * UserCountOutputType without action
+   * UsuarioCountOutputType without action
    */
-  export type UserCountOutputTypeCountContadoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserContadorWhereInput
+  export type UsuarioCountOutputTypeCountContadoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsuarioContadorWhereInput
   }
 
 
@@ -1363,7 +1363,7 @@ export namespace Prisma {
    * ContadorCountOutputType without action
    */
   export type ContadorCountOutputTypeCountUsuariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserContadorWhereInput
+    where?: UsuarioContadorWhereInput
   }
 
   /**
@@ -1417,16 +1417,16 @@ export namespace Prisma {
    */
 
   /**
-   * Model User
+   * Model Usuario
    */
 
-  export type AggregateUser = {
-    _count: UserCountAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
+  export type AggregateUsuario = {
+    _count: UsuarioCountAggregateOutputType | null
+    _min: UsuarioMinAggregateOutputType | null
+    _max: UsuarioMaxAggregateOutputType | null
   }
 
-  export type UserMinAggregateOutputType = {
+  export type UsuarioMinAggregateOutputType = {
     id: string | null
     email: string | null
     password: string | null
@@ -1435,7 +1435,7 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type UserMaxAggregateOutputType = {
+  export type UsuarioMaxAggregateOutputType = {
     id: string | null
     email: string | null
     password: string | null
@@ -1444,7 +1444,7 @@ export namespace Prisma {
     updatedAt: Date | null
   }
 
-  export type UserCountAggregateOutputType = {
+  export type UsuarioCountAggregateOutputType = {
     id: number
     email: number
     password: number
@@ -1455,7 +1455,7 @@ export namespace Prisma {
   }
 
 
-  export type UserMinAggregateInputType = {
+  export type UsuarioMinAggregateInputType = {
     id?: true
     email?: true
     password?: true
@@ -1464,7 +1464,7 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type UserMaxAggregateInputType = {
+  export type UsuarioMaxAggregateInputType = {
     id?: true
     email?: true
     password?: true
@@ -1473,7 +1473,7 @@ export namespace Prisma {
     updatedAt?: true
   }
 
-  export type UserCountAggregateInputType = {
+  export type UsuarioCountAggregateInputType = {
     id?: true
     email?: true
     password?: true
@@ -1483,117 +1483,117 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type UserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which User to aggregate.
+     * Filter which Usuario to aggregate.
      */
-    where?: UserWhereInput
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Users
+     * Count returned Usuarios
     **/
-    _count?: true | UserCountAggregateInputType
+    _count?: true | UsuarioCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: UserMinAggregateInputType
+    _min?: UsuarioMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: UserMaxAggregateInputType
+    _max?: UsuarioMaxAggregateInputType
   }
 
-  export type GetUserAggregateType<T extends UserAggregateArgs> = {
-        [P in keyof T & keyof AggregateUser]: P extends '_count' | 'count'
+  export type GetUsuarioAggregateType<T extends UsuarioAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsuario]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateUser[P]>
-      : GetScalarType<T[P], AggregateUser[P]>
+        : GetScalarType<T[P], AggregateUsuario[P]>
+      : GetScalarType<T[P], AggregateUsuario[P]>
   }
 
 
 
 
-  export type UserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserWhereInput
-    orderBy?: UserOrderByWithAggregationInput | UserOrderByWithAggregationInput[]
-    by: UserScalarFieldEnum[] | UserScalarFieldEnum
-    having?: UserScalarWhereWithAggregatesInput
+  export type UsuarioGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsuarioWhereInput
+    orderBy?: UsuarioOrderByWithAggregationInput | UsuarioOrderByWithAggregationInput[]
+    by: UsuarioScalarFieldEnum[] | UsuarioScalarFieldEnum
+    having?: UsuarioScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: UserCountAggregateInputType | true
-    _min?: UserMinAggregateInputType
-    _max?: UserMaxAggregateInputType
+    _count?: UsuarioCountAggregateInputType | true
+    _min?: UsuarioMinAggregateInputType
+    _max?: UsuarioMaxAggregateInputType
   }
 
-  export type UserGroupByOutputType = {
+  export type UsuarioGroupByOutputType = {
     id: string
     email: string
     password: string
     role: $Enums.Role
     createdAt: Date
     updatedAt: Date
-    _count: UserCountAggregateOutputType | null
-    _min: UserMinAggregateOutputType | null
-    _max: UserMaxAggregateOutputType | null
+    _count: UsuarioCountAggregateOutputType | null
+    _min: UsuarioMinAggregateOutputType | null
+    _max: UsuarioMaxAggregateOutputType | null
   }
 
-  type GetUserGroupByPayload<T extends UserGroupByArgs> = Prisma.PrismaPromise<
+  type GetUsuarioGroupByPayload<T extends UsuarioGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserGroupByOutputType, T['by']> &
+      PickEnumerable<UsuarioGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof UserGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof UsuarioGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], UserGroupByOutputType[P]>
-            : GetScalarType<T[P], UserGroupByOutputType[P]>
+              : GetScalarType<T[P], UsuarioGroupByOutputType[P]>
+            : GetScalarType<T[P], UsuarioGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UsuarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
     password?: boolean
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    contadores?: boolean | User$contadoresArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["user"]>
+    contadores?: boolean | Usuario$contadoresArgs<ExtArgs>
+    _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usuario"]>
 
 
-  export type UserSelectScalar = {
+  export type UsuarioSelectScalar = {
     id?: boolean
     email?: boolean
     password?: boolean
@@ -1602,15 +1602,15 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    contadores?: boolean | User$contadoresArgs<ExtArgs>
-    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contadores?: boolean | Usuario$contadoresArgs<ExtArgs>
+    _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
 
-  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "User"
+  export type $UsuarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Usuario"
     objects: {
-      contadores: Prisma.$UserContadorPayload<ExtArgs>[]
+      contadores: Prisma.$UsuarioContadorPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1619,143 +1619,143 @@ export namespace Prisma {
       role: $Enums.Role
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["user"]>
+    }, ExtArgs["result"]["usuario"]>
     composites: {}
   }
 
-  type UserGetPayload<S extends boolean | null | undefined | UserDefaultArgs> = $Result.GetResult<Prisma.$UserPayload, S>
+  type UsuarioGetPayload<S extends boolean | null | undefined | UsuarioDefaultArgs> = $Result.GetResult<Prisma.$UsuarioPayload, S>
 
-  type UserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<UserFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: UserCountAggregateInputType | true
+  type UsuarioCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UsuarioFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UsuarioCountAggregateInputType | true
     }
 
-  export interface UserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['User'], meta: { name: 'User' } }
+  export interface UsuarioDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Usuario'], meta: { name: 'Usuario' } }
     /**
-     * Find zero or one User that matches the filter.
-     * @param {UserFindUniqueArgs} args - Arguments to find a User
+     * Find zero or one Usuario that matches the filter.
+     * @param {UsuarioFindUniqueArgs} args - Arguments to find a Usuario
      * @example
-     * // Get one User
-     * const user = await prisma.user.findUnique({
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends UserFindUniqueArgs>(args: SelectSubset<T, UserFindUniqueArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    findUnique<T extends UsuarioFindUniqueArgs>(args: SelectSubset<T, UsuarioFindUniqueArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one User that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Usuario that matches the filter or throw an error with `error.code='P2025'` 
      * if no matches were found.
-     * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
+     * @param {UsuarioFindUniqueOrThrowArgs} args - Arguments to find a Usuario
      * @example
-     * // Get one User
-     * const user = await prisma.user.findUniqueOrThrow({
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends UserFindUniqueOrThrowArgs>(args: SelectSubset<T, UserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    findUniqueOrThrow<T extends UsuarioFindUniqueOrThrowArgs>(args: SelectSubset<T, UsuarioFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
 
     /**
-     * Find the first User that matches the filter.
+     * Find the first Usuario that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstArgs} args - Arguments to find a User
+     * @param {UsuarioFindFirstArgs} args - Arguments to find a Usuario
      * @example
-     * // Get one User
-     * const user = await prisma.user.findFirst({
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends UserFindFirstArgs>(args?: SelectSubset<T, UserFindFirstArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    findFirst<T extends UsuarioFindFirstArgs>(args?: SelectSubset<T, UsuarioFindFirstArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
 
     /**
-     * Find the first User that matches the filter or
+     * Find the first Usuario that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindFirstOrThrowArgs} args - Arguments to find a User
+     * @param {UsuarioFindFirstOrThrowArgs} args - Arguments to find a Usuario
      * @example
-     * // Get one User
-     * const user = await prisma.user.findFirstOrThrow({
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends UserFindFirstOrThrowArgs>(args?: SelectSubset<T, UserFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    findFirstOrThrow<T extends UsuarioFindFirstOrThrowArgs>(args?: SelectSubset<T, UsuarioFindFirstOrThrowArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
 
     /**
-     * Find zero or more Users that matches the filter.
+     * Find zero or more Usuarios that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {UsuarioFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Users
-     * const users = await prisma.user.findMany()
+     * // Get all Usuarios
+     * const usuarios = await prisma.usuario.findMany()
      * 
-     * // Get first 10 Users
-     * const users = await prisma.user.findMany({ take: 10 })
+     * // Get first 10 Usuarios
+     * const usuarios = await prisma.usuario.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+     * const usuarioWithIdOnly = await prisma.usuario.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends UserFindManyArgs>(args?: SelectSubset<T, UserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany">>
+    findMany<T extends UsuarioFindManyArgs>(args?: SelectSubset<T, UsuarioFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findMany">>
 
     /**
-     * Create a User.
-     * @param {UserCreateArgs} args - Arguments to create a User.
+     * Create a Usuario.
+     * @param {UsuarioCreateArgs} args - Arguments to create a Usuario.
      * @example
-     * // Create one User
-     * const User = await prisma.user.create({
+     * // Create one Usuario
+     * const Usuario = await prisma.usuario.create({
      *   data: {
-     *     // ... data to create a User
+     *     // ... data to create a Usuario
      *   }
      * })
      * 
      */
-    create<T extends UserCreateArgs>(args: SelectSubset<T, UserCreateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    create<T extends UsuarioCreateArgs>(args: SelectSubset<T, UsuarioCreateArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "create">, never, ExtArgs>
 
     /**
-     * Create many Users.
-     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * Create many Usuarios.
+     * @param {UsuarioCreateManyArgs} args - Arguments to create many Usuarios.
      * @example
-     * // Create many Users
-     * const user = await prisma.user.createMany({
+     * // Create many Usuarios
+     * const usuario = await prisma.usuario.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends UsuarioCreateManyArgs>(args?: SelectSubset<T, UsuarioCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a User.
-     * @param {UserDeleteArgs} args - Arguments to delete one User.
+     * Delete a Usuario.
+     * @param {UsuarioDeleteArgs} args - Arguments to delete one Usuario.
      * @example
-     * // Delete one User
-     * const User = await prisma.user.delete({
+     * // Delete one Usuario
+     * const Usuario = await prisma.usuario.delete({
      *   where: {
-     *     // ... filter to delete one User
+     *     // ... filter to delete one Usuario
      *   }
      * })
      * 
      */
-    delete<T extends UserDeleteArgs>(args: SelectSubset<T, UserDeleteArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    delete<T extends UsuarioDeleteArgs>(args: SelectSubset<T, UsuarioDeleteArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "delete">, never, ExtArgs>
 
     /**
-     * Update one User.
-     * @param {UserUpdateArgs} args - Arguments to update one User.
+     * Update one Usuario.
+     * @param {UsuarioUpdateArgs} args - Arguments to update one Usuario.
      * @example
-     * // Update one User
-     * const user = await prisma.user.update({
+     * // Update one Usuario
+     * const usuario = await prisma.usuario.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1765,30 +1765,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends UserUpdateArgs>(args: SelectSubset<T, UserUpdateArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    update<T extends UsuarioUpdateArgs>(args: SelectSubset<T, UsuarioUpdateArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "update">, never, ExtArgs>
 
     /**
-     * Delete zero or more Users.
-     * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+     * Delete zero or more Usuarios.
+     * @param {UsuarioDeleteManyArgs} args - Arguments to filter Usuarios to delete.
      * @example
-     * // Delete a few Users
-     * const { count } = await prisma.user.deleteMany({
+     * // Delete a few Usuarios
+     * const { count } = await prisma.usuario.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends UserDeleteManyArgs>(args?: SelectSubset<T, UserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends UsuarioDeleteManyArgs>(args?: SelectSubset<T, UsuarioDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Users.
+     * Update zero or more Usuarios.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {UsuarioUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Users
-     * const user = await prisma.user.updateMany({
+     * // Update many Usuarios
+     * const usuario = await prisma.usuario.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1798,79 +1798,79 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends UsuarioUpdateManyArgs>(args: SelectSubset<T, UsuarioUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one User.
-     * @param {UserUpsertArgs} args - Arguments to update or create a User.
+     * Create or update one Usuario.
+     * @param {UsuarioUpsertArgs} args - Arguments to update or create a Usuario.
      * @example
-     * // Update or create a User
-     * const user = await prisma.user.upsert({
+     * // Update or create a Usuario
+     * const usuario = await prisma.usuario.upsert({
      *   create: {
-     *     // ... data to create a User
+     *     // ... data to create a Usuario
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the User we want to update
+     *     // ... the filter for the Usuario we want to update
      *   }
      * })
      */
-    upsert<T extends UserUpsertArgs>(args: SelectSubset<T, UserUpsertArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+    upsert<T extends UsuarioUpsertArgs>(args: SelectSubset<T, UsuarioUpsertArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
 
     /**
-     * Find zero or more Users that matches the filter.
-     * @param {UserFindRawArgs} args - Select which filters you would like to apply.
+     * Find zero or more Usuarios that matches the filter.
+     * @param {UsuarioFindRawArgs} args - Select which filters you would like to apply.
      * @example
-     * const user = await prisma.user.findRaw({
+     * const usuario = await prisma.usuario.findRaw({
      *   filter: { age: { $gt: 25 } } 
      * })
      */
-    findRaw(args?: UserFindRawArgs): Prisma.PrismaPromise<JsonObject>
+    findRaw(args?: UsuarioFindRawArgs): Prisma.PrismaPromise<JsonObject>
 
     /**
-     * Perform aggregation operations on a User.
-     * @param {UserAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * Perform aggregation operations on a Usuario.
+     * @param {UsuarioAggregateRawArgs} args - Select which aggregations you would like to apply.
      * @example
-     * const user = await prisma.user.aggregateRaw({
+     * const usuario = await prisma.usuario.aggregateRaw({
      *   pipeline: [
      *     { $match: { status: "registered" } },
      *     { $group: { _id: "$country", total: { $sum: 1 } } }
      *   ]
      * })
      */
-    aggregateRaw(args?: UserAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+    aggregateRaw(args?: UsuarioAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
 
 
     /**
-     * Count the number of Users.
+     * Count the number of Usuarios.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserCountArgs} args - Arguments to filter Users to count.
+     * @param {UsuarioCountArgs} args - Arguments to filter Usuarios to count.
      * @example
-     * // Count the number of Users
-     * const count = await prisma.user.count({
+     * // Count the number of Usuarios
+     * const count = await prisma.usuario.count({
      *   where: {
-     *     // ... the filter for the Users we want to count
+     *     // ... the filter for the Usuarios we want to count
      *   }
      * })
     **/
-    count<T extends UserCountArgs>(
-      args?: Subset<T, UserCountArgs>,
+    count<T extends UsuarioCountArgs>(
+      args?: Subset<T, UsuarioCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], UserCountAggregateOutputType>
+          : GetScalarType<T['select'], UsuarioCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a User.
+     * Allows you to perform aggregations operations on a Usuario.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {UsuarioAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -1890,13 +1890,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends UserAggregateArgs>(args: Subset<T, UserAggregateArgs>): Prisma.PrismaPromise<GetUserAggregateType<T>>
+    aggregate<T extends UsuarioAggregateArgs>(args: Subset<T, UsuarioAggregateArgs>): Prisma.PrismaPromise<GetUsuarioAggregateType<T>>
 
     /**
-     * Group by User.
+     * Group by Usuario.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserGroupByArgs} args - Group by arguments.
+     * @param {UsuarioGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -1911,14 +1911,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends UserGroupByArgs,
+      T extends UsuarioGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserGroupByArgs['orderBy'] }
-        : { orderBy?: UserGroupByArgs['orderBy'] },
+        ? { orderBy: UsuarioGroupByArgs['orderBy'] }
+        : { orderBy?: UsuarioGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1967,22 +1967,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, UserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, UsuarioGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsuarioGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the User model
+   * Fields of the Usuario model
    */
-  readonly fields: UserFieldRefs;
+  readonly fields: UsuarioFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for User.
+   * The delegate class that acts as a "Promise-like" for Usuario.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    contadores<T extends User$contadoresArgs<ExtArgs> = {}>(args?: Subset<T, User$contadoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findMany"> | Null>
+    contadores<T extends Usuario$contadoresArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$contadoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2009,316 +2009,316 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the User model
+   * Fields of the Usuario model
    */ 
-  interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'String'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
-    readonly role: FieldRef<"User", 'Role'>
-    readonly createdAt: FieldRef<"User", 'DateTime'>
-    readonly updatedAt: FieldRef<"User", 'DateTime'>
+  interface UsuarioFieldRefs {
+    readonly id: FieldRef<"Usuario", 'String'>
+    readonly email: FieldRef<"Usuario", 'String'>
+    readonly password: FieldRef<"Usuario", 'String'>
+    readonly role: FieldRef<"Usuario", 'Role'>
+    readonly createdAt: FieldRef<"Usuario", 'DateTime'>
+    readonly updatedAt: FieldRef<"Usuario", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * User findUnique
+   * Usuario findUnique
    */
-  export type UserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Usuario to fetch.
      */
-    where: UserWhereUniqueInput
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * User findUniqueOrThrow
+   * Usuario findUniqueOrThrow
    */
-  export type UserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Usuario to fetch.
      */
-    where: UserWhereUniqueInput
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * User findFirst
+   * Usuario findFirst
    */
-  export type UserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Usuario to fetch.
      */
-    where?: UserWhereInput
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for Usuarios.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of Usuarios.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
   }
 
   /**
-   * User findFirstOrThrow
+   * Usuario findFirstOrThrow
    */
-  export type UserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which User to fetch.
+     * Filter, which Usuario to fetch.
      */
-    where?: UserWhereInput
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Users.
+     * Sets the position for searching for Usuarios.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Users.
+     * Filter by unique combinations of Usuarios.
      */
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
   }
 
   /**
-   * User findMany
+   * Usuario findMany
    */
-  export type UserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which Users to fetch.
+     * Filter, which Usuarios to fetch.
      */
-    where?: UserWhereInput
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Users to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Users.
+     * Sets the position for listing Usuarios.
      */
-    cursor?: UserWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Users from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Users.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
-    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+    distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
   }
 
   /**
-   * User create
+   * Usuario create
    */
-  export type UserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * The data needed to create a User.
+     * The data needed to create a Usuario.
      */
-    data: XOR<UserCreateInput, UserUncheckedCreateInput>
+    data: XOR<UsuarioCreateInput, UsuarioUncheckedCreateInput>
   }
 
   /**
-   * User createMany
+   * Usuario createMany
    */
-  export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Users.
+     * The data used to create many Usuarios.
      */
-    data: UserCreateManyInput | UserCreateManyInput[]
+    data: UsuarioCreateManyInput | UsuarioCreateManyInput[]
   }
 
   /**
-   * User update
+   * Usuario update
    */
-  export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * The data needed to update a User.
+     * The data needed to update a Usuario.
      */
-    data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    data: XOR<UsuarioUpdateInput, UsuarioUncheckedUpdateInput>
     /**
-     * Choose, which User to update.
+     * Choose, which Usuario to update.
      */
-    where: UserWhereUniqueInput
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * User updateMany
+   * Usuario updateMany
    */
-  export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Users.
+     * The data used to update Usuarios.
      */
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    data: XOR<UsuarioUpdateManyMutationInput, UsuarioUncheckedUpdateManyInput>
     /**
-     * Filter which Users to update
+     * Filter which Usuarios to update
      */
-    where?: UserWhereInput
+    where?: UsuarioWhereInput
   }
 
   /**
-   * User upsert
+   * Usuario upsert
    */
-  export type UserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * The filter to search for the User to update in case it exists.
+     * The filter to search for the Usuario to update in case it exists.
      */
-    where: UserWhereUniqueInput
+    where: UsuarioWhereUniqueInput
     /**
-     * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+     * In case the Usuario found by the `where` argument doesn't exist, create a new Usuario with this data.
      */
-    create: XOR<UserCreateInput, UserUncheckedCreateInput>
+    create: XOR<UsuarioCreateInput, UsuarioUncheckedCreateInput>
     /**
-     * In case the User was found with the provided `where` argument, update it with this data.
+     * In case the Usuario was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<UserUpdateInput, UserUncheckedUpdateInput>
+    update: XOR<UsuarioUpdateInput, UsuarioUncheckedUpdateInput>
   }
 
   /**
-   * User delete
+   * Usuario delete
    */
-  export type UserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter which User to delete.
+     * Filter which Usuario to delete.
      */
-    where: UserWhereUniqueInput
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * User deleteMany
+   * Usuario deleteMany
    */
-  export type UserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Users to delete
+     * Filter which Usuarios to delete
      */
-    where?: UserWhereInput
+    where?: UsuarioWhereInput
   }
 
   /**
-   * User findRaw
+   * Usuario findRaw
    */
-  export type UserFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
      */
@@ -2330,9 +2330,9 @@ export namespace Prisma {
   }
 
   /**
-   * User aggregateRaw
+   * Usuario aggregateRaw
    */
-  export type UserAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
      */
@@ -2344,37 +2344,37 @@ export namespace Prisma {
   }
 
   /**
-   * User.contadores
+   * Usuario.contadores
    */
-  export type User$contadoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Usuario$contadoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
-    where?: UserContadorWhereInput
-    orderBy?: UserContadorOrderByWithRelationInput | UserContadorOrderByWithRelationInput[]
-    cursor?: UserContadorWhereUniqueInput
+    include?: UsuarioContadorInclude<ExtArgs> | null
+    where?: UsuarioContadorWhereInput
+    orderBy?: UsuarioContadorOrderByWithRelationInput | UsuarioContadorOrderByWithRelationInput[]
+    cursor?: UsuarioContadorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserContadorScalarFieldEnum | UserContadorScalarFieldEnum[]
+    distinct?: UsuarioContadorScalarFieldEnum | UsuarioContadorScalarFieldEnum[]
   }
 
   /**
-   * User without action
+   * Usuario without action
    */
-  export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the User
+     * Select specific fields to fetch from the Usuario
      */
-    select?: UserSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
   }
 
 
@@ -2596,7 +2596,7 @@ export namespace Prisma {
   export type $ContadorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Contador"
     objects: {
-      usuarios: Prisma.$UserContadorPayload<ExtArgs>[]
+      usuarios: Prisma.$UsuarioContadorPayload<ExtArgs>[]
       Emitentes: Prisma.$EmitentePayload<ExtArgs>[]
       endereco: Prisma.$EnderecoPayload<ExtArgs> | null
       certificados: Prisma.$CertificadoPayload<ExtArgs>[]
@@ -2973,7 +2973,7 @@ export namespace Prisma {
    */
   export interface Prisma__ContadorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    usuarios<T extends Contador$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findMany"> | Null>
+    usuarios<T extends Contador$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findMany"> | Null>
     Emitentes<T extends Contador$EmitentesArgs<ExtArgs> = {}>(args?: Subset<T, Contador$EmitentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findMany"> | Null>
     endereco<T extends Contador$enderecoArgs<ExtArgs> = {}>(args?: Subset<T, Contador$enderecoArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     certificados<T extends Contador$certificadosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$certificadosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "findMany"> | Null>
@@ -3344,19 +3344,19 @@ export namespace Prisma {
    */
   export type Contador$usuariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
-    where?: UserContadorWhereInput
-    orderBy?: UserContadorOrderByWithRelationInput | UserContadorOrderByWithRelationInput[]
-    cursor?: UserContadorWhereUniqueInput
+    include?: UsuarioContadorInclude<ExtArgs> | null
+    where?: UsuarioContadorWhereInput
+    orderBy?: UsuarioContadorOrderByWithRelationInput | UsuarioContadorOrderByWithRelationInput[]
+    cursor?: UsuarioContadorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: UserContadorScalarFieldEnum | UserContadorScalarFieldEnum[]
+    distinct?: UsuarioContadorScalarFieldEnum | UsuarioContadorScalarFieldEnum[]
   }
 
   /**
@@ -3430,316 +3430,316 @@ export namespace Prisma {
 
 
   /**
-   * Model UserContador
+   * Model UsuarioContador
    */
 
-  export type AggregateUserContador = {
-    _count: UserContadorCountAggregateOutputType | null
-    _min: UserContadorMinAggregateOutputType | null
-    _max: UserContadorMaxAggregateOutputType | null
+  export type AggregateUsuarioContador = {
+    _count: UsuarioContadorCountAggregateOutputType | null
+    _min: UsuarioContadorMinAggregateOutputType | null
+    _max: UsuarioContadorMaxAggregateOutputType | null
   }
 
-  export type UserContadorMinAggregateOutputType = {
+  export type UsuarioContadorMinAggregateOutputType = {
     id: string | null
-    userId: string | null
+    UsuarioId: string | null
     contadorId: string | null
   }
 
-  export type UserContadorMaxAggregateOutputType = {
+  export type UsuarioContadorMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
+    UsuarioId: string | null
     contadorId: string | null
   }
 
-  export type UserContadorCountAggregateOutputType = {
+  export type UsuarioContadorCountAggregateOutputType = {
     id: number
-    userId: number
+    UsuarioId: number
     contadorId: number
     _all: number
   }
 
 
-  export type UserContadorMinAggregateInputType = {
+  export type UsuarioContadorMinAggregateInputType = {
     id?: true
-    userId?: true
+    UsuarioId?: true
     contadorId?: true
   }
 
-  export type UserContadorMaxAggregateInputType = {
+  export type UsuarioContadorMaxAggregateInputType = {
     id?: true
-    userId?: true
+    UsuarioId?: true
     contadorId?: true
   }
 
-  export type UserContadorCountAggregateInputType = {
+  export type UsuarioContadorCountAggregateInputType = {
     id?: true
-    userId?: true
+    UsuarioId?: true
     contadorId?: true
     _all?: true
   }
 
-  export type UserContadorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which UserContador to aggregate.
+     * Filter which UsuarioContador to aggregate.
      */
-    where?: UserContadorWhereInput
+    where?: UsuarioContadorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of UserContadors to fetch.
+     * Determine the order of UsuarioContadors to fetch.
      */
-    orderBy?: UserContadorOrderByWithRelationInput | UserContadorOrderByWithRelationInput[]
+    orderBy?: UsuarioContadorOrderByWithRelationInput | UsuarioContadorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: UserContadorWhereUniqueInput
+    cursor?: UsuarioContadorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` UserContadors from the position of the cursor.
+     * Take `±n` UsuarioContadors from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` UserContadors.
+     * Skip the first `n` UsuarioContadors.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned UserContadors
+     * Count returned UsuarioContadors
     **/
-    _count?: true | UserContadorCountAggregateInputType
+    _count?: true | UsuarioContadorCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: UserContadorMinAggregateInputType
+    _min?: UsuarioContadorMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: UserContadorMaxAggregateInputType
+    _max?: UsuarioContadorMaxAggregateInputType
   }
 
-  export type GetUserContadorAggregateType<T extends UserContadorAggregateArgs> = {
-        [P in keyof T & keyof AggregateUserContador]: P extends '_count' | 'count'
+  export type GetUsuarioContadorAggregateType<T extends UsuarioContadorAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsuarioContador]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateUserContador[P]>
-      : GetScalarType<T[P], AggregateUserContador[P]>
+        : GetScalarType<T[P], AggregateUsuarioContador[P]>
+      : GetScalarType<T[P], AggregateUsuarioContador[P]>
   }
 
 
 
 
-  export type UserContadorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UserContadorWhereInput
-    orderBy?: UserContadorOrderByWithAggregationInput | UserContadorOrderByWithAggregationInput[]
-    by: UserContadorScalarFieldEnum[] | UserContadorScalarFieldEnum
-    having?: UserContadorScalarWhereWithAggregatesInput
+  export type UsuarioContadorGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsuarioContadorWhereInput
+    orderBy?: UsuarioContadorOrderByWithAggregationInput | UsuarioContadorOrderByWithAggregationInput[]
+    by: UsuarioContadorScalarFieldEnum[] | UsuarioContadorScalarFieldEnum
+    having?: UsuarioContadorScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: UserContadorCountAggregateInputType | true
-    _min?: UserContadorMinAggregateInputType
-    _max?: UserContadorMaxAggregateInputType
+    _count?: UsuarioContadorCountAggregateInputType | true
+    _min?: UsuarioContadorMinAggregateInputType
+    _max?: UsuarioContadorMaxAggregateInputType
   }
 
-  export type UserContadorGroupByOutputType = {
+  export type UsuarioContadorGroupByOutputType = {
     id: string
-    userId: string
+    UsuarioId: string
     contadorId: string
-    _count: UserContadorCountAggregateOutputType | null
-    _min: UserContadorMinAggregateOutputType | null
-    _max: UserContadorMaxAggregateOutputType | null
+    _count: UsuarioContadorCountAggregateOutputType | null
+    _min: UsuarioContadorMinAggregateOutputType | null
+    _max: UsuarioContadorMaxAggregateOutputType | null
   }
 
-  type GetUserContadorGroupByPayload<T extends UserContadorGroupByArgs> = Prisma.PrismaPromise<
+  type GetUsuarioContadorGroupByPayload<T extends UsuarioContadorGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<UserContadorGroupByOutputType, T['by']> &
+      PickEnumerable<UsuarioContadorGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof UserContadorGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof UsuarioContadorGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], UserContadorGroupByOutputType[P]>
-            : GetScalarType<T[P], UserContadorGroupByOutputType[P]>
+              : GetScalarType<T[P], UsuarioContadorGroupByOutputType[P]>
+            : GetScalarType<T[P], UsuarioContadorGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type UserContadorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UsuarioContadorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
+    UsuarioId?: boolean
     contadorId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    Usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
     contador?: boolean | ContadorDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["userContador"]>
+  }, ExtArgs["result"]["usuarioContador"]>
 
 
-  export type UserContadorSelectScalar = {
+  export type UsuarioContadorSelectScalar = {
     id?: boolean
-    userId?: boolean
+    UsuarioId?: boolean
     contadorId?: boolean
   }
 
-  export type UserContadorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+  export type UsuarioContadorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
     contador?: boolean | ContadorDefaultArgs<ExtArgs>
   }
 
-  export type $UserContadorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "UserContador"
+  export type $UsuarioContadorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UsuarioContador"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      Usuario: Prisma.$UsuarioPayload<ExtArgs>
       contador: Prisma.$ContadorPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
+      UsuarioId: string
       contadorId: string
-    }, ExtArgs["result"]["userContador"]>
+    }, ExtArgs["result"]["usuarioContador"]>
     composites: {}
   }
 
-  type UserContadorGetPayload<S extends boolean | null | undefined | UserContadorDefaultArgs> = $Result.GetResult<Prisma.$UserContadorPayload, S>
+  type UsuarioContadorGetPayload<S extends boolean | null | undefined | UsuarioContadorDefaultArgs> = $Result.GetResult<Prisma.$UsuarioContadorPayload, S>
 
-  type UserContadorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<UserContadorFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: UserContadorCountAggregateInputType | true
+  type UsuarioContadorCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UsuarioContadorFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UsuarioContadorCountAggregateInputType | true
     }
 
-  export interface UserContadorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserContador'], meta: { name: 'UserContador' } }
+  export interface UsuarioContadorDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UsuarioContador'], meta: { name: 'UsuarioContador' } }
     /**
-     * Find zero or one UserContador that matches the filter.
-     * @param {UserContadorFindUniqueArgs} args - Arguments to find a UserContador
+     * Find zero or one UsuarioContador that matches the filter.
+     * @param {UsuarioContadorFindUniqueArgs} args - Arguments to find a UsuarioContador
      * @example
-     * // Get one UserContador
-     * const userContador = await prisma.userContador.findUnique({
+     * // Get one UsuarioContador
+     * const usuarioContador = await prisma.usuarioContador.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends UserContadorFindUniqueArgs>(args: SelectSubset<T, UserContadorFindUniqueArgs<ExtArgs>>): Prisma__UserContadorClient<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    findUnique<T extends UsuarioContadorFindUniqueArgs>(args: SelectSubset<T, UsuarioContadorFindUniqueArgs<ExtArgs>>): Prisma__UsuarioContadorClient<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one UserContador that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one UsuarioContador that matches the filter or throw an error with `error.code='P2025'` 
      * if no matches were found.
-     * @param {UserContadorFindUniqueOrThrowArgs} args - Arguments to find a UserContador
+     * @param {UsuarioContadorFindUniqueOrThrowArgs} args - Arguments to find a UsuarioContador
      * @example
-     * // Get one UserContador
-     * const userContador = await prisma.userContador.findUniqueOrThrow({
+     * // Get one UsuarioContador
+     * const usuarioContador = await prisma.usuarioContador.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends UserContadorFindUniqueOrThrowArgs>(args: SelectSubset<T, UserContadorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserContadorClient<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    findUniqueOrThrow<T extends UsuarioContadorFindUniqueOrThrowArgs>(args: SelectSubset<T, UsuarioContadorFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UsuarioContadorClient<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
 
     /**
-     * Find the first UserContador that matches the filter.
+     * Find the first UsuarioContador that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserContadorFindFirstArgs} args - Arguments to find a UserContador
+     * @param {UsuarioContadorFindFirstArgs} args - Arguments to find a UsuarioContador
      * @example
-     * // Get one UserContador
-     * const userContador = await prisma.userContador.findFirst({
+     * // Get one UsuarioContador
+     * const usuarioContador = await prisma.usuarioContador.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends UserContadorFindFirstArgs>(args?: SelectSubset<T, UserContadorFindFirstArgs<ExtArgs>>): Prisma__UserContadorClient<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    findFirst<T extends UsuarioContadorFindFirstArgs>(args?: SelectSubset<T, UsuarioContadorFindFirstArgs<ExtArgs>>): Prisma__UsuarioContadorClient<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
 
     /**
-     * Find the first UserContador that matches the filter or
+     * Find the first UsuarioContador that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserContadorFindFirstOrThrowArgs} args - Arguments to find a UserContador
+     * @param {UsuarioContadorFindFirstOrThrowArgs} args - Arguments to find a UsuarioContador
      * @example
-     * // Get one UserContador
-     * const userContador = await prisma.userContador.findFirstOrThrow({
+     * // Get one UsuarioContador
+     * const usuarioContador = await prisma.usuarioContador.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends UserContadorFindFirstOrThrowArgs>(args?: SelectSubset<T, UserContadorFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserContadorClient<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    findFirstOrThrow<T extends UsuarioContadorFindFirstOrThrowArgs>(args?: SelectSubset<T, UsuarioContadorFindFirstOrThrowArgs<ExtArgs>>): Prisma__UsuarioContadorClient<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
 
     /**
-     * Find zero or more UserContadors that matches the filter.
+     * Find zero or more UsuarioContadors that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserContadorFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {UsuarioContadorFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all UserContadors
-     * const userContadors = await prisma.userContador.findMany()
+     * // Get all UsuarioContadors
+     * const usuarioContadors = await prisma.usuarioContador.findMany()
      * 
-     * // Get first 10 UserContadors
-     * const userContadors = await prisma.userContador.findMany({ take: 10 })
+     * // Get first 10 UsuarioContadors
+     * const usuarioContadors = await prisma.usuarioContador.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const userContadorWithIdOnly = await prisma.userContador.findMany({ select: { id: true } })
+     * const usuarioContadorWithIdOnly = await prisma.usuarioContador.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends UserContadorFindManyArgs>(args?: SelectSubset<T, UserContadorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findMany">>
+    findMany<T extends UsuarioContadorFindManyArgs>(args?: SelectSubset<T, UsuarioContadorFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findMany">>
 
     /**
-     * Create a UserContador.
-     * @param {UserContadorCreateArgs} args - Arguments to create a UserContador.
+     * Create a UsuarioContador.
+     * @param {UsuarioContadorCreateArgs} args - Arguments to create a UsuarioContador.
      * @example
-     * // Create one UserContador
-     * const UserContador = await prisma.userContador.create({
+     * // Create one UsuarioContador
+     * const UsuarioContador = await prisma.usuarioContador.create({
      *   data: {
-     *     // ... data to create a UserContador
+     *     // ... data to create a UsuarioContador
      *   }
      * })
      * 
      */
-    create<T extends UserContadorCreateArgs>(args: SelectSubset<T, UserContadorCreateArgs<ExtArgs>>): Prisma__UserContadorClient<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    create<T extends UsuarioContadorCreateArgs>(args: SelectSubset<T, UsuarioContadorCreateArgs<ExtArgs>>): Prisma__UsuarioContadorClient<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "create">, never, ExtArgs>
 
     /**
-     * Create many UserContadors.
-     * @param {UserContadorCreateManyArgs} args - Arguments to create many UserContadors.
+     * Create many UsuarioContadors.
+     * @param {UsuarioContadorCreateManyArgs} args - Arguments to create many UsuarioContadors.
      * @example
-     * // Create many UserContadors
-     * const userContador = await prisma.userContador.createMany({
+     * // Create many UsuarioContadors
+     * const usuarioContador = await prisma.usuarioContador.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends UserContadorCreateManyArgs>(args?: SelectSubset<T, UserContadorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends UsuarioContadorCreateManyArgs>(args?: SelectSubset<T, UsuarioContadorCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a UserContador.
-     * @param {UserContadorDeleteArgs} args - Arguments to delete one UserContador.
+     * Delete a UsuarioContador.
+     * @param {UsuarioContadorDeleteArgs} args - Arguments to delete one UsuarioContador.
      * @example
-     * // Delete one UserContador
-     * const UserContador = await prisma.userContador.delete({
+     * // Delete one UsuarioContador
+     * const UsuarioContador = await prisma.usuarioContador.delete({
      *   where: {
-     *     // ... filter to delete one UserContador
+     *     // ... filter to delete one UsuarioContador
      *   }
      * })
      * 
      */
-    delete<T extends UserContadorDeleteArgs>(args: SelectSubset<T, UserContadorDeleteArgs<ExtArgs>>): Prisma__UserContadorClient<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    delete<T extends UsuarioContadorDeleteArgs>(args: SelectSubset<T, UsuarioContadorDeleteArgs<ExtArgs>>): Prisma__UsuarioContadorClient<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "delete">, never, ExtArgs>
 
     /**
-     * Update one UserContador.
-     * @param {UserContadorUpdateArgs} args - Arguments to update one UserContador.
+     * Update one UsuarioContador.
+     * @param {UsuarioContadorUpdateArgs} args - Arguments to update one UsuarioContador.
      * @example
-     * // Update one UserContador
-     * const userContador = await prisma.userContador.update({
+     * // Update one UsuarioContador
+     * const usuarioContador = await prisma.usuarioContador.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3749,30 +3749,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends UserContadorUpdateArgs>(args: SelectSubset<T, UserContadorUpdateArgs<ExtArgs>>): Prisma__UserContadorClient<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    update<T extends UsuarioContadorUpdateArgs>(args: SelectSubset<T, UsuarioContadorUpdateArgs<ExtArgs>>): Prisma__UsuarioContadorClient<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "update">, never, ExtArgs>
 
     /**
-     * Delete zero or more UserContadors.
-     * @param {UserContadorDeleteManyArgs} args - Arguments to filter UserContadors to delete.
+     * Delete zero or more UsuarioContadors.
+     * @param {UsuarioContadorDeleteManyArgs} args - Arguments to filter UsuarioContadors to delete.
      * @example
-     * // Delete a few UserContadors
-     * const { count } = await prisma.userContador.deleteMany({
+     * // Delete a few UsuarioContadors
+     * const { count } = await prisma.usuarioContador.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends UserContadorDeleteManyArgs>(args?: SelectSubset<T, UserContadorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends UsuarioContadorDeleteManyArgs>(args?: SelectSubset<T, UsuarioContadorDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more UserContadors.
+     * Update zero or more UsuarioContadors.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserContadorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {UsuarioContadorUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many UserContadors
-     * const userContador = await prisma.userContador.updateMany({
+     * // Update many UsuarioContadors
+     * const usuarioContador = await prisma.usuarioContador.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3782,79 +3782,79 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends UserContadorUpdateManyArgs>(args: SelectSubset<T, UserContadorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends UsuarioContadorUpdateManyArgs>(args: SelectSubset<T, UsuarioContadorUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one UserContador.
-     * @param {UserContadorUpsertArgs} args - Arguments to update or create a UserContador.
+     * Create or update one UsuarioContador.
+     * @param {UsuarioContadorUpsertArgs} args - Arguments to update or create a UsuarioContador.
      * @example
-     * // Update or create a UserContador
-     * const userContador = await prisma.userContador.upsert({
+     * // Update or create a UsuarioContador
+     * const usuarioContador = await prisma.usuarioContador.upsert({
      *   create: {
-     *     // ... data to create a UserContador
+     *     // ... data to create a UsuarioContador
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the UserContador we want to update
+     *     // ... the filter for the UsuarioContador we want to update
      *   }
      * })
      */
-    upsert<T extends UserContadorUpsertArgs>(args: SelectSubset<T, UserContadorUpsertArgs<ExtArgs>>): Prisma__UserContadorClient<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+    upsert<T extends UsuarioContadorUpsertArgs>(args: SelectSubset<T, UsuarioContadorUpsertArgs<ExtArgs>>): Prisma__UsuarioContadorClient<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
 
     /**
-     * Find zero or more UserContadors that matches the filter.
-     * @param {UserContadorFindRawArgs} args - Select which filters you would like to apply.
+     * Find zero or more UsuarioContadors that matches the filter.
+     * @param {UsuarioContadorFindRawArgs} args - Select which filters you would like to apply.
      * @example
-     * const userContador = await prisma.userContador.findRaw({
+     * const usuarioContador = await prisma.usuarioContador.findRaw({
      *   filter: { age: { $gt: 25 } } 
      * })
      */
-    findRaw(args?: UserContadorFindRawArgs): Prisma.PrismaPromise<JsonObject>
+    findRaw(args?: UsuarioContadorFindRawArgs): Prisma.PrismaPromise<JsonObject>
 
     /**
-     * Perform aggregation operations on a UserContador.
-     * @param {UserContadorAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * Perform aggregation operations on a UsuarioContador.
+     * @param {UsuarioContadorAggregateRawArgs} args - Select which aggregations you would like to apply.
      * @example
-     * const userContador = await prisma.userContador.aggregateRaw({
+     * const usuarioContador = await prisma.usuarioContador.aggregateRaw({
      *   pipeline: [
      *     { $match: { status: "registered" } },
      *     { $group: { _id: "$country", total: { $sum: 1 } } }
      *   ]
      * })
      */
-    aggregateRaw(args?: UserContadorAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+    aggregateRaw(args?: UsuarioContadorAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
 
 
     /**
-     * Count the number of UserContadors.
+     * Count the number of UsuarioContadors.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserContadorCountArgs} args - Arguments to filter UserContadors to count.
+     * @param {UsuarioContadorCountArgs} args - Arguments to filter UsuarioContadors to count.
      * @example
-     * // Count the number of UserContadors
-     * const count = await prisma.userContador.count({
+     * // Count the number of UsuarioContadors
+     * const count = await prisma.usuarioContador.count({
      *   where: {
-     *     // ... the filter for the UserContadors we want to count
+     *     // ... the filter for the UsuarioContadors we want to count
      *   }
      * })
     **/
-    count<T extends UserContadorCountArgs>(
-      args?: Subset<T, UserContadorCountArgs>,
+    count<T extends UsuarioContadorCountArgs>(
+      args?: Subset<T, UsuarioContadorCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], UserContadorCountAggregateOutputType>
+          : GetScalarType<T['select'], UsuarioContadorCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a UserContador.
+     * Allows you to perform aggregations operations on a UsuarioContador.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserContadorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {UsuarioContadorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3874,13 +3874,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends UserContadorAggregateArgs>(args: Subset<T, UserContadorAggregateArgs>): Prisma.PrismaPromise<GetUserContadorAggregateType<T>>
+    aggregate<T extends UsuarioContadorAggregateArgs>(args: Subset<T, UsuarioContadorAggregateArgs>): Prisma.PrismaPromise<GetUsuarioContadorAggregateType<T>>
 
     /**
-     * Group by UserContador.
+     * Group by UsuarioContador.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserContadorGroupByArgs} args - Group by arguments.
+     * @param {UsuarioContadorGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3895,14 +3895,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends UserContadorGroupByArgs,
+      T extends UsuarioContadorGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UserContadorGroupByArgs['orderBy'] }
-        : { orderBy?: UserContadorGroupByArgs['orderBy'] },
+        ? { orderBy: UsuarioContadorGroupByArgs['orderBy'] }
+        : { orderBy?: UsuarioContadorGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3951,22 +3951,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, UserContadorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserContadorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, UsuarioContadorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsuarioContadorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the UserContador model
+   * Fields of the UsuarioContador model
    */
-  readonly fields: UserContadorFieldRefs;
+  readonly fields: UsuarioContadorFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for UserContador.
+   * The delegate class that acts as a "Promise-like" for UsuarioContador.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__UserContadorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__UsuarioContadorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    Usuario<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     contador<T extends ContadorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContadorDefaultArgs<ExtArgs>>): Prisma__ContadorClient<$Result.GetResult<Prisma.$ContadorPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3994,313 +3994,313 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the UserContador model
+   * Fields of the UsuarioContador model
    */ 
-  interface UserContadorFieldRefs {
-    readonly id: FieldRef<"UserContador", 'String'>
-    readonly userId: FieldRef<"UserContador", 'String'>
-    readonly contadorId: FieldRef<"UserContador", 'String'>
+  interface UsuarioContadorFieldRefs {
+    readonly id: FieldRef<"UsuarioContador", 'String'>
+    readonly UsuarioId: FieldRef<"UsuarioContador", 'String'>
+    readonly contadorId: FieldRef<"UsuarioContador", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * UserContador findUnique
+   * UsuarioContador findUnique
    */
-  export type UserContadorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
     /**
-     * Filter, which UserContador to fetch.
+     * Filter, which UsuarioContador to fetch.
      */
-    where: UserContadorWhereUniqueInput
+    where: UsuarioContadorWhereUniqueInput
   }
 
   /**
-   * UserContador findUniqueOrThrow
+   * UsuarioContador findUniqueOrThrow
    */
-  export type UserContadorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
     /**
-     * Filter, which UserContador to fetch.
+     * Filter, which UsuarioContador to fetch.
      */
-    where: UserContadorWhereUniqueInput
+    where: UsuarioContadorWhereUniqueInput
   }
 
   /**
-   * UserContador findFirst
+   * UsuarioContador findFirst
    */
-  export type UserContadorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
     /**
-     * Filter, which UserContador to fetch.
+     * Filter, which UsuarioContador to fetch.
      */
-    where?: UserContadorWhereInput
+    where?: UsuarioContadorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of UserContadors to fetch.
+     * Determine the order of UsuarioContadors to fetch.
      */
-    orderBy?: UserContadorOrderByWithRelationInput | UserContadorOrderByWithRelationInput[]
+    orderBy?: UsuarioContadorOrderByWithRelationInput | UsuarioContadorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for UserContadors.
+     * Sets the position for searching for UsuarioContadors.
      */
-    cursor?: UserContadorWhereUniqueInput
+    cursor?: UsuarioContadorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` UserContadors from the position of the cursor.
+     * Take `±n` UsuarioContadors from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` UserContadors.
+     * Skip the first `n` UsuarioContadors.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of UserContadors.
+     * Filter by unique combinations of UsuarioContadors.
      */
-    distinct?: UserContadorScalarFieldEnum | UserContadorScalarFieldEnum[]
+    distinct?: UsuarioContadorScalarFieldEnum | UsuarioContadorScalarFieldEnum[]
   }
 
   /**
-   * UserContador findFirstOrThrow
+   * UsuarioContador findFirstOrThrow
    */
-  export type UserContadorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
     /**
-     * Filter, which UserContador to fetch.
+     * Filter, which UsuarioContador to fetch.
      */
-    where?: UserContadorWhereInput
+    where?: UsuarioContadorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of UserContadors to fetch.
+     * Determine the order of UsuarioContadors to fetch.
      */
-    orderBy?: UserContadorOrderByWithRelationInput | UserContadorOrderByWithRelationInput[]
+    orderBy?: UsuarioContadorOrderByWithRelationInput | UsuarioContadorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for UserContadors.
+     * Sets the position for searching for UsuarioContadors.
      */
-    cursor?: UserContadorWhereUniqueInput
+    cursor?: UsuarioContadorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` UserContadors from the position of the cursor.
+     * Take `±n` UsuarioContadors from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` UserContadors.
+     * Skip the first `n` UsuarioContadors.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of UserContadors.
+     * Filter by unique combinations of UsuarioContadors.
      */
-    distinct?: UserContadorScalarFieldEnum | UserContadorScalarFieldEnum[]
+    distinct?: UsuarioContadorScalarFieldEnum | UsuarioContadorScalarFieldEnum[]
   }
 
   /**
-   * UserContador findMany
+   * UsuarioContador findMany
    */
-  export type UserContadorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
     /**
-     * Filter, which UserContadors to fetch.
+     * Filter, which UsuarioContadors to fetch.
      */
-    where?: UserContadorWhereInput
+    where?: UsuarioContadorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of UserContadors to fetch.
+     * Determine the order of UsuarioContadors to fetch.
      */
-    orderBy?: UserContadorOrderByWithRelationInput | UserContadorOrderByWithRelationInput[]
+    orderBy?: UsuarioContadorOrderByWithRelationInput | UsuarioContadorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing UserContadors.
+     * Sets the position for listing UsuarioContadors.
      */
-    cursor?: UserContadorWhereUniqueInput
+    cursor?: UsuarioContadorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` UserContadors from the position of the cursor.
+     * Take `±n` UsuarioContadors from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` UserContadors.
+     * Skip the first `n` UsuarioContadors.
      */
     skip?: number
-    distinct?: UserContadorScalarFieldEnum | UserContadorScalarFieldEnum[]
+    distinct?: UsuarioContadorScalarFieldEnum | UsuarioContadorScalarFieldEnum[]
   }
 
   /**
-   * UserContador create
+   * UsuarioContador create
    */
-  export type UserContadorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
     /**
-     * The data needed to create a UserContador.
+     * The data needed to create a UsuarioContador.
      */
-    data: XOR<UserContadorCreateInput, UserContadorUncheckedCreateInput>
+    data: XOR<UsuarioContadorCreateInput, UsuarioContadorUncheckedCreateInput>
   }
 
   /**
-   * UserContador createMany
+   * UsuarioContador createMany
    */
-  export type UserContadorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many UserContadors.
+     * The data used to create many UsuarioContadors.
      */
-    data: UserContadorCreateManyInput | UserContadorCreateManyInput[]
+    data: UsuarioContadorCreateManyInput | UsuarioContadorCreateManyInput[]
   }
 
   /**
-   * UserContador update
+   * UsuarioContador update
    */
-  export type UserContadorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
     /**
-     * The data needed to update a UserContador.
+     * The data needed to update a UsuarioContador.
      */
-    data: XOR<UserContadorUpdateInput, UserContadorUncheckedUpdateInput>
+    data: XOR<UsuarioContadorUpdateInput, UsuarioContadorUncheckedUpdateInput>
     /**
-     * Choose, which UserContador to update.
+     * Choose, which UsuarioContador to update.
      */
-    where: UserContadorWhereUniqueInput
+    where: UsuarioContadorWhereUniqueInput
   }
 
   /**
-   * UserContador updateMany
+   * UsuarioContador updateMany
    */
-  export type UserContadorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update UserContadors.
+     * The data used to update UsuarioContadors.
      */
-    data: XOR<UserContadorUpdateManyMutationInput, UserContadorUncheckedUpdateManyInput>
+    data: XOR<UsuarioContadorUpdateManyMutationInput, UsuarioContadorUncheckedUpdateManyInput>
     /**
-     * Filter which UserContadors to update
+     * Filter which UsuarioContadors to update
      */
-    where?: UserContadorWhereInput
+    where?: UsuarioContadorWhereInput
   }
 
   /**
-   * UserContador upsert
+   * UsuarioContador upsert
    */
-  export type UserContadorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
     /**
-     * The filter to search for the UserContador to update in case it exists.
+     * The filter to search for the UsuarioContador to update in case it exists.
      */
-    where: UserContadorWhereUniqueInput
+    where: UsuarioContadorWhereUniqueInput
     /**
-     * In case the UserContador found by the `where` argument doesn't exist, create a new UserContador with this data.
+     * In case the UsuarioContador found by the `where` argument doesn't exist, create a new UsuarioContador with this data.
      */
-    create: XOR<UserContadorCreateInput, UserContadorUncheckedCreateInput>
+    create: XOR<UsuarioContadorCreateInput, UsuarioContadorUncheckedCreateInput>
     /**
-     * In case the UserContador was found with the provided `where` argument, update it with this data.
+     * In case the UsuarioContador was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<UserContadorUpdateInput, UserContadorUncheckedUpdateInput>
+    update: XOR<UsuarioContadorUpdateInput, UsuarioContadorUncheckedUpdateInput>
   }
 
   /**
-   * UserContador delete
+   * UsuarioContador delete
    */
-  export type UserContadorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
     /**
-     * Filter which UserContador to delete.
+     * Filter which UsuarioContador to delete.
      */
-    where: UserContadorWhereUniqueInput
+    where: UsuarioContadorWhereUniqueInput
   }
 
   /**
-   * UserContador deleteMany
+   * UsuarioContador deleteMany
    */
-  export type UserContadorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which UserContadors to delete
+     * Filter which UsuarioContadors to delete
      */
-    where?: UserContadorWhereInput
+    where?: UsuarioContadorWhereInput
   }
 
   /**
-   * UserContador findRaw
+   * UsuarioContador findRaw
    */
-  export type UserContadorFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
      */
@@ -4312,9 +4312,9 @@ export namespace Prisma {
   }
 
   /**
-   * UserContador aggregateRaw
+   * UsuarioContador aggregateRaw
    */
-  export type UserContadorAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
      */
@@ -4326,17 +4326,17 @@ export namespace Prisma {
   }
 
   /**
-   * UserContador without action
+   * UsuarioContador without action
    */
-  export type UserContadorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioContadorDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the UserContador
+     * Select specific fields to fetch from the UsuarioContador
      */
-    select?: UserContadorSelect<ExtArgs> | null
+    select?: UsuarioContadorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: UserContadorInclude<ExtArgs> | null
+    include?: UsuarioContadorInclude<ExtArgs> | null
   }
 
 
@@ -7386,7 +7386,7 @@ export namespace Prisma {
    * Enums
    */
 
-  export const UserScalarFieldEnum: {
+  export const UsuarioScalarFieldEnum: {
     id: 'id',
     email: 'email',
     password: 'password',
@@ -7395,7 +7395,7 @@ export namespace Prisma {
     updatedAt: 'updatedAt'
   };
 
-  export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+  export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
 
 
   export const ContadorScalarFieldEnum: {
@@ -7412,13 +7412,13 @@ export namespace Prisma {
   export type ContadorScalarFieldEnum = (typeof ContadorScalarFieldEnum)[keyof typeof ContadorScalarFieldEnum]
 
 
-  export const UserContadorScalarFieldEnum: {
+  export const UsuarioContadorScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
+    UsuarioId: 'UsuarioId',
     contadorId: 'contadorId'
   };
 
-  export type UserContadorScalarFieldEnum = (typeof UserContadorScalarFieldEnum)[keyof typeof UserContadorScalarFieldEnum]
+  export type UsuarioContadorScalarFieldEnum = (typeof UsuarioContadorScalarFieldEnum)[keyof typeof UsuarioContadorScalarFieldEnum]
 
 
   export const EmitenteScalarFieldEnum: {
@@ -7549,64 +7549,64 @@ export namespace Prisma {
    */
 
 
-  export type UserWhereInput = {
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    id?: StringFilter<"User"> | string
-    email?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
-    role?: EnumRoleFilter<"User"> | $Enums.Role
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-    contadores?: UserContadorListRelationFilter
+  export type UsuarioWhereInput = {
+    AND?: UsuarioWhereInput | UsuarioWhereInput[]
+    OR?: UsuarioWhereInput[]
+    NOT?: UsuarioWhereInput | UsuarioWhereInput[]
+    id?: StringFilter<"Usuario"> | string
+    email?: StringFilter<"Usuario"> | string
+    password?: StringFilter<"Usuario"> | string
+    role?: EnumRoleFilter<"Usuario"> | $Enums.Role
+    createdAt?: DateTimeFilter<"Usuario"> | Date | string
+    updatedAt?: DateTimeFilter<"Usuario"> | Date | string
+    contadores?: UsuarioContadorListRelationFilter
   }
 
-  export type UserOrderByWithRelationInput = {
+  export type UsuarioOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    contadores?: UserContadorOrderByRelationAggregateInput
+    contadores?: UsuarioContadorOrderByRelationAggregateInput
   }
 
-  export type UserWhereUniqueInput = Prisma.AtLeast<{
+  export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
-    AND?: UserWhereInput | UserWhereInput[]
-    OR?: UserWhereInput[]
-    NOT?: UserWhereInput | UserWhereInput[]
-    password?: StringFilter<"User"> | string
-    role?: EnumRoleFilter<"User"> | $Enums.Role
-    createdAt?: DateTimeFilter<"User"> | Date | string
-    updatedAt?: DateTimeFilter<"User"> | Date | string
-    contadores?: UserContadorListRelationFilter
+    AND?: UsuarioWhereInput | UsuarioWhereInput[]
+    OR?: UsuarioWhereInput[]
+    NOT?: UsuarioWhereInput | UsuarioWhereInput[]
+    password?: StringFilter<"Usuario"> | string
+    role?: EnumRoleFilter<"Usuario"> | $Enums.Role
+    createdAt?: DateTimeFilter<"Usuario"> | Date | string
+    updatedAt?: DateTimeFilter<"Usuario"> | Date | string
+    contadores?: UsuarioContadorListRelationFilter
   }, "id" | "email">
 
-  export type UserOrderByWithAggregationInput = {
+  export type UsuarioOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: UserCountOrderByAggregateInput
-    _max?: UserMaxOrderByAggregateInput
-    _min?: UserMinOrderByAggregateInput
+    _count?: UsuarioCountOrderByAggregateInput
+    _max?: UsuarioMaxOrderByAggregateInput
+    _min?: UsuarioMinOrderByAggregateInput
   }
 
-  export type UserScalarWhereWithAggregatesInput = {
-    AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    OR?: UserScalarWhereWithAggregatesInput[]
-    NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"User"> | string
-    email?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
-    role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
-    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  export type UsuarioScalarWhereWithAggregatesInput = {
+    AND?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
+    OR?: UsuarioScalarWhereWithAggregatesInput[]
+    NOT?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Usuario"> | string
+    email?: StringWithAggregatesFilter<"Usuario"> | string
+    password?: StringWithAggregatesFilter<"Usuario"> | string
+    role?: EnumRoleWithAggregatesFilter<"Usuario"> | $Enums.Role
+    createdAt?: DateTimeWithAggregatesFilter<"Usuario"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Usuario"> | Date | string
   }
 
   export type ContadorWhereInput = {
@@ -7621,7 +7621,7 @@ export namespace Prisma {
     email?: StringNullableFilter<"Contador"> | string | null
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
-    usuarios?: UserContadorListRelationFilter
+    usuarios?: UsuarioContadorListRelationFilter
     Emitentes?: EmitenteListRelationFilter
     endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
     certificados?: CertificadoListRelationFilter
@@ -7636,7 +7636,7 @@ export namespace Prisma {
     email?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    usuarios?: UserContadorOrderByRelationAggregateInput
+    usuarios?: UsuarioContadorOrderByRelationAggregateInput
     Emitentes?: EmitenteOrderByRelationAggregateInput
     endereco?: EnderecoOrderByWithRelationInput
     certificados?: CertificadoOrderByRelationAggregateInput
@@ -7654,7 +7654,7 @@ export namespace Prisma {
     email?: StringNullableFilter<"Contador"> | string | null
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
-    usuarios?: UserContadorListRelationFilter
+    usuarios?: UsuarioContadorListRelationFilter
     Emitentes?: EmitenteListRelationFilter
     endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
     certificados?: CertificadoListRelationFilter
@@ -7688,53 +7688,53 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Contador"> | Date | string
   }
 
-  export type UserContadorWhereInput = {
-    AND?: UserContadorWhereInput | UserContadorWhereInput[]
-    OR?: UserContadorWhereInput[]
-    NOT?: UserContadorWhereInput | UserContadorWhereInput[]
-    id?: StringFilter<"UserContador"> | string
-    userId?: StringFilter<"UserContador"> | string
-    contadorId?: StringFilter<"UserContador"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+  export type UsuarioContadorWhereInput = {
+    AND?: UsuarioContadorWhereInput | UsuarioContadorWhereInput[]
+    OR?: UsuarioContadorWhereInput[]
+    NOT?: UsuarioContadorWhereInput | UsuarioContadorWhereInput[]
+    id?: StringFilter<"UsuarioContador"> | string
+    UsuarioId?: StringFilter<"UsuarioContador"> | string
+    contadorId?: StringFilter<"UsuarioContador"> | string
+    Usuario?: XOR<UsuarioRelationFilter, UsuarioWhereInput>
     contador?: XOR<ContadorRelationFilter, ContadorWhereInput>
   }
 
-  export type UserContadorOrderByWithRelationInput = {
+  export type UsuarioContadorOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    UsuarioId?: SortOrder
     contadorId?: SortOrder
-    user?: UserOrderByWithRelationInput
+    Usuario?: UsuarioOrderByWithRelationInput
     contador?: ContadorOrderByWithRelationInput
   }
 
-  export type UserContadorWhereUniqueInput = Prisma.AtLeast<{
+  export type UsuarioContadorWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    userId_contadorId?: UserContadorUserIdContadorIdCompoundUniqueInput
-    AND?: UserContadorWhereInput | UserContadorWhereInput[]
-    OR?: UserContadorWhereInput[]
-    NOT?: UserContadorWhereInput | UserContadorWhereInput[]
-    userId?: StringFilter<"UserContador"> | string
-    contadorId?: StringFilter<"UserContador"> | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    UsuarioId_contadorId?: UsuarioContadorUsuarioIdContadorIdCompoundUniqueInput
+    AND?: UsuarioContadorWhereInput | UsuarioContadorWhereInput[]
+    OR?: UsuarioContadorWhereInput[]
+    NOT?: UsuarioContadorWhereInput | UsuarioContadorWhereInput[]
+    UsuarioId?: StringFilter<"UsuarioContador"> | string
+    contadorId?: StringFilter<"UsuarioContador"> | string
+    Usuario?: XOR<UsuarioRelationFilter, UsuarioWhereInput>
     contador?: XOR<ContadorRelationFilter, ContadorWhereInput>
-  }, "id" | "userId_contadorId">
+  }, "id" | "UsuarioId_contadorId">
 
-  export type UserContadorOrderByWithAggregationInput = {
+  export type UsuarioContadorOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
+    UsuarioId?: SortOrder
     contadorId?: SortOrder
-    _count?: UserContadorCountOrderByAggregateInput
-    _max?: UserContadorMaxOrderByAggregateInput
-    _min?: UserContadorMinOrderByAggregateInput
+    _count?: UsuarioContadorCountOrderByAggregateInput
+    _max?: UsuarioContadorMaxOrderByAggregateInput
+    _min?: UsuarioContadorMinOrderByAggregateInput
   }
 
-  export type UserContadorScalarWhereWithAggregatesInput = {
-    AND?: UserContadorScalarWhereWithAggregatesInput | UserContadorScalarWhereWithAggregatesInput[]
-    OR?: UserContadorScalarWhereWithAggregatesInput[]
-    NOT?: UserContadorScalarWhereWithAggregatesInput | UserContadorScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"UserContador"> | string
-    userId?: StringWithAggregatesFilter<"UserContador"> | string
-    contadorId?: StringWithAggregatesFilter<"UserContador"> | string
+  export type UsuarioContadorScalarWhereWithAggregatesInput = {
+    AND?: UsuarioContadorScalarWhereWithAggregatesInput | UsuarioContadorScalarWhereWithAggregatesInput[]
+    OR?: UsuarioContadorScalarWhereWithAggregatesInput[]
+    NOT?: UsuarioContadorScalarWhereWithAggregatesInput | UsuarioContadorScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UsuarioContador"> | string
+    UsuarioId?: StringWithAggregatesFilter<"UsuarioContador"> | string
+    contadorId?: StringWithAggregatesFilter<"UsuarioContador"> | string
   }
 
   export type EmitenteWhereInput = {
@@ -7985,45 +7985,45 @@ export namespace Prisma {
     emitenteId?: StringNullableWithAggregatesFilter<"Endereco"> | string | null
   }
 
-  export type UserCreateInput = {
+  export type UsuarioCreateInput = {
     id?: string
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    contadores?: UserContadorCreateNestedManyWithoutUserInput
+    contadores?: UsuarioContadorCreateNestedManyWithoutUsuarioInput
   }
 
-  export type UserUncheckedCreateInput = {
+  export type UsuarioUncheckedCreateInput = {
     id?: string
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    contadores?: UserContadorUncheckedCreateNestedManyWithoutUserInput
+    contadores?: UsuarioContadorUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
-  export type UserUpdateInput = {
+  export type UsuarioUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contadores?: UserContadorUpdateManyWithoutUserNestedInput
+    contadores?: UsuarioContadorUpdateManyWithoutUsuarioNestedInput
   }
 
-  export type UserUncheckedUpdateInput = {
+  export type UsuarioUncheckedUpdateInput = {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contadores?: UserContadorUncheckedUpdateManyWithoutUserNestedInput
+    contadores?: UsuarioContadorUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
-  export type UserCreateManyInput = {
+  export type UsuarioCreateManyInput = {
     id?: string
     email: string
     password: string
@@ -8032,7 +8032,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UserUpdateManyMutationInput = {
+  export type UsuarioUpdateManyMutationInput = {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -8040,7 +8040,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserUncheckedUpdateManyInput = {
+  export type UsuarioUncheckedUpdateManyInput = {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -8057,7 +8057,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    usuarios?: UserContadorCreateNestedManyWithoutContadorInput
+    usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
     endereco?: EnderecoCreateNestedOneWithoutContadorInput
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
@@ -8072,7 +8072,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
+    usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
     endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
@@ -8086,7 +8086,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
+    usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
@@ -8100,7 +8100,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
+    usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
@@ -8137,40 +8137,40 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserContadorCreateInput = {
+  export type UsuarioContadorCreateInput = {
     id?: string
-    user: UserCreateNestedOneWithoutContadoresInput
+    Usuario: UsuarioCreateNestedOneWithoutContadoresInput
     contador: ContadorCreateNestedOneWithoutUsuariosInput
   }
 
-  export type UserContadorUncheckedCreateInput = {
+  export type UsuarioContadorUncheckedCreateInput = {
     id?: string
-    userId: string
+    UsuarioId: string
     contadorId: string
   }
 
-  export type UserContadorUpdateInput = {
-    user?: UserUpdateOneRequiredWithoutContadoresNestedInput
+  export type UsuarioContadorUpdateInput = {
+    Usuario?: UsuarioUpdateOneRequiredWithoutContadoresNestedInput
     contador?: ContadorUpdateOneRequiredWithoutUsuariosNestedInput
   }
 
-  export type UserContadorUncheckedUpdateInput = {
-    userId?: StringFieldUpdateOperationsInput | string
+  export type UsuarioContadorUncheckedUpdateInput = {
+    UsuarioId?: StringFieldUpdateOperationsInput | string
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserContadorCreateManyInput = {
+  export type UsuarioContadorCreateManyInput = {
     id?: string
-    userId: string
+    UsuarioId: string
     contadorId: string
   }
 
-  export type UserContadorUpdateManyMutationInput = {
+  export type UsuarioContadorUpdateManyMutationInput = {
 
   }
 
-  export type UserContadorUncheckedUpdateManyInput = {
-    userId?: StringFieldUpdateOperationsInput | string
+  export type UsuarioContadorUncheckedUpdateManyInput = {
+    UsuarioId?: StringFieldUpdateOperationsInput | string
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -8468,17 +8468,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type UserContadorListRelationFilter = {
-    every?: UserContadorWhereInput
-    some?: UserContadorWhereInput
-    none?: UserContadorWhereInput
+  export type UsuarioContadorListRelationFilter = {
+    every?: UsuarioContadorWhereInput
+    some?: UsuarioContadorWhereInput
+    none?: UsuarioContadorWhereInput
   }
 
-  export type UserContadorOrderByRelationAggregateInput = {
+  export type UsuarioContadorOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type UserCountOrderByAggregateInput = {
+  export type UsuarioCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
@@ -8487,7 +8487,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type UserMaxOrderByAggregateInput = {
+  export type UsuarioMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
@@ -8496,7 +8496,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type UserMinOrderByAggregateInput = {
+  export type UsuarioMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
     password?: SortOrder
@@ -8640,9 +8640,9 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type UserRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type UsuarioRelationFilter = {
+    is?: UsuarioWhereInput
+    isNot?: UsuarioWhereInput
   }
 
   export type ContadorRelationFilter = {
@@ -8650,26 +8650,26 @@ export namespace Prisma {
     isNot?: ContadorWhereInput
   }
 
-  export type UserContadorUserIdContadorIdCompoundUniqueInput = {
-    userId: string
+  export type UsuarioContadorUsuarioIdContadorIdCompoundUniqueInput = {
+    UsuarioId: string
     contadorId: string
   }
 
-  export type UserContadorCountOrderByAggregateInput = {
+  export type UsuarioContadorCountOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    UsuarioId?: SortOrder
     contadorId?: SortOrder
   }
 
-  export type UserContadorMaxOrderByAggregateInput = {
+  export type UsuarioContadorMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    UsuarioId?: SortOrder
     contadorId?: SortOrder
   }
 
-  export type UserContadorMinOrderByAggregateInput = {
+  export type UsuarioContadorMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
+    UsuarioId?: SortOrder
     contadorId?: SortOrder
   }
 
@@ -8847,18 +8847,18 @@ export namespace Prisma {
     emitenteId?: SortOrder
   }
 
-  export type UserContadorCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserContadorCreateWithoutUserInput, UserContadorUncheckedCreateWithoutUserInput> | UserContadorCreateWithoutUserInput[] | UserContadorUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserContadorCreateOrConnectWithoutUserInput | UserContadorCreateOrConnectWithoutUserInput[]
-    createMany?: UserContadorCreateManyUserInputEnvelope
-    connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
+  export type UsuarioContadorCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput> | UsuarioContadorCreateWithoutUsuarioInput[] | UsuarioContadorUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: UsuarioContadorCreateOrConnectWithoutUsuarioInput | UsuarioContadorCreateOrConnectWithoutUsuarioInput[]
+    createMany?: UsuarioContadorCreateManyUsuarioInputEnvelope
+    connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
   }
 
-  export type UserContadorUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<UserContadorCreateWithoutUserInput, UserContadorUncheckedCreateWithoutUserInput> | UserContadorCreateWithoutUserInput[] | UserContadorUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserContadorCreateOrConnectWithoutUserInput | UserContadorCreateOrConnectWithoutUserInput[]
-    createMany?: UserContadorCreateManyUserInputEnvelope
-    connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
+  export type UsuarioContadorUncheckedCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput> | UsuarioContadorCreateWithoutUsuarioInput[] | UsuarioContadorUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: UsuarioContadorCreateOrConnectWithoutUsuarioInput | UsuarioContadorCreateOrConnectWithoutUsuarioInput[]
+    createMany?: UsuarioContadorCreateManyUsuarioInputEnvelope
+    connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8873,39 +8873,39 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type UserContadorUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserContadorCreateWithoutUserInput, UserContadorUncheckedCreateWithoutUserInput> | UserContadorCreateWithoutUserInput[] | UserContadorUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserContadorCreateOrConnectWithoutUserInput | UserContadorCreateOrConnectWithoutUserInput[]
-    upsert?: UserContadorUpsertWithWhereUniqueWithoutUserInput | UserContadorUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserContadorCreateManyUserInputEnvelope
-    set?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    disconnect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    delete?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    update?: UserContadorUpdateWithWhereUniqueWithoutUserInput | UserContadorUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserContadorUpdateManyWithWhereWithoutUserInput | UserContadorUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserContadorScalarWhereInput | UserContadorScalarWhereInput[]
+  export type UsuarioContadorUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput> | UsuarioContadorCreateWithoutUsuarioInput[] | UsuarioContadorUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: UsuarioContadorCreateOrConnectWithoutUsuarioInput | UsuarioContadorCreateOrConnectWithoutUsuarioInput[]
+    upsert?: UsuarioContadorUpsertWithWhereUniqueWithoutUsuarioInput | UsuarioContadorUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: UsuarioContadorCreateManyUsuarioInputEnvelope
+    set?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    disconnect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    delete?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    update?: UsuarioContadorUpdateWithWhereUniqueWithoutUsuarioInput | UsuarioContadorUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: UsuarioContadorUpdateManyWithWhereWithoutUsuarioInput | UsuarioContadorUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
   }
 
-  export type UserContadorUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<UserContadorCreateWithoutUserInput, UserContadorUncheckedCreateWithoutUserInput> | UserContadorCreateWithoutUserInput[] | UserContadorUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: UserContadorCreateOrConnectWithoutUserInput | UserContadorCreateOrConnectWithoutUserInput[]
-    upsert?: UserContadorUpsertWithWhereUniqueWithoutUserInput | UserContadorUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: UserContadorCreateManyUserInputEnvelope
-    set?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    disconnect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    delete?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    update?: UserContadorUpdateWithWhereUniqueWithoutUserInput | UserContadorUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: UserContadorUpdateManyWithWhereWithoutUserInput | UserContadorUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: UserContadorScalarWhereInput | UserContadorScalarWhereInput[]
+  export type UsuarioContadorUncheckedUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput> | UsuarioContadorCreateWithoutUsuarioInput[] | UsuarioContadorUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: UsuarioContadorCreateOrConnectWithoutUsuarioInput | UsuarioContadorCreateOrConnectWithoutUsuarioInput[]
+    upsert?: UsuarioContadorUpsertWithWhereUniqueWithoutUsuarioInput | UsuarioContadorUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: UsuarioContadorCreateManyUsuarioInputEnvelope
+    set?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    disconnect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    delete?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    update?: UsuarioContadorUpdateWithWhereUniqueWithoutUsuarioInput | UsuarioContadorUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: UsuarioContadorUpdateManyWithWhereWithoutUsuarioInput | UsuarioContadorUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
   }
 
-  export type UserContadorCreateNestedManyWithoutContadorInput = {
-    create?: XOR<UserContadorCreateWithoutContadorInput, UserContadorUncheckedCreateWithoutContadorInput> | UserContadorCreateWithoutContadorInput[] | UserContadorUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: UserContadorCreateOrConnectWithoutContadorInput | UserContadorCreateOrConnectWithoutContadorInput[]
-    createMany?: UserContadorCreateManyContadorInputEnvelope
-    connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
+  export type UsuarioContadorCreateNestedManyWithoutContadorInput = {
+    create?: XOR<UsuarioContadorCreateWithoutContadorInput, UsuarioContadorUncheckedCreateWithoutContadorInput> | UsuarioContadorCreateWithoutContadorInput[] | UsuarioContadorUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: UsuarioContadorCreateOrConnectWithoutContadorInput | UsuarioContadorCreateOrConnectWithoutContadorInput[]
+    createMany?: UsuarioContadorCreateManyContadorInputEnvelope
+    connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
   }
 
   export type EmitenteCreateNestedManyWithoutContadorInput = {
@@ -8928,11 +8928,11 @@ export namespace Prisma {
     connect?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
   }
 
-  export type UserContadorUncheckedCreateNestedManyWithoutContadorInput = {
-    create?: XOR<UserContadorCreateWithoutContadorInput, UserContadorUncheckedCreateWithoutContadorInput> | UserContadorCreateWithoutContadorInput[] | UserContadorUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: UserContadorCreateOrConnectWithoutContadorInput | UserContadorCreateOrConnectWithoutContadorInput[]
-    createMany?: UserContadorCreateManyContadorInputEnvelope
-    connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
+  export type UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput = {
+    create?: XOR<UsuarioContadorCreateWithoutContadorInput, UsuarioContadorUncheckedCreateWithoutContadorInput> | UsuarioContadorCreateWithoutContadorInput[] | UsuarioContadorUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: UsuarioContadorCreateOrConnectWithoutContadorInput | UsuarioContadorCreateOrConnectWithoutContadorInput[]
+    createMany?: UsuarioContadorCreateManyContadorInputEnvelope
+    connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
   }
 
   export type EmitenteUncheckedCreateNestedManyWithoutContadorInput = {
@@ -8960,18 +8960,18 @@ export namespace Prisma {
     unset?: boolean
   }
 
-  export type UserContadorUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<UserContadorCreateWithoutContadorInput, UserContadorUncheckedCreateWithoutContadorInput> | UserContadorCreateWithoutContadorInput[] | UserContadorUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: UserContadorCreateOrConnectWithoutContadorInput | UserContadorCreateOrConnectWithoutContadorInput[]
-    upsert?: UserContadorUpsertWithWhereUniqueWithoutContadorInput | UserContadorUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: UserContadorCreateManyContadorInputEnvelope
-    set?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    disconnect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    delete?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    update?: UserContadorUpdateWithWhereUniqueWithoutContadorInput | UserContadorUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: UserContadorUpdateManyWithWhereWithoutContadorInput | UserContadorUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: UserContadorScalarWhereInput | UserContadorScalarWhereInput[]
+  export type UsuarioContadorUpdateManyWithoutContadorNestedInput = {
+    create?: XOR<UsuarioContadorCreateWithoutContadorInput, UsuarioContadorUncheckedCreateWithoutContadorInput> | UsuarioContadorCreateWithoutContadorInput[] | UsuarioContadorUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: UsuarioContadorCreateOrConnectWithoutContadorInput | UsuarioContadorCreateOrConnectWithoutContadorInput[]
+    upsert?: UsuarioContadorUpsertWithWhereUniqueWithoutContadorInput | UsuarioContadorUpsertWithWhereUniqueWithoutContadorInput[]
+    createMany?: UsuarioContadorCreateManyContadorInputEnvelope
+    set?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    disconnect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    delete?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    update?: UsuarioContadorUpdateWithWhereUniqueWithoutContadorInput | UsuarioContadorUpdateWithWhereUniqueWithoutContadorInput[]
+    updateMany?: UsuarioContadorUpdateManyWithWhereWithoutContadorInput | UsuarioContadorUpdateManyWithWhereWithoutContadorInput[]
+    deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
   }
 
   export type EmitenteUpdateManyWithoutContadorNestedInput = {
@@ -9012,18 +9012,18 @@ export namespace Prisma {
     deleteMany?: CertificadoScalarWhereInput | CertificadoScalarWhereInput[]
   }
 
-  export type UserContadorUncheckedUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<UserContadorCreateWithoutContadorInput, UserContadorUncheckedCreateWithoutContadorInput> | UserContadorCreateWithoutContadorInput[] | UserContadorUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: UserContadorCreateOrConnectWithoutContadorInput | UserContadorCreateOrConnectWithoutContadorInput[]
-    upsert?: UserContadorUpsertWithWhereUniqueWithoutContadorInput | UserContadorUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: UserContadorCreateManyContadorInputEnvelope
-    set?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    disconnect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    delete?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    connect?: UserContadorWhereUniqueInput | UserContadorWhereUniqueInput[]
-    update?: UserContadorUpdateWithWhereUniqueWithoutContadorInput | UserContadorUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: UserContadorUpdateManyWithWhereWithoutContadorInput | UserContadorUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: UserContadorScalarWhereInput | UserContadorScalarWhereInput[]
+  export type UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput = {
+    create?: XOR<UsuarioContadorCreateWithoutContadorInput, UsuarioContadorUncheckedCreateWithoutContadorInput> | UsuarioContadorCreateWithoutContadorInput[] | UsuarioContadorUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: UsuarioContadorCreateOrConnectWithoutContadorInput | UsuarioContadorCreateOrConnectWithoutContadorInput[]
+    upsert?: UsuarioContadorUpsertWithWhereUniqueWithoutContadorInput | UsuarioContadorUpsertWithWhereUniqueWithoutContadorInput[]
+    createMany?: UsuarioContadorCreateManyContadorInputEnvelope
+    set?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    disconnect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    delete?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+    update?: UsuarioContadorUpdateWithWhereUniqueWithoutContadorInput | UsuarioContadorUpdateWithWhereUniqueWithoutContadorInput[]
+    updateMany?: UsuarioContadorUpdateManyWithWhereWithoutContadorInput | UsuarioContadorUpdateManyWithWhereWithoutContadorInput[]
+    deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
   }
 
   export type EmitenteUncheckedUpdateManyWithoutContadorNestedInput = {
@@ -9064,10 +9064,10 @@ export namespace Prisma {
     deleteMany?: CertificadoScalarWhereInput | CertificadoScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutContadoresInput = {
-    create?: XOR<UserCreateWithoutContadoresInput, UserUncheckedCreateWithoutContadoresInput>
-    connectOrCreate?: UserCreateOrConnectWithoutContadoresInput
-    connect?: UserWhereUniqueInput
+  export type UsuarioCreateNestedOneWithoutContadoresInput = {
+    create?: XOR<UsuarioCreateWithoutContadoresInput, UsuarioUncheckedCreateWithoutContadoresInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutContadoresInput
+    connect?: UsuarioWhereUniqueInput
   }
 
   export type ContadorCreateNestedOneWithoutUsuariosInput = {
@@ -9076,12 +9076,12 @@ export namespace Prisma {
     connect?: ContadorWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutContadoresNestedInput = {
-    create?: XOR<UserCreateWithoutContadoresInput, UserUncheckedCreateWithoutContadoresInput>
-    connectOrCreate?: UserCreateOrConnectWithoutContadoresInput
-    upsert?: UserUpsertWithoutContadoresInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContadoresInput, UserUpdateWithoutContadoresInput>, UserUncheckedUpdateWithoutContadoresInput>
+  export type UsuarioUpdateOneRequiredWithoutContadoresNestedInput = {
+    create?: XOR<UsuarioCreateWithoutContadoresInput, UsuarioUncheckedCreateWithoutContadoresInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutContadoresInput
+    upsert?: UsuarioUpsertWithoutContadoresInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutContadoresInput, UsuarioUpdateWithoutContadoresInput>, UsuarioUncheckedUpdateWithoutContadoresInput>
   }
 
   export type ContadorUpdateOneRequiredWithoutUsuariosNestedInput = {
@@ -9359,67 +9359,67 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type UserContadorCreateWithoutUserInput = {
+  export type UsuarioContadorCreateWithoutUsuarioInput = {
     id?: string
     contador: ContadorCreateNestedOneWithoutUsuariosInput
   }
 
-  export type UserContadorUncheckedCreateWithoutUserInput = {
+  export type UsuarioContadorUncheckedCreateWithoutUsuarioInput = {
     id?: string
     contadorId: string
   }
 
-  export type UserContadorCreateOrConnectWithoutUserInput = {
-    where: UserContadorWhereUniqueInput
-    create: XOR<UserContadorCreateWithoutUserInput, UserContadorUncheckedCreateWithoutUserInput>
+  export type UsuarioContadorCreateOrConnectWithoutUsuarioInput = {
+    where: UsuarioContadorWhereUniqueInput
+    create: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput>
   }
 
-  export type UserContadorCreateManyUserInputEnvelope = {
-    data: UserContadorCreateManyUserInput | UserContadorCreateManyUserInput[]
+  export type UsuarioContadorCreateManyUsuarioInputEnvelope = {
+    data: UsuarioContadorCreateManyUsuarioInput | UsuarioContadorCreateManyUsuarioInput[]
   }
 
-  export type UserContadorUpsertWithWhereUniqueWithoutUserInput = {
-    where: UserContadorWhereUniqueInput
-    update: XOR<UserContadorUpdateWithoutUserInput, UserContadorUncheckedUpdateWithoutUserInput>
-    create: XOR<UserContadorCreateWithoutUserInput, UserContadorUncheckedCreateWithoutUserInput>
+  export type UsuarioContadorUpsertWithWhereUniqueWithoutUsuarioInput = {
+    where: UsuarioContadorWhereUniqueInput
+    update: XOR<UsuarioContadorUpdateWithoutUsuarioInput, UsuarioContadorUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput>
   }
 
-  export type UserContadorUpdateWithWhereUniqueWithoutUserInput = {
-    where: UserContadorWhereUniqueInput
-    data: XOR<UserContadorUpdateWithoutUserInput, UserContadorUncheckedUpdateWithoutUserInput>
+  export type UsuarioContadorUpdateWithWhereUniqueWithoutUsuarioInput = {
+    where: UsuarioContadorWhereUniqueInput
+    data: XOR<UsuarioContadorUpdateWithoutUsuarioInput, UsuarioContadorUncheckedUpdateWithoutUsuarioInput>
   }
 
-  export type UserContadorUpdateManyWithWhereWithoutUserInput = {
-    where: UserContadorScalarWhereInput
-    data: XOR<UserContadorUpdateManyMutationInput, UserContadorUncheckedUpdateManyWithoutUserInput>
+  export type UsuarioContadorUpdateManyWithWhereWithoutUsuarioInput = {
+    where: UsuarioContadorScalarWhereInput
+    data: XOR<UsuarioContadorUpdateManyMutationInput, UsuarioContadorUncheckedUpdateManyWithoutUsuarioInput>
   }
 
-  export type UserContadorScalarWhereInput = {
-    AND?: UserContadorScalarWhereInput | UserContadorScalarWhereInput[]
-    OR?: UserContadorScalarWhereInput[]
-    NOT?: UserContadorScalarWhereInput | UserContadorScalarWhereInput[]
-    id?: StringFilter<"UserContador"> | string
-    userId?: StringFilter<"UserContador"> | string
-    contadorId?: StringFilter<"UserContador"> | string
+  export type UsuarioContadorScalarWhereInput = {
+    AND?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
+    OR?: UsuarioContadorScalarWhereInput[]
+    NOT?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
+    id?: StringFilter<"UsuarioContador"> | string
+    UsuarioId?: StringFilter<"UsuarioContador"> | string
+    contadorId?: StringFilter<"UsuarioContador"> | string
   }
 
-  export type UserContadorCreateWithoutContadorInput = {
+  export type UsuarioContadorCreateWithoutContadorInput = {
     id?: string
-    user: UserCreateNestedOneWithoutContadoresInput
+    Usuario: UsuarioCreateNestedOneWithoutContadoresInput
   }
 
-  export type UserContadorUncheckedCreateWithoutContadorInput = {
+  export type UsuarioContadorUncheckedCreateWithoutContadorInput = {
     id?: string
-    userId: string
+    UsuarioId: string
   }
 
-  export type UserContadorCreateOrConnectWithoutContadorInput = {
-    where: UserContadorWhereUniqueInput
-    create: XOR<UserContadorCreateWithoutContadorInput, UserContadorUncheckedCreateWithoutContadorInput>
+  export type UsuarioContadorCreateOrConnectWithoutContadorInput = {
+    where: UsuarioContadorWhereUniqueInput
+    create: XOR<UsuarioContadorCreateWithoutContadorInput, UsuarioContadorUncheckedCreateWithoutContadorInput>
   }
 
-  export type UserContadorCreateManyContadorInputEnvelope = {
-    data: UserContadorCreateManyContadorInput | UserContadorCreateManyContadorInput[]
+  export type UsuarioContadorCreateManyContadorInputEnvelope = {
+    data: UsuarioContadorCreateManyContadorInput | UsuarioContadorCreateManyContadorInput[]
   }
 
   export type EmitenteCreateWithoutContadorInput = {
@@ -9519,20 +9519,20 @@ export namespace Prisma {
     data: CertificadoCreateManyContadorInput | CertificadoCreateManyContadorInput[]
   }
 
-  export type UserContadorUpsertWithWhereUniqueWithoutContadorInput = {
-    where: UserContadorWhereUniqueInput
-    update: XOR<UserContadorUpdateWithoutContadorInput, UserContadorUncheckedUpdateWithoutContadorInput>
-    create: XOR<UserContadorCreateWithoutContadorInput, UserContadorUncheckedCreateWithoutContadorInput>
+  export type UsuarioContadorUpsertWithWhereUniqueWithoutContadorInput = {
+    where: UsuarioContadorWhereUniqueInput
+    update: XOR<UsuarioContadorUpdateWithoutContadorInput, UsuarioContadorUncheckedUpdateWithoutContadorInput>
+    create: XOR<UsuarioContadorCreateWithoutContadorInput, UsuarioContadorUncheckedCreateWithoutContadorInput>
   }
 
-  export type UserContadorUpdateWithWhereUniqueWithoutContadorInput = {
-    where: UserContadorWhereUniqueInput
-    data: XOR<UserContadorUpdateWithoutContadorInput, UserContadorUncheckedUpdateWithoutContadorInput>
+  export type UsuarioContadorUpdateWithWhereUniqueWithoutContadorInput = {
+    where: UsuarioContadorWhereUniqueInput
+    data: XOR<UsuarioContadorUpdateWithoutContadorInput, UsuarioContadorUncheckedUpdateWithoutContadorInput>
   }
 
-  export type UserContadorUpdateManyWithWhereWithoutContadorInput = {
-    where: UserContadorScalarWhereInput
-    data: XOR<UserContadorUpdateManyMutationInput, UserContadorUncheckedUpdateManyWithoutContadorInput>
+  export type UsuarioContadorUpdateManyWithWhereWithoutContadorInput = {
+    where: UsuarioContadorScalarWhereInput
+    data: XOR<UsuarioContadorUpdateManyMutationInput, UsuarioContadorUncheckedUpdateManyWithoutContadorInput>
   }
 
   export type EmitenteUpsertWithWhereUniqueWithoutContadorInput = {
@@ -9636,7 +9636,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Certificado"> | Date | string
   }
 
-  export type UserCreateWithoutContadoresInput = {
+  export type UsuarioCreateWithoutContadoresInput = {
     id?: string
     email: string
     password: string
@@ -9645,7 +9645,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UserUncheckedCreateWithoutContadoresInput = {
+  export type UsuarioUncheckedCreateWithoutContadoresInput = {
     id?: string
     email: string
     password: string
@@ -9654,9 +9654,9 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type UserCreateOrConnectWithoutContadoresInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutContadoresInput, UserUncheckedCreateWithoutContadoresInput>
+  export type UsuarioCreateOrConnectWithoutContadoresInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutContadoresInput, UsuarioUncheckedCreateWithoutContadoresInput>
   }
 
   export type ContadorCreateWithoutUsuariosInput = {
@@ -9692,18 +9692,18 @@ export namespace Prisma {
     create: XOR<ContadorCreateWithoutUsuariosInput, ContadorUncheckedCreateWithoutUsuariosInput>
   }
 
-  export type UserUpsertWithoutContadoresInput = {
-    update: XOR<UserUpdateWithoutContadoresInput, UserUncheckedUpdateWithoutContadoresInput>
-    create: XOR<UserCreateWithoutContadoresInput, UserUncheckedCreateWithoutContadoresInput>
-    where?: UserWhereInput
+  export type UsuarioUpsertWithoutContadoresInput = {
+    update: XOR<UsuarioUpdateWithoutContadoresInput, UsuarioUncheckedUpdateWithoutContadoresInput>
+    create: XOR<UsuarioCreateWithoutContadoresInput, UsuarioUncheckedCreateWithoutContadoresInput>
+    where?: UsuarioWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutContadoresInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutContadoresInput, UserUncheckedUpdateWithoutContadoresInput>
+  export type UsuarioUpdateToOneWithWhereWithoutContadoresInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutContadoresInput, UsuarioUncheckedUpdateWithoutContadoresInput>
   }
 
-  export type UserUpdateWithoutContadoresInput = {
+  export type UsuarioUpdateWithoutContadoresInput = {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -9711,7 +9711,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserUncheckedUpdateWithoutContadoresInput = {
+  export type UsuarioUncheckedUpdateWithoutContadoresInput = {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -9806,7 +9806,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    usuarios?: UserContadorCreateNestedManyWithoutContadorInput
+    usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
     endereco?: EnderecoCreateNestedOneWithoutContadorInput
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
@@ -9820,7 +9820,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
+    usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
     endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
@@ -9885,7 +9885,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
+    usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
@@ -9898,7 +9898,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
+    usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
@@ -9912,7 +9912,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    usuarios?: UserContadorCreateNestedManyWithoutContadorInput
+    usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
     endereco?: EnderecoCreateNestedOneWithoutContadorInput
   }
@@ -9926,7 +9926,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
+    usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
     endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
   }
@@ -9955,7 +9955,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
+    usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUpdateOneWithoutContadorNestedInput
   }
@@ -9968,7 +9968,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
+    usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
   }
@@ -9982,7 +9982,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    usuarios?: UserContadorCreateNestedManyWithoutContadorInput
+    usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
@@ -9996,7 +9996,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
+    usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
@@ -10056,7 +10056,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
+    usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
@@ -10069,7 +10069,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
+    usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
@@ -10109,26 +10109,26 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserContadorCreateManyUserInput = {
+  export type UsuarioContadorCreateManyUsuarioInput = {
     id?: string
     contadorId: string
   }
 
-  export type UserContadorUpdateWithoutUserInput = {
+  export type UsuarioContadorUpdateWithoutUsuarioInput = {
     contador?: ContadorUpdateOneRequiredWithoutUsuariosNestedInput
   }
 
-  export type UserContadorUncheckedUpdateWithoutUserInput = {
+  export type UsuarioContadorUncheckedUpdateWithoutUsuarioInput = {
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserContadorUncheckedUpdateManyWithoutUserInput = {
+  export type UsuarioContadorUncheckedUpdateManyWithoutUsuarioInput = {
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserContadorCreateManyContadorInput = {
+  export type UsuarioContadorCreateManyContadorInput = {
     id?: string
-    userId: string
+    UsuarioId: string
   }
 
   export type EmitenteCreateManyContadorInput = {
@@ -10151,16 +10151,16 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type UserContadorUpdateWithoutContadorInput = {
-    user?: UserUpdateOneRequiredWithoutContadoresNestedInput
+  export type UsuarioContadorUpdateWithoutContadorInput = {
+    Usuario?: UsuarioUpdateOneRequiredWithoutContadoresNestedInput
   }
 
-  export type UserContadorUncheckedUpdateWithoutContadorInput = {
-    userId?: StringFieldUpdateOperationsInput | string
+  export type UsuarioContadorUncheckedUpdateWithoutContadorInput = {
+    UsuarioId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UserContadorUncheckedUpdateManyWithoutContadorInput = {
-    userId?: StringFieldUpdateOperationsInput | string
+  export type UsuarioContadorUncheckedUpdateManyWithoutContadorInput = {
+    UsuarioId?: StringFieldUpdateOperationsInput | string
   }
 
   export type EmitenteUpdateWithoutContadorInput = {
@@ -10286,9 +10286,9 @@ export namespace Prisma {
    * Aliases for legacy arg types
    */
     /**
-     * @deprecated Use UserCountOutputTypeDefaultArgs instead
+     * @deprecated Use UsuarioCountOutputTypeDefaultArgs instead
      */
-    export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
+    export type UsuarioCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UsuarioCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use ContadorCountOutputTypeDefaultArgs instead
      */
@@ -10298,17 +10298,17 @@ export namespace Prisma {
      */
     export type EmitenteCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EmitenteCountOutputTypeDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use UserDefaultArgs instead
+     * @deprecated Use UsuarioDefaultArgs instead
      */
-    export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
+    export type UsuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UsuarioDefaultArgs<ExtArgs>
     /**
      * @deprecated Use ContadorDefaultArgs instead
      */
     export type ContadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ContadorDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use UserContadorDefaultArgs instead
+     * @deprecated Use UsuarioContadorDefaultArgs instead
      */
-    export type UserContadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserContadorDefaultArgs<ExtArgs>
+    export type UsuarioContadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UsuarioContadorDefaultArgs<ExtArgs>
     /**
      * @deprecated Use EmitenteDefaultArgs instead
      */

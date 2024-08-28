@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { AuthenticationError } from "apollo-server";
-import type { TypeUser } from "../controller/UserController";
+import type { TypeUsuario } from "../controller/UsuarioController";
 import { sign, verify } from "jsonwebtoken";
  
 export const getUserAuth = (req: Request) => {
@@ -15,7 +15,7 @@ export const isAdminAuth = (user: any) => {
     }
 };
 
-export const generateToken = async (user: TypeUser): Promise<string> => await sign({ userId: user.id, role: user.role }, process.env.JWT_SECRET!, { expiresIn: '1d' });
+export const generateToken = async (user: TypeUsuario): Promise<string> => await sign({ userId: user.id, role: user.role }, process.env.JWT_SECRET!, { expiresIn: '1d' });
 export const verifyToken = (token: string, JWT_SECRET: string) => {
     const { userId, role } = verify(token, JWT_SECRET) as { userId: string; role: string };
     return { userId, role }

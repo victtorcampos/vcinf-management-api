@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server';
 
-export const UserTypeDefs = gql`
+export const ContadorTypeDefs = gql`
 
 scalar Date
 

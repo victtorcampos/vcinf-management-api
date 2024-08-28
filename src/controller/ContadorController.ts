@@ -1,29 +1,47 @@
-import { type Contador as TypeContador, Prisma, PrismaClient, type $Enums } from "../config/prisma-client";
+import { type Contador as TypeContador, type Endereco as TypeEndereco, type $Enums, PrismaClient, type Certificado as TypeCertificado, type Usuario as TypeUsuario, Prisma, } from "../config/prisma-client";
 import { getUserAuth, isAdminAuth } from "../services/authService";
 import { handleError, handleSuccess, type ApiResponse, } from "../utils/responseHandler";
 
 const prisma = new PrismaClient().contador;
- 
-interface CreateContadorData { nome: string; cpf: string; regcrc: string; telefone: string; email: string; }
-interface Contador { id: string; nome: string; cpf: string; usuarios: User[]; }
-interface User { id: string; email: string; role: $Enums.Role; }
 
-export const createContador = async (data: TypeContador, context: any): Promise<ApiResponse<Contador>> => {
+export interface TypeContadorInput extends TypeContador {
+  certificados: TypeCertificado[];
+  endereco: TypeEndereco;
+}
+
+export interface TypeContadorResponse extends TypeContador {
+  certificados: TypeCertificado[];
+}
+
+export const createContador = async (data: TypeContadorInput, context: any): Promise<ApiResponse<TypeContadorResponse>> => {
   try {
-    const user = getUserAuth(context.req);
-    isAdminAuth(user);
+    const usuario = getUserAuth(context.req);
+    isAdminAuth(usuario);
 
-    const { nome, cpf, regcrc, telefone, email } = data;
-    const neWcontador = await prisma.create({ data: { nome, cpf, regcrc, telefone, email, usuarios: { create: { userId: user.userId } }, }, include: { usuarios: { include: { user: { select: { id: true, email: true, role: true } } }, }, }, });
+    const contador = await prisma.create({
+      data: {
+        ...data, usuarios: { create: { UsuarioId: usuario.userId } },
+        endereco: { create: { ...data.endereco } },
+        certificados: { create: [{ ...data.certificados[0], validade: new Date("2025-12-31T23:59:59Z") }] }
+      },
+      include: { endereco: true, certificados: true, usuarios: true }
+    });
 
-    const usuarios = neWcontador.usuarios.map((usuario) => usuario.user);
+    console.log({
+      ...contador,
+      certificados: contador.certificados,
+      endereco: contador.endereco,
+      usuarios: contador.usuarios
+    });
+
 
     return handleSuccess({
-      id: neWcontador.id,
-      nome: neWcontador.nome,
-      cpf: neWcontador.cpf,
-      usuarios,
+      ...contador,
+      certificados: contador.certificados,
+      endereco: contador.endereco,
+      usuarios: contador.usuarios
     });
+
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
@@ -31,65 +49,5 @@ export const createContador = async (data: TypeContador, context: any): Promise<
       }
     }
     return handleError("Erro desconhecido.");
-  }
-};
-
-export const updateContador = async (
-  id: string,
-  data: { nome: string; cpf: string },
-  context: any
-): Promise<ApiResponse<Contador>> => {
-  try {
-    const user = getUserAuth(context.req);
-    isAdminAuth(user);
-
-    const upContador = await prisma.update({
-      where: { id },
-      data,
-      include: {
-        usuarios: {
-          include: { user: { select: { id: true, email: true, role: true } } },
-        },
-      },
-    });
-
-    const usuarios = upContador.usuarios.map((usuario) => usuario.user);
-
-    return handleSuccess({
-      id: upContador.id,
-      nome: upContador.nome,
-      cpf: upContador.cpf,
-      usuarios,
-    });
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      return handleError(`Erro ao atualizar contador.`, error.code);
-    }
-    return handleError("Erro não definido.");
-  }
-};
-
-export const deleteContador = async (
-  id: string,
-  context: any
-): Promise<ApiResponse<{ message: string }>> => {
-  try {
-    const user = getUserAuth(context.req);
-    isAdminAuth(user);
-    const deleteContador = await prisma.delete({ where: { id } });
-
-    if (!deleteContador) {
-      return handleError("Não foi possível excluir o contador.");
-    }
-
-    return handleSuccess({ message: "Contador excluído com sucesso." });
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      return handleError(
-        "Contador não excluído. Contador informado não existe no cadastro.",
-        error.code
-      );
-    }
-    return handleError("Erro não catalogado.");
   }
 };
