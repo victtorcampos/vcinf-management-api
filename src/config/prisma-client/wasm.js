@@ -151,6 +151,15 @@ exports.Prisma.EmitenteScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CertificadoScalarFieldEnum = {
+  id: 'id',
+  requerente: 'requerente',
+  validade: 'validade',
+  fileBase64: 'fileBase64',
+  contadorId: 'contadorId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.EnderecoScalarFieldEnum = {
   id: 'id',
   tipo: 'tipo',
@@ -189,6 +198,7 @@ exports.Prisma.ModelName = {
   Contador: 'Contador',
   UserContador: 'UserContador',
   Emitente: 'Emitente',
+  Certificado: 'Certificado',
   Endereco: 'Endereco'
 };
 

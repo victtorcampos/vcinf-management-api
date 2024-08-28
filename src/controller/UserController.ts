@@ -17,7 +17,7 @@ export const findUserByEmail = async (email: string): Promise<ApiResponse<Prisma
 export const createUser = async (data: TypeUser, context: any): Promise<ApiResponse<PrismaUser>> => {
     try {
         const user = getUserAuth(context.req);
-        isAdminAuth(user);
+       // isAdminAuth(user);
         const hashedPassword = await hash(data.password, 10);
         const newUser = await prisma.create({ data: { email: data.email, password: hashedPassword, role: data.role }, });
         return handleSuccess(newUser);

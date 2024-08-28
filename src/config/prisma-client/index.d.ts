@@ -34,6 +34,11 @@ export type UserContador = $Result.DefaultSelection<Prisma.$UserContadorPayload>
  */
 export type Emitente = $Result.DefaultSelection<Prisma.$EmitentePayload>
 /**
+ * Model Certificado
+ * 
+ */
+export type Certificado = $Result.DefaultSelection<Prisma.$CertificadoPayload>
+/**
  * Model Endereco
  * 
  */
@@ -187,6 +192,16 @@ export class PrismaClient<
     * ```
     */
   get emitente(): Prisma.EmitenteDelegate<ExtArgs>;
+
+  /**
+   * `prisma.certificado`: Exposes CRUD operations for the **Certificado** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Certificados
+    * const certificados = await prisma.certificado.findMany()
+    * ```
+    */
+  get certificado(): Prisma.CertificadoDelegate<ExtArgs>;
 
   /**
    * `prisma.endereco`: Exposes CRUD operations for the **Endereco** model.
@@ -678,6 +693,7 @@ export namespace Prisma {
     Contador: 'Contador',
     UserContador: 'UserContador',
     Emitente: 'Emitente',
+    Certificado: 'Certificado',
     Endereco: 'Endereco'
   };
 
@@ -694,7 +710,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "contador" | "userContador" | "emitente" | "endereco"
+      modelProps: "user" | "contador" | "userContador" | "emitente" | "certificado" | "endereco"
       txIsolationLevel: never
     }
     model: {
@@ -994,6 +1010,80 @@ export namespace Prisma {
           }
         }
       }
+      Certificado: {
+        payload: Prisma.$CertificadoPayload<ExtArgs>
+        fields: Prisma.CertificadoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CertificadoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificadoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CertificadoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificadoPayload>
+          }
+          findFirst: {
+            args: Prisma.CertificadoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificadoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CertificadoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificadoPayload>
+          }
+          findMany: {
+            args: Prisma.CertificadoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificadoPayload>[]
+          }
+          create: {
+            args: Prisma.CertificadoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificadoPayload>
+          }
+          createMany: {
+            args: Prisma.CertificadoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.CertificadoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificadoPayload>
+          }
+          update: {
+            args: Prisma.CertificadoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificadoPayload>
+          }
+          deleteMany: {
+            args: Prisma.CertificadoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CertificadoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.CertificadoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CertificadoPayload>
+          }
+          aggregate: {
+            args: Prisma.CertificadoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCertificado>
+          }
+          groupBy: {
+            args: Prisma.CertificadoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CertificadoGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.CertificadoFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.CertificadoAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.CertificadoCountArgs<ExtArgs>
+            result: $Utils.Optional<CertificadoCountAggregateOutputType> | number
+          }
+        }
+      }
       Endereco: {
         payload: Prisma.$EnderecoPayload<ExtArgs>
         fields: Prisma.EnderecoFieldRefs
@@ -1249,11 +1339,13 @@ export namespace Prisma {
   export type ContadorCountOutputType = {
     usuarios: number
     Emitentes: number
+    certificados: number
   }
 
   export type ContadorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuarios?: boolean | ContadorCountOutputTypeCountUsuariosArgs
     Emitentes?: boolean | ContadorCountOutputTypeCountEmitentesArgs
+    certificados?: boolean | ContadorCountOutputTypeCountCertificadosArgs
   }
 
   // Custom InputTypes
@@ -1279,6 +1371,13 @@ export namespace Prisma {
    */
   export type ContadorCountOutputTypeCountEmitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmitenteWhereInput
+  }
+
+  /**
+   * ContadorCountOutputType without action
+   */
+  export type ContadorCountOutputTypeCountCertificadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CertificadoWhereInput
   }
 
 
@@ -2470,6 +2569,7 @@ export namespace Prisma {
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
     Emitentes?: boolean | Contador$EmitentesArgs<ExtArgs>
     endereco?: boolean | Contador$enderecoArgs<ExtArgs>
+    certificados?: boolean | Contador$certificadosArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contador"]>
 
@@ -2489,6 +2589,7 @@ export namespace Prisma {
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
     Emitentes?: boolean | Contador$EmitentesArgs<ExtArgs>
     endereco?: boolean | Contador$enderecoArgs<ExtArgs>
+    certificados?: boolean | Contador$certificadosArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2498,6 +2599,7 @@ export namespace Prisma {
       usuarios: Prisma.$UserContadorPayload<ExtArgs>[]
       Emitentes: Prisma.$EmitentePayload<ExtArgs>[]
       endereco: Prisma.$EnderecoPayload<ExtArgs> | null
+      certificados: Prisma.$CertificadoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2874,6 +2976,7 @@ export namespace Prisma {
     usuarios<T extends Contador$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserContadorPayload<ExtArgs>, T, "findMany"> | Null>
     Emitentes<T extends Contador$EmitentesArgs<ExtArgs> = {}>(args?: Subset<T, Contador$EmitentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findMany"> | Null>
     endereco<T extends Contador$enderecoArgs<ExtArgs> = {}>(args?: Subset<T, Contador$enderecoArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    certificados<T extends Contador$certificadosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$certificadosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3289,6 +3392,26 @@ export namespace Prisma {
      */
     include?: EnderecoInclude<ExtArgs> | null
     where?: EnderecoWhereInput
+  }
+
+  /**
+   * Contador.certificados
+   */
+  export type Contador$certificadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    where?: CertificadoWhereInput
+    orderBy?: CertificadoOrderByWithRelationInput | CertificadoOrderByWithRelationInput[]
+    cursor?: CertificadoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CertificadoScalarFieldEnum | CertificadoScalarFieldEnum[]
   }
 
   /**
@@ -5243,6 +5366,961 @@ export namespace Prisma {
 
 
   /**
+   * Model Certificado
+   */
+
+  export type AggregateCertificado = {
+    _count: CertificadoCountAggregateOutputType | null
+    _min: CertificadoMinAggregateOutputType | null
+    _max: CertificadoMaxAggregateOutputType | null
+  }
+
+  export type CertificadoMinAggregateOutputType = {
+    id: string | null
+    requerente: string | null
+    validade: Date | null
+    fileBase64: string | null
+    contadorId: string | null
+    createdAt: Date | null
+  }
+
+  export type CertificadoMaxAggregateOutputType = {
+    id: string | null
+    requerente: string | null
+    validade: Date | null
+    fileBase64: string | null
+    contadorId: string | null
+    createdAt: Date | null
+  }
+
+  export type CertificadoCountAggregateOutputType = {
+    id: number
+    requerente: number
+    validade: number
+    fileBase64: number
+    contadorId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type CertificadoMinAggregateInputType = {
+    id?: true
+    requerente?: true
+    validade?: true
+    fileBase64?: true
+    contadorId?: true
+    createdAt?: true
+  }
+
+  export type CertificadoMaxAggregateInputType = {
+    id?: true
+    requerente?: true
+    validade?: true
+    fileBase64?: true
+    contadorId?: true
+    createdAt?: true
+  }
+
+  export type CertificadoCountAggregateInputType = {
+    id?: true
+    requerente?: true
+    validade?: true
+    fileBase64?: true
+    contadorId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type CertificadoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Certificado to aggregate.
+     */
+    where?: CertificadoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificados to fetch.
+     */
+    orderBy?: CertificadoOrderByWithRelationInput | CertificadoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CertificadoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificados from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificados.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Certificados
+    **/
+    _count?: true | CertificadoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CertificadoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CertificadoMaxAggregateInputType
+  }
+
+  export type GetCertificadoAggregateType<T extends CertificadoAggregateArgs> = {
+        [P in keyof T & keyof AggregateCertificado]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCertificado[P]>
+      : GetScalarType<T[P], AggregateCertificado[P]>
+  }
+
+
+
+
+  export type CertificadoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CertificadoWhereInput
+    orderBy?: CertificadoOrderByWithAggregationInput | CertificadoOrderByWithAggregationInput[]
+    by: CertificadoScalarFieldEnum[] | CertificadoScalarFieldEnum
+    having?: CertificadoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CertificadoCountAggregateInputType | true
+    _min?: CertificadoMinAggregateInputType
+    _max?: CertificadoMaxAggregateInputType
+  }
+
+  export type CertificadoGroupByOutputType = {
+    id: string
+    requerente: string | null
+    validade: Date | null
+    fileBase64: string | null
+    contadorId: string | null
+    createdAt: Date
+    _count: CertificadoCountAggregateOutputType | null
+    _min: CertificadoMinAggregateOutputType | null
+    _max: CertificadoMaxAggregateOutputType | null
+  }
+
+  type GetCertificadoGroupByPayload<T extends CertificadoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CertificadoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CertificadoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CertificadoGroupByOutputType[P]>
+            : GetScalarType<T[P], CertificadoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CertificadoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    requerente?: boolean
+    validade?: boolean
+    fileBase64?: boolean
+    contadorId?: boolean
+    createdAt?: boolean
+    contador?: boolean | Certificado$contadorArgs<ExtArgs>
+  }, ExtArgs["result"]["certificado"]>
+
+
+  export type CertificadoSelectScalar = {
+    id?: boolean
+    requerente?: boolean
+    validade?: boolean
+    fileBase64?: boolean
+    contadorId?: boolean
+    createdAt?: boolean
+  }
+
+  export type CertificadoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    contador?: boolean | Certificado$contadorArgs<ExtArgs>
+  }
+
+  export type $CertificadoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Certificado"
+    objects: {
+      contador: Prisma.$ContadorPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      requerente: string | null
+      validade: Date | null
+      fileBase64: string | null
+      contadorId: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["certificado"]>
+    composites: {}
+  }
+
+  type CertificadoGetPayload<S extends boolean | null | undefined | CertificadoDefaultArgs> = $Result.GetResult<Prisma.$CertificadoPayload, S>
+
+  type CertificadoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CertificadoFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: CertificadoCountAggregateInputType | true
+    }
+
+  export interface CertificadoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Certificado'], meta: { name: 'Certificado' } }
+    /**
+     * Find zero or one Certificado that matches the filter.
+     * @param {CertificadoFindUniqueArgs} args - Arguments to find a Certificado
+     * @example
+     * // Get one Certificado
+     * const certificado = await prisma.certificado.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CertificadoFindUniqueArgs>(args: SelectSubset<T, CertificadoFindUniqueArgs<ExtArgs>>): Prisma__CertificadoClient<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Certificado that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {CertificadoFindUniqueOrThrowArgs} args - Arguments to find a Certificado
+     * @example
+     * // Get one Certificado
+     * const certificado = await prisma.certificado.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CertificadoFindUniqueOrThrowArgs>(args: SelectSubset<T, CertificadoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CertificadoClient<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Certificado that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificadoFindFirstArgs} args - Arguments to find a Certificado
+     * @example
+     * // Get one Certificado
+     * const certificado = await prisma.certificado.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CertificadoFindFirstArgs>(args?: SelectSubset<T, CertificadoFindFirstArgs<ExtArgs>>): Prisma__CertificadoClient<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Certificado that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificadoFindFirstOrThrowArgs} args - Arguments to find a Certificado
+     * @example
+     * // Get one Certificado
+     * const certificado = await prisma.certificado.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CertificadoFindFirstOrThrowArgs>(args?: SelectSubset<T, CertificadoFindFirstOrThrowArgs<ExtArgs>>): Prisma__CertificadoClient<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Certificados that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificadoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Certificados
+     * const certificados = await prisma.certificado.findMany()
+     * 
+     * // Get first 10 Certificados
+     * const certificados = await prisma.certificado.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const certificadoWithIdOnly = await prisma.certificado.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CertificadoFindManyArgs>(args?: SelectSubset<T, CertificadoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Certificado.
+     * @param {CertificadoCreateArgs} args - Arguments to create a Certificado.
+     * @example
+     * // Create one Certificado
+     * const Certificado = await prisma.certificado.create({
+     *   data: {
+     *     // ... data to create a Certificado
+     *   }
+     * })
+     * 
+     */
+    create<T extends CertificadoCreateArgs>(args: SelectSubset<T, CertificadoCreateArgs<ExtArgs>>): Prisma__CertificadoClient<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Certificados.
+     * @param {CertificadoCreateManyArgs} args - Arguments to create many Certificados.
+     * @example
+     * // Create many Certificados
+     * const certificado = await prisma.certificado.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CertificadoCreateManyArgs>(args?: SelectSubset<T, CertificadoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Certificado.
+     * @param {CertificadoDeleteArgs} args - Arguments to delete one Certificado.
+     * @example
+     * // Delete one Certificado
+     * const Certificado = await prisma.certificado.delete({
+     *   where: {
+     *     // ... filter to delete one Certificado
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CertificadoDeleteArgs>(args: SelectSubset<T, CertificadoDeleteArgs<ExtArgs>>): Prisma__CertificadoClient<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Certificado.
+     * @param {CertificadoUpdateArgs} args - Arguments to update one Certificado.
+     * @example
+     * // Update one Certificado
+     * const certificado = await prisma.certificado.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CertificadoUpdateArgs>(args: SelectSubset<T, CertificadoUpdateArgs<ExtArgs>>): Prisma__CertificadoClient<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Certificados.
+     * @param {CertificadoDeleteManyArgs} args - Arguments to filter Certificados to delete.
+     * @example
+     * // Delete a few Certificados
+     * const { count } = await prisma.certificado.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CertificadoDeleteManyArgs>(args?: SelectSubset<T, CertificadoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Certificados.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificadoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Certificados
+     * const certificado = await prisma.certificado.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CertificadoUpdateManyArgs>(args: SelectSubset<T, CertificadoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Certificado.
+     * @param {CertificadoUpsertArgs} args - Arguments to update or create a Certificado.
+     * @example
+     * // Update or create a Certificado
+     * const certificado = await prisma.certificado.upsert({
+     *   create: {
+     *     // ... data to create a Certificado
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Certificado we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CertificadoUpsertArgs>(args: SelectSubset<T, CertificadoUpsertArgs<ExtArgs>>): Prisma__CertificadoClient<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+    /**
+     * Find zero or more Certificados that matches the filter.
+     * @param {CertificadoFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const certificado = await prisma.certificado.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+     */
+    findRaw(args?: CertificadoFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a Certificado.
+     * @param {CertificadoAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const certificado = await prisma.certificado.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: CertificadoAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of Certificados.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificadoCountArgs} args - Arguments to filter Certificados to count.
+     * @example
+     * // Count the number of Certificados
+     * const count = await prisma.certificado.count({
+     *   where: {
+     *     // ... the filter for the Certificados we want to count
+     *   }
+     * })
+    **/
+    count<T extends CertificadoCountArgs>(
+      args?: Subset<T, CertificadoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CertificadoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Certificado.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificadoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CertificadoAggregateArgs>(args: Subset<T, CertificadoAggregateArgs>): Prisma.PrismaPromise<GetCertificadoAggregateType<T>>
+
+    /**
+     * Group by Certificado.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CertificadoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CertificadoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CertificadoGroupByArgs['orderBy'] }
+        : { orderBy?: CertificadoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CertificadoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCertificadoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Certificado model
+   */
+  readonly fields: CertificadoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Certificado.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CertificadoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    contador<T extends Certificado$contadorArgs<ExtArgs> = {}>(args?: Subset<T, Certificado$contadorArgs<ExtArgs>>): Prisma__ContadorClient<$Result.GetResult<Prisma.$ContadorPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Certificado model
+   */ 
+  interface CertificadoFieldRefs {
+    readonly id: FieldRef<"Certificado", 'String'>
+    readonly requerente: FieldRef<"Certificado", 'String'>
+    readonly validade: FieldRef<"Certificado", 'DateTime'>
+    readonly fileBase64: FieldRef<"Certificado", 'String'>
+    readonly contadorId: FieldRef<"Certificado", 'String'>
+    readonly createdAt: FieldRef<"Certificado", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Certificado findUnique
+   */
+  export type CertificadoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificado to fetch.
+     */
+    where: CertificadoWhereUniqueInput
+  }
+
+  /**
+   * Certificado findUniqueOrThrow
+   */
+  export type CertificadoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificado to fetch.
+     */
+    where: CertificadoWhereUniqueInput
+  }
+
+  /**
+   * Certificado findFirst
+   */
+  export type CertificadoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificado to fetch.
+     */
+    where?: CertificadoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificados to fetch.
+     */
+    orderBy?: CertificadoOrderByWithRelationInput | CertificadoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Certificados.
+     */
+    cursor?: CertificadoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificados from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificados.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Certificados.
+     */
+    distinct?: CertificadoScalarFieldEnum | CertificadoScalarFieldEnum[]
+  }
+
+  /**
+   * Certificado findFirstOrThrow
+   */
+  export type CertificadoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificado to fetch.
+     */
+    where?: CertificadoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificados to fetch.
+     */
+    orderBy?: CertificadoOrderByWithRelationInput | CertificadoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Certificados.
+     */
+    cursor?: CertificadoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificados from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificados.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Certificados.
+     */
+    distinct?: CertificadoScalarFieldEnum | CertificadoScalarFieldEnum[]
+  }
+
+  /**
+   * Certificado findMany
+   */
+  export type CertificadoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    /**
+     * Filter, which Certificados to fetch.
+     */
+    where?: CertificadoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Certificados to fetch.
+     */
+    orderBy?: CertificadoOrderByWithRelationInput | CertificadoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Certificados.
+     */
+    cursor?: CertificadoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Certificados from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Certificados.
+     */
+    skip?: number
+    distinct?: CertificadoScalarFieldEnum | CertificadoScalarFieldEnum[]
+  }
+
+  /**
+   * Certificado create
+   */
+  export type CertificadoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Certificado.
+     */
+    data?: XOR<CertificadoCreateInput, CertificadoUncheckedCreateInput>
+  }
+
+  /**
+   * Certificado createMany
+   */
+  export type CertificadoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Certificados.
+     */
+    data: CertificadoCreateManyInput | CertificadoCreateManyInput[]
+  }
+
+  /**
+   * Certificado update
+   */
+  export type CertificadoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Certificado.
+     */
+    data: XOR<CertificadoUpdateInput, CertificadoUncheckedUpdateInput>
+    /**
+     * Choose, which Certificado to update.
+     */
+    where: CertificadoWhereUniqueInput
+  }
+
+  /**
+   * Certificado updateMany
+   */
+  export type CertificadoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Certificados.
+     */
+    data: XOR<CertificadoUpdateManyMutationInput, CertificadoUncheckedUpdateManyInput>
+    /**
+     * Filter which Certificados to update
+     */
+    where?: CertificadoWhereInput
+  }
+
+  /**
+   * Certificado upsert
+   */
+  export type CertificadoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Certificado to update in case it exists.
+     */
+    where: CertificadoWhereUniqueInput
+    /**
+     * In case the Certificado found by the `where` argument doesn't exist, create a new Certificado with this data.
+     */
+    create: XOR<CertificadoCreateInput, CertificadoUncheckedCreateInput>
+    /**
+     * In case the Certificado was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CertificadoUpdateInput, CertificadoUncheckedUpdateInput>
+  }
+
+  /**
+   * Certificado delete
+   */
+  export type CertificadoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+    /**
+     * Filter which Certificado to delete.
+     */
+    where: CertificadoWhereUniqueInput
+  }
+
+  /**
+   * Certificado deleteMany
+   */
+  export type CertificadoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Certificados to delete
+     */
+    where?: CertificadoWhereInput
+  }
+
+  /**
+   * Certificado findRaw
+   */
+  export type CertificadoFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * Certificado aggregateRaw
+   */
+  export type CertificadoAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * Certificado.contador
+   */
+  export type Certificado$contadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contador
+     */
+    select?: ContadorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorInclude<ExtArgs> | null
+    where?: ContadorWhereInput
+  }
+
+  /**
+   * Certificado without action
+   */
+  export type CertificadoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Certificado
+     */
+    select?: CertificadoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CertificadoInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Endereco
    */
 
@@ -6359,6 +7437,18 @@ export namespace Prisma {
   export type EmitenteScalarFieldEnum = (typeof EmitenteScalarFieldEnum)[keyof typeof EmitenteScalarFieldEnum]
 
 
+  export const CertificadoScalarFieldEnum: {
+    id: 'id',
+    requerente: 'requerente',
+    validade: 'validade',
+    fileBase64: 'fileBase64',
+    contadorId: 'contadorId',
+    createdAt: 'createdAt'
+  };
+
+  export type CertificadoScalarFieldEnum = (typeof CertificadoScalarFieldEnum)[keyof typeof CertificadoScalarFieldEnum]
+
+
   export const EnderecoScalarFieldEnum: {
     id: 'id',
     tipo: 'tipo',
@@ -6534,6 +7624,7 @@ export namespace Prisma {
     usuarios?: UserContadorListRelationFilter
     Emitentes?: EmitenteListRelationFilter
     endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
+    certificados?: CertificadoListRelationFilter
   }
 
   export type ContadorOrderByWithRelationInput = {
@@ -6548,6 +7639,7 @@ export namespace Prisma {
     usuarios?: UserContadorOrderByRelationAggregateInput
     Emitentes?: EmitenteOrderByRelationAggregateInput
     endereco?: EnderecoOrderByWithRelationInput
+    certificados?: CertificadoOrderByRelationAggregateInput
   }
 
   export type ContadorWhereUniqueInput = Prisma.AtLeast<{
@@ -6565,6 +7657,7 @@ export namespace Prisma {
     usuarios?: UserContadorListRelationFilter
     Emitentes?: EmitenteListRelationFilter
     endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
+    certificados?: CertificadoListRelationFilter
   }, "id" | "cpf" | "regcrc">
 
   export type ContadorOrderByWithAggregationInput = {
@@ -6727,6 +7820,66 @@ export namespace Prisma {
     contadorId?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
+  }
+
+  export type CertificadoWhereInput = {
+    AND?: CertificadoWhereInput | CertificadoWhereInput[]
+    OR?: CertificadoWhereInput[]
+    NOT?: CertificadoWhereInput | CertificadoWhereInput[]
+    id?: StringFilter<"Certificado"> | string
+    requerente?: StringNullableFilter<"Certificado"> | string | null
+    validade?: DateTimeNullableFilter<"Certificado"> | Date | string | null
+    fileBase64?: StringNullableFilter<"Certificado"> | string | null
+    contadorId?: StringNullableFilter<"Certificado"> | string | null
+    createdAt?: DateTimeFilter<"Certificado"> | Date | string
+    contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
+  }
+
+  export type CertificadoOrderByWithRelationInput = {
+    id?: SortOrder
+    requerente?: SortOrder
+    validade?: SortOrder
+    fileBase64?: SortOrder
+    contadorId?: SortOrder
+    createdAt?: SortOrder
+    contador?: ContadorOrderByWithRelationInput
+  }
+
+  export type CertificadoWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: CertificadoWhereInput | CertificadoWhereInput[]
+    OR?: CertificadoWhereInput[]
+    NOT?: CertificadoWhereInput | CertificadoWhereInput[]
+    requerente?: StringNullableFilter<"Certificado"> | string | null
+    validade?: DateTimeNullableFilter<"Certificado"> | Date | string | null
+    fileBase64?: StringNullableFilter<"Certificado"> | string | null
+    contadorId?: StringNullableFilter<"Certificado"> | string | null
+    createdAt?: DateTimeFilter<"Certificado"> | Date | string
+    contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
+  }, "id">
+
+  export type CertificadoOrderByWithAggregationInput = {
+    id?: SortOrder
+    requerente?: SortOrder
+    validade?: SortOrder
+    fileBase64?: SortOrder
+    contadorId?: SortOrder
+    createdAt?: SortOrder
+    _count?: CertificadoCountOrderByAggregateInput
+    _max?: CertificadoMaxOrderByAggregateInput
+    _min?: CertificadoMinOrderByAggregateInput
+  }
+
+  export type CertificadoScalarWhereWithAggregatesInput = {
+    AND?: CertificadoScalarWhereWithAggregatesInput | CertificadoScalarWhereWithAggregatesInput[]
+    OR?: CertificadoScalarWhereWithAggregatesInput[]
+    NOT?: CertificadoScalarWhereWithAggregatesInput | CertificadoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Certificado"> | string
+    requerente?: StringNullableWithAggregatesFilter<"Certificado"> | string | null
+    validade?: DateTimeNullableWithAggregatesFilter<"Certificado"> | Date | string | null
+    fileBase64?: StringNullableWithAggregatesFilter<"Certificado"> | string | null
+    contadorId?: StringNullableWithAggregatesFilter<"Certificado"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Certificado"> | Date | string
   }
 
   export type EnderecoWhereInput = {
@@ -6907,6 +8060,7 @@ export namespace Prisma {
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
     endereco?: EnderecoCreateNestedOneWithoutContadorInput
+    certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateInput = {
@@ -6921,6 +8075,7 @@ export namespace Prisma {
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
     endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
+    certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorUpdateInput = {
@@ -6934,6 +8089,7 @@ export namespace Prisma {
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUpdateOneWithoutContadorNestedInput
+    certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateInput = {
@@ -6947,6 +8103,7 @@ export namespace Prisma {
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
+    certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
 
   export type ContadorCreateManyInput = {
@@ -7105,6 +8262,64 @@ export namespace Prisma {
     contadorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificadoCreateInput = {
+    id?: string
+    requerente?: string | null
+    validade?: Date | string | null
+    fileBase64?: string | null
+    createdAt?: Date | string
+    contador?: ContadorCreateNestedOneWithoutCertificadosInput
+  }
+
+  export type CertificadoUncheckedCreateInput = {
+    id?: string
+    requerente?: string | null
+    validade?: Date | string | null
+    fileBase64?: string | null
+    contadorId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CertificadoUpdateInput = {
+    requerente?: NullableStringFieldUpdateOperationsInput | string | null
+    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contador?: ContadorUpdateOneWithoutCertificadosNestedInput
+  }
+
+  export type CertificadoUncheckedUpdateInput = {
+    requerente?: NullableStringFieldUpdateOperationsInput | string | null
+    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    contadorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificadoCreateManyInput = {
+    id?: string
+    requerente?: string | null
+    validade?: Date | string | null
+    fileBase64?: string | null
+    contadorId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CertificadoUpdateManyMutationInput = {
+    requerente?: NullableStringFieldUpdateOperationsInput | string | null
+    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificadoUncheckedUpdateManyInput = {
+    requerente?: NullableStringFieldUpdateOperationsInput | string | null
+    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    contadorId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnderecoCreateInput = {
@@ -7359,7 +8574,17 @@ export namespace Prisma {
     isNot?: EnderecoWhereInput | null
   }
 
+  export type CertificadoListRelationFilter = {
+    every?: CertificadoWhereInput
+    some?: CertificadoWhereInput
+    none?: CertificadoWhereInput
+  }
+
   export type EmitenteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CertificadoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7512,6 +8737,60 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    isSet?: boolean
+  }
+
+  export type CertificadoCountOrderByAggregateInput = {
+    id?: SortOrder
+    requerente?: SortOrder
+    validade?: SortOrder
+    fileBase64?: SortOrder
+    contadorId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CertificadoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    requerente?: SortOrder
+    validade?: SortOrder
+    fileBase64?: SortOrder
+    contadorId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type CertificadoMinOrderByAggregateInput = {
+    id?: SortOrder
+    requerente?: SortOrder
+    validade?: SortOrder
+    fileBase64?: SortOrder
+    contadorId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
   export type EmitenteNullableRelationFilter = {
     is?: EmitenteWhereInput | null
     isNot?: EmitenteWhereInput | null
@@ -7642,6 +8921,13 @@ export namespace Prisma {
     connect?: EnderecoWhereUniqueInput
   }
 
+  export type CertificadoCreateNestedManyWithoutContadorInput = {
+    create?: XOR<CertificadoCreateWithoutContadorInput, CertificadoUncheckedCreateWithoutContadorInput> | CertificadoCreateWithoutContadorInput[] | CertificadoUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: CertificadoCreateOrConnectWithoutContadorInput | CertificadoCreateOrConnectWithoutContadorInput[]
+    createMany?: CertificadoCreateManyContadorInputEnvelope
+    connect?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
+  }
+
   export type UserContadorUncheckedCreateNestedManyWithoutContadorInput = {
     create?: XOR<UserContadorCreateWithoutContadorInput, UserContadorUncheckedCreateWithoutContadorInput> | UserContadorCreateWithoutContadorInput[] | UserContadorUncheckedCreateWithoutContadorInput[]
     connectOrCreate?: UserContadorCreateOrConnectWithoutContadorInput | UserContadorCreateOrConnectWithoutContadorInput[]
@@ -7660,6 +8946,13 @@ export namespace Prisma {
     create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
     connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput
     connect?: EnderecoWhereUniqueInput
+  }
+
+  export type CertificadoUncheckedCreateNestedManyWithoutContadorInput = {
+    create?: XOR<CertificadoCreateWithoutContadorInput, CertificadoUncheckedCreateWithoutContadorInput> | CertificadoCreateWithoutContadorInput[] | CertificadoUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: CertificadoCreateOrConnectWithoutContadorInput | CertificadoCreateOrConnectWithoutContadorInput[]
+    createMany?: CertificadoCreateManyContadorInputEnvelope
+    connect?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -7705,6 +8998,20 @@ export namespace Prisma {
     update?: XOR<XOR<EnderecoUpdateToOneWithWhereWithoutContadorInput, EnderecoUpdateWithoutContadorInput>, EnderecoUncheckedUpdateWithoutContadorInput>
   }
 
+  export type CertificadoUpdateManyWithoutContadorNestedInput = {
+    create?: XOR<CertificadoCreateWithoutContadorInput, CertificadoUncheckedCreateWithoutContadorInput> | CertificadoCreateWithoutContadorInput[] | CertificadoUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: CertificadoCreateOrConnectWithoutContadorInput | CertificadoCreateOrConnectWithoutContadorInput[]
+    upsert?: CertificadoUpsertWithWhereUniqueWithoutContadorInput | CertificadoUpsertWithWhereUniqueWithoutContadorInput[]
+    createMany?: CertificadoCreateManyContadorInputEnvelope
+    set?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
+    disconnect?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
+    delete?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
+    connect?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
+    update?: CertificadoUpdateWithWhereUniqueWithoutContadorInput | CertificadoUpdateWithWhereUniqueWithoutContadorInput[]
+    updateMany?: CertificadoUpdateManyWithWhereWithoutContadorInput | CertificadoUpdateManyWithWhereWithoutContadorInput[]
+    deleteMany?: CertificadoScalarWhereInput | CertificadoScalarWhereInput[]
+  }
+
   export type UserContadorUncheckedUpdateManyWithoutContadorNestedInput = {
     create?: XOR<UserContadorCreateWithoutContadorInput, UserContadorUncheckedCreateWithoutContadorInput> | UserContadorCreateWithoutContadorInput[] | UserContadorUncheckedCreateWithoutContadorInput[]
     connectOrCreate?: UserContadorCreateOrConnectWithoutContadorInput | UserContadorCreateOrConnectWithoutContadorInput[]
@@ -7741,6 +9048,20 @@ export namespace Prisma {
     delete?: EnderecoWhereInput | boolean
     connect?: EnderecoWhereUniqueInput
     update?: XOR<XOR<EnderecoUpdateToOneWithWhereWithoutContadorInput, EnderecoUpdateWithoutContadorInput>, EnderecoUncheckedUpdateWithoutContadorInput>
+  }
+
+  export type CertificadoUncheckedUpdateManyWithoutContadorNestedInput = {
+    create?: XOR<CertificadoCreateWithoutContadorInput, CertificadoUncheckedCreateWithoutContadorInput> | CertificadoCreateWithoutContadorInput[] | CertificadoUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: CertificadoCreateOrConnectWithoutContadorInput | CertificadoCreateOrConnectWithoutContadorInput[]
+    upsert?: CertificadoUpsertWithWhereUniqueWithoutContadorInput | CertificadoUpsertWithWhereUniqueWithoutContadorInput[]
+    createMany?: CertificadoCreateManyContadorInputEnvelope
+    set?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
+    disconnect?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
+    delete?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
+    connect?: CertificadoWhereUniqueInput | CertificadoWhereUniqueInput[]
+    update?: CertificadoUpdateWithWhereUniqueWithoutContadorInput | CertificadoUpdateWithWhereUniqueWithoutContadorInput[]
+    updateMany?: CertificadoUpdateManyWithWhereWithoutContadorInput | CertificadoUpdateManyWithWhereWithoutContadorInput[]
+    deleteMany?: CertificadoScalarWhereInput | CertificadoScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutContadoresInput = {
@@ -7827,6 +9148,27 @@ export namespace Prisma {
     update?: EnderecoUpdateWithWhereUniqueWithoutEmitenteInput | EnderecoUpdateWithWhereUniqueWithoutEmitenteInput[]
     updateMany?: EnderecoUpdateManyWithWhereWithoutEmitenteInput | EnderecoUpdateManyWithWhereWithoutEmitenteInput[]
     deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+  }
+
+  export type ContadorCreateNestedOneWithoutCertificadosInput = {
+    create?: XOR<ContadorCreateWithoutCertificadosInput, ContadorUncheckedCreateWithoutCertificadosInput>
+    connectOrCreate?: ContadorCreateOrConnectWithoutCertificadosInput
+    connect?: ContadorWhereUniqueInput
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+    unset?: boolean
+  }
+
+  export type ContadorUpdateOneWithoutCertificadosNestedInput = {
+    create?: XOR<ContadorCreateWithoutCertificadosInput, ContadorUncheckedCreateWithoutCertificadosInput>
+    connectOrCreate?: ContadorCreateOrConnectWithoutCertificadosInput
+    upsert?: ContadorUpsertWithoutCertificadosInput
+    disconnect?: boolean
+    delete?: ContadorWhereInput | boolean
+    connect?: ContadorWhereUniqueInput
+    update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutCertificadosInput, ContadorUpdateWithoutCertificadosInput>, ContadorUncheckedUpdateWithoutCertificadosInput>
   }
 
   export type ContadorCreateNestedOneWithoutEnderecoInput = {
@@ -7990,6 +9332,33 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    isSet?: boolean
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
   export type UserContadorCreateWithoutUserInput = {
     id?: string
     contador: ContadorCreateNestedOneWithoutUsuariosInput
@@ -8125,6 +9494,31 @@ export namespace Prisma {
     create: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
   }
 
+  export type CertificadoCreateWithoutContadorInput = {
+    id?: string
+    requerente?: string | null
+    validade?: Date | string | null
+    fileBase64?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CertificadoUncheckedCreateWithoutContadorInput = {
+    id?: string
+    requerente?: string | null
+    validade?: Date | string | null
+    fileBase64?: string | null
+    createdAt?: Date | string
+  }
+
+  export type CertificadoCreateOrConnectWithoutContadorInput = {
+    where: CertificadoWhereUniqueInput
+    create: XOR<CertificadoCreateWithoutContadorInput, CertificadoUncheckedCreateWithoutContadorInput>
+  }
+
+  export type CertificadoCreateManyContadorInputEnvelope = {
+    data: CertificadoCreateManyContadorInput | CertificadoCreateManyContadorInput[]
+  }
+
   export type UserContadorUpsertWithWhereUniqueWithoutContadorInput = {
     where: UserContadorWhereUniqueInput
     update: XOR<UserContadorUpdateWithoutContadorInput, UserContadorUncheckedUpdateWithoutContadorInput>
@@ -8214,6 +9608,34 @@ export namespace Prisma {
     emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type CertificadoUpsertWithWhereUniqueWithoutContadorInput = {
+    where: CertificadoWhereUniqueInput
+    update: XOR<CertificadoUpdateWithoutContadorInput, CertificadoUncheckedUpdateWithoutContadorInput>
+    create: XOR<CertificadoCreateWithoutContadorInput, CertificadoUncheckedCreateWithoutContadorInput>
+  }
+
+  export type CertificadoUpdateWithWhereUniqueWithoutContadorInput = {
+    where: CertificadoWhereUniqueInput
+    data: XOR<CertificadoUpdateWithoutContadorInput, CertificadoUncheckedUpdateWithoutContadorInput>
+  }
+
+  export type CertificadoUpdateManyWithWhereWithoutContadorInput = {
+    where: CertificadoScalarWhereInput
+    data: XOR<CertificadoUpdateManyMutationInput, CertificadoUncheckedUpdateManyWithoutContadorInput>
+  }
+
+  export type CertificadoScalarWhereInput = {
+    AND?: CertificadoScalarWhereInput | CertificadoScalarWhereInput[]
+    OR?: CertificadoScalarWhereInput[]
+    NOT?: CertificadoScalarWhereInput | CertificadoScalarWhereInput[]
+    id?: StringFilter<"Certificado"> | string
+    requerente?: StringNullableFilter<"Certificado"> | string | null
+    validade?: DateTimeNullableFilter<"Certificado"> | Date | string | null
+    fileBase64?: StringNullableFilter<"Certificado"> | string | null
+    contadorId?: StringNullableFilter<"Certificado"> | string | null
+    createdAt?: DateTimeFilter<"Certificado"> | Date | string
+  }
+
   export type UserCreateWithoutContadoresInput = {
     id?: string
     email: string
@@ -8248,6 +9670,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
     endereco?: EnderecoCreateNestedOneWithoutContadorInput
+    certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateWithoutUsuariosInput = {
@@ -8261,6 +9684,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
     endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
+    certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorCreateOrConnectWithoutUsuariosInput = {
@@ -8316,6 +9740,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUpdateOneWithoutContadorNestedInput
+    certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateWithoutUsuariosInput = {
@@ -8328,6 +9753,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
+    certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
 
   export type EnderecoCreateWithoutEmitenteInput = {
@@ -8382,6 +9808,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
     endereco?: EnderecoCreateNestedOneWithoutContadorInput
+    certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateWithoutEmitentesInput = {
@@ -8395,6 +9822,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
     endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
+    certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorCreateOrConnectWithoutEmitentesInput = {
@@ -8459,6 +9887,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUpdateOneWithoutContadorNestedInput
+    certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateWithoutEmitentesInput = {
@@ -8470,6 +9899,77 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
+    certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
+  }
+
+  export type ContadorCreateWithoutCertificadosInput = {
+    id?: string
+    nome: string
+    cpf: string
+    regcrc: string
+    telefone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    usuarios?: UserContadorCreateNestedManyWithoutContadorInput
+    Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoCreateNestedOneWithoutContadorInput
+  }
+
+  export type ContadorUncheckedCreateWithoutCertificadosInput = {
+    id?: string
+    nome: string
+    cpf: string
+    regcrc: string
+    telefone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
+    Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
+  }
+
+  export type ContadorCreateOrConnectWithoutCertificadosInput = {
+    where: ContadorWhereUniqueInput
+    create: XOR<ContadorCreateWithoutCertificadosInput, ContadorUncheckedCreateWithoutCertificadosInput>
+  }
+
+  export type ContadorUpsertWithoutCertificadosInput = {
+    update: XOR<ContadorUpdateWithoutCertificadosInput, ContadorUncheckedUpdateWithoutCertificadosInput>
+    create: XOR<ContadorCreateWithoutCertificadosInput, ContadorUncheckedCreateWithoutCertificadosInput>
+    where?: ContadorWhereInput
+  }
+
+  export type ContadorUpdateToOneWithWhereWithoutCertificadosInput = {
+    where?: ContadorWhereInput
+    data: XOR<ContadorUpdateWithoutCertificadosInput, ContadorUncheckedUpdateWithoutCertificadosInput>
+  }
+
+  export type ContadorUpdateWithoutCertificadosInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    cpf?: StringFieldUpdateOperationsInput | string
+    regcrc?: StringFieldUpdateOperationsInput | string
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
+    Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
+  }
+
+  export type ContadorUncheckedUpdateWithoutCertificadosInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    cpf?: StringFieldUpdateOperationsInput | string
+    regcrc?: StringFieldUpdateOperationsInput | string
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
+    Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
   }
 
@@ -8484,6 +9984,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     usuarios?: UserContadorCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
+    certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateWithoutEnderecoInput = {
@@ -8497,6 +9998,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     usuarios?: UserContadorUncheckedCreateNestedManyWithoutContadorInput
     Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
+    certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
 
   export type ContadorCreateOrConnectWithoutEnderecoInput = {
@@ -8556,6 +10058,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
+    certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateWithoutEnderecoInput = {
@@ -8568,6 +10071,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UserContadorUncheckedUpdateManyWithoutContadorNestedInput
     Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
+    certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
 
   export type EmitenteUpsertWithoutEnderecosInput = {
@@ -8639,6 +10143,14 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type CertificadoCreateManyContadorInput = {
+    id?: string
+    requerente?: string | null
+    validade?: Date | string | null
+    fileBase64?: string | null
+    createdAt?: Date | string
+  }
+
   export type UserContadorUpdateWithoutContadorInput = {
     user?: UserUpdateOneRequiredWithoutContadoresNestedInput
   }
@@ -8684,6 +10196,27 @@ export namespace Prisma {
     IE?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificadoUpdateWithoutContadorInput = {
+    requerente?: NullableStringFieldUpdateOperationsInput | string | null
+    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificadoUncheckedUpdateWithoutContadorInput = {
+    requerente?: NullableStringFieldUpdateOperationsInput | string | null
+    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CertificadoUncheckedUpdateManyWithoutContadorInput = {
+    requerente?: NullableStringFieldUpdateOperationsInput | string | null
+    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnderecoCreateManyEmitenteInput = {
@@ -8780,6 +10313,10 @@ export namespace Prisma {
      * @deprecated Use EmitenteDefaultArgs instead
      */
     export type EmitenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EmitenteDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use CertificadoDefaultArgs instead
+     */
+    export type CertificadoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CertificadoDefaultArgs<ExtArgs>
     /**
      * @deprecated Use EnderecoDefaultArgs instead
      */

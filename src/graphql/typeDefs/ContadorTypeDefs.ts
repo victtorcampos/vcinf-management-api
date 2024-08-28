@@ -1,6 +1,9 @@
 import { gql } from 'apollo-server';
 
 export const UserTypeDefs = gql`
+
+scalar Date
+
 # Definição dos tipos de dados
 type Contador {
   id: ID!
@@ -10,6 +13,7 @@ type Contador {
   telefone: String
   email: String!
   endereco: Endereco
+  certificados: [Certificado]
 }
 
 type Endereco {
@@ -25,6 +29,12 @@ type Endereco {
   codigoIBGEestado: String
 }
 
+type Certificado {
+  requerente: String!
+  fileBase64: String
+  validade: Date
+}
+
 input ContadorInput {
   nome :String!
   cpf: String!
@@ -32,6 +42,7 @@ input ContadorInput {
   telefone: String
   email: String!
   endereco: EnderecoInput
+  certificados: [CertificadoInput]
 }
 
 input EnderecoInput {
@@ -45,6 +56,13 @@ input EnderecoInput {
   nome_estado: String
   uf: String
   codigoIBGEestado: String
+}
+
+
+input CertificadoInput {
+  requerente: String
+  fileBase64: String #Arquivo BASE64
+  validade: Date
 }
 
 # Definição das mutações
