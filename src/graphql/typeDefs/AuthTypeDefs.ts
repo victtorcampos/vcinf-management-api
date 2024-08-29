@@ -1,34 +1,30 @@
 import { gql } from 'apollo-server';
 
 export const AuthTypeDefs = gql`
-# Definição dos tipos de dados
+
+  type AuthResponse {
+    success: Boolean!
+    token : String
+    error: ErrorResponse
+  }
 
   type ErrorResponse {
     message: String!
     code: String
   }
 
-
-  type AuthResponse {
-    success: Boolean!
-    data: String
-    error: ErrorResponse
-  }
-
   # Definição das mutações
   type Mutation {
-    authenticateUser(email: String!, password: String!): AuthResponse!
+    authUsuario(email: String!, password: String!): AuthResponse
+    authContador(id : ID!): String
   }
 
-  # Definição das queries
   type Query {
-
+    getToken: String
   }
 
-  # Definição do schema
   schema {
     query: Query
     mutation: Mutation
   }
-
 `;

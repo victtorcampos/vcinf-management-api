@@ -11,6 +11,6 @@ export const UsuarioResolvers = {
         createUsuario: async (_: any, args: { data: TypeUsuario }, context: any): Promise<ApiResponse<TypeUsuario>> => { return await createUsuario(args.data, context); },
         updateUsuario: async (_: any, { id, email, password, role }: TypeUsuario, context: any): Promise<ApiResponse<TypeUsuario>> => { return await updateUsuario({ id, email, password, role }, context); },
         deleteUsuario: async (_: any, { id }: { id: string }, context: any): Promise<ApiResponse<null>> => { return await deleteUsuario(id, context); },
-        authenticateUsuario: async (_: any, args: { email: string; password: string }): Promise<ApiResponse<string>> => { return await authenticateUsuario(args.email, args.password); },
+        //authenticateUsuario: async (_: any, args: { email: string; password: string }): Promise<ApiResponse<string>> => { return await authenticateUsuario(args.email, args.password); },
     }
 }

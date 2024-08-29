@@ -58,18 +58,12 @@ export const UsuarioTypeDefs = gql`
     role: String!
   }
 
-  type AuthResponse {
-    success: Boolean!
-    data: String
-    error: ErrorResponse
-  }
-
   # Definição das mutações
   type Mutation {
     createUsuario(data: CreateUsuarioInput!): UsuarioResponse!
     updateUsuario(data: UpdateUsuarioInput!): UsuarioResponse!
     deleteUsuario(id: ID!): DeleteResponse!
-    authenticateUsuario(email: String!, password: String!): AuthResponse!
+
   }
 
   # Definição das queries
