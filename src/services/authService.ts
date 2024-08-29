@@ -2,13 +2,23 @@ import { Request } from 'express';
 import { AuthenticationError } from "apollo-server";
 import type { TypeUsuario } from "../controller/UsuarioController";
 import { sign, verify } from "jsonwebtoken";
- 
+
 export const getUserAuth = (req: Request) => {
-    const authorization = req.headers.authorization; if (authorization) {
+    const authorization = req.headers.authorization;
+    if (authorization) {
         const token = authorization.replace('Bearer ', '');
         return verifyToken(token, process.env.JWT_SECRET!);
     } throw new AuthenticationError('Not authenticated');
 };
+
+export const getAuth = (req: Request) => {
+    const authorization = req.headers.authorization;
+    if (authorization) {
+        const token = authorization.replace('Bearer ', '');
+        return verify(token, process.env.JWT_SECRET!) as { userId: string; role: string; contadorId: string };
+    } throw new AuthenticationError('Contador não selecionado');
+}
+
 export const isAdminAuth = (user: any) => {
     if (user.role !== 'ADMIN') {
         throw new AuthenticationError('Not authorized as admin');

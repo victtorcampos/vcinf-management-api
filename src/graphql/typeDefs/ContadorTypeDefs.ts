@@ -5,16 +5,39 @@ export const ContadorTypeDefs = gql`
 scalar Date
 
 # Definição dos tipos de dados
-type Contador {
+type TypeContador {
   id: ID!
-  nome :String!
-  cpf: String!
-  regcrc: String!
+  nome: String
+  cpf: String
+  regcrc: String
   telefone: String
-  email: String!
-  endereco: Endereco
-  certificados: [Certificado]
+  email: String
+  endereco : TypeEndereco
+  certificados: [TypeCertificados]
+  usuarios: [TypeUsuarios]
 }
+  type TypeEndereco {
+    id: ID!
+  }
+  
+  type TypeCertificados {
+    id: ID!
+  }
+
+  type TypeUsuarios {
+    id: ID!
+  }
+
+  type ContadorResponse {
+    success: Boolean!
+    data: TypeContador
+    error: ErrorResponse
+  }
+
+  type ErrorResponse {
+    message: String!
+    code: String
+  }
 
 type Endereco {
   logradouro: String
@@ -67,13 +90,13 @@ input CertificadoInput {
 
 # Definição das mutações
 type Mutation {
-  createContador(data: ContadorInput) : Contador
+  createContador(data: ContadorInput): ContadorResponse
 }
 
 # Definição da query raiz (opcional, se necessário)
 type Query {
   # Aqui você pode adicionar queries conforme necessário, por exemplo:
-  listContadores: [Contador!]!
+  listContadores: [TypeContador!]!
 }
 
 # Definição do schema

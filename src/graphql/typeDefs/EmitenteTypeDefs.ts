@@ -1,81 +1,50 @@
 import { gql } from 'apollo-server';
 
 export const EmitenteTypeDefs = gql`
-type Contador {
-  id: ID!
-  nome: String
-  cpf: String
-  regcrc: String
-  telefone: String
-  email: String
-}
 
-type Emitente {
-  id: ID!
-  cod_dominio: String
-  nome: String
-  razao_social: String
-  cnpj: String
-  cpf: String
-  ie: String
-  enderecos: [Endereco]
-  contador: [Contador]!
-}
+  type TypeEmitente {
+    id: ID!
+    cod_dominio: String
+    nome: String
+    razao_social: String
+    cnpj: String
+    cpf: String
+    ie: String
+    enderecos: [TypeEndereco]
+  }
 
-type Endereco {
-  id: ID!
-  tipo: String
-  logradouro: String
-  nro: String
-  complemento: String
-  bairro: String
-  cep: String
-  nome_cidade: String
-  codigoIBGEcidade: String
-  nome_estado: String
-  uf: String
-  codigoIBGEestado: String
-}
+  type EmitenteResponse {
+    success: Boolean!
+    data: TypeEmitente
+    error: ErrorResponse
+  }
 
-input CreateEmitenteInput {
-  cod_dominio: String
-  nome: String
-  razao_social: String
-  cnpj: String
-  cpf: String
-  ie: String
-  enderecos: [CreateEnderecoInput!]!
-}
+  type ErrorResponse {
+    message: String!
+    code: String
+  }
+  
+  input EmitenteInputCreate{
+    cod_dominio: String
+    nome: String
+    razao_social: String
+    cnpj: String
+    cpf: String
+    IE: String
+    enderecos: [EnderecoInput]
+  }
 
-input CreateEnderecoInput {
-  tipo: String
-  logradouro: String!
-  nro: String!
-  complemento: String
-  bairro: String!
-  cep: String!
-  nome_cidade: String!
-  codigoIBGEcidade: String!
-  nome_estado: String!
-  uf: String!
-  codigoIBGEestado: String!
-}
+  type Mutation {
+    createEmitente(data : EmitenteInputCreate): EmitenteResponse
+  }
 
-type EmitenteResponse {
-  success: Boolean!
-  data: Emitente
-  error: ErrorResponse
-}
+  type Query {
+  # Aqui você pode adicionar queries conforme necessário, por exemplo:
+    Emitentes: [TypeEmitente!]!
+  }
 
-type ErrorResponse {
-  message: String!
-  code: String
-}
-
-
-type Mutation {
-    emitente(data:CreateEmitenteInput!): EmitenteResponse!
-    updateEmitente(id: ID!) : String
-    deleteEmitente(id: ID!) : String
+  schema {
+    query: Query
+    mutation: Mutation
   }
 `;

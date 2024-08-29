@@ -3,7 +3,7 @@ import { compare } from "bcryptjs";
 import { PrismaClient, type Usuario as typeUsuario } from "../config/prisma-client";
 
 import { sign } from "jsonwebtoken";
-import { getUserAuth } from "../services/authService";
+import { getAuth, getUserAuth } from "../services/authService";
 
 const prisma = new PrismaClient().usuario;
 
@@ -25,11 +25,16 @@ export const authUsuario = async (email: string, password: string): Promise<Auth
 
 export const authContador = async (id: string, context: any): Promise<AuthApiResponse<string>> => {
     try {
-        const usuario = getUserAuth(context.req);
+        const usuarioAuth = getAuth(context.req);
+        const usuario = await prisma.findUnique({ where: { id: usuarioAuth.userId }, include: { contadores: true } });
+        const contadorRelacionado = usuario?.contadores.some(contador => contador.contadorId === id);
+        if (!contadorRelacionado) {
+            throw new AuthenticationError('Usuário não autorizado para acessar este contador.');
+        }
 
-        console.log(usuario);
+        const token = await sign({ userId: usuario?.id, role: usuario?.role, contadorId: id }, process.env.JWT_SECRET!, { expiresIn: '1d' });
 
-        return handleSuccess("token");
+        return handleSuccess(token);
     } catch (error) {
         if (error instanceof AuthenticationError) {
             return handleError(error.message, "00000");

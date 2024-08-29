@@ -16,7 +16,7 @@ export const AuthTypeDefs = gql`
   # Definição das mutações
   type Mutation {
     authUsuario(email: String!, password: String!): AuthResponse
-    authContador(id : ID!): String
+    authContador(id : ID!): AuthResponse
   }
 
   type Query {

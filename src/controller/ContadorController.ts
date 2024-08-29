@@ -1,23 +1,25 @@
-import { type Contador as TypeContador, type Endereco as TypeEndereco, type $Enums, PrismaClient, type Certificado as TypeCertificado, type Usuario as TypeUsuario, Prisma, } from "../config/prisma-client";
+import { type Contador as TypeContador, type Endereco as TypeEndereco, type $Enums, PrismaClient, type Certificado as TypeCertificado, type Usuario as TypeUsuario, type UsuarioContador as TypeUsuarioContador, Prisma, } from "../config/prisma-client";
 import { getUserAuth, isAdminAuth } from "../services/authService";
 import { handleError, handleSuccess, type ApiResponse, } from "../utils/responseHandler";
 
-const prisma = new PrismaClient().contador;
+const prisma = new PrismaClient({
+  //log: ['query', 'info', 'warn', 'error'],
+}).contador;
 
 export interface TypeContadorInput extends TypeContador {
   certificados: TypeCertificado[];
   endereco: TypeEndereco;
+
 }
 
 export interface TypeContadorResponse extends TypeContador {
-  certificados: TypeCertificado[];
 }
 
 export const createContador = async (data: TypeContadorInput, context: any): Promise<ApiResponse<TypeContadorResponse>> => {
+
   try {
     const usuario = getUserAuth(context.req);
     isAdminAuth(usuario);
-
     const contador = await prisma.create({
       data: {
         ...data, usuarios: { create: { UsuarioId: usuario.userId } },
@@ -27,20 +29,7 @@ export const createContador = async (data: TypeContadorInput, context: any): Pro
       include: { endereco: true, certificados: true, usuarios: true }
     });
 
-    console.log({
-      ...contador,
-      certificados: contador.certificados,
-      endereco: contador.endereco,
-      usuarios: contador.usuarios
-    });
-
-
-    return handleSuccess({
-      ...contador,
-      certificados: contador.certificados,
-      endereco: contador.endereco,
-      usuarios: contador.usuarios
-    });
+    return handleSuccess(contador);
 
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {

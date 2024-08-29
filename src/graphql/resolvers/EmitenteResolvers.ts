@@ -1,15 +1,17 @@
-import { createEmitente, EmitenteData } from "../../controller";
-import { ApiResponse } from "../../utils";
+import { type Endereco as TypeEndereco, type Emitente as TypeEmitente } from "../../config/prisma-client";
+import { createEmitente } from "../../controller";
+import { ApiResponse, handleSuccess } from "../../utils";
 
 type Context = { req: Request; };
 
+interface InputContador extends TypeEmitente {
+    enderecos: [TypeEndereco]
+}
 export const EmitenteResolvers = {
     Query: {
 
     },
     Mutation: {
-
-        emitente: async (_: any, { data }: { data: EmitenteData }, context: Context): Promise<ApiResponse<EmitenteData>> => await createEmitente(data, context),
-
+        createEmitente: async (_: any, args: { data: InputContador }, context: Context): Promise<ApiResponse<any>> => await createEmitente(args.data, context),
     },
 }

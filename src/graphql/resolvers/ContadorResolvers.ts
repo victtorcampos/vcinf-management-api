@@ -10,7 +10,7 @@ export interface TypeContadorInput extends TypeContador {
 }
 export const ContadorResolvers = {
     Mutation: {
-        createContador: async (_: any, args: { data: TypeContadorInput }, context: any) => await createContador(args.data, context),
+        createContador: async (_: any, args: { data: TypeContadorInput }, context: any): Promise<ApiResponse<TypeContador>> => await createContador(args.data, context),
     },
     Query: {
         // Defina os resolvers das queries se necessário
