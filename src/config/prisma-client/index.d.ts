@@ -29,6 +29,11 @@ export type Contador = $Result.DefaultSelection<Prisma.$ContadorPayload>
  */
 export type UsuarioContador = $Result.DefaultSelection<Prisma.$UsuarioContadorPayload>
 /**
+ * Model ContadorEmitente
+ * 
+ */
+export type ContadorEmitente = $Result.DefaultSelection<Prisma.$ContadorEmitentePayload>
+/**
  * Model Emitente
  * 
  */
@@ -182,6 +187,16 @@ export class PrismaClient<
     * ```
     */
   get usuarioContador(): Prisma.UsuarioContadorDelegate<ExtArgs>;
+
+  /**
+   * `prisma.contadorEmitente`: Exposes CRUD operations for the **ContadorEmitente** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContadorEmitentes
+    * const contadorEmitentes = await prisma.contadorEmitente.findMany()
+    * ```
+    */
+  get contadorEmitente(): Prisma.ContadorEmitenteDelegate<ExtArgs>;
 
   /**
    * `prisma.emitente`: Exposes CRUD operations for the **Emitente** model.
@@ -692,6 +707,7 @@ export namespace Prisma {
     Usuario: 'Usuario',
     Contador: 'Contador',
     UsuarioContador: 'UsuarioContador',
+    ContadorEmitente: 'ContadorEmitente',
     Emitente: 'Emitente',
     Certificado: 'Certificado',
     Endereco: 'Endereco'
@@ -710,7 +726,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "usuario" | "contador" | "usuarioContador" | "emitente" | "certificado" | "endereco"
+      modelProps: "usuario" | "contador" | "usuarioContador" | "contadorEmitente" | "emitente" | "certificado" | "endereco"
       txIsolationLevel: never
     }
     model: {
@@ -933,6 +949,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UsuarioContadorCountArgs<ExtArgs>
             result: $Utils.Optional<UsuarioContadorCountAggregateOutputType> | number
+          }
+        }
+      }
+      ContadorEmitente: {
+        payload: Prisma.$ContadorEmitentePayload<ExtArgs>
+        fields: Prisma.ContadorEmitenteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContadorEmitenteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContadorEmitentePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContadorEmitenteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContadorEmitentePayload>
+          }
+          findFirst: {
+            args: Prisma.ContadorEmitenteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContadorEmitentePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContadorEmitenteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContadorEmitentePayload>
+          }
+          findMany: {
+            args: Prisma.ContadorEmitenteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContadorEmitentePayload>[]
+          }
+          create: {
+            args: Prisma.ContadorEmitenteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContadorEmitentePayload>
+          }
+          createMany: {
+            args: Prisma.ContadorEmitenteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ContadorEmitenteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContadorEmitentePayload>
+          }
+          update: {
+            args: Prisma.ContadorEmitenteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContadorEmitentePayload>
+          }
+          deleteMany: {
+            args: Prisma.ContadorEmitenteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContadorEmitenteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ContadorEmitenteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContadorEmitentePayload>
+          }
+          aggregate: {
+            args: Prisma.ContadorEmitenteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContadorEmitente>
+          }
+          groupBy: {
+            args: Prisma.ContadorEmitenteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContadorEmitenteGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.ContadorEmitenteFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.ContadorEmitenteAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.ContadorEmitenteCountArgs<ExtArgs>
+            result: $Utils.Optional<ContadorEmitenteCountAggregateOutputType> | number
           }
         }
       }
@@ -1338,13 +1428,13 @@ export namespace Prisma {
 
   export type ContadorCountOutputType = {
     usuarios: number
-    Emitentes: number
+    emitentes: number
     certificados: number
   }
 
   export type ContadorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuarios?: boolean | ContadorCountOutputTypeCountUsuariosArgs
-    Emitentes?: boolean | ContadorCountOutputTypeCountEmitentesArgs
+    emitentes?: boolean | ContadorCountOutputTypeCountEmitentesArgs
     certificados?: boolean | ContadorCountOutputTypeCountCertificadosArgs
   }
 
@@ -1370,7 +1460,7 @@ export namespace Prisma {
    * ContadorCountOutputType without action
    */
   export type ContadorCountOutputTypeCountEmitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EmitenteWhereInput
+    where?: ContadorEmitenteWhereInput
   }
 
   /**
@@ -1387,10 +1477,12 @@ export namespace Prisma {
 
   export type EmitenteCountOutputType = {
     enderecos: number
+    contadores: number
   }
 
   export type EmitenteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     enderecos?: boolean | EmitenteCountOutputTypeCountEnderecosArgs
+    contadores?: boolean | EmitenteCountOutputTypeCountContadoresArgs
   }
 
   // Custom InputTypes
@@ -1409,6 +1501,13 @@ export namespace Prisma {
    */
   export type EmitenteCountOutputTypeCountEnderecosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EnderecoWhereInput
+  }
+
+  /**
+   * EmitenteCountOutputType without action
+   */
+  export type EmitenteCountOutputTypeCountContadoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContadorEmitenteWhereInput
   }
 
 
@@ -2567,7 +2666,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
-    Emitentes?: boolean | Contador$EmitentesArgs<ExtArgs>
+    emitentes?: boolean | Contador$emitentesArgs<ExtArgs>
     endereco?: boolean | Contador$enderecoArgs<ExtArgs>
     certificados?: boolean | Contador$certificadosArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
@@ -2587,7 +2686,7 @@ export namespace Prisma {
 
   export type ContadorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
-    Emitentes?: boolean | Contador$EmitentesArgs<ExtArgs>
+    emitentes?: boolean | Contador$emitentesArgs<ExtArgs>
     endereco?: boolean | Contador$enderecoArgs<ExtArgs>
     certificados?: boolean | Contador$certificadosArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
@@ -2597,7 +2696,7 @@ export namespace Prisma {
     name: "Contador"
     objects: {
       usuarios: Prisma.$UsuarioContadorPayload<ExtArgs>[]
-      Emitentes: Prisma.$EmitentePayload<ExtArgs>[]
+      emitentes: Prisma.$ContadorEmitentePayload<ExtArgs>[]
       endereco: Prisma.$EnderecoPayload<ExtArgs> | null
       certificados: Prisma.$CertificadoPayload<ExtArgs>[]
     }
@@ -2974,7 +3073,7 @@ export namespace Prisma {
   export interface Prisma__ContadorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     usuarios<T extends Contador$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findMany"> | Null>
-    Emitentes<T extends Contador$EmitentesArgs<ExtArgs> = {}>(args?: Subset<T, Contador$EmitentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findMany"> | Null>
+    emitentes<T extends Contador$emitentesArgs<ExtArgs> = {}>(args?: Subset<T, Contador$emitentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findMany"> | Null>
     endereco<T extends Contador$enderecoArgs<ExtArgs> = {}>(args?: Subset<T, Contador$enderecoArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     certificados<T extends Contador$certificadosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$certificadosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "findMany"> | Null>
     /**
@@ -3360,23 +3459,23 @@ export namespace Prisma {
   }
 
   /**
-   * Contador.Emitentes
+   * Contador.emitentes
    */
-  export type Contador$EmitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Contador$emitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Emitente
+     * Select specific fields to fetch from the ContadorEmitente
      */
-    select?: EmitenteSelect<ExtArgs> | null
+    select?: ContadorEmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: EmitenteInclude<ExtArgs> | null
-    where?: EmitenteWhereInput
-    orderBy?: EmitenteOrderByWithRelationInput | EmitenteOrderByWithRelationInput[]
-    cursor?: EmitenteWhereUniqueInput
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    where?: ContadorEmitenteWhereInput
+    orderBy?: ContadorEmitenteOrderByWithRelationInput | ContadorEmitenteOrderByWithRelationInput[]
+    cursor?: ContadorEmitenteWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: EmitenteScalarFieldEnum | EmitenteScalarFieldEnum[]
+    distinct?: ContadorEmitenteScalarFieldEnum | ContadorEmitenteScalarFieldEnum[]
   }
 
   /**
@@ -3441,19 +3540,19 @@ export namespace Prisma {
 
   export type UsuarioContadorMinAggregateOutputType = {
     id: string | null
-    UsuarioId: string | null
+    usuarioId: string | null
     contadorId: string | null
   }
 
   export type UsuarioContadorMaxAggregateOutputType = {
     id: string | null
-    UsuarioId: string | null
+    usuarioId: string | null
     contadorId: string | null
   }
 
   export type UsuarioContadorCountAggregateOutputType = {
     id: number
-    UsuarioId: number
+    usuarioId: number
     contadorId: number
     _all: number
   }
@@ -3461,19 +3560,19 @@ export namespace Prisma {
 
   export type UsuarioContadorMinAggregateInputType = {
     id?: true
-    UsuarioId?: true
+    usuarioId?: true
     contadorId?: true
   }
 
   export type UsuarioContadorMaxAggregateInputType = {
     id?: true
-    UsuarioId?: true
+    usuarioId?: true
     contadorId?: true
   }
 
   export type UsuarioContadorCountAggregateInputType = {
     id?: true
-    UsuarioId?: true
+    usuarioId?: true
     contadorId?: true
     _all?: true
   }
@@ -3552,7 +3651,7 @@ export namespace Prisma {
 
   export type UsuarioContadorGroupByOutputType = {
     id: string
-    UsuarioId: string
+    usuarioId: string
     contadorId: string
     _count: UsuarioContadorCountAggregateOutputType | null
     _min: UsuarioContadorMinAggregateOutputType | null
@@ -3575,7 +3674,7 @@ export namespace Prisma {
 
   export type UsuarioContadorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    UsuarioId?: boolean
+    usuarioId?: boolean
     contadorId?: boolean
     Usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
     contador?: boolean | ContadorDefaultArgs<ExtArgs>
@@ -3584,7 +3683,7 @@ export namespace Prisma {
 
   export type UsuarioContadorSelectScalar = {
     id?: boolean
-    UsuarioId?: boolean
+    usuarioId?: boolean
     contadorId?: boolean
   }
 
@@ -3601,7 +3700,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      UsuarioId: string
+      usuarioId: string
       contadorId: string
     }, ExtArgs["result"]["usuarioContador"]>
     composites: {}
@@ -3998,7 +4097,7 @@ export namespace Prisma {
    */ 
   interface UsuarioContadorFieldRefs {
     readonly id: FieldRef<"UsuarioContador", 'String'>
-    readonly UsuarioId: FieldRef<"UsuarioContador", 'String'>
+    readonly usuarioId: FieldRef<"UsuarioContador", 'String'>
     readonly contadorId: FieldRef<"UsuarioContador", 'String'>
   }
     
@@ -4341,6 +4440,917 @@ export namespace Prisma {
 
 
   /**
+   * Model ContadorEmitente
+   */
+
+  export type AggregateContadorEmitente = {
+    _count: ContadorEmitenteCountAggregateOutputType | null
+    _min: ContadorEmitenteMinAggregateOutputType | null
+    _max: ContadorEmitenteMaxAggregateOutputType | null
+  }
+
+  export type ContadorEmitenteMinAggregateOutputType = {
+    id: string | null
+    emitenteId: string | null
+    contadorId: string | null
+  }
+
+  export type ContadorEmitenteMaxAggregateOutputType = {
+    id: string | null
+    emitenteId: string | null
+    contadorId: string | null
+  }
+
+  export type ContadorEmitenteCountAggregateOutputType = {
+    id: number
+    emitenteId: number
+    contadorId: number
+    _all: number
+  }
+
+
+  export type ContadorEmitenteMinAggregateInputType = {
+    id?: true
+    emitenteId?: true
+    contadorId?: true
+  }
+
+  export type ContadorEmitenteMaxAggregateInputType = {
+    id?: true
+    emitenteId?: true
+    contadorId?: true
+  }
+
+  export type ContadorEmitenteCountAggregateInputType = {
+    id?: true
+    emitenteId?: true
+    contadorId?: true
+    _all?: true
+  }
+
+  export type ContadorEmitenteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContadorEmitente to aggregate.
+     */
+    where?: ContadorEmitenteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContadorEmitentes to fetch.
+     */
+    orderBy?: ContadorEmitenteOrderByWithRelationInput | ContadorEmitenteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContadorEmitenteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContadorEmitentes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContadorEmitentes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContadorEmitentes
+    **/
+    _count?: true | ContadorEmitenteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContadorEmitenteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContadorEmitenteMaxAggregateInputType
+  }
+
+  export type GetContadorEmitenteAggregateType<T extends ContadorEmitenteAggregateArgs> = {
+        [P in keyof T & keyof AggregateContadorEmitente]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContadorEmitente[P]>
+      : GetScalarType<T[P], AggregateContadorEmitente[P]>
+  }
+
+
+
+
+  export type ContadorEmitenteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContadorEmitenteWhereInput
+    orderBy?: ContadorEmitenteOrderByWithAggregationInput | ContadorEmitenteOrderByWithAggregationInput[]
+    by: ContadorEmitenteScalarFieldEnum[] | ContadorEmitenteScalarFieldEnum
+    having?: ContadorEmitenteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContadorEmitenteCountAggregateInputType | true
+    _min?: ContadorEmitenteMinAggregateInputType
+    _max?: ContadorEmitenteMaxAggregateInputType
+  }
+
+  export type ContadorEmitenteGroupByOutputType = {
+    id: string
+    emitenteId: string
+    contadorId: string
+    _count: ContadorEmitenteCountAggregateOutputType | null
+    _min: ContadorEmitenteMinAggregateOutputType | null
+    _max: ContadorEmitenteMaxAggregateOutputType | null
+  }
+
+  type GetContadorEmitenteGroupByPayload<T extends ContadorEmitenteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContadorEmitenteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContadorEmitenteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContadorEmitenteGroupByOutputType[P]>
+            : GetScalarType<T[P], ContadorEmitenteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContadorEmitenteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    emitenteId?: boolean
+    contadorId?: boolean
+    emitente?: boolean | EmitenteDefaultArgs<ExtArgs>
+    contador?: boolean | ContadorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contadorEmitente"]>
+
+
+  export type ContadorEmitenteSelectScalar = {
+    id?: boolean
+    emitenteId?: boolean
+    contadorId?: boolean
+  }
+
+  export type ContadorEmitenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emitente?: boolean | EmitenteDefaultArgs<ExtArgs>
+    contador?: boolean | ContadorDefaultArgs<ExtArgs>
+  }
+
+  export type $ContadorEmitentePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContadorEmitente"
+    objects: {
+      emitente: Prisma.$EmitentePayload<ExtArgs>
+      contador: Prisma.$ContadorPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      emitenteId: string
+      contadorId: string
+    }, ExtArgs["result"]["contadorEmitente"]>
+    composites: {}
+  }
+
+  type ContadorEmitenteGetPayload<S extends boolean | null | undefined | ContadorEmitenteDefaultArgs> = $Result.GetResult<Prisma.$ContadorEmitentePayload, S>
+
+  type ContadorEmitenteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ContadorEmitenteFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ContadorEmitenteCountAggregateInputType | true
+    }
+
+  export interface ContadorEmitenteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContadorEmitente'], meta: { name: 'ContadorEmitente' } }
+    /**
+     * Find zero or one ContadorEmitente that matches the filter.
+     * @param {ContadorEmitenteFindUniqueArgs} args - Arguments to find a ContadorEmitente
+     * @example
+     * // Get one ContadorEmitente
+     * const contadorEmitente = await prisma.contadorEmitente.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContadorEmitenteFindUniqueArgs>(args: SelectSubset<T, ContadorEmitenteFindUniqueArgs<ExtArgs>>): Prisma__ContadorEmitenteClient<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ContadorEmitente that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ContadorEmitenteFindUniqueOrThrowArgs} args - Arguments to find a ContadorEmitente
+     * @example
+     * // Get one ContadorEmitente
+     * const contadorEmitente = await prisma.contadorEmitente.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContadorEmitenteFindUniqueOrThrowArgs>(args: SelectSubset<T, ContadorEmitenteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContadorEmitenteClient<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ContadorEmitente that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContadorEmitenteFindFirstArgs} args - Arguments to find a ContadorEmitente
+     * @example
+     * // Get one ContadorEmitente
+     * const contadorEmitente = await prisma.contadorEmitente.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContadorEmitenteFindFirstArgs>(args?: SelectSubset<T, ContadorEmitenteFindFirstArgs<ExtArgs>>): Prisma__ContadorEmitenteClient<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ContadorEmitente that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContadorEmitenteFindFirstOrThrowArgs} args - Arguments to find a ContadorEmitente
+     * @example
+     * // Get one ContadorEmitente
+     * const contadorEmitente = await prisma.contadorEmitente.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContadorEmitenteFindFirstOrThrowArgs>(args?: SelectSubset<T, ContadorEmitenteFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContadorEmitenteClient<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ContadorEmitentes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContadorEmitenteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContadorEmitentes
+     * const contadorEmitentes = await prisma.contadorEmitente.findMany()
+     * 
+     * // Get first 10 ContadorEmitentes
+     * const contadorEmitentes = await prisma.contadorEmitente.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contadorEmitenteWithIdOnly = await prisma.contadorEmitente.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContadorEmitenteFindManyArgs>(args?: SelectSubset<T, ContadorEmitenteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ContadorEmitente.
+     * @param {ContadorEmitenteCreateArgs} args - Arguments to create a ContadorEmitente.
+     * @example
+     * // Create one ContadorEmitente
+     * const ContadorEmitente = await prisma.contadorEmitente.create({
+     *   data: {
+     *     // ... data to create a ContadorEmitente
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContadorEmitenteCreateArgs>(args: SelectSubset<T, ContadorEmitenteCreateArgs<ExtArgs>>): Prisma__ContadorEmitenteClient<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ContadorEmitentes.
+     * @param {ContadorEmitenteCreateManyArgs} args - Arguments to create many ContadorEmitentes.
+     * @example
+     * // Create many ContadorEmitentes
+     * const contadorEmitente = await prisma.contadorEmitente.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContadorEmitenteCreateManyArgs>(args?: SelectSubset<T, ContadorEmitenteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ContadorEmitente.
+     * @param {ContadorEmitenteDeleteArgs} args - Arguments to delete one ContadorEmitente.
+     * @example
+     * // Delete one ContadorEmitente
+     * const ContadorEmitente = await prisma.contadorEmitente.delete({
+     *   where: {
+     *     // ... filter to delete one ContadorEmitente
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContadorEmitenteDeleteArgs>(args: SelectSubset<T, ContadorEmitenteDeleteArgs<ExtArgs>>): Prisma__ContadorEmitenteClient<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ContadorEmitente.
+     * @param {ContadorEmitenteUpdateArgs} args - Arguments to update one ContadorEmitente.
+     * @example
+     * // Update one ContadorEmitente
+     * const contadorEmitente = await prisma.contadorEmitente.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContadorEmitenteUpdateArgs>(args: SelectSubset<T, ContadorEmitenteUpdateArgs<ExtArgs>>): Prisma__ContadorEmitenteClient<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ContadorEmitentes.
+     * @param {ContadorEmitenteDeleteManyArgs} args - Arguments to filter ContadorEmitentes to delete.
+     * @example
+     * // Delete a few ContadorEmitentes
+     * const { count } = await prisma.contadorEmitente.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContadorEmitenteDeleteManyArgs>(args?: SelectSubset<T, ContadorEmitenteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContadorEmitentes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContadorEmitenteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContadorEmitentes
+     * const contadorEmitente = await prisma.contadorEmitente.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContadorEmitenteUpdateManyArgs>(args: SelectSubset<T, ContadorEmitenteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ContadorEmitente.
+     * @param {ContadorEmitenteUpsertArgs} args - Arguments to update or create a ContadorEmitente.
+     * @example
+     * // Update or create a ContadorEmitente
+     * const contadorEmitente = await prisma.contadorEmitente.upsert({
+     *   create: {
+     *     // ... data to create a ContadorEmitente
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContadorEmitente we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContadorEmitenteUpsertArgs>(args: SelectSubset<T, ContadorEmitenteUpsertArgs<ExtArgs>>): Prisma__ContadorEmitenteClient<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+    /**
+     * Find zero or more ContadorEmitentes that matches the filter.
+     * @param {ContadorEmitenteFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const contadorEmitente = await prisma.contadorEmitente.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+     */
+    findRaw(args?: ContadorEmitenteFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a ContadorEmitente.
+     * @param {ContadorEmitenteAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const contadorEmitente = await prisma.contadorEmitente.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: ContadorEmitenteAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of ContadorEmitentes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContadorEmitenteCountArgs} args - Arguments to filter ContadorEmitentes to count.
+     * @example
+     * // Count the number of ContadorEmitentes
+     * const count = await prisma.contadorEmitente.count({
+     *   where: {
+     *     // ... the filter for the ContadorEmitentes we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContadorEmitenteCountArgs>(
+      args?: Subset<T, ContadorEmitenteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContadorEmitenteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContadorEmitente.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContadorEmitenteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContadorEmitenteAggregateArgs>(args: Subset<T, ContadorEmitenteAggregateArgs>): Prisma.PrismaPromise<GetContadorEmitenteAggregateType<T>>
+
+    /**
+     * Group by ContadorEmitente.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContadorEmitenteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContadorEmitenteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContadorEmitenteGroupByArgs['orderBy'] }
+        : { orderBy?: ContadorEmitenteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContadorEmitenteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContadorEmitenteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContadorEmitente model
+   */
+  readonly fields: ContadorEmitenteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContadorEmitente.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContadorEmitenteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    emitente<T extends EmitenteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmitenteDefaultArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    contador<T extends ContadorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContadorDefaultArgs<ExtArgs>>): Prisma__ContadorClient<$Result.GetResult<Prisma.$ContadorPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContadorEmitente model
+   */ 
+  interface ContadorEmitenteFieldRefs {
+    readonly id: FieldRef<"ContadorEmitente", 'String'>
+    readonly emitenteId: FieldRef<"ContadorEmitente", 'String'>
+    readonly contadorId: FieldRef<"ContadorEmitente", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContadorEmitente findUnique
+   */
+  export type ContadorEmitenteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which ContadorEmitente to fetch.
+     */
+    where: ContadorEmitenteWhereUniqueInput
+  }
+
+  /**
+   * ContadorEmitente findUniqueOrThrow
+   */
+  export type ContadorEmitenteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which ContadorEmitente to fetch.
+     */
+    where: ContadorEmitenteWhereUniqueInput
+  }
+
+  /**
+   * ContadorEmitente findFirst
+   */
+  export type ContadorEmitenteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which ContadorEmitente to fetch.
+     */
+    where?: ContadorEmitenteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContadorEmitentes to fetch.
+     */
+    orderBy?: ContadorEmitenteOrderByWithRelationInput | ContadorEmitenteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContadorEmitentes.
+     */
+    cursor?: ContadorEmitenteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContadorEmitentes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContadorEmitentes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContadorEmitentes.
+     */
+    distinct?: ContadorEmitenteScalarFieldEnum | ContadorEmitenteScalarFieldEnum[]
+  }
+
+  /**
+   * ContadorEmitente findFirstOrThrow
+   */
+  export type ContadorEmitenteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which ContadorEmitente to fetch.
+     */
+    where?: ContadorEmitenteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContadorEmitentes to fetch.
+     */
+    orderBy?: ContadorEmitenteOrderByWithRelationInput | ContadorEmitenteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContadorEmitentes.
+     */
+    cursor?: ContadorEmitenteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContadorEmitentes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContadorEmitentes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContadorEmitentes.
+     */
+    distinct?: ContadorEmitenteScalarFieldEnum | ContadorEmitenteScalarFieldEnum[]
+  }
+
+  /**
+   * ContadorEmitente findMany
+   */
+  export type ContadorEmitenteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which ContadorEmitentes to fetch.
+     */
+    where?: ContadorEmitenteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContadorEmitentes to fetch.
+     */
+    orderBy?: ContadorEmitenteOrderByWithRelationInput | ContadorEmitenteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContadorEmitentes.
+     */
+    cursor?: ContadorEmitenteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContadorEmitentes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContadorEmitentes.
+     */
+    skip?: number
+    distinct?: ContadorEmitenteScalarFieldEnum | ContadorEmitenteScalarFieldEnum[]
+  }
+
+  /**
+   * ContadorEmitente create
+   */
+  export type ContadorEmitenteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContadorEmitente.
+     */
+    data: XOR<ContadorEmitenteCreateInput, ContadorEmitenteUncheckedCreateInput>
+  }
+
+  /**
+   * ContadorEmitente createMany
+   */
+  export type ContadorEmitenteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContadorEmitentes.
+     */
+    data: ContadorEmitenteCreateManyInput | ContadorEmitenteCreateManyInput[]
+  }
+
+  /**
+   * ContadorEmitente update
+   */
+  export type ContadorEmitenteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContadorEmitente.
+     */
+    data: XOR<ContadorEmitenteUpdateInput, ContadorEmitenteUncheckedUpdateInput>
+    /**
+     * Choose, which ContadorEmitente to update.
+     */
+    where: ContadorEmitenteWhereUniqueInput
+  }
+
+  /**
+   * ContadorEmitente updateMany
+   */
+  export type ContadorEmitenteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContadorEmitentes.
+     */
+    data: XOR<ContadorEmitenteUpdateManyMutationInput, ContadorEmitenteUncheckedUpdateManyInput>
+    /**
+     * Filter which ContadorEmitentes to update
+     */
+    where?: ContadorEmitenteWhereInput
+  }
+
+  /**
+   * ContadorEmitente upsert
+   */
+  export type ContadorEmitenteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContadorEmitente to update in case it exists.
+     */
+    where: ContadorEmitenteWhereUniqueInput
+    /**
+     * In case the ContadorEmitente found by the `where` argument doesn't exist, create a new ContadorEmitente with this data.
+     */
+    create: XOR<ContadorEmitenteCreateInput, ContadorEmitenteUncheckedCreateInput>
+    /**
+     * In case the ContadorEmitente was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContadorEmitenteUpdateInput, ContadorEmitenteUncheckedUpdateInput>
+  }
+
+  /**
+   * ContadorEmitente delete
+   */
+  export type ContadorEmitenteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter which ContadorEmitente to delete.
+     */
+    where: ContadorEmitenteWhereUniqueInput
+  }
+
+  /**
+   * ContadorEmitente deleteMany
+   */
+  export type ContadorEmitenteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContadorEmitentes to delete
+     */
+    where?: ContadorEmitenteWhereInput
+  }
+
+  /**
+   * ContadorEmitente findRaw
+   */
+  export type ContadorEmitenteFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * ContadorEmitente aggregateRaw
+   */
+  export type ContadorEmitenteAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * ContadorEmitente without action
+   */
+  export type ContadorEmitenteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContadorEmitente
+     */
+    select?: ContadorEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Emitente
    */
 
@@ -4358,7 +5368,6 @@ export namespace Prisma {
     cnpj: string | null
     cpf: string | null
     IE: string | null
-    contadorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4371,7 +5380,6 @@ export namespace Prisma {
     cnpj: string | null
     cpf: string | null
     IE: string | null
-    contadorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -4384,7 +5392,6 @@ export namespace Prisma {
     cnpj: number
     cpf: number
     IE: number
-    contadorId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -4399,7 +5406,6 @@ export namespace Prisma {
     cnpj?: true
     cpf?: true
     IE?: true
-    contadorId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4412,7 +5418,6 @@ export namespace Prisma {
     cnpj?: true
     cpf?: true
     IE?: true
-    contadorId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -4425,7 +5430,6 @@ export namespace Prisma {
     cnpj?: true
     cpf?: true
     IE?: true
-    contadorId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -4511,7 +5515,6 @@ export namespace Prisma {
     cnpj: string | null
     cpf: string | null
     IE: string
-    contadorId: string | null
     createdAt: Date
     updatedAt: Date
     _count: EmitenteCountAggregateOutputType | null
@@ -4541,11 +5544,10 @@ export namespace Prisma {
     cnpj?: boolean
     cpf?: boolean
     IE?: boolean
-    contadorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     enderecos?: boolean | Emitente$enderecosArgs<ExtArgs>
-    contador?: boolean | Emitente$contadorArgs<ExtArgs>
+    contadores?: boolean | Emitente$contadoresArgs<ExtArgs>
     _count?: boolean | EmitenteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emitente"]>
 
@@ -4558,14 +5560,13 @@ export namespace Prisma {
     cnpj?: boolean
     cpf?: boolean
     IE?: boolean
-    contadorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
   export type EmitenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     enderecos?: boolean | Emitente$enderecosArgs<ExtArgs>
-    contador?: boolean | Emitente$contadorArgs<ExtArgs>
+    contadores?: boolean | Emitente$contadoresArgs<ExtArgs>
     _count?: boolean | EmitenteCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4573,7 +5574,7 @@ export namespace Prisma {
     name: "Emitente"
     objects: {
       enderecos: Prisma.$EnderecoPayload<ExtArgs>[]
-      contador: Prisma.$ContadorPayload<ExtArgs> | null
+      contadores: Prisma.$ContadorEmitentePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4583,7 +5584,6 @@ export namespace Prisma {
       cnpj: string | null
       cpf: string | null
       IE: string
-      contadorId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emitente"]>
@@ -4950,7 +5950,7 @@ export namespace Prisma {
   export interface Prisma__EmitenteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     enderecos<T extends Emitente$enderecosArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$enderecosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany"> | Null>
-    contador<T extends Emitente$contadorArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$contadorArgs<ExtArgs>>): Prisma__ContadorClient<$Result.GetResult<Prisma.$ContadorPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    contadores<T extends Emitente$contadoresArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$contadoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4987,7 +5987,6 @@ export namespace Prisma {
     readonly cnpj: FieldRef<"Emitente", 'String'>
     readonly cpf: FieldRef<"Emitente", 'String'>
     readonly IE: FieldRef<"Emitente", 'String'>
-    readonly contadorId: FieldRef<"Emitente", 'String'>
     readonly createdAt: FieldRef<"Emitente", 'DateTime'>
     readonly updatedAt: FieldRef<"Emitente", 'DateTime'>
   }
@@ -5336,18 +6335,23 @@ export namespace Prisma {
   }
 
   /**
-   * Emitente.contador
+   * Emitente.contadores
    */
-  export type Emitente$contadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Emitente$contadoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Contador
+     * Select specific fields to fetch from the ContadorEmitente
      */
-    select?: ContadorSelect<ExtArgs> | null
+    select?: ContadorEmitenteSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ContadorInclude<ExtArgs> | null
-    where?: ContadorWhereInput
+    include?: ContadorEmitenteInclude<ExtArgs> | null
+    where?: ContadorEmitenteWhereInput
+    orderBy?: ContadorEmitenteOrderByWithRelationInput | ContadorEmitenteOrderByWithRelationInput[]
+    cursor?: ContadorEmitenteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContadorEmitenteScalarFieldEnum | ContadorEmitenteScalarFieldEnum[]
   }
 
   /**
@@ -7414,11 +8418,20 @@ export namespace Prisma {
 
   export const UsuarioContadorScalarFieldEnum: {
     id: 'id',
-    UsuarioId: 'UsuarioId',
+    usuarioId: 'usuarioId',
     contadorId: 'contadorId'
   };
 
   export type UsuarioContadorScalarFieldEnum = (typeof UsuarioContadorScalarFieldEnum)[keyof typeof UsuarioContadorScalarFieldEnum]
+
+
+  export const ContadorEmitenteScalarFieldEnum: {
+    id: 'id',
+    emitenteId: 'emitenteId',
+    contadorId: 'contadorId'
+  };
+
+  export type ContadorEmitenteScalarFieldEnum = (typeof ContadorEmitenteScalarFieldEnum)[keyof typeof ContadorEmitenteScalarFieldEnum]
 
 
   export const EmitenteScalarFieldEnum: {
@@ -7429,7 +8442,6 @@ export namespace Prisma {
     cnpj: 'cnpj',
     cpf: 'cpf',
     IE: 'IE',
-    contadorId: 'contadorId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7622,7 +8634,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UsuarioContadorListRelationFilter
-    Emitentes?: EmitenteListRelationFilter
+    emitentes?: ContadorEmitenteListRelationFilter
     endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
     certificados?: CertificadoListRelationFilter
   }
@@ -7637,7 +8649,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     usuarios?: UsuarioContadorOrderByRelationAggregateInput
-    Emitentes?: EmitenteOrderByRelationAggregateInput
+    emitentes?: ContadorEmitenteOrderByRelationAggregateInput
     endereco?: EnderecoOrderByWithRelationInput
     certificados?: CertificadoOrderByRelationAggregateInput
   }
@@ -7655,7 +8667,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Contador"> | Date | string
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UsuarioContadorListRelationFilter
-    Emitentes?: EmitenteListRelationFilter
+    emitentes?: ContadorEmitenteListRelationFilter
     endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
     certificados?: CertificadoListRelationFilter
   }, "id" | "cpf" | "regcrc">
@@ -7693,7 +8705,7 @@ export namespace Prisma {
     OR?: UsuarioContadorWhereInput[]
     NOT?: UsuarioContadorWhereInput | UsuarioContadorWhereInput[]
     id?: StringFilter<"UsuarioContador"> | string
-    UsuarioId?: StringFilter<"UsuarioContador"> | string
+    usuarioId?: StringFilter<"UsuarioContador"> | string
     contadorId?: StringFilter<"UsuarioContador"> | string
     Usuario?: XOR<UsuarioRelationFilter, UsuarioWhereInput>
     contador?: XOR<ContadorRelationFilter, ContadorWhereInput>
@@ -7701,7 +8713,7 @@ export namespace Prisma {
 
   export type UsuarioContadorOrderByWithRelationInput = {
     id?: SortOrder
-    UsuarioId?: SortOrder
+    usuarioId?: SortOrder
     contadorId?: SortOrder
     Usuario?: UsuarioOrderByWithRelationInput
     contador?: ContadorOrderByWithRelationInput
@@ -7709,19 +8721,19 @@ export namespace Prisma {
 
   export type UsuarioContadorWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    UsuarioId_contadorId?: UsuarioContadorUsuarioIdContadorIdCompoundUniqueInput
+    usuarioId_contadorId?: UsuarioContadorUsuarioIdContadorIdCompoundUniqueInput
     AND?: UsuarioContadorWhereInput | UsuarioContadorWhereInput[]
     OR?: UsuarioContadorWhereInput[]
     NOT?: UsuarioContadorWhereInput | UsuarioContadorWhereInput[]
-    UsuarioId?: StringFilter<"UsuarioContador"> | string
+    usuarioId?: StringFilter<"UsuarioContador"> | string
     contadorId?: StringFilter<"UsuarioContador"> | string
     Usuario?: XOR<UsuarioRelationFilter, UsuarioWhereInput>
     contador?: XOR<ContadorRelationFilter, ContadorWhereInput>
-  }, "id" | "UsuarioId_contadorId">
+  }, "id" | "usuarioId_contadorId">
 
   export type UsuarioContadorOrderByWithAggregationInput = {
     id?: SortOrder
-    UsuarioId?: SortOrder
+    usuarioId?: SortOrder
     contadorId?: SortOrder
     _count?: UsuarioContadorCountOrderByAggregateInput
     _max?: UsuarioContadorMaxOrderByAggregateInput
@@ -7733,8 +8745,57 @@ export namespace Prisma {
     OR?: UsuarioContadorScalarWhereWithAggregatesInput[]
     NOT?: UsuarioContadorScalarWhereWithAggregatesInput | UsuarioContadorScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"UsuarioContador"> | string
-    UsuarioId?: StringWithAggregatesFilter<"UsuarioContador"> | string
+    usuarioId?: StringWithAggregatesFilter<"UsuarioContador"> | string
     contadorId?: StringWithAggregatesFilter<"UsuarioContador"> | string
+  }
+
+  export type ContadorEmitenteWhereInput = {
+    AND?: ContadorEmitenteWhereInput | ContadorEmitenteWhereInput[]
+    OR?: ContadorEmitenteWhereInput[]
+    NOT?: ContadorEmitenteWhereInput | ContadorEmitenteWhereInput[]
+    id?: StringFilter<"ContadorEmitente"> | string
+    emitenteId?: StringFilter<"ContadorEmitente"> | string
+    contadorId?: StringFilter<"ContadorEmitente"> | string
+    emitente?: XOR<EmitenteRelationFilter, EmitenteWhereInput>
+    contador?: XOR<ContadorRelationFilter, ContadorWhereInput>
+  }
+
+  export type ContadorEmitenteOrderByWithRelationInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
+    contadorId?: SortOrder
+    emitente?: EmitenteOrderByWithRelationInput
+    contador?: ContadorOrderByWithRelationInput
+  }
+
+  export type ContadorEmitenteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    emitenteId_contadorId?: ContadorEmitenteEmitenteIdContadorIdCompoundUniqueInput
+    AND?: ContadorEmitenteWhereInput | ContadorEmitenteWhereInput[]
+    OR?: ContadorEmitenteWhereInput[]
+    NOT?: ContadorEmitenteWhereInput | ContadorEmitenteWhereInput[]
+    emitenteId?: StringFilter<"ContadorEmitente"> | string
+    contadorId?: StringFilter<"ContadorEmitente"> | string
+    emitente?: XOR<EmitenteRelationFilter, EmitenteWhereInput>
+    contador?: XOR<ContadorRelationFilter, ContadorWhereInput>
+  }, "id" | "emitenteId_contadorId">
+
+  export type ContadorEmitenteOrderByWithAggregationInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
+    contadorId?: SortOrder
+    _count?: ContadorEmitenteCountOrderByAggregateInput
+    _max?: ContadorEmitenteMaxOrderByAggregateInput
+    _min?: ContadorEmitenteMinOrderByAggregateInput
+  }
+
+  export type ContadorEmitenteScalarWhereWithAggregatesInput = {
+    AND?: ContadorEmitenteScalarWhereWithAggregatesInput | ContadorEmitenteScalarWhereWithAggregatesInput[]
+    OR?: ContadorEmitenteScalarWhereWithAggregatesInput[]
+    NOT?: ContadorEmitenteScalarWhereWithAggregatesInput | ContadorEmitenteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ContadorEmitente"> | string
+    emitenteId?: StringWithAggregatesFilter<"ContadorEmitente"> | string
+    contadorId?: StringWithAggregatesFilter<"ContadorEmitente"> | string
   }
 
   export type EmitenteWhereInput = {
@@ -7748,11 +8809,10 @@ export namespace Prisma {
     cnpj?: StringNullableFilter<"Emitente"> | string | null
     cpf?: StringNullableFilter<"Emitente"> | string | null
     IE?: StringFilter<"Emitente"> | string
-    contadorId?: StringNullableFilter<"Emitente"> | string | null
     createdAt?: DateTimeFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
-    contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
+    contadores?: ContadorEmitenteListRelationFilter
   }
 
   export type EmitenteOrderByWithRelationInput = {
@@ -7763,11 +8823,10 @@ export namespace Prisma {
     cnpj?: SortOrder
     cpf?: SortOrder
     IE?: SortOrder
-    contadorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     enderecos?: EnderecoOrderByRelationAggregateInput
-    contador?: ContadorOrderByWithRelationInput
+    contadores?: ContadorEmitenteOrderByRelationAggregateInput
   }
 
   export type EmitenteWhereUniqueInput = Prisma.AtLeast<{
@@ -7783,11 +8842,10 @@ export namespace Prisma {
     cnpj?: StringNullableFilter<"Emitente"> | string | null
     cpf?: StringNullableFilter<"Emitente"> | string | null
     IE?: StringFilter<"Emitente"> | string
-    contadorId?: StringNullableFilter<"Emitente"> | string | null
     createdAt?: DateTimeFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
-    contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
+    contadores?: ContadorEmitenteListRelationFilter
   }, "id" | "cnpj_IE" | "cpf_IE">
 
   export type EmitenteOrderByWithAggregationInput = {
@@ -7798,7 +8856,6 @@ export namespace Prisma {
     cnpj?: SortOrder
     cpf?: SortOrder
     IE?: SortOrder
-    contadorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmitenteCountOrderByAggregateInput
@@ -7817,7 +8874,6 @@ export namespace Prisma {
     cnpj?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
     cpf?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
     IE?: StringWithAggregatesFilter<"Emitente"> | string
-    contadorId?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
   }
@@ -8058,7 +9114,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
-    Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
+    emitentes?: ContadorEmitenteCreateNestedManyWithoutContadorInput
     endereco?: EnderecoCreateNestedOneWithoutContadorInput
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
@@ -8073,7 +9129,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
-    Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
+    emitentes?: ContadorEmitenteUncheckedCreateNestedManyWithoutContadorInput
     endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
@@ -8087,7 +9143,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
-    Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
+    emitentes?: ContadorEmitenteUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
@@ -8101,7 +9157,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
-    Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
+    emitentes?: ContadorEmitenteUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
@@ -8145,7 +9201,7 @@ export namespace Prisma {
 
   export type UsuarioContadorUncheckedCreateInput = {
     id?: string
-    UsuarioId: string
+    usuarioId: string
     contadorId: string
   }
 
@@ -8155,13 +9211,13 @@ export namespace Prisma {
   }
 
   export type UsuarioContadorUncheckedUpdateInput = {
-    UsuarioId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UsuarioContadorCreateManyInput = {
     id?: string
-    UsuarioId: string
+    usuarioId: string
     contadorId: string
   }
 
@@ -8170,7 +9226,44 @@ export namespace Prisma {
   }
 
   export type UsuarioContadorUncheckedUpdateManyInput = {
-    UsuarioId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+    contadorId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ContadorEmitenteCreateInput = {
+    id?: string
+    emitente: EmitenteCreateNestedOneWithoutContadoresInput
+    contador: ContadorCreateNestedOneWithoutEmitentesInput
+  }
+
+  export type ContadorEmitenteUncheckedCreateInput = {
+    id?: string
+    emitenteId: string
+    contadorId: string
+  }
+
+  export type ContadorEmitenteUpdateInput = {
+    emitente?: EmitenteUpdateOneRequiredWithoutContadoresNestedInput
+    contador?: ContadorUpdateOneRequiredWithoutEmitentesNestedInput
+  }
+
+  export type ContadorEmitenteUncheckedUpdateInput = {
+    emitenteId?: StringFieldUpdateOperationsInput | string
+    contadorId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ContadorEmitenteCreateManyInput = {
+    id?: string
+    emitenteId: string
+    contadorId: string
+  }
+
+  export type ContadorEmitenteUpdateManyMutationInput = {
+
+  }
+
+  export type ContadorEmitenteUncheckedUpdateManyInput = {
+    emitenteId?: StringFieldUpdateOperationsInput | string
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -8185,7 +9278,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
-    contador?: ContadorCreateNestedOneWithoutEmitentesInput
+    contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateInput = {
@@ -8196,10 +9289,10 @@ export namespace Prisma {
     cnpj?: string | null
     cpf?: string | null
     IE: string
-    contadorId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
+    contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUpdateInput = {
@@ -8212,7 +9305,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
-    contador?: ContadorUpdateOneWithoutEmitentesNestedInput
+    contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateInput = {
@@ -8222,10 +9315,10 @@ export namespace Prisma {
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     IE?: StringFieldUpdateOperationsInput | string
-    contadorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
+    contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteCreateManyInput = {
@@ -8236,7 +9329,6 @@ export namespace Prisma {
     cnpj?: string | null
     cpf?: string | null
     IE: string
-    contadorId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8259,7 +9351,6 @@ export namespace Prisma {
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     IE?: StringFieldUpdateOperationsInput | string
-    contadorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8563,10 +9654,10 @@ export namespace Prisma {
     isSet?: boolean
   }
 
-  export type EmitenteListRelationFilter = {
-    every?: EmitenteWhereInput
-    some?: EmitenteWhereInput
-    none?: EmitenteWhereInput
+  export type ContadorEmitenteListRelationFilter = {
+    every?: ContadorEmitenteWhereInput
+    some?: ContadorEmitenteWhereInput
+    none?: ContadorEmitenteWhereInput
   }
 
   export type EnderecoNullableRelationFilter = {
@@ -8580,7 +9671,7 @@ export namespace Prisma {
     none?: CertificadoWhereInput
   }
 
-  export type EmitenteOrderByRelationAggregateInput = {
+  export type ContadorEmitenteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8651,25 +9742,53 @@ export namespace Prisma {
   }
 
   export type UsuarioContadorUsuarioIdContadorIdCompoundUniqueInput = {
-    UsuarioId: string
+    usuarioId: string
     contadorId: string
   }
 
   export type UsuarioContadorCountOrderByAggregateInput = {
     id?: SortOrder
-    UsuarioId?: SortOrder
+    usuarioId?: SortOrder
     contadorId?: SortOrder
   }
 
   export type UsuarioContadorMaxOrderByAggregateInput = {
     id?: SortOrder
-    UsuarioId?: SortOrder
+    usuarioId?: SortOrder
     contadorId?: SortOrder
   }
 
   export type UsuarioContadorMinOrderByAggregateInput = {
     id?: SortOrder
-    UsuarioId?: SortOrder
+    usuarioId?: SortOrder
+    contadorId?: SortOrder
+  }
+
+  export type EmitenteRelationFilter = {
+    is?: EmitenteWhereInput
+    isNot?: EmitenteWhereInput
+  }
+
+  export type ContadorEmitenteEmitenteIdContadorIdCompoundUniqueInput = {
+    emitenteId: string
+    contadorId: string
+  }
+
+  export type ContadorEmitenteCountOrderByAggregateInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
+    contadorId?: SortOrder
+  }
+
+  export type ContadorEmitenteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
+    contadorId?: SortOrder
+  }
+
+  export type ContadorEmitenteMinOrderByAggregateInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
     contadorId?: SortOrder
   }
 
@@ -8677,11 +9796,6 @@ export namespace Prisma {
     every?: EnderecoWhereInput
     some?: EnderecoWhereInput
     none?: EnderecoWhereInput
-  }
-
-  export type ContadorNullableRelationFilter = {
-    is?: ContadorWhereInput | null
-    isNot?: ContadorWhereInput | null
   }
 
   export type EnderecoOrderByRelationAggregateInput = {
@@ -8706,7 +9820,6 @@ export namespace Prisma {
     cnpj?: SortOrder
     cpf?: SortOrder
     IE?: SortOrder
-    contadorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8719,7 +9832,6 @@ export namespace Prisma {
     cnpj?: SortOrder
     cpf?: SortOrder
     IE?: SortOrder
-    contadorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8732,7 +9844,6 @@ export namespace Prisma {
     cnpj?: SortOrder
     cpf?: SortOrder
     IE?: SortOrder
-    contadorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8747,6 +9858,11 @@ export namespace Prisma {
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
     isSet?: boolean
+  }
+
+  export type ContadorNullableRelationFilter = {
+    is?: ContadorWhereInput | null
+    isNot?: ContadorWhereInput | null
   }
 
   export type CertificadoCountOrderByAggregateInput = {
@@ -8908,11 +10024,11 @@ export namespace Prisma {
     connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
   }
 
-  export type EmitenteCreateNestedManyWithoutContadorInput = {
-    create?: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput> | EmitenteCreateWithoutContadorInput[] | EmitenteUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EmitenteCreateOrConnectWithoutContadorInput | EmitenteCreateOrConnectWithoutContadorInput[]
-    createMany?: EmitenteCreateManyContadorInputEnvelope
-    connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+  export type ContadorEmitenteCreateNestedManyWithoutContadorInput = {
+    create?: XOR<ContadorEmitenteCreateWithoutContadorInput, ContadorEmitenteUncheckedCreateWithoutContadorInput> | ContadorEmitenteCreateWithoutContadorInput[] | ContadorEmitenteUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutContadorInput | ContadorEmitenteCreateOrConnectWithoutContadorInput[]
+    createMany?: ContadorEmitenteCreateManyContadorInputEnvelope
+    connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
   }
 
   export type EnderecoCreateNestedOneWithoutContadorInput = {
@@ -8935,11 +10051,11 @@ export namespace Prisma {
     connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
   }
 
-  export type EmitenteUncheckedCreateNestedManyWithoutContadorInput = {
-    create?: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput> | EmitenteCreateWithoutContadorInput[] | EmitenteUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EmitenteCreateOrConnectWithoutContadorInput | EmitenteCreateOrConnectWithoutContadorInput[]
-    createMany?: EmitenteCreateManyContadorInputEnvelope
-    connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
+  export type ContadorEmitenteUncheckedCreateNestedManyWithoutContadorInput = {
+    create?: XOR<ContadorEmitenteCreateWithoutContadorInput, ContadorEmitenteUncheckedCreateWithoutContadorInput> | ContadorEmitenteCreateWithoutContadorInput[] | ContadorEmitenteUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutContadorInput | ContadorEmitenteCreateOrConnectWithoutContadorInput[]
+    createMany?: ContadorEmitenteCreateManyContadorInputEnvelope
+    connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
   }
 
   export type EnderecoUncheckedCreateNestedOneWithoutContadorInput = {
@@ -8974,18 +10090,18 @@ export namespace Prisma {
     deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
   }
 
-  export type EmitenteUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput> | EmitenteCreateWithoutContadorInput[] | EmitenteUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EmitenteCreateOrConnectWithoutContadorInput | EmitenteCreateOrConnectWithoutContadorInput[]
-    upsert?: EmitenteUpsertWithWhereUniqueWithoutContadorInput | EmitenteUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: EmitenteCreateManyContadorInputEnvelope
-    set?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
-    disconnect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
-    delete?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
-    connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
-    update?: EmitenteUpdateWithWhereUniqueWithoutContadorInput | EmitenteUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: EmitenteUpdateManyWithWhereWithoutContadorInput | EmitenteUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
+  export type ContadorEmitenteUpdateManyWithoutContadorNestedInput = {
+    create?: XOR<ContadorEmitenteCreateWithoutContadorInput, ContadorEmitenteUncheckedCreateWithoutContadorInput> | ContadorEmitenteCreateWithoutContadorInput[] | ContadorEmitenteUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutContadorInput | ContadorEmitenteCreateOrConnectWithoutContadorInput[]
+    upsert?: ContadorEmitenteUpsertWithWhereUniqueWithoutContadorInput | ContadorEmitenteUpsertWithWhereUniqueWithoutContadorInput[]
+    createMany?: ContadorEmitenteCreateManyContadorInputEnvelope
+    set?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    disconnect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    delete?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    update?: ContadorEmitenteUpdateWithWhereUniqueWithoutContadorInput | ContadorEmitenteUpdateWithWhereUniqueWithoutContadorInput[]
+    updateMany?: ContadorEmitenteUpdateManyWithWhereWithoutContadorInput | ContadorEmitenteUpdateManyWithWhereWithoutContadorInput[]
+    deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
   export type EnderecoUpdateOneWithoutContadorNestedInput = {
@@ -9026,18 +10142,18 @@ export namespace Prisma {
     deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
   }
 
-  export type EmitenteUncheckedUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput> | EmitenteCreateWithoutContadorInput[] | EmitenteUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EmitenteCreateOrConnectWithoutContadorInput | EmitenteCreateOrConnectWithoutContadorInput[]
-    upsert?: EmitenteUpsertWithWhereUniqueWithoutContadorInput | EmitenteUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: EmitenteCreateManyContadorInputEnvelope
-    set?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
-    disconnect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
-    delete?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
-    connect?: EmitenteWhereUniqueInput | EmitenteWhereUniqueInput[]
-    update?: EmitenteUpdateWithWhereUniqueWithoutContadorInput | EmitenteUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: EmitenteUpdateManyWithWhereWithoutContadorInput | EmitenteUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
+  export type ContadorEmitenteUncheckedUpdateManyWithoutContadorNestedInput = {
+    create?: XOR<ContadorEmitenteCreateWithoutContadorInput, ContadorEmitenteUncheckedCreateWithoutContadorInput> | ContadorEmitenteCreateWithoutContadorInput[] | ContadorEmitenteUncheckedCreateWithoutContadorInput[]
+    connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutContadorInput | ContadorEmitenteCreateOrConnectWithoutContadorInput[]
+    upsert?: ContadorEmitenteUpsertWithWhereUniqueWithoutContadorInput | ContadorEmitenteUpsertWithWhereUniqueWithoutContadorInput[]
+    createMany?: ContadorEmitenteCreateManyContadorInputEnvelope
+    set?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    disconnect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    delete?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    update?: ContadorEmitenteUpdateWithWhereUniqueWithoutContadorInput | ContadorEmitenteUpdateWithWhereUniqueWithoutContadorInput[]
+    updateMany?: ContadorEmitenteUpdateManyWithWhereWithoutContadorInput | ContadorEmitenteUpdateManyWithWhereWithoutContadorInput[]
+    deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
   export type EnderecoUncheckedUpdateOneWithoutContadorNestedInput = {
@@ -9092,11 +10208,10 @@ export namespace Prisma {
     update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutUsuariosInput, ContadorUpdateWithoutUsuariosInput>, ContadorUncheckedUpdateWithoutUsuariosInput>
   }
 
-  export type EnderecoCreateNestedManyWithoutEmitenteInput = {
-    create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
-    createMany?: EnderecoCreateManyEmitenteInputEnvelope
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+  export type EmitenteCreateNestedOneWithoutContadoresInput = {
+    create?: XOR<EmitenteCreateWithoutContadoresInput, EmitenteUncheckedCreateWithoutContadoresInput>
+    connectOrCreate?: EmitenteCreateOrConnectWithoutContadoresInput
+    connect?: EmitenteWhereUniqueInput
   }
 
   export type ContadorCreateNestedOneWithoutEmitentesInput = {
@@ -9105,11 +10220,48 @@ export namespace Prisma {
     connect?: ContadorWhereUniqueInput
   }
 
+  export type EmitenteUpdateOneRequiredWithoutContadoresNestedInput = {
+    create?: XOR<EmitenteCreateWithoutContadoresInput, EmitenteUncheckedCreateWithoutContadoresInput>
+    connectOrCreate?: EmitenteCreateOrConnectWithoutContadoresInput
+    upsert?: EmitenteUpsertWithoutContadoresInput
+    connect?: EmitenteWhereUniqueInput
+    update?: XOR<XOR<EmitenteUpdateToOneWithWhereWithoutContadoresInput, EmitenteUpdateWithoutContadoresInput>, EmitenteUncheckedUpdateWithoutContadoresInput>
+  }
+
+  export type ContadorUpdateOneRequiredWithoutEmitentesNestedInput = {
+    create?: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
+    connectOrCreate?: ContadorCreateOrConnectWithoutEmitentesInput
+    upsert?: ContadorUpsertWithoutEmitentesInput
+    connect?: ContadorWhereUniqueInput
+    update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutEmitentesInput, ContadorUpdateWithoutEmitentesInput>, ContadorUncheckedUpdateWithoutEmitentesInput>
+  }
+
+  export type EnderecoCreateNestedManyWithoutEmitenteInput = {
+    create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
+    createMany?: EnderecoCreateManyEmitenteInputEnvelope
+    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+  }
+
+  export type ContadorEmitenteCreateNestedManyWithoutEmitenteInput = {
+    create?: XOR<ContadorEmitenteCreateWithoutEmitenteInput, ContadorEmitenteUncheckedCreateWithoutEmitenteInput> | ContadorEmitenteCreateWithoutEmitenteInput[] | ContadorEmitenteUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutEmitenteInput | ContadorEmitenteCreateOrConnectWithoutEmitenteInput[]
+    createMany?: ContadorEmitenteCreateManyEmitenteInputEnvelope
+    connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+  }
+
   export type EnderecoUncheckedCreateNestedManyWithoutEmitenteInput = {
     create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
     connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
     createMany?: EnderecoCreateManyEmitenteInputEnvelope
     connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+  }
+
+  export type ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput = {
+    create?: XOR<ContadorEmitenteCreateWithoutEmitenteInput, ContadorEmitenteUncheckedCreateWithoutEmitenteInput> | ContadorEmitenteCreateWithoutEmitenteInput[] | ContadorEmitenteUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutEmitenteInput | ContadorEmitenteCreateOrConnectWithoutEmitenteInput[]
+    createMany?: ContadorEmitenteCreateManyEmitenteInputEnvelope
+    connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
   }
 
   export type EnderecoUpdateManyWithoutEmitenteNestedInput = {
@@ -9126,14 +10278,18 @@ export namespace Prisma {
     deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
   }
 
-  export type ContadorUpdateOneWithoutEmitentesNestedInput = {
-    create?: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
-    connectOrCreate?: ContadorCreateOrConnectWithoutEmitentesInput
-    upsert?: ContadorUpsertWithoutEmitentesInput
-    disconnect?: boolean
-    delete?: ContadorWhereInput | boolean
-    connect?: ContadorWhereUniqueInput
-    update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutEmitentesInput, ContadorUpdateWithoutEmitentesInput>, ContadorUncheckedUpdateWithoutEmitentesInput>
+  export type ContadorEmitenteUpdateManyWithoutEmitenteNestedInput = {
+    create?: XOR<ContadorEmitenteCreateWithoutEmitenteInput, ContadorEmitenteUncheckedCreateWithoutEmitenteInput> | ContadorEmitenteCreateWithoutEmitenteInput[] | ContadorEmitenteUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutEmitenteInput | ContadorEmitenteCreateOrConnectWithoutEmitenteInput[]
+    upsert?: ContadorEmitenteUpsertWithWhereUniqueWithoutEmitenteInput | ContadorEmitenteUpsertWithWhereUniqueWithoutEmitenteInput[]
+    createMany?: ContadorEmitenteCreateManyEmitenteInputEnvelope
+    set?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    disconnect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    delete?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    update?: ContadorEmitenteUpdateWithWhereUniqueWithoutEmitenteInput | ContadorEmitenteUpdateWithWhereUniqueWithoutEmitenteInput[]
+    updateMany?: ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput | ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput[]
+    deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
   export type EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput = {
@@ -9148,6 +10304,20 @@ export namespace Prisma {
     update?: EnderecoUpdateWithWhereUniqueWithoutEmitenteInput | EnderecoUpdateWithWhereUniqueWithoutEmitenteInput[]
     updateMany?: EnderecoUpdateManyWithWhereWithoutEmitenteInput | EnderecoUpdateManyWithWhereWithoutEmitenteInput[]
     deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+  }
+
+  export type ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput = {
+    create?: XOR<ContadorEmitenteCreateWithoutEmitenteInput, ContadorEmitenteUncheckedCreateWithoutEmitenteInput> | ContadorEmitenteCreateWithoutEmitenteInput[] | ContadorEmitenteUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutEmitenteInput | ContadorEmitenteCreateOrConnectWithoutEmitenteInput[]
+    upsert?: ContadorEmitenteUpsertWithWhereUniqueWithoutEmitenteInput | ContadorEmitenteUpsertWithWhereUniqueWithoutEmitenteInput[]
+    createMany?: ContadorEmitenteCreateManyEmitenteInputEnvelope
+    set?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    disconnect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    delete?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+    update?: ContadorEmitenteUpdateWithWhereUniqueWithoutEmitenteInput | ContadorEmitenteUpdateWithWhereUniqueWithoutEmitenteInput[]
+    updateMany?: ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput | ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput[]
+    deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
   export type ContadorCreateNestedOneWithoutCertificadosInput = {
@@ -9399,7 +10569,7 @@ export namespace Prisma {
     OR?: UsuarioContadorScalarWhereInput[]
     NOT?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
     id?: StringFilter<"UsuarioContador"> | string
-    UsuarioId?: StringFilter<"UsuarioContador"> | string
+    usuarioId?: StringFilter<"UsuarioContador"> | string
     contadorId?: StringFilter<"UsuarioContador"> | string
   }
 
@@ -9410,7 +10580,7 @@ export namespace Prisma {
 
   export type UsuarioContadorUncheckedCreateWithoutContadorInput = {
     id?: string
-    UsuarioId: string
+    usuarioId: string
   }
 
   export type UsuarioContadorCreateOrConnectWithoutContadorInput = {
@@ -9422,39 +10592,23 @@ export namespace Prisma {
     data: UsuarioContadorCreateManyContadorInput | UsuarioContadorCreateManyContadorInput[]
   }
 
-  export type EmitenteCreateWithoutContadorInput = {
+  export type ContadorEmitenteCreateWithoutContadorInput = {
     id?: string
-    cod_dominio?: string | null
-    nome: string
-    razao_social: string
-    cnpj?: string | null
-    cpf?: string | null
-    IE: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
+    emitente: EmitenteCreateNestedOneWithoutContadoresInput
   }
 
-  export type EmitenteUncheckedCreateWithoutContadorInput = {
+  export type ContadorEmitenteUncheckedCreateWithoutContadorInput = {
     id?: string
-    cod_dominio?: string | null
-    nome: string
-    razao_social: string
-    cnpj?: string | null
-    cpf?: string | null
-    IE: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
+    emitenteId: string
   }
 
-  export type EmitenteCreateOrConnectWithoutContadorInput = {
-    where: EmitenteWhereUniqueInput
-    create: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput>
+  export type ContadorEmitenteCreateOrConnectWithoutContadorInput = {
+    where: ContadorEmitenteWhereUniqueInput
+    create: XOR<ContadorEmitenteCreateWithoutContadorInput, ContadorEmitenteUncheckedCreateWithoutContadorInput>
   }
 
-  export type EmitenteCreateManyContadorInputEnvelope = {
-    data: EmitenteCreateManyContadorInput | EmitenteCreateManyContadorInput[]
+  export type ContadorEmitenteCreateManyContadorInputEnvelope = {
+    data: ContadorEmitenteCreateManyContadorInput | ContadorEmitenteCreateManyContadorInput[]
   }
 
   export type EnderecoCreateWithoutContadorInput = {
@@ -9535,36 +10689,29 @@ export namespace Prisma {
     data: XOR<UsuarioContadorUpdateManyMutationInput, UsuarioContadorUncheckedUpdateManyWithoutContadorInput>
   }
 
-  export type EmitenteUpsertWithWhereUniqueWithoutContadorInput = {
-    where: EmitenteWhereUniqueInput
-    update: XOR<EmitenteUpdateWithoutContadorInput, EmitenteUncheckedUpdateWithoutContadorInput>
-    create: XOR<EmitenteCreateWithoutContadorInput, EmitenteUncheckedCreateWithoutContadorInput>
+  export type ContadorEmitenteUpsertWithWhereUniqueWithoutContadorInput = {
+    where: ContadorEmitenteWhereUniqueInput
+    update: XOR<ContadorEmitenteUpdateWithoutContadorInput, ContadorEmitenteUncheckedUpdateWithoutContadorInput>
+    create: XOR<ContadorEmitenteCreateWithoutContadorInput, ContadorEmitenteUncheckedCreateWithoutContadorInput>
   }
 
-  export type EmitenteUpdateWithWhereUniqueWithoutContadorInput = {
-    where: EmitenteWhereUniqueInput
-    data: XOR<EmitenteUpdateWithoutContadorInput, EmitenteUncheckedUpdateWithoutContadorInput>
+  export type ContadorEmitenteUpdateWithWhereUniqueWithoutContadorInput = {
+    where: ContadorEmitenteWhereUniqueInput
+    data: XOR<ContadorEmitenteUpdateWithoutContadorInput, ContadorEmitenteUncheckedUpdateWithoutContadorInput>
   }
 
-  export type EmitenteUpdateManyWithWhereWithoutContadorInput = {
-    where: EmitenteScalarWhereInput
-    data: XOR<EmitenteUpdateManyMutationInput, EmitenteUncheckedUpdateManyWithoutContadorInput>
+  export type ContadorEmitenteUpdateManyWithWhereWithoutContadorInput = {
+    where: ContadorEmitenteScalarWhereInput
+    data: XOR<ContadorEmitenteUpdateManyMutationInput, ContadorEmitenteUncheckedUpdateManyWithoutContadorInput>
   }
 
-  export type EmitenteScalarWhereInput = {
-    AND?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
-    OR?: EmitenteScalarWhereInput[]
-    NOT?: EmitenteScalarWhereInput | EmitenteScalarWhereInput[]
-    id?: StringFilter<"Emitente"> | string
-    cod_dominio?: StringNullableFilter<"Emitente"> | string | null
-    nome?: StringFilter<"Emitente"> | string
-    razao_social?: StringFilter<"Emitente"> | string
-    cnpj?: StringNullableFilter<"Emitente"> | string | null
-    cpf?: StringNullableFilter<"Emitente"> | string | null
-    IE?: StringFilter<"Emitente"> | string
-    contadorId?: StringNullableFilter<"Emitente"> | string | null
-    createdAt?: DateTimeFilter<"Emitente"> | Date | string
-    updatedAt?: DateTimeFilter<"Emitente"> | Date | string
+  export type ContadorEmitenteScalarWhereInput = {
+    AND?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
+    OR?: ContadorEmitenteScalarWhereInput[]
+    NOT?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
+    id?: StringFilter<"ContadorEmitente"> | string
+    emitenteId?: StringFilter<"ContadorEmitente"> | string
+    contadorId?: StringFilter<"ContadorEmitente"> | string
   }
 
   export type EnderecoUpsertWithoutContadorInput = {
@@ -9668,7 +10815,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
+    emitentes?: ContadorEmitenteCreateNestedManyWithoutContadorInput
     endereco?: EnderecoCreateNestedOneWithoutContadorInput
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
@@ -9682,7 +10829,7 @@ export namespace Prisma {
     email?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
+    emitentes?: ContadorEmitenteUncheckedCreateNestedManyWithoutContadorInput
     endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
@@ -9738,7 +10885,7 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
+    emitentes?: ContadorEmitenteUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
@@ -9751,7 +10898,143 @@ export namespace Prisma {
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
+    emitentes?: ContadorEmitenteUncheckedUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
+    certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
+  }
+
+  export type EmitenteCreateWithoutContadoresInput = {
+    id?: string
+    cod_dominio?: string | null
+    nome: string
+    razao_social: string
+    cnpj?: string | null
+    cpf?: string | null
+    IE: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
+  }
+
+  export type EmitenteUncheckedCreateWithoutContadoresInput = {
+    id?: string
+    cod_dominio?: string | null
+    nome: string
+    razao_social: string
+    cnpj?: string | null
+    cpf?: string | null
+    IE: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
+  }
+
+  export type EmitenteCreateOrConnectWithoutContadoresInput = {
+    where: EmitenteWhereUniqueInput
+    create: XOR<EmitenteCreateWithoutContadoresInput, EmitenteUncheckedCreateWithoutContadoresInput>
+  }
+
+  export type ContadorCreateWithoutEmitentesInput = {
+    id?: string
+    nome: string
+    cpf: string
+    regcrc: string
+    telefone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoCreateNestedOneWithoutContadorInput
+    certificados?: CertificadoCreateNestedManyWithoutContadorInput
+  }
+
+  export type ContadorUncheckedCreateWithoutEmitentesInput = {
+    id?: string
+    nome: string
+    cpf: string
+    regcrc: string
+    telefone?: string | null
+    email?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
+    certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
+  }
+
+  export type ContadorCreateOrConnectWithoutEmitentesInput = {
+    where: ContadorWhereUniqueInput
+    create: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
+  }
+
+  export type EmitenteUpsertWithoutContadoresInput = {
+    update: XOR<EmitenteUpdateWithoutContadoresInput, EmitenteUncheckedUpdateWithoutContadoresInput>
+    create: XOR<EmitenteCreateWithoutContadoresInput, EmitenteUncheckedCreateWithoutContadoresInput>
+    where?: EmitenteWhereInput
+  }
+
+  export type EmitenteUpdateToOneWithWhereWithoutContadoresInput = {
+    where?: EmitenteWhereInput
+    data: XOR<EmitenteUpdateWithoutContadoresInput, EmitenteUncheckedUpdateWithoutContadoresInput>
+  }
+
+  export type EmitenteUpdateWithoutContadoresInput = {
+    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: StringFieldUpdateOperationsInput | string
+    razao_social?: StringFieldUpdateOperationsInput | string
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    IE?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
+  }
+
+  export type EmitenteUncheckedUpdateWithoutContadoresInput = {
+    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: StringFieldUpdateOperationsInput | string
+    razao_social?: StringFieldUpdateOperationsInput | string
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    IE?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
+  }
+
+  export type ContadorUpsertWithoutEmitentesInput = {
+    update: XOR<ContadorUpdateWithoutEmitentesInput, ContadorUncheckedUpdateWithoutEmitentesInput>
+    create: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
+    where?: ContadorWhereInput
+  }
+
+  export type ContadorUpdateToOneWithWhereWithoutEmitentesInput = {
+    where?: ContadorWhereInput
+    data: XOR<ContadorUpdateWithoutEmitentesInput, ContadorUncheckedUpdateWithoutEmitentesInput>
+  }
+
+  export type ContadorUpdateWithoutEmitentesInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    cpf?: StringFieldUpdateOperationsInput | string
+    regcrc?: StringFieldUpdateOperationsInput | string
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
+    certificados?: CertificadoUpdateManyWithoutContadorNestedInput
+  }
+
+  export type ContadorUncheckedUpdateWithoutEmitentesInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    cpf?: StringFieldUpdateOperationsInput | string
+    regcrc?: StringFieldUpdateOperationsInput | string
+    telefone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
@@ -9797,37 +11080,23 @@ export namespace Prisma {
     data: EnderecoCreateManyEmitenteInput | EnderecoCreateManyEmitenteInput[]
   }
 
-  export type ContadorCreateWithoutEmitentesInput = {
+  export type ContadorEmitenteCreateWithoutEmitenteInput = {
     id?: string
-    nome: string
-    cpf: string
-    regcrc: string
-    telefone?: string | null
-    email?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
-    endereco?: EnderecoCreateNestedOneWithoutContadorInput
-    certificados?: CertificadoCreateNestedManyWithoutContadorInput
+    contador: ContadorCreateNestedOneWithoutEmitentesInput
   }
 
-  export type ContadorUncheckedCreateWithoutEmitentesInput = {
+  export type ContadorEmitenteUncheckedCreateWithoutEmitenteInput = {
     id?: string
-    nome: string
-    cpf: string
-    regcrc: string
-    telefone?: string | null
-    email?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
-    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
-    certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
+    contadorId: string
   }
 
-  export type ContadorCreateOrConnectWithoutEmitentesInput = {
-    where: ContadorWhereUniqueInput
-    create: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
+  export type ContadorEmitenteCreateOrConnectWithoutEmitenteInput = {
+    where: ContadorEmitenteWhereUniqueInput
+    create: XOR<ContadorEmitenteCreateWithoutEmitenteInput, ContadorEmitenteUncheckedCreateWithoutEmitenteInput>
+  }
+
+  export type ContadorEmitenteCreateManyEmitenteInputEnvelope = {
+    data: ContadorEmitenteCreateManyEmitenteInput | ContadorEmitenteCreateManyEmitenteInput[]
   }
 
   export type EnderecoUpsertWithWhereUniqueWithoutEmitenteInput = {
@@ -9866,41 +11135,20 @@ export namespace Prisma {
     emitenteId?: StringNullableFilter<"Endereco"> | string | null
   }
 
-  export type ContadorUpsertWithoutEmitentesInput = {
-    update: XOR<ContadorUpdateWithoutEmitentesInput, ContadorUncheckedUpdateWithoutEmitentesInput>
-    create: XOR<ContadorCreateWithoutEmitentesInput, ContadorUncheckedCreateWithoutEmitentesInput>
-    where?: ContadorWhereInput
+  export type ContadorEmitenteUpsertWithWhereUniqueWithoutEmitenteInput = {
+    where: ContadorEmitenteWhereUniqueInput
+    update: XOR<ContadorEmitenteUpdateWithoutEmitenteInput, ContadorEmitenteUncheckedUpdateWithoutEmitenteInput>
+    create: XOR<ContadorEmitenteCreateWithoutEmitenteInput, ContadorEmitenteUncheckedCreateWithoutEmitenteInput>
   }
 
-  export type ContadorUpdateToOneWithWhereWithoutEmitentesInput = {
-    where?: ContadorWhereInput
-    data: XOR<ContadorUpdateWithoutEmitentesInput, ContadorUncheckedUpdateWithoutEmitentesInput>
+  export type ContadorEmitenteUpdateWithWhereUniqueWithoutEmitenteInput = {
+    where: ContadorEmitenteWhereUniqueInput
+    data: XOR<ContadorEmitenteUpdateWithoutEmitenteInput, ContadorEmitenteUncheckedUpdateWithoutEmitenteInput>
   }
 
-  export type ContadorUpdateWithoutEmitentesInput = {
-    nome?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
-    regcrc?: StringFieldUpdateOperationsInput | string
-    telefone?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
-    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
-    certificados?: CertificadoUpdateManyWithoutContadorNestedInput
-  }
-
-  export type ContadorUncheckedUpdateWithoutEmitentesInput = {
-    nome?: StringFieldUpdateOperationsInput | string
-    cpf?: StringFieldUpdateOperationsInput | string
-    regcrc?: StringFieldUpdateOperationsInput | string
-    telefone?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
-    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
-    certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
+  export type ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput = {
+    where: ContadorEmitenteScalarWhereInput
+    data: XOR<ContadorEmitenteUpdateManyMutationInput, ContadorEmitenteUncheckedUpdateManyWithoutEmitenteInput>
   }
 
   export type ContadorCreateWithoutCertificadosInput = {
@@ -9913,7 +11161,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
-    Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
+    emitentes?: ContadorEmitenteCreateNestedManyWithoutContadorInput
     endereco?: EnderecoCreateNestedOneWithoutContadorInput
   }
 
@@ -9927,7 +11175,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
-    Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
+    emitentes?: ContadorEmitenteUncheckedCreateNestedManyWithoutContadorInput
     endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
   }
 
@@ -9956,7 +11204,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
-    Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
+    emitentes?: ContadorEmitenteUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUpdateOneWithoutContadorNestedInput
   }
 
@@ -9969,7 +11217,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
-    Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
+    emitentes?: ContadorEmitenteUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
   }
 
@@ -9983,7 +11231,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
-    Emitentes?: EmitenteCreateNestedManyWithoutContadorInput
+    emitentes?: ContadorEmitenteCreateNestedManyWithoutContadorInput
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
 
@@ -9997,7 +11245,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
-    Emitentes?: EmitenteUncheckedCreateNestedManyWithoutContadorInput
+    emitentes?: ContadorEmitenteUncheckedCreateNestedManyWithoutContadorInput
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
 
@@ -10016,7 +11264,7 @@ export namespace Prisma {
     IE: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    contador?: ContadorCreateNestedOneWithoutEmitentesInput
+    contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateWithoutEnderecosInput = {
@@ -10027,9 +11275,9 @@ export namespace Prisma {
     cnpj?: string | null
     cpf?: string | null
     IE: string
-    contadorId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteCreateOrConnectWithoutEnderecosInput = {
@@ -10057,7 +11305,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
-    Emitentes?: EmitenteUpdateManyWithoutContadorNestedInput
+    emitentes?: ContadorEmitenteUpdateManyWithoutContadorNestedInput
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
 
@@ -10070,7 +11318,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
-    Emitentes?: EmitenteUncheckedUpdateManyWithoutContadorNestedInput
+    emitentes?: ContadorEmitenteUncheckedUpdateManyWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
 
@@ -10094,7 +11342,7 @@ export namespace Prisma {
     IE?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contador?: ContadorUpdateOneWithoutEmitentesNestedInput
+    contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateWithoutEnderecosInput = {
@@ -10104,9 +11352,9 @@ export namespace Prisma {
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
     IE?: StringFieldUpdateOperationsInput | string
-    contadorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type UsuarioContadorCreateManyUsuarioInput = {
@@ -10128,19 +11376,12 @@ export namespace Prisma {
 
   export type UsuarioContadorCreateManyContadorInput = {
     id?: string
-    UsuarioId: string
+    usuarioId: string
   }
 
-  export type EmitenteCreateManyContadorInput = {
+  export type ContadorEmitenteCreateManyContadorInput = {
     id?: string
-    cod_dominio?: string | null
-    nome: string
-    razao_social: string
-    cnpj?: string | null
-    cpf?: string | null
-    IE: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
+    emitenteId: string
   }
 
   export type CertificadoCreateManyContadorInput = {
@@ -10156,46 +11397,23 @@ export namespace Prisma {
   }
 
   export type UsuarioContadorUncheckedUpdateWithoutContadorInput = {
-    UsuarioId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UsuarioContadorUncheckedUpdateManyWithoutContadorInput = {
-    UsuarioId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type EmitenteUpdateWithoutContadorInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
-    nome?: StringFieldUpdateOperationsInput | string
-    razao_social?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
+  export type ContadorEmitenteUpdateWithoutContadorInput = {
+    emitente?: EmitenteUpdateOneRequiredWithoutContadoresNestedInput
   }
 
-  export type EmitenteUncheckedUpdateWithoutContadorInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
-    nome?: StringFieldUpdateOperationsInput | string
-    razao_social?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
+  export type ContadorEmitenteUncheckedUpdateWithoutContadorInput = {
+    emitenteId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type EmitenteUncheckedUpdateManyWithoutContadorInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
-    nome?: StringFieldUpdateOperationsInput | string
-    razao_social?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type ContadorEmitenteUncheckedUpdateManyWithoutContadorInput = {
+    emitenteId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CertificadoUpdateWithoutContadorInput = {
@@ -10233,6 +11451,11 @@ export namespace Prisma {
     uf: string
     codigoIBGEestado: string
     contadorId?: string | null
+  }
+
+  export type ContadorEmitenteCreateManyEmitenteInput = {
+    id?: string
+    contadorId: string
   }
 
   export type EnderecoUpdateWithoutEmitenteInput = {
@@ -10280,6 +11503,18 @@ export namespace Prisma {
     contadorId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type ContadorEmitenteUpdateWithoutEmitenteInput = {
+    contador?: ContadorUpdateOneRequiredWithoutEmitentesNestedInput
+  }
+
+  export type ContadorEmitenteUncheckedUpdateWithoutEmitenteInput = {
+    contadorId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ContadorEmitenteUncheckedUpdateManyWithoutEmitenteInput = {
+    contadorId?: StringFieldUpdateOperationsInput | string
+  }
+
 
 
   /**
@@ -10309,6 +11544,10 @@ export namespace Prisma {
      * @deprecated Use UsuarioContadorDefaultArgs instead
      */
     export type UsuarioContadorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UsuarioContadorDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ContadorEmitenteDefaultArgs instead
+     */
+    export type ContadorEmitenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ContadorEmitenteDefaultArgs<ExtArgs>
     /**
      * @deprecated Use EmitenteDefaultArgs instead
      */

@@ -134,7 +134,13 @@ exports.Prisma.ContadorScalarFieldEnum = {
 
 exports.Prisma.UsuarioContadorScalarFieldEnum = {
   id: 'id',
-  UsuarioId: 'UsuarioId',
+  usuarioId: 'usuarioId',
+  contadorId: 'contadorId'
+};
+
+exports.Prisma.ContadorEmitenteScalarFieldEnum = {
+  id: 'id',
+  emitenteId: 'emitenteId',
   contadorId: 'contadorId'
 };
 
@@ -146,7 +152,6 @@ exports.Prisma.EmitenteScalarFieldEnum = {
   cnpj: 'cnpj',
   cpf: 'cpf',
   IE: 'IE',
-  contadorId: 'contadorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -197,6 +202,7 @@ exports.Prisma.ModelName = {
   Usuario: 'Usuario',
   Contador: 'Contador',
   UsuarioContador: 'UsuarioContador',
+  ContadorEmitente: 'ContadorEmitente',
   Emitente: 'Emitente',
   Certificado: 'Certificado',
   Endereco: 'Endereco'

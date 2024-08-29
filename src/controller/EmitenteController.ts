@@ -21,12 +21,11 @@ export const createEmitente = async (data: InputContador, context: any): Promise
                 , enderecos: {
                     create: data.enderecos
                 },
-                contadorId: auth.contadorId
+                contadores: {
+                    create: { contadorId: auth.contadorId }
+                }
             }
         })
-
-        console.log(handleSuccess(emitente));
-
         return handleSuccess(emitente)
     } catch (error) {
         return handleError("Erro desconhecido.");

@@ -25,32 +25,42 @@ model Usuario {
 }
 
 model Contador {
-  id           String            @id @default(auto()) @map("_id") @db.ObjectId
+  id           String             @id @default(auto()) @map("_id") @db.ObjectId
   nome         String
-  cpf          String            @unique
-  regcrc       String            @unique
+  cpf          String             @unique
+  regcrc       String             @unique
   telefone     String?
   email        String?
   usuarios     UsuarioContador[]
-  Emitentes    Emitente[]
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
+  emitentes    ContadorEmitente[]
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
   endereco     Endereco?
   certificados Certificado[]
 }
 
 model UsuarioContador {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  UsuarioId  String   @db.ObjectId
+  usuarioId  String   @db.ObjectId
   contadorId String   @db.ObjectId
-  Usuario    Usuario  @relation(fields: [UsuarioId], references: [id], onDelete: Cascade)
+  Usuario    Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   contador   Contador @relation(fields: [contadorId], references: [id], onDelete: Cascade)
 
-  @@unique([UsuarioId, contadorId])
+  @@unique([usuarioId, contadorId])
+}
+
+model ContadorEmitente {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  emitenteId String   @db.ObjectId
+  contadorId String   @db.ObjectId
+  emitente   Emitente @relation(fields: [emitenteId], references: [id], onDelete: Cascade)
+  contador   Contador @relation(fields: [contadorId], references: [id], onDelete: Cascade)
+
+  @@unique([emitenteId, contadorId])
 }
 
 model Emitente {
-  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  id           String             @id @default(auto()) @map("_id") @db.ObjectId
   cod_dominio  String?
   nome         String
   razao_social String
@@ -58,10 +68,9 @@ model Emitente {
   cpf          String?
   IE           String
   enderecos    Endereco[]
-  contador     Contador?  @relation(fields: [contadorId], references: [id], onDelete: Cascade)
-  contadorId   String?    @db.ObjectId
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  contadores   ContadorEmitente[]
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
 
   @@unique([cnpj, IE])
   @@unique([cpf, IE])

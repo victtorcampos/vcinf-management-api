@@ -22,7 +22,7 @@ export const createContador = async (data: TypeContadorInput, context: any): Pro
     isAdminAuth(usuario);
     const contador = await prisma.create({
       data: {
-        ...data, usuarios: { create: { UsuarioId: usuario.userId } },
+        ...data, usuarios: { create: { usuarioId: usuario.userId } },
         endereco: { create: { ...data.endereco } },
         certificados: { create: [{ ...data.certificados[0], validade: new Date("2025-12-31T23:59:59Z") }] }
       },

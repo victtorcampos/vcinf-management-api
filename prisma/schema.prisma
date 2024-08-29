@@ -69,7 +69,6 @@ model Emitente {
   IE           String
   enderecos    Endereco[]
   contadores   ContadorEmitente[]
-  contadorId   String?            @db.ObjectId
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
 
