@@ -151,7 +151,7 @@ exports.Prisma.EmitenteScalarFieldEnum = {
   razao_social: 'razao_social',
   cnpj: 'cnpj',
   cpf: 'cpf',
-  IE: 'IE',
+  ie: 'ie',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

@@ -11,7 +11,7 @@ interface InputContador extends TypeEmitente {
     enderecos: [TypeEndereco]
 }
 
-export const createEmitente = async (data: InputContador, context: any): Promise<ApiResponse<any>> => {
+export const createEmitente = async (data: InputContador, context: any): Promise<ApiResponse<TypeEmitente>> => {
     try {
         const auth = getAuth(context.req);
         isAdminAuth(auth);
@@ -31,3 +31,15 @@ export const createEmitente = async (data: InputContador, context: any): Promise
         return handleError("Erro desconhecido.");
     }
 };
+export const findIdEmitente = async (id: string, context: any): Promise<ApiResponse<TypeEmitente | null>> => {
+    try {
+        const emitente = await prisma.findUnique({ where: { id: id } });
+        
+        console.log(handleSuccess(emitente));
+
+        return handleSuccess(emitente)
+    } catch (error) {
+        return handleError("Erro desconhecido.");
+    }
+};
+

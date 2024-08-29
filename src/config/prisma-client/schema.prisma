@@ -66,14 +66,14 @@ model Emitente {
   razao_social String
   cnpj         String?
   cpf          String?
-  IE           String
+  ie           String
   enderecos    Endereco[]
   contadores   ContadorEmitente[]
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
 
-  @@unique([cnpj, IE])
-  @@unique([cpf, IE])
+  @@unique([cnpj, ie])
+  @@unique([cpf, ie])
 }
 
 model Certificado {

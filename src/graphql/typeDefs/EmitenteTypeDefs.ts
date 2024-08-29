@@ -9,7 +9,7 @@ export const EmitenteTypeDefs = gql`
     razao_social: String
     cnpj: String
     cpf: String
-    ie: String
+    IE: String
     enderecos: [TypeEndereco]
   }
 
@@ -36,6 +36,7 @@ export const EmitenteTypeDefs = gql`
 
   type Mutation {
     createEmitente(data : EmitenteInputCreate): EmitenteResponse
+    findIdEmitente(id: ID!): EmitenteResponse
   }
 
   type Query {

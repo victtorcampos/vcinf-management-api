@@ -5367,7 +5367,7 @@ export namespace Prisma {
     razao_social: string | null
     cnpj: string | null
     cpf: string | null
-    IE: string | null
+    ie: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5379,7 +5379,7 @@ export namespace Prisma {
     razao_social: string | null
     cnpj: string | null
     cpf: string | null
-    IE: string | null
+    ie: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5391,7 +5391,7 @@ export namespace Prisma {
     razao_social: number
     cnpj: number
     cpf: number
-    IE: number
+    ie: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5405,7 +5405,7 @@ export namespace Prisma {
     razao_social?: true
     cnpj?: true
     cpf?: true
-    IE?: true
+    ie?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5417,7 +5417,7 @@ export namespace Prisma {
     razao_social?: true
     cnpj?: true
     cpf?: true
-    IE?: true
+    ie?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5429,7 +5429,7 @@ export namespace Prisma {
     razao_social?: true
     cnpj?: true
     cpf?: true
-    IE?: true
+    ie?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -5514,7 +5514,7 @@ export namespace Prisma {
     razao_social: string
     cnpj: string | null
     cpf: string | null
-    IE: string
+    ie: string
     createdAt: Date
     updatedAt: Date
     _count: EmitenteCountAggregateOutputType | null
@@ -5543,7 +5543,7 @@ export namespace Prisma {
     razao_social?: boolean
     cnpj?: boolean
     cpf?: boolean
-    IE?: boolean
+    ie?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     enderecos?: boolean | Emitente$enderecosArgs<ExtArgs>
@@ -5559,7 +5559,7 @@ export namespace Prisma {
     razao_social?: boolean
     cnpj?: boolean
     cpf?: boolean
-    IE?: boolean
+    ie?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -5583,7 +5583,7 @@ export namespace Prisma {
       razao_social: string
       cnpj: string | null
       cpf: string | null
-      IE: string
+      ie: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emitente"]>
@@ -5986,7 +5986,7 @@ export namespace Prisma {
     readonly razao_social: FieldRef<"Emitente", 'String'>
     readonly cnpj: FieldRef<"Emitente", 'String'>
     readonly cpf: FieldRef<"Emitente", 'String'>
-    readonly IE: FieldRef<"Emitente", 'String'>
+    readonly ie: FieldRef<"Emitente", 'String'>
     readonly createdAt: FieldRef<"Emitente", 'DateTime'>
     readonly updatedAt: FieldRef<"Emitente", 'DateTime'>
   }
@@ -8441,7 +8441,7 @@ export namespace Prisma {
     razao_social: 'razao_social',
     cnpj: 'cnpj',
     cpf: 'cpf',
-    IE: 'IE',
+    ie: 'ie',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -8808,7 +8808,7 @@ export namespace Prisma {
     razao_social?: StringFilter<"Emitente"> | string
     cnpj?: StringNullableFilter<"Emitente"> | string | null
     cpf?: StringNullableFilter<"Emitente"> | string | null
-    IE?: StringFilter<"Emitente"> | string
+    ie?: StringFilter<"Emitente"> | string
     createdAt?: DateTimeFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
@@ -8822,7 +8822,7 @@ export namespace Prisma {
     razao_social?: SortOrder
     cnpj?: SortOrder
     cpf?: SortOrder
-    IE?: SortOrder
+    ie?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     enderecos?: EnderecoOrderByRelationAggregateInput
@@ -8831,8 +8831,8 @@ export namespace Prisma {
 
   export type EmitenteWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    cnpj_IE?: EmitenteCnpjIECompoundUniqueInput
-    cpf_IE?: EmitenteCpfIECompoundUniqueInput
+    cnpj_ie?: EmitenteCnpjIeCompoundUniqueInput
+    cpf_ie?: EmitenteCpfIeCompoundUniqueInput
     AND?: EmitenteWhereInput | EmitenteWhereInput[]
     OR?: EmitenteWhereInput[]
     NOT?: EmitenteWhereInput | EmitenteWhereInput[]
@@ -8841,12 +8841,12 @@ export namespace Prisma {
     razao_social?: StringFilter<"Emitente"> | string
     cnpj?: StringNullableFilter<"Emitente"> | string | null
     cpf?: StringNullableFilter<"Emitente"> | string | null
-    IE?: StringFilter<"Emitente"> | string
+    ie?: StringFilter<"Emitente"> | string
     createdAt?: DateTimeFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
     contadores?: ContadorEmitenteListRelationFilter
-  }, "id" | "cnpj_IE" | "cpf_IE">
+  }, "id" | "cnpj_ie" | "cpf_ie">
 
   export type EmitenteOrderByWithAggregationInput = {
     id?: SortOrder
@@ -8855,7 +8855,7 @@ export namespace Prisma {
     razao_social?: SortOrder
     cnpj?: SortOrder
     cpf?: SortOrder
-    IE?: SortOrder
+    ie?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: EmitenteCountOrderByAggregateInput
@@ -8873,7 +8873,7 @@ export namespace Prisma {
     razao_social?: StringWithAggregatesFilter<"Emitente"> | string
     cnpj?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
     cpf?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
-    IE?: StringWithAggregatesFilter<"Emitente"> | string
+    ie?: StringWithAggregatesFilter<"Emitente"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
   }
@@ -9274,7 +9274,7 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    IE: string
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
@@ -9288,7 +9288,7 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    IE: string
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
@@ -9301,7 +9301,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
@@ -9314,7 +9314,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
@@ -9328,7 +9328,7 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    IE: string
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9339,7 +9339,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9350,7 +9350,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9802,14 +9802,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type EmitenteCnpjIECompoundUniqueInput = {
+  export type EmitenteCnpjIeCompoundUniqueInput = {
     cnpj: string
-    IE: string
+    ie: string
   }
 
-  export type EmitenteCpfIECompoundUniqueInput = {
+  export type EmitenteCpfIeCompoundUniqueInput = {
     cpf: string
-    IE: string
+    ie: string
   }
 
   export type EmitenteCountOrderByAggregateInput = {
@@ -9819,7 +9819,7 @@ export namespace Prisma {
     razao_social?: SortOrder
     cnpj?: SortOrder
     cpf?: SortOrder
-    IE?: SortOrder
+    ie?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9831,7 +9831,7 @@ export namespace Prisma {
     razao_social?: SortOrder
     cnpj?: SortOrder
     cpf?: SortOrder
-    IE?: SortOrder
+    ie?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -9843,7 +9843,7 @@ export namespace Prisma {
     razao_social?: SortOrder
     cnpj?: SortOrder
     cpf?: SortOrder
-    IE?: SortOrder
+    ie?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -10910,7 +10910,7 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    IE: string
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
@@ -10923,7 +10923,7 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    IE: string
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
@@ -10984,7 +10984,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
@@ -10996,7 +10996,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
@@ -11261,7 +11261,7 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    IE: string
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
@@ -11274,7 +11274,7 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    IE: string
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
@@ -11339,7 +11339,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
@@ -11351,7 +11351,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    IE?: StringFieldUpdateOperationsInput | string
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
