@@ -13,10 +13,11 @@ export const getUserAuth = (req: Request) => {
 
 export const getAuth = (req: Request) => {
     const authorization = req.headers.authorization;
-    if (authorization) {
-        const token = authorization.replace('Bearer ', '');
-        return verify(token, process.env.JWT_SECRET!) as { userId: string; role: string; contadorId: string };
-    } throw new AuthenticationError('Contador não selecionado');
+    if (!authorization) {
+        throw new AuthenticationError('Contador não selecionado');
+    }
+    const token = authorization.replace('Bearer ', '');
+    return verify(token, process.env.JWT_SECRET!) as { userId: string; role: string; contadorId: string };
 }
 
 export const isAdminAuth = (user: any) => {

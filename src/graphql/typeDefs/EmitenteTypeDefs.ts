@@ -9,13 +9,20 @@ export const EmitenteTypeDefs = gql`
     razao_social: String
     cnpj: String
     cpf: String
-    IE: String
+    ie: String
     enderecos: [TypeEndereco]
+    contadores: [TypeContador]
   }
 
   type EmitenteResponse {
     success: Boolean!
     data: TypeEmitente
+    error: ErrorResponse
+  }
+
+  type deleteEmitenteResponse {
+    success: Boolean!
+    data: String
     error: ErrorResponse
   }
 
@@ -37,6 +44,7 @@ export const EmitenteTypeDefs = gql`
   type Mutation {
     createEmitente(data : EmitenteInputCreate): EmitenteResponse
     findIdEmitente(id: ID!): EmitenteResponse
+    deleteIdEmitente(id: ID!): deleteEmitenteResponse
   }
 
   type Query {
