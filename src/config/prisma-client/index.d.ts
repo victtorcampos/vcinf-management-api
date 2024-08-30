@@ -34,6 +34,11 @@ export type UsuarioContador = $Result.DefaultSelection<Prisma.$UsuarioContadorPa
  */
 export type ContadorEmitente = $Result.DefaultSelection<Prisma.$ContadorEmitentePayload>
 /**
+ * Model UsuarioEmitente
+ * 
+ */
+export type UsuarioEmitente = $Result.DefaultSelection<Prisma.$UsuarioEmitentePayload>
+/**
  * Model Emitente
  * 
  */
@@ -197,6 +202,16 @@ export class PrismaClient<
     * ```
     */
   get contadorEmitente(): Prisma.ContadorEmitenteDelegate<ExtArgs>;
+
+  /**
+   * `prisma.usuarioEmitente`: Exposes CRUD operations for the **UsuarioEmitente** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UsuarioEmitentes
+    * const usuarioEmitentes = await prisma.usuarioEmitente.findMany()
+    * ```
+    */
+  get usuarioEmitente(): Prisma.UsuarioEmitenteDelegate<ExtArgs>;
 
   /**
    * `prisma.emitente`: Exposes CRUD operations for the **Emitente** model.
@@ -670,6 +685,7 @@ export namespace Prisma {
     Contador: 'Contador',
     UsuarioContador: 'UsuarioContador',
     ContadorEmitente: 'ContadorEmitente',
+    UsuarioEmitente: 'UsuarioEmitente',
     Emitente: 'Emitente',
     Certificado: 'Certificado',
     Endereco: 'Endereco'
@@ -688,7 +704,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "usuario" | "contador" | "usuarioContador" | "contadorEmitente" | "emitente" | "certificado" | "endereco"
+      modelProps: "usuario" | "contador" | "usuarioContador" | "contadorEmitente" | "usuarioEmitente" | "emitente" | "certificado" | "endereco"
       txIsolationLevel: never
     }
     model: {
@@ -985,6 +1001,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ContadorEmitenteCountArgs<ExtArgs>
             result: $Utils.Optional<ContadorEmitenteCountAggregateOutputType> | number
+          }
+        }
+      }
+      UsuarioEmitente: {
+        payload: Prisma.$UsuarioEmitentePayload<ExtArgs>
+        fields: Prisma.UsuarioEmitenteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UsuarioEmitenteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UsuarioEmitenteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
+          }
+          findFirst: {
+            args: Prisma.UsuarioEmitenteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UsuarioEmitenteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
+          }
+          findMany: {
+            args: Prisma.UsuarioEmitenteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>[]
+          }
+          create: {
+            args: Prisma.UsuarioEmitenteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
+          }
+          createMany: {
+            args: Prisma.UsuarioEmitenteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.UsuarioEmitenteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
+          }
+          update: {
+            args: Prisma.UsuarioEmitenteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
+          }
+          deleteMany: {
+            args: Prisma.UsuarioEmitenteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UsuarioEmitenteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UsuarioEmitenteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
+          }
+          aggregate: {
+            args: Prisma.UsuarioEmitenteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsuarioEmitente>
+          }
+          groupBy: {
+            args: Prisma.UsuarioEmitenteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioEmitenteGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.UsuarioEmitenteFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.UsuarioEmitenteAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.UsuarioEmitenteCountArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioEmitenteCountAggregateOutputType> | number
           }
         }
       }
@@ -1359,10 +1449,12 @@ export namespace Prisma {
 
   export type UsuarioCountOutputType = {
     contadores: number
+    emitentes: number
   }
 
   export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contadores?: boolean | UsuarioCountOutputTypeCountContadoresArgs
+    emitentes?: boolean | UsuarioCountOutputTypeCountEmitentesArgs
   }
 
   // Custom InputTypes
@@ -1381,6 +1473,13 @@ export namespace Prisma {
    */
   export type UsuarioCountOutputTypeCountContadoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UsuarioContadorWhereInput
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountEmitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsuarioEmitenteWhereInput
   }
 
 
@@ -1440,11 +1539,13 @@ export namespace Prisma {
   export type EmitenteCountOutputType = {
     enderecos: number
     contadores: number
+    usuarios: number
   }
 
   export type EmitenteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     enderecos?: boolean | EmitenteCountOutputTypeCountEnderecosArgs
     contadores?: boolean | EmitenteCountOutputTypeCountContadoresArgs
+    usuarios?: boolean | EmitenteCountOutputTypeCountUsuariosArgs
   }
 
   // Custom InputTypes
@@ -1470,6 +1571,13 @@ export namespace Prisma {
    */
   export type EmitenteCountOutputTypeCountContadoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContadorEmitenteWhereInput
+  }
+
+  /**
+   * EmitenteCountOutputType without action
+   */
+  export type EmitenteCountOutputTypeCountUsuariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsuarioEmitenteWhereInput
   }
 
 
@@ -1650,6 +1758,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     contadores?: boolean | Usuario$contadoresArgs<ExtArgs>
+    emitentes?: boolean | Usuario$emitentesArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
@@ -1665,6 +1774,7 @@ export namespace Prisma {
 
   export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contadores?: boolean | Usuario$contadoresArgs<ExtArgs>
+    emitentes?: boolean | Usuario$emitentesArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1672,6 +1782,7 @@ export namespace Prisma {
     name: "Usuario"
     objects: {
       contadores: Prisma.$UsuarioContadorPayload<ExtArgs>[]
+      emitentes: Prisma.$UsuarioEmitentePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2044,6 +2155,7 @@ export namespace Prisma {
   export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     contadores<T extends Usuario$contadoresArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$contadoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findMany"> | Null>
+    emitentes<T extends Usuario$emitentesArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$emitentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2422,6 +2534,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UsuarioContadorScalarFieldEnum | UsuarioContadorScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario.emitentes
+   */
+  export type Usuario$emitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    where?: UsuarioEmitenteWhereInput
+    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
+    cursor?: UsuarioEmitenteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
   }
 
   /**
@@ -5313,6 +5445,917 @@ export namespace Prisma {
 
 
   /**
+   * Model UsuarioEmitente
+   */
+
+  export type AggregateUsuarioEmitente = {
+    _count: UsuarioEmitenteCountAggregateOutputType | null
+    _min: UsuarioEmitenteMinAggregateOutputType | null
+    _max: UsuarioEmitenteMaxAggregateOutputType | null
+  }
+
+  export type UsuarioEmitenteMinAggregateOutputType = {
+    id: string | null
+    emitenteId: string | null
+    usuarioId: string | null
+  }
+
+  export type UsuarioEmitenteMaxAggregateOutputType = {
+    id: string | null
+    emitenteId: string | null
+    usuarioId: string | null
+  }
+
+  export type UsuarioEmitenteCountAggregateOutputType = {
+    id: number
+    emitenteId: number
+    usuarioId: number
+    _all: number
+  }
+
+
+  export type UsuarioEmitenteMinAggregateInputType = {
+    id?: true
+    emitenteId?: true
+    usuarioId?: true
+  }
+
+  export type UsuarioEmitenteMaxAggregateInputType = {
+    id?: true
+    emitenteId?: true
+    usuarioId?: true
+  }
+
+  export type UsuarioEmitenteCountAggregateInputType = {
+    id?: true
+    emitenteId?: true
+    usuarioId?: true
+    _all?: true
+  }
+
+  export type UsuarioEmitenteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UsuarioEmitente to aggregate.
+     */
+    where?: UsuarioEmitenteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UsuarioEmitentes to fetch.
+     */
+    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UsuarioEmitenteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UsuarioEmitentes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UsuarioEmitentes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UsuarioEmitentes
+    **/
+    _count?: true | UsuarioEmitenteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UsuarioEmitenteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UsuarioEmitenteMaxAggregateInputType
+  }
+
+  export type GetUsuarioEmitenteAggregateType<T extends UsuarioEmitenteAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsuarioEmitente]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUsuarioEmitente[P]>
+      : GetScalarType<T[P], AggregateUsuarioEmitente[P]>
+  }
+
+
+
+
+  export type UsuarioEmitenteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsuarioEmitenteWhereInput
+    orderBy?: UsuarioEmitenteOrderByWithAggregationInput | UsuarioEmitenteOrderByWithAggregationInput[]
+    by: UsuarioEmitenteScalarFieldEnum[] | UsuarioEmitenteScalarFieldEnum
+    having?: UsuarioEmitenteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UsuarioEmitenteCountAggregateInputType | true
+    _min?: UsuarioEmitenteMinAggregateInputType
+    _max?: UsuarioEmitenteMaxAggregateInputType
+  }
+
+  export type UsuarioEmitenteGroupByOutputType = {
+    id: string
+    emitenteId: string
+    usuarioId: string
+    _count: UsuarioEmitenteCountAggregateOutputType | null
+    _min: UsuarioEmitenteMinAggregateOutputType | null
+    _max: UsuarioEmitenteMaxAggregateOutputType | null
+  }
+
+  type GetUsuarioEmitenteGroupByPayload<T extends UsuarioEmitenteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UsuarioEmitenteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UsuarioEmitenteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UsuarioEmitenteGroupByOutputType[P]>
+            : GetScalarType<T[P], UsuarioEmitenteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UsuarioEmitenteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    emitenteId?: boolean
+    usuarioId?: boolean
+    emitente?: boolean | EmitenteDefaultArgs<ExtArgs>
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usuarioEmitente"]>
+
+
+  export type UsuarioEmitenteSelectScalar = {
+    id?: boolean
+    emitenteId?: boolean
+    usuarioId?: boolean
+  }
+
+  export type UsuarioEmitenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    emitente?: boolean | EmitenteDefaultArgs<ExtArgs>
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
+
+  export type $UsuarioEmitentePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UsuarioEmitente"
+    objects: {
+      emitente: Prisma.$EmitentePayload<ExtArgs>
+      usuario: Prisma.$UsuarioPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      emitenteId: string
+      usuarioId: string
+    }, ExtArgs["result"]["usuarioEmitente"]>
+    composites: {}
+  }
+
+  type UsuarioEmitenteGetPayload<S extends boolean | null | undefined | UsuarioEmitenteDefaultArgs> = $Result.GetResult<Prisma.$UsuarioEmitentePayload, S>
+
+  type UsuarioEmitenteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UsuarioEmitenteFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UsuarioEmitenteCountAggregateInputType | true
+    }
+
+  export interface UsuarioEmitenteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UsuarioEmitente'], meta: { name: 'UsuarioEmitente' } }
+    /**
+     * Find zero or one UsuarioEmitente that matches the filter.
+     * @param {UsuarioEmitenteFindUniqueArgs} args - Arguments to find a UsuarioEmitente
+     * @example
+     * // Get one UsuarioEmitente
+     * const usuarioEmitente = await prisma.usuarioEmitente.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UsuarioEmitenteFindUniqueArgs>(args: SelectSubset<T, UsuarioEmitenteFindUniqueArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UsuarioEmitente that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UsuarioEmitenteFindUniqueOrThrowArgs} args - Arguments to find a UsuarioEmitente
+     * @example
+     * // Get one UsuarioEmitente
+     * const usuarioEmitente = await prisma.usuarioEmitente.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UsuarioEmitenteFindUniqueOrThrowArgs>(args: SelectSubset<T, UsuarioEmitenteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UsuarioEmitente that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioEmitenteFindFirstArgs} args - Arguments to find a UsuarioEmitente
+     * @example
+     * // Get one UsuarioEmitente
+     * const usuarioEmitente = await prisma.usuarioEmitente.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UsuarioEmitenteFindFirstArgs>(args?: SelectSubset<T, UsuarioEmitenteFindFirstArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UsuarioEmitente that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioEmitenteFindFirstOrThrowArgs} args - Arguments to find a UsuarioEmitente
+     * @example
+     * // Get one UsuarioEmitente
+     * const usuarioEmitente = await prisma.usuarioEmitente.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UsuarioEmitenteFindFirstOrThrowArgs>(args?: SelectSubset<T, UsuarioEmitenteFindFirstOrThrowArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UsuarioEmitentes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioEmitenteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UsuarioEmitentes
+     * const usuarioEmitentes = await prisma.usuarioEmitente.findMany()
+     * 
+     * // Get first 10 UsuarioEmitentes
+     * const usuarioEmitentes = await prisma.usuarioEmitente.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const usuarioEmitenteWithIdOnly = await prisma.usuarioEmitente.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UsuarioEmitenteFindManyArgs>(args?: SelectSubset<T, UsuarioEmitenteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UsuarioEmitente.
+     * @param {UsuarioEmitenteCreateArgs} args - Arguments to create a UsuarioEmitente.
+     * @example
+     * // Create one UsuarioEmitente
+     * const UsuarioEmitente = await prisma.usuarioEmitente.create({
+     *   data: {
+     *     // ... data to create a UsuarioEmitente
+     *   }
+     * })
+     * 
+     */
+    create<T extends UsuarioEmitenteCreateArgs>(args: SelectSubset<T, UsuarioEmitenteCreateArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UsuarioEmitentes.
+     * @param {UsuarioEmitenteCreateManyArgs} args - Arguments to create many UsuarioEmitentes.
+     * @example
+     * // Create many UsuarioEmitentes
+     * const usuarioEmitente = await prisma.usuarioEmitente.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UsuarioEmitenteCreateManyArgs>(args?: SelectSubset<T, UsuarioEmitenteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a UsuarioEmitente.
+     * @param {UsuarioEmitenteDeleteArgs} args - Arguments to delete one UsuarioEmitente.
+     * @example
+     * // Delete one UsuarioEmitente
+     * const UsuarioEmitente = await prisma.usuarioEmitente.delete({
+     *   where: {
+     *     // ... filter to delete one UsuarioEmitente
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UsuarioEmitenteDeleteArgs>(args: SelectSubset<T, UsuarioEmitenteDeleteArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UsuarioEmitente.
+     * @param {UsuarioEmitenteUpdateArgs} args - Arguments to update one UsuarioEmitente.
+     * @example
+     * // Update one UsuarioEmitente
+     * const usuarioEmitente = await prisma.usuarioEmitente.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UsuarioEmitenteUpdateArgs>(args: SelectSubset<T, UsuarioEmitenteUpdateArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UsuarioEmitentes.
+     * @param {UsuarioEmitenteDeleteManyArgs} args - Arguments to filter UsuarioEmitentes to delete.
+     * @example
+     * // Delete a few UsuarioEmitentes
+     * const { count } = await prisma.usuarioEmitente.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UsuarioEmitenteDeleteManyArgs>(args?: SelectSubset<T, UsuarioEmitenteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UsuarioEmitentes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioEmitenteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UsuarioEmitentes
+     * const usuarioEmitente = await prisma.usuarioEmitente.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UsuarioEmitenteUpdateManyArgs>(args: SelectSubset<T, UsuarioEmitenteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UsuarioEmitente.
+     * @param {UsuarioEmitenteUpsertArgs} args - Arguments to update or create a UsuarioEmitente.
+     * @example
+     * // Update or create a UsuarioEmitente
+     * const usuarioEmitente = await prisma.usuarioEmitente.upsert({
+     *   create: {
+     *     // ... data to create a UsuarioEmitente
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UsuarioEmitente we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UsuarioEmitenteUpsertArgs>(args: SelectSubset<T, UsuarioEmitenteUpsertArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+    /**
+     * Find zero or more UsuarioEmitentes that matches the filter.
+     * @param {UsuarioEmitenteFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const usuarioEmitente = await prisma.usuarioEmitente.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+     */
+    findRaw(args?: UsuarioEmitenteFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a UsuarioEmitente.
+     * @param {UsuarioEmitenteAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const usuarioEmitente = await prisma.usuarioEmitente.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: UsuarioEmitenteAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of UsuarioEmitentes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioEmitenteCountArgs} args - Arguments to filter UsuarioEmitentes to count.
+     * @example
+     * // Count the number of UsuarioEmitentes
+     * const count = await prisma.usuarioEmitente.count({
+     *   where: {
+     *     // ... the filter for the UsuarioEmitentes we want to count
+     *   }
+     * })
+    **/
+    count<T extends UsuarioEmitenteCountArgs>(
+      args?: Subset<T, UsuarioEmitenteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UsuarioEmitenteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UsuarioEmitente.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioEmitenteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UsuarioEmitenteAggregateArgs>(args: Subset<T, UsuarioEmitenteAggregateArgs>): Prisma.PrismaPromise<GetUsuarioEmitenteAggregateType<T>>
+
+    /**
+     * Group by UsuarioEmitente.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioEmitenteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UsuarioEmitenteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UsuarioEmitenteGroupByArgs['orderBy'] }
+        : { orderBy?: UsuarioEmitenteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UsuarioEmitenteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsuarioEmitenteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UsuarioEmitente model
+   */
+  readonly fields: UsuarioEmitenteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UsuarioEmitente.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UsuarioEmitenteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    emitente<T extends EmitenteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmitenteDefaultArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    usuario<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UsuarioEmitente model
+   */ 
+  interface UsuarioEmitenteFieldRefs {
+    readonly id: FieldRef<"UsuarioEmitente", 'String'>
+    readonly emitenteId: FieldRef<"UsuarioEmitente", 'String'>
+    readonly usuarioId: FieldRef<"UsuarioEmitente", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UsuarioEmitente findUnique
+   */
+  export type UsuarioEmitenteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which UsuarioEmitente to fetch.
+     */
+    where: UsuarioEmitenteWhereUniqueInput
+  }
+
+  /**
+   * UsuarioEmitente findUniqueOrThrow
+   */
+  export type UsuarioEmitenteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which UsuarioEmitente to fetch.
+     */
+    where: UsuarioEmitenteWhereUniqueInput
+  }
+
+  /**
+   * UsuarioEmitente findFirst
+   */
+  export type UsuarioEmitenteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which UsuarioEmitente to fetch.
+     */
+    where?: UsuarioEmitenteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UsuarioEmitentes to fetch.
+     */
+    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UsuarioEmitentes.
+     */
+    cursor?: UsuarioEmitenteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UsuarioEmitentes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UsuarioEmitentes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UsuarioEmitentes.
+     */
+    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
+  }
+
+  /**
+   * UsuarioEmitente findFirstOrThrow
+   */
+  export type UsuarioEmitenteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which UsuarioEmitente to fetch.
+     */
+    where?: UsuarioEmitenteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UsuarioEmitentes to fetch.
+     */
+    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UsuarioEmitentes.
+     */
+    cursor?: UsuarioEmitenteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UsuarioEmitentes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UsuarioEmitentes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UsuarioEmitentes.
+     */
+    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
+  }
+
+  /**
+   * UsuarioEmitente findMany
+   */
+  export type UsuarioEmitenteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter, which UsuarioEmitentes to fetch.
+     */
+    where?: UsuarioEmitenteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UsuarioEmitentes to fetch.
+     */
+    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UsuarioEmitentes.
+     */
+    cursor?: UsuarioEmitenteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UsuarioEmitentes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UsuarioEmitentes.
+     */
+    skip?: number
+    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
+  }
+
+  /**
+   * UsuarioEmitente create
+   */
+  export type UsuarioEmitenteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UsuarioEmitente.
+     */
+    data: XOR<UsuarioEmitenteCreateInput, UsuarioEmitenteUncheckedCreateInput>
+  }
+
+  /**
+   * UsuarioEmitente createMany
+   */
+  export type UsuarioEmitenteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UsuarioEmitentes.
+     */
+    data: UsuarioEmitenteCreateManyInput | UsuarioEmitenteCreateManyInput[]
+  }
+
+  /**
+   * UsuarioEmitente update
+   */
+  export type UsuarioEmitenteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UsuarioEmitente.
+     */
+    data: XOR<UsuarioEmitenteUpdateInput, UsuarioEmitenteUncheckedUpdateInput>
+    /**
+     * Choose, which UsuarioEmitente to update.
+     */
+    where: UsuarioEmitenteWhereUniqueInput
+  }
+
+  /**
+   * UsuarioEmitente updateMany
+   */
+  export type UsuarioEmitenteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UsuarioEmitentes.
+     */
+    data: XOR<UsuarioEmitenteUpdateManyMutationInput, UsuarioEmitenteUncheckedUpdateManyInput>
+    /**
+     * Filter which UsuarioEmitentes to update
+     */
+    where?: UsuarioEmitenteWhereInput
+  }
+
+  /**
+   * UsuarioEmitente upsert
+   */
+  export type UsuarioEmitenteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UsuarioEmitente to update in case it exists.
+     */
+    where: UsuarioEmitenteWhereUniqueInput
+    /**
+     * In case the UsuarioEmitente found by the `where` argument doesn't exist, create a new UsuarioEmitente with this data.
+     */
+    create: XOR<UsuarioEmitenteCreateInput, UsuarioEmitenteUncheckedCreateInput>
+    /**
+     * In case the UsuarioEmitente was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UsuarioEmitenteUpdateInput, UsuarioEmitenteUncheckedUpdateInput>
+  }
+
+  /**
+   * UsuarioEmitente delete
+   */
+  export type UsuarioEmitenteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    /**
+     * Filter which UsuarioEmitente to delete.
+     */
+    where: UsuarioEmitenteWhereUniqueInput
+  }
+
+  /**
+   * UsuarioEmitente deleteMany
+   */
+  export type UsuarioEmitenteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UsuarioEmitentes to delete
+     */
+    where?: UsuarioEmitenteWhereInput
+  }
+
+  /**
+   * UsuarioEmitente findRaw
+   */
+  export type UsuarioEmitenteFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * UsuarioEmitente aggregateRaw
+   */
+  export type UsuarioEmitenteAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * UsuarioEmitente without action
+   */
+  export type UsuarioEmitenteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Emitente
    */
 
@@ -5510,6 +6553,7 @@ export namespace Prisma {
     updatedAt?: boolean
     enderecos?: boolean | Emitente$enderecosArgs<ExtArgs>
     contadores?: boolean | Emitente$contadoresArgs<ExtArgs>
+    usuarios?: boolean | Emitente$usuariosArgs<ExtArgs>
     _count?: boolean | EmitenteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emitente"]>
 
@@ -5529,6 +6573,7 @@ export namespace Prisma {
   export type EmitenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     enderecos?: boolean | Emitente$enderecosArgs<ExtArgs>
     contadores?: boolean | Emitente$contadoresArgs<ExtArgs>
+    usuarios?: boolean | Emitente$usuariosArgs<ExtArgs>
     _count?: boolean | EmitenteCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5537,6 +6582,7 @@ export namespace Prisma {
     objects: {
       enderecos: Prisma.$EnderecoPayload<ExtArgs>[]
       contadores: Prisma.$ContadorEmitentePayload<ExtArgs>[]
+      usuarios: Prisma.$UsuarioEmitentePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5913,6 +6959,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     enderecos<T extends Emitente$enderecosArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$enderecosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany"> | Null>
     contadores<T extends Emitente$contadoresArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$contadoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findMany"> | Null>
+    usuarios<T extends Emitente$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6314,6 +7361,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContadorEmitenteScalarFieldEnum | ContadorEmitenteScalarFieldEnum[]
+  }
+
+  /**
+   * Emitente.usuarios
+   */
+  export type Emitente$usuariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioEmitente
+     */
+    select?: UsuarioEmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioEmitenteInclude<ExtArgs> | null
+    where?: UsuarioEmitenteWhereInput
+    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
+    cursor?: UsuarioEmitenteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
   }
 
   /**
@@ -8396,6 +9463,15 @@ export namespace Prisma {
   export type ContadorEmitenteScalarFieldEnum = (typeof ContadorEmitenteScalarFieldEnum)[keyof typeof ContadorEmitenteScalarFieldEnum]
 
 
+  export const UsuarioEmitenteScalarFieldEnum: {
+    id: 'id',
+    emitenteId: 'emitenteId',
+    usuarioId: 'usuarioId'
+  };
+
+  export type UsuarioEmitenteScalarFieldEnum = (typeof UsuarioEmitenteScalarFieldEnum)[keyof typeof UsuarioEmitenteScalarFieldEnum]
+
+
   export const EmitenteScalarFieldEnum: {
     id: 'id',
     cod_dominio: 'cod_dominio',
@@ -8534,6 +9610,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
     updatedAt?: DateTimeFilter<"Usuario"> | Date | string
     contadores?: UsuarioContadorListRelationFilter
+    emitentes?: UsuarioEmitenteListRelationFilter
   }
 
   export type UsuarioOrderByWithRelationInput = {
@@ -8544,6 +9621,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     contadores?: UsuarioContadorOrderByRelationAggregateInput
+    emitentes?: UsuarioEmitenteOrderByRelationAggregateInput
   }
 
   export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -8557,6 +9635,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
     updatedAt?: DateTimeFilter<"Usuario"> | Date | string
     contadores?: UsuarioContadorListRelationFilter
+    emitentes?: UsuarioEmitenteListRelationFilter
   }, "id" | "email">
 
   export type UsuarioOrderByWithAggregationInput = {
@@ -8760,6 +9839,55 @@ export namespace Prisma {
     contadorId?: StringWithAggregatesFilter<"ContadorEmitente"> | string
   }
 
+  export type UsuarioEmitenteWhereInput = {
+    AND?: UsuarioEmitenteWhereInput | UsuarioEmitenteWhereInput[]
+    OR?: UsuarioEmitenteWhereInput[]
+    NOT?: UsuarioEmitenteWhereInput | UsuarioEmitenteWhereInput[]
+    id?: StringFilter<"UsuarioEmitente"> | string
+    emitenteId?: StringFilter<"UsuarioEmitente"> | string
+    usuarioId?: StringFilter<"UsuarioEmitente"> | string
+    emitente?: XOR<EmitenteRelationFilter, EmitenteWhereInput>
+    usuario?: XOR<UsuarioRelationFilter, UsuarioWhereInput>
+  }
+
+  export type UsuarioEmitenteOrderByWithRelationInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
+    usuarioId?: SortOrder
+    emitente?: EmitenteOrderByWithRelationInput
+    usuario?: UsuarioOrderByWithRelationInput
+  }
+
+  export type UsuarioEmitenteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    emitenteId_usuarioId?: UsuarioEmitenteEmitenteIdUsuarioIdCompoundUniqueInput
+    AND?: UsuarioEmitenteWhereInput | UsuarioEmitenteWhereInput[]
+    OR?: UsuarioEmitenteWhereInput[]
+    NOT?: UsuarioEmitenteWhereInput | UsuarioEmitenteWhereInput[]
+    emitenteId?: StringFilter<"UsuarioEmitente"> | string
+    usuarioId?: StringFilter<"UsuarioEmitente"> | string
+    emitente?: XOR<EmitenteRelationFilter, EmitenteWhereInput>
+    usuario?: XOR<UsuarioRelationFilter, UsuarioWhereInput>
+  }, "id" | "emitenteId_usuarioId">
+
+  export type UsuarioEmitenteOrderByWithAggregationInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
+    usuarioId?: SortOrder
+    _count?: UsuarioEmitenteCountOrderByAggregateInput
+    _max?: UsuarioEmitenteMaxOrderByAggregateInput
+    _min?: UsuarioEmitenteMinOrderByAggregateInput
+  }
+
+  export type UsuarioEmitenteScalarWhereWithAggregatesInput = {
+    AND?: UsuarioEmitenteScalarWhereWithAggregatesInput | UsuarioEmitenteScalarWhereWithAggregatesInput[]
+    OR?: UsuarioEmitenteScalarWhereWithAggregatesInput[]
+    NOT?: UsuarioEmitenteScalarWhereWithAggregatesInput | UsuarioEmitenteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UsuarioEmitente"> | string
+    emitenteId?: StringWithAggregatesFilter<"UsuarioEmitente"> | string
+    usuarioId?: StringWithAggregatesFilter<"UsuarioEmitente"> | string
+  }
+
   export type EmitenteWhereInput = {
     AND?: EmitenteWhereInput | EmitenteWhereInput[]
     OR?: EmitenteWhereInput[]
@@ -8775,6 +9903,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
     contadores?: ContadorEmitenteListRelationFilter
+    usuarios?: UsuarioEmitenteListRelationFilter
   }
 
   export type EmitenteOrderByWithRelationInput = {
@@ -8789,6 +9918,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     enderecos?: EnderecoOrderByRelationAggregateInput
     contadores?: ContadorEmitenteOrderByRelationAggregateInput
+    usuarios?: UsuarioEmitenteOrderByRelationAggregateInput
   }
 
   export type EmitenteWhereUniqueInput = Prisma.AtLeast<{
@@ -8808,6 +9938,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
     contadores?: ContadorEmitenteListRelationFilter
+    usuarios?: UsuarioEmitenteListRelationFilter
   }, "id" | "cnpj_ie" | "cpf_ie">
 
   export type EmitenteOrderByWithAggregationInput = {
@@ -9011,6 +10142,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: UsuarioContadorCreateNestedManyWithoutUsuarioInput
+    emitentes?: UsuarioEmitenteCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateInput = {
@@ -9021,6 +10153,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: UsuarioContadorUncheckedCreateNestedManyWithoutUsuarioInput
+    emitentes?: UsuarioEmitenteUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUpdateInput = {
@@ -9030,6 +10163,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: UsuarioContadorUpdateManyWithoutUsuarioNestedInput
+    emitentes?: UsuarioEmitenteUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateInput = {
@@ -9039,6 +10173,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: UsuarioContadorUncheckedUpdateManyWithoutUsuarioNestedInput
+    emitentes?: UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioCreateManyInput = {
@@ -9229,6 +10364,43 @@ export namespace Prisma {
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type UsuarioEmitenteCreateInput = {
+    id?: string
+    emitente: EmitenteCreateNestedOneWithoutUsuariosInput
+    usuario: UsuarioCreateNestedOneWithoutEmitentesInput
+  }
+
+  export type UsuarioEmitenteUncheckedCreateInput = {
+    id?: string
+    emitenteId: string
+    usuarioId: string
+  }
+
+  export type UsuarioEmitenteUpdateInput = {
+    emitente?: EmitenteUpdateOneRequiredWithoutUsuariosNestedInput
+    usuario?: UsuarioUpdateOneRequiredWithoutEmitentesNestedInput
+  }
+
+  export type UsuarioEmitenteUncheckedUpdateInput = {
+    emitenteId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UsuarioEmitenteCreateManyInput = {
+    id?: string
+    emitenteId: string
+    usuarioId: string
+  }
+
+  export type UsuarioEmitenteUpdateManyMutationInput = {
+
+  }
+
+  export type UsuarioEmitenteUncheckedUpdateManyInput = {
+    emitenteId?: StringFieldUpdateOperationsInput | string
+    usuarioId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type EmitenteCreateInput = {
     id?: string
     cod_dominio?: string | null
@@ -9241,6 +10413,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
     contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
+    usuarios?: UsuarioEmitenteCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateInput = {
@@ -9255,6 +10428,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
     contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
+    usuarios?: UsuarioEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUpdateInput = {
@@ -9268,6 +10442,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
     contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
+    usuarios?: UsuarioEmitenteUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateInput = {
@@ -9281,6 +10456,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
     contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
+    usuarios?: UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteCreateManyInput = {
@@ -9527,7 +10703,17 @@ export namespace Prisma {
     none?: UsuarioContadorWhereInput
   }
 
+  export type UsuarioEmitenteListRelationFilter = {
+    every?: UsuarioEmitenteWhereInput
+    some?: UsuarioEmitenteWhereInput
+    none?: UsuarioEmitenteWhereInput
+  }
+
   export type UsuarioContadorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UsuarioEmitenteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9754,6 +10940,29 @@ export namespace Prisma {
     contadorId?: SortOrder
   }
 
+  export type UsuarioEmitenteEmitenteIdUsuarioIdCompoundUniqueInput = {
+    emitenteId: string
+    usuarioId: string
+  }
+
+  export type UsuarioEmitenteCountOrderByAggregateInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
+    usuarioId?: SortOrder
+  }
+
+  export type UsuarioEmitenteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
+    usuarioId?: SortOrder
+  }
+
+  export type UsuarioEmitenteMinOrderByAggregateInput = {
+    id?: SortOrder
+    emitenteId?: SortOrder
+    usuarioId?: SortOrder
+  }
+
   export type EnderecoListRelationFilter = {
     every?: EnderecoWhereInput
     some?: EnderecoWhereInput
@@ -9932,11 +11141,25 @@ export namespace Prisma {
     connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
   }
 
+  export type UsuarioEmitenteCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput> | UsuarioEmitenteCreateWithoutUsuarioInput[] | UsuarioEmitenteUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutUsuarioInput | UsuarioEmitenteCreateOrConnectWithoutUsuarioInput[]
+    createMany?: UsuarioEmitenteCreateManyUsuarioInputEnvelope
+    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+  }
+
   export type UsuarioContadorUncheckedCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput> | UsuarioContadorCreateWithoutUsuarioInput[] | UsuarioContadorUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: UsuarioContadorCreateOrConnectWithoutUsuarioInput | UsuarioContadorCreateOrConnectWithoutUsuarioInput[]
     createMany?: UsuarioContadorCreateManyUsuarioInputEnvelope
     connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
+  }
+
+  export type UsuarioEmitenteUncheckedCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput> | UsuarioEmitenteCreateWithoutUsuarioInput[] | UsuarioEmitenteUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutUsuarioInput | UsuarioEmitenteCreateOrConnectWithoutUsuarioInput[]
+    createMany?: UsuarioEmitenteCreateManyUsuarioInputEnvelope
+    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -9965,6 +11188,20 @@ export namespace Prisma {
     deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
   }
 
+  export type UsuarioEmitenteUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput> | UsuarioEmitenteCreateWithoutUsuarioInput[] | UsuarioEmitenteUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutUsuarioInput | UsuarioEmitenteCreateOrConnectWithoutUsuarioInput[]
+    upsert?: UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput | UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: UsuarioEmitenteCreateManyUsuarioInputEnvelope
+    set?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    disconnect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    delete?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    update?: UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput | UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput | UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
+  }
+
   export type UsuarioContadorUncheckedUpdateManyWithoutUsuarioNestedInput = {
     create?: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput> | UsuarioContadorCreateWithoutUsuarioInput[] | UsuarioContadorUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: UsuarioContadorCreateOrConnectWithoutUsuarioInput | UsuarioContadorCreateOrConnectWithoutUsuarioInput[]
@@ -9977,6 +11214,20 @@ export namespace Prisma {
     update?: UsuarioContadorUpdateWithWhereUniqueWithoutUsuarioInput | UsuarioContadorUpdateWithWhereUniqueWithoutUsuarioInput[]
     updateMany?: UsuarioContadorUpdateManyWithWhereWithoutUsuarioInput | UsuarioContadorUpdateManyWithWhereWithoutUsuarioInput[]
     deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
+  }
+
+  export type UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput> | UsuarioEmitenteCreateWithoutUsuarioInput[] | UsuarioEmitenteUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutUsuarioInput | UsuarioEmitenteCreateOrConnectWithoutUsuarioInput[]
+    upsert?: UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput | UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: UsuarioEmitenteCreateManyUsuarioInputEnvelope
+    set?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    disconnect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    delete?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    update?: UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput | UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput | UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
   }
 
   export type UsuarioContadorCreateNestedManyWithoutContadorInput = {
@@ -10198,6 +11449,34 @@ export namespace Prisma {
     update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutEmitentesInput, ContadorUpdateWithoutEmitentesInput>, ContadorUncheckedUpdateWithoutEmitentesInput>
   }
 
+  export type EmitenteCreateNestedOneWithoutUsuariosInput = {
+    create?: XOR<EmitenteCreateWithoutUsuariosInput, EmitenteUncheckedCreateWithoutUsuariosInput>
+    connectOrCreate?: EmitenteCreateOrConnectWithoutUsuariosInput
+    connect?: EmitenteWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutEmitentesInput = {
+    create?: XOR<UsuarioCreateWithoutEmitentesInput, UsuarioUncheckedCreateWithoutEmitentesInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutEmitentesInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type EmitenteUpdateOneRequiredWithoutUsuariosNestedInput = {
+    create?: XOR<EmitenteCreateWithoutUsuariosInput, EmitenteUncheckedCreateWithoutUsuariosInput>
+    connectOrCreate?: EmitenteCreateOrConnectWithoutUsuariosInput
+    upsert?: EmitenteUpsertWithoutUsuariosInput
+    connect?: EmitenteWhereUniqueInput
+    update?: XOR<XOR<EmitenteUpdateToOneWithWhereWithoutUsuariosInput, EmitenteUpdateWithoutUsuariosInput>, EmitenteUncheckedUpdateWithoutUsuariosInput>
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutEmitentesNestedInput = {
+    create?: XOR<UsuarioCreateWithoutEmitentesInput, UsuarioUncheckedCreateWithoutEmitentesInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutEmitentesInput
+    upsert?: UsuarioUpsertWithoutEmitentesInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutEmitentesInput, UsuarioUpdateWithoutEmitentesInput>, UsuarioUncheckedUpdateWithoutEmitentesInput>
+  }
+
   export type EnderecoCreateNestedManyWithoutEmitenteInput = {
     create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
     connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
@@ -10212,6 +11491,13 @@ export namespace Prisma {
     connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
   }
 
+  export type UsuarioEmitenteCreateNestedManyWithoutEmitenteInput = {
+    create?: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput> | UsuarioEmitenteCreateWithoutEmitenteInput[] | UsuarioEmitenteUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutEmitenteInput | UsuarioEmitenteCreateOrConnectWithoutEmitenteInput[]
+    createMany?: UsuarioEmitenteCreateManyEmitenteInputEnvelope
+    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+  }
+
   export type EnderecoUncheckedCreateNestedManyWithoutEmitenteInput = {
     create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
     connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
@@ -10224,6 +11510,13 @@ export namespace Prisma {
     connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutEmitenteInput | ContadorEmitenteCreateOrConnectWithoutEmitenteInput[]
     createMany?: ContadorEmitenteCreateManyEmitenteInputEnvelope
     connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+  }
+
+  export type UsuarioEmitenteUncheckedCreateNestedManyWithoutEmitenteInput = {
+    create?: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput> | UsuarioEmitenteCreateWithoutEmitenteInput[] | UsuarioEmitenteUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutEmitenteInput | UsuarioEmitenteCreateOrConnectWithoutEmitenteInput[]
+    createMany?: UsuarioEmitenteCreateManyEmitenteInputEnvelope
+    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
   }
 
   export type EnderecoUpdateManyWithoutEmitenteNestedInput = {
@@ -10254,6 +11547,20 @@ export namespace Prisma {
     deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
+  export type UsuarioEmitenteUpdateManyWithoutEmitenteNestedInput = {
+    create?: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput> | UsuarioEmitenteCreateWithoutEmitenteInput[] | UsuarioEmitenteUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutEmitenteInput | UsuarioEmitenteCreateOrConnectWithoutEmitenteInput[]
+    upsert?: UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput | UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput[]
+    createMany?: UsuarioEmitenteCreateManyEmitenteInputEnvelope
+    set?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    disconnect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    delete?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    update?: UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput | UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput[]
+    updateMany?: UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput | UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput[]
+    deleteMany?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
+  }
+
   export type EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput = {
     create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
     connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
@@ -10280,6 +11587,20 @@ export namespace Prisma {
     update?: ContadorEmitenteUpdateWithWhereUniqueWithoutEmitenteInput | ContadorEmitenteUpdateWithWhereUniqueWithoutEmitenteInput[]
     updateMany?: ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput | ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput[]
     deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
+  }
+
+  export type UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput = {
+    create?: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput> | UsuarioEmitenteCreateWithoutEmitenteInput[] | UsuarioEmitenteUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutEmitenteInput | UsuarioEmitenteCreateOrConnectWithoutEmitenteInput[]
+    upsert?: UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput | UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput[]
+    createMany?: UsuarioEmitenteCreateManyEmitenteInputEnvelope
+    set?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    disconnect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    delete?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
+    update?: UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput | UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput[]
+    updateMany?: UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput | UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput[]
+    deleteMany?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
   }
 
   export type ContadorCreateNestedOneWithoutCertificadosInput = {
@@ -10510,6 +11831,25 @@ export namespace Prisma {
     data: UsuarioContadorCreateManyUsuarioInput | UsuarioContadorCreateManyUsuarioInput[]
   }
 
+  export type UsuarioEmitenteCreateWithoutUsuarioInput = {
+    id?: string
+    emitente: EmitenteCreateNestedOneWithoutUsuariosInput
+  }
+
+  export type UsuarioEmitenteUncheckedCreateWithoutUsuarioInput = {
+    id?: string
+    emitenteId: string
+  }
+
+  export type UsuarioEmitenteCreateOrConnectWithoutUsuarioInput = {
+    where: UsuarioEmitenteWhereUniqueInput
+    create: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type UsuarioEmitenteCreateManyUsuarioInputEnvelope = {
+    data: UsuarioEmitenteCreateManyUsuarioInput | UsuarioEmitenteCreateManyUsuarioInput[]
+  }
+
   export type UsuarioContadorUpsertWithWhereUniqueWithoutUsuarioInput = {
     where: UsuarioContadorWhereUniqueInput
     update: XOR<UsuarioContadorUpdateWithoutUsuarioInput, UsuarioContadorUncheckedUpdateWithoutUsuarioInput>
@@ -10533,6 +11873,31 @@ export namespace Prisma {
     id?: StringFilter<"UsuarioContador"> | string
     usuarioId?: StringFilter<"UsuarioContador"> | string
     contadorId?: StringFilter<"UsuarioContador"> | string
+  }
+
+  export type UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput = {
+    where: UsuarioEmitenteWhereUniqueInput
+    update: XOR<UsuarioEmitenteUpdateWithoutUsuarioInput, UsuarioEmitenteUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput = {
+    where: UsuarioEmitenteWhereUniqueInput
+    data: XOR<UsuarioEmitenteUpdateWithoutUsuarioInput, UsuarioEmitenteUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput = {
+    where: UsuarioEmitenteScalarWhereInput
+    data: XOR<UsuarioEmitenteUpdateManyMutationInput, UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioInput>
+  }
+
+  export type UsuarioEmitenteScalarWhereInput = {
+    AND?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
+    OR?: UsuarioEmitenteScalarWhereInput[]
+    NOT?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
+    id?: StringFilter<"UsuarioEmitente"> | string
+    emitenteId?: StringFilter<"UsuarioEmitente"> | string
+    usuarioId?: StringFilter<"UsuarioEmitente"> | string
   }
 
   export type UsuarioContadorCreateWithoutContadorInput = {
@@ -10752,6 +12117,7 @@ export namespace Prisma {
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
+    emitentes?: UsuarioEmitenteCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutContadoresInput = {
@@ -10761,6 +12127,7 @@ export namespace Prisma {
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
+    emitentes?: UsuarioEmitenteUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutContadoresInput = {
@@ -10818,6 +12185,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emitentes?: UsuarioEmitenteUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutContadoresInput = {
@@ -10826,6 +12194,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emitentes?: UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type ContadorUpsertWithoutUsuariosInput = {
@@ -10876,6 +12245,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
+    usuarios?: UsuarioEmitenteCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateWithoutContadoresInput = {
@@ -10889,6 +12259,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
+    usuarios?: UsuarioEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteCreateOrConnectWithoutContadoresInput = {
@@ -10950,6 +12321,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
+    usuarios?: UsuarioEmitenteUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateWithoutContadoresInput = {
@@ -10962,6 +12334,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
+    usuarios?: UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type ContadorUpsertWithoutEmitentesInput = {
@@ -10999,6 +12372,130 @@ export namespace Prisma {
     usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
     endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
+  }
+
+  export type EmitenteCreateWithoutUsuariosInput = {
+    id?: string
+    cod_dominio?: string | null
+    nome: string
+    razao_social: string
+    cnpj?: string | null
+    cpf?: string | null
+    ie: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
+    contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
+  }
+
+  export type EmitenteUncheckedCreateWithoutUsuariosInput = {
+    id?: string
+    cod_dominio?: string | null
+    nome: string
+    razao_social: string
+    cnpj?: string | null
+    cpf?: string | null
+    ie: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
+    contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
+  }
+
+  export type EmitenteCreateOrConnectWithoutUsuariosInput = {
+    where: EmitenteWhereUniqueInput
+    create: XOR<EmitenteCreateWithoutUsuariosInput, EmitenteUncheckedCreateWithoutUsuariosInput>
+  }
+
+  export type UsuarioCreateWithoutEmitentesInput = {
+    id?: string
+    email: string
+    password: string
+    role?: $Enums.Role
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contadores?: UsuarioContadorCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutEmitentesInput = {
+    id?: string
+    email: string
+    password: string
+    role?: $Enums.Role
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    contadores?: UsuarioContadorUncheckedCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutEmitentesInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutEmitentesInput, UsuarioUncheckedCreateWithoutEmitentesInput>
+  }
+
+  export type EmitenteUpsertWithoutUsuariosInput = {
+    update: XOR<EmitenteUpdateWithoutUsuariosInput, EmitenteUncheckedUpdateWithoutUsuariosInput>
+    create: XOR<EmitenteCreateWithoutUsuariosInput, EmitenteUncheckedCreateWithoutUsuariosInput>
+    where?: EmitenteWhereInput
+  }
+
+  export type EmitenteUpdateToOneWithWhereWithoutUsuariosInput = {
+    where?: EmitenteWhereInput
+    data: XOR<EmitenteUpdateWithoutUsuariosInput, EmitenteUncheckedUpdateWithoutUsuariosInput>
+  }
+
+  export type EmitenteUpdateWithoutUsuariosInput = {
+    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: StringFieldUpdateOperationsInput | string
+    razao_social?: StringFieldUpdateOperationsInput | string
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
+    contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
+  }
+
+  export type EmitenteUncheckedUpdateWithoutUsuariosInput = {
+    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    nome?: StringFieldUpdateOperationsInput | string
+    razao_social?: StringFieldUpdateOperationsInput | string
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
+    contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
+  }
+
+  export type UsuarioUpsertWithoutEmitentesInput = {
+    update: XOR<UsuarioUpdateWithoutEmitentesInput, UsuarioUncheckedUpdateWithoutEmitentesInput>
+    create: XOR<UsuarioCreateWithoutEmitentesInput, UsuarioUncheckedCreateWithoutEmitentesInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutEmitentesInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutEmitentesInput, UsuarioUncheckedUpdateWithoutEmitentesInput>
+  }
+
+  export type UsuarioUpdateWithoutEmitentesInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contadores?: UsuarioContadorUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutEmitentesInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    contadores?: UsuarioContadorUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type EnderecoCreateWithoutEmitenteInput = {
@@ -11061,6 +12558,25 @@ export namespace Prisma {
     data: ContadorEmitenteCreateManyEmitenteInput | ContadorEmitenteCreateManyEmitenteInput[]
   }
 
+  export type UsuarioEmitenteCreateWithoutEmitenteInput = {
+    id?: string
+    usuario: UsuarioCreateNestedOneWithoutEmitentesInput
+  }
+
+  export type UsuarioEmitenteUncheckedCreateWithoutEmitenteInput = {
+    id?: string
+    usuarioId: string
+  }
+
+  export type UsuarioEmitenteCreateOrConnectWithoutEmitenteInput = {
+    where: UsuarioEmitenteWhereUniqueInput
+    create: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput>
+  }
+
+  export type UsuarioEmitenteCreateManyEmitenteInputEnvelope = {
+    data: UsuarioEmitenteCreateManyEmitenteInput | UsuarioEmitenteCreateManyEmitenteInput[]
+  }
+
   export type EnderecoUpsertWithWhereUniqueWithoutEmitenteInput = {
     where: EnderecoWhereUniqueInput
     update: XOR<EnderecoUpdateWithoutEmitenteInput, EnderecoUncheckedUpdateWithoutEmitenteInput>
@@ -11111,6 +12627,22 @@ export namespace Prisma {
   export type ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput = {
     where: ContadorEmitenteScalarWhereInput
     data: XOR<ContadorEmitenteUpdateManyMutationInput, ContadorEmitenteUncheckedUpdateManyWithoutEmitenteInput>
+  }
+
+  export type UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput = {
+    where: UsuarioEmitenteWhereUniqueInput
+    update: XOR<UsuarioEmitenteUpdateWithoutEmitenteInput, UsuarioEmitenteUncheckedUpdateWithoutEmitenteInput>
+    create: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput>
+  }
+
+  export type UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput = {
+    where: UsuarioEmitenteWhereUniqueInput
+    data: XOR<UsuarioEmitenteUpdateWithoutEmitenteInput, UsuarioEmitenteUncheckedUpdateWithoutEmitenteInput>
+  }
+
+  export type UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput = {
+    where: UsuarioEmitenteScalarWhereInput
+    data: XOR<UsuarioEmitenteUpdateManyMutationInput, UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteInput>
   }
 
   export type ContadorCreateWithoutCertificadosInput = {
@@ -11227,6 +12759,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
+    usuarios?: UsuarioEmitenteCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateWithoutEnderecosInput = {
@@ -11240,6 +12773,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
+    usuarios?: UsuarioEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteCreateOrConnectWithoutEnderecosInput = {
@@ -11305,6 +12839,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
+    usuarios?: UsuarioEmitenteUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateWithoutEnderecosInput = {
@@ -11317,11 +12852,17 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
+    usuarios?: UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type UsuarioContadorCreateManyUsuarioInput = {
     id?: string
     contadorId: string
+  }
+
+  export type UsuarioEmitenteCreateManyUsuarioInput = {
+    id?: string
+    emitenteId: string
   }
 
   export type UsuarioContadorUpdateWithoutUsuarioInput = {
@@ -11334,6 +12875,18 @@ export namespace Prisma {
 
   export type UsuarioContadorUncheckedUpdateManyWithoutUsuarioInput = {
     contadorId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UsuarioEmitenteUpdateWithoutUsuarioInput = {
+    emitente?: EmitenteUpdateOneRequiredWithoutUsuariosNestedInput
+  }
+
+  export type UsuarioEmitenteUncheckedUpdateWithoutUsuarioInput = {
+    emitenteId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioInput = {
+    emitenteId?: StringFieldUpdateOperationsInput | string
   }
 
   export type UsuarioContadorCreateManyContadorInput = {
@@ -11420,6 +12973,11 @@ export namespace Prisma {
     contadorId: string
   }
 
+  export type UsuarioEmitenteCreateManyEmitenteInput = {
+    id?: string
+    usuarioId: string
+  }
+
   export type EnderecoUpdateWithoutEmitenteInput = {
     tipo?: StringFieldUpdateOperationsInput | string
     logradouro?: StringFieldUpdateOperationsInput | string
@@ -11477,6 +13035,18 @@ export namespace Prisma {
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type UsuarioEmitenteUpdateWithoutEmitenteInput = {
+    usuario?: UsuarioUpdateOneRequiredWithoutEmitentesNestedInput
+  }
+
+  export type UsuarioEmitenteUncheckedUpdateWithoutEmitenteInput = {
+    usuarioId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteInput = {
+    usuarioId?: StringFieldUpdateOperationsInput | string
+  }
+
 
 
   /**
@@ -11510,6 +13080,10 @@ export namespace Prisma {
      * @deprecated Use ContadorEmitenteDefaultArgs instead
      */
     export type ContadorEmitenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ContadorEmitenteDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UsuarioEmitenteDefaultArgs instead
+     */
+    export type UsuarioEmitenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UsuarioEmitenteDefaultArgs<ExtArgs>
     /**
      * @deprecated Use EmitenteDefaultArgs instead
      */

@@ -20,6 +20,7 @@ model Usuario {
   password   String
   role       Role              @default(NOOB)
   contadores UsuarioContador[]
+  emitentes  UsuarioEmitente[]
   createdAt  DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
 }
@@ -59,6 +60,16 @@ model ContadorEmitente {
   @@unique([emitenteId, contadorId])
 }
 
+model UsuarioEmitente {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  emitenteId String   @db.ObjectId
+  usuarioId  String   @db.ObjectId
+  emitente   Emitente @relation(fields: [emitenteId], references: [id], onDelete: Cascade)
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@unique([emitenteId, usuarioId])
+}
+
 model Emitente {
   id           String             @id @default(auto()) @map("_id") @db.ObjectId
   cod_dominio  String?
@@ -69,6 +80,7 @@ model Emitente {
   ie           String
   enderecos    Endereco[]
   contadores   ContadorEmitente[]
+  usuarios     UsuarioEmitente[]
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
 
