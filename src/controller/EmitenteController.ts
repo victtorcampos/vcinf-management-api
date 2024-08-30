@@ -18,7 +18,6 @@ interface EmitenteResponse extends TypeEmitente {
 
 }
 
-
 export const createEmitente = async (data: InputContador, context: any): Promise<ApiResponse<TypeEmitente>> => {
     try {
         const auth = getAuth(context.req);
@@ -28,7 +27,8 @@ export const createEmitente = async (data: InputContador, context: any): Promise
                 ...data
                 , enderecos: {
                     create: data.enderecos
-                },
+                }
+                ,
                 contadores: {
                     create: { contadorId: auth.contadorId }
                 }
