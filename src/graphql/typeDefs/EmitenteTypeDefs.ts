@@ -11,7 +11,16 @@ export const EmitenteTypeDefs = gql`
     cpf: String
     ie: String
     enderecos: [TypeEndereco]
-    contadores: [TypeContador]
+    contadores: [TypeContadorEmitente]
+    usuarios: [TypeUsuarioEmitente]
+  }
+
+  type TypeContadorEmitente {
+    contadorId: String
+  }
+
+  type TypeUsuarioEmitente {
+    usuarioId: String
   }
 
   type EmitenteResponse {
@@ -37,7 +46,7 @@ export const EmitenteTypeDefs = gql`
     razao_social: String
     cnpj: String
     cpf: String
-    IE: String
+    ie  : String
     enderecos: [EnderecoInput]
   }
 

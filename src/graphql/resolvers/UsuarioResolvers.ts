@@ -1,11 +1,11 @@
-import { $Enums } from "../../config/prisma-client";
-import { authenticateUsuario, createUsuario, deleteUsuario, findAllUsuarios, findUsuarioById, updateUsuario, type TypeUsuario } from "../../controller";
+import { $Enums, type Usuario as TypeUsuario } from "../../config/prisma-client";
+import { authenticateUsuario, createUsuario, deleteUsuario, findAllUsuarios, findUsuarioById, updateUsuario, } from "../../controller";
 import type { ApiResponse } from "../../utils";
 
 export const UsuarioResolvers = {
     Query: {
         Usuarios: async (): Promise<ApiResponse<TypeUsuario[]>> => { return await findAllUsuarios(); },
-        Usuario: async (_: any, { id }: { id: string }): Promise<ApiResponse<TypeUsuario | null>> => { return await findUsuarioById(id); },
+        Usuario: async (_: any, { id }: { id: string }, context: any): Promise<ApiResponse<TypeUsuario | null>> => { return await findUsuarioById(id, context); },
     },
     Mutation: {
         createUsuario: async (_: any, args: { data: TypeUsuario }, context: any): Promise<ApiResponse<TypeUsuario>> => { return await createUsuario(args.data, context); },

@@ -1,7 +1,9 @@
 import { Request } from 'express';
 import { AuthenticationError } from "apollo-server";
-import type { TypeUsuario } from "../controller/UsuarioController";
+
+
 import { sign, verify } from "jsonwebtoken";
+import { type Usuario as TypeUsuario } from '../config/prisma-client';
 
 export const getUserAuth = (req: Request) => {
     const authorization = req.headers.authorization;
@@ -13,6 +15,8 @@ export const getUserAuth = (req: Request) => {
 
 export const getAuth = (req: Request) => {
     const authorization = req.headers.authorization;
+    console.log(authorization);
+    
     if (!authorization) {
         throw new AuthenticationError('Contador não selecionado');
     }

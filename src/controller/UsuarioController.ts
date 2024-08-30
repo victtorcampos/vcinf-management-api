@@ -1,25 +1,37 @@
 import { hash } from 'bcryptjs';
-import { Prisma, PrismaClient, type $Enums, type Usuario as PrismaUsuario } from "../config/prisma-client";
+import { Prisma, PrismaClient, type $Enums, type Usuario as TypeUsuario } from "../config/prisma-client";
 import { AuthenticationError, ValidationError } from 'apollo-server';
-import { generateToken, getUserAuth, isAdminAuth } from '../services/authService';
+import { generateToken, getAuth, getUserAuth, isAdminAuth } from '../services/authService';
 import { compare } from "bcryptjs";
 import { handleError, handleSuccess, type ApiResponse } from '../utils/responseHandler';
-const prisma = new PrismaClient().usuario;
+const prisma = new PrismaClient({
+    log: ['query', 'info', 'warn', 'error'],
+}).usuario;
 
-export interface TypeUsuario extends PrismaUsuario { }
 
-export const findAllUsuarios = async (): Promise<ApiResponse<PrismaUsuario[]>> => { try { const usuarios = await prisma.findMany(); return handleSuccess(usuarios); } catch (error) { return handleError('Erro ao buscar todos os usuários.'); } };
+export const findAllUsuarios = async (): Promise<ApiResponse<TypeUsuario[]>> => { try { const usuarios = await prisma.findMany(); return handleSuccess(usuarios); } catch (error) { return handleError('Erro ao buscar todos os usuários.'); } };
 
-export const findUsuarioById = async (id: string): Promise<ApiResponse<PrismaUsuario | null>> => { try { const usuario = await prisma.findUnique({ where: { id } }); return handleSuccess(usuario); } catch (error) { return handleError(`Erro ao buscar usuário com ID ${id}.`); } };
-
-export const findUsuarioByEmail = async (email: string): Promise<ApiResponse<PrismaUsuario | null>> => { try { const usuario = await prisma.findUnique({ where: { email } }); return handleSuccess(usuario); } catch (error) { return handleError(`Erro ao buscar usuário com email ${email}.`); } };
-
-export const createUsuario = async (data: TypeUsuario, context: any): Promise<ApiResponse<PrismaUsuario>> => {
+export const findUsuarioById = async (id: string, context: any): Promise<ApiResponse<TypeUsuario | null>> => {
     try {
-        const usuario = getUserAuth(context.req);
-        isAdminAuth(usuario);
+        const auth = getAuth(context.req);
+        if (!auth.userId) { throw new AuthenticationError("Usuario não auntenticado.") };
+        const usuario = await prisma.findUnique({ where: { id } });
+        return handleSuccess(usuario);
+    } catch (error) {
+        return handleError(`Erro ao buscar usuário com ID ${id}.`);
+    }
+};
+
+export const findUsuarioByEmail = async (email: string): Promise<ApiResponse<TypeUsuario | null>> => { try { const usuario = await prisma.findUnique({ where: { email } }); return handleSuccess(usuario); } catch (error) { return handleError(`Erro ao buscar usuário com email ${email}.`); } };
+
+export const createUsuario = async (data: TypeUsuario, context: any): Promise<ApiResponse<TypeUsuario>> => {
+    console.log(data);
+    
+    try {
+        const auth = getAuth(context.req);        
+        isAdminAuth(auth);
         const hashedPassword = await hash(data.password, 10);
-        const newUsuario = await prisma.create({ data: { email: data.email, password: hashedPassword, role: data.role }, });
+        const newUsuario = await prisma.create({ data: { ...data, password: hashedPassword }, });
         return handleSuccess(newUsuario);
     } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
@@ -32,7 +44,7 @@ export const createUsuario = async (data: TypeUsuario, context: any): Promise<Ap
     }
 };
 
-export const updateUsuario = async (data: { id: string; email: string; password?: string; role: $Enums.Role }, context: any): Promise<ApiResponse<PrismaUsuario>> => {
+export const updateUsuario = async (data: { id: string; email: string; password?: string; role: $Enums.Role }, context: any): Promise<ApiResponse<TypeUsuario>> => {
     try {
         if (!data.id) {
             throw new ValidationError('ID não fornecido.');

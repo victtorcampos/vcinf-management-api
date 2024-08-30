@@ -5,6 +5,7 @@ export const UsuarioTypeDefs = gql`
 # Definição dos tipos de dados
   type Usuario {
     id: ID!
+    nome: String
     email: String!
     role: Role!
   }
@@ -46,6 +47,7 @@ export const UsuarioTypeDefs = gql`
 
   # Definição dos inputs
   input CreateUsuarioInput {
+    nome: String
     email: String!
     password: String!
     role: String!
@@ -63,7 +65,6 @@ export const UsuarioTypeDefs = gql`
     createUsuario(data: CreateUsuarioInput!): UsuarioResponse!
     updateUsuario(data: UpdateUsuarioInput!): UsuarioResponse!
     deleteUsuario(id: ID!): DeleteResponse!
-
   }
 
   # Definição das queries

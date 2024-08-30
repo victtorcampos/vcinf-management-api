@@ -28,8 +28,10 @@ export const createEmitente = async (data: InputContador, context: any): Promise
                 , enderecos: {
                     create: data.enderecos
                 }
-                ,
-                contadores: {
+                , usuarios: {
+                    create: { usuarioId: auth.userId }
+                }
+                , contadores: {
                     create: { contadorId: auth.contadorId }
                 }
             },
@@ -38,7 +40,7 @@ export const createEmitente = async (data: InputContador, context: any): Promise
 
         return handleSuccess(emitente)
     } catch (error) {
-        return handleError("Erro desconhecido.");
+        return handleError(`Erro desconhecido.`);
     }
 };
 export const findIdEmitente = async (id: string, context: any): Promise<ApiResponse<TypeEmitente>> => {
@@ -46,7 +48,9 @@ export const findIdEmitente = async (id: string, context: any): Promise<ApiRespo
         const auth = getAuth(context.req);
         if (!auth.userId) { throw new AuthenticationError("Usuario não auntenticado.") }
         if (!auth.contadorId) { throw new AuthenticationError("Contador não selecionado.") }
-        const emitente = await prisma.findUnique({ where: { id: id }, include: { enderecos: true, contadores: true } });
+        const emitente = await prisma.findUnique({ where: { id: id }, include: { enderecos: true, contadores: true , usuarios: true} });
+        console.log(emitente);
+        
         if (!emitente) { throw new ValidationError('ID não fornecido.'); }
         return handleSuccess(emitente)
     } catch (error) {
