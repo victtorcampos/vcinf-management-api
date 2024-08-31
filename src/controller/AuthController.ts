@@ -5,11 +5,16 @@ import { PrismaClient, type Usuario as typeUsuario } from "../config/prisma-clie
 import { sign } from "jsonwebtoken";
 import { getAuth, getUserAuth } from "../services/authService";
 
-const prisma = new PrismaClient().usuario;
+const prisma = new PrismaClient({
+    //log: ['query', 'info', 'warn', 'error'],
+}).usuario;
 
 export const authUsuario = async (email: string, password: string): Promise<AuthApiResponse<string>> => {
+    console.log({ email, password });
+
     try {
         const usuario = await prisma.findUnique({ where: { email } });
+        
         if (!usuario) { throw new AuthenticationError('Credenciais inválidas.'); }
         const valid = await compare(password, usuario.password);
         if (!valid) { throw new AuthenticationError('Credenciais inválidas.'); }

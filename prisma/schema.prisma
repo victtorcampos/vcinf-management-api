@@ -113,7 +113,7 @@ model Endereco {
   uf               String
   codigoIBGEestado String
   contador         Contador? @relation(fields: [contadorId], references: [id], onDelete: Cascade)
-  contadorId       String?   @unique @db.ObjectId
+  contadorId       String?  @db.ObjectId
   emitente         Emitente? @relation(fields: [emitenteId], references: [id], onDelete: Cascade)
   emitenteId       String?   @db.ObjectId
 }

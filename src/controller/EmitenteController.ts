@@ -6,7 +6,7 @@ import { JsonWebTokenError } from "jsonwebtoken";
 import { PrismaClientKnownRequestError, PrismaClientValidationError } from "../config/prisma-client/runtime/library";
 
 const prisma = new PrismaClient({
-    //log: ['query', 'info', 'warn', 'error'],
+    log: ['query', 'info', 'warn', 'error'],
 }).emitente;
 
 type Context = { req: Request; };
@@ -21,6 +21,8 @@ interface EmitenteResponse extends TypeEmitente {
 export const createEmitente = async (data: InputContador, context: any): Promise<ApiResponse<TypeEmitente>> => {
     try {
         const auth = getAuth(context.req);
+        console.log(data.enderecos);
+        
         isAdminAuth(auth);
         const emitente = await prisma.create({
             data: {
