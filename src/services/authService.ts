@@ -15,8 +15,6 @@ export const getUserAuth = (req: Request) => {
 
 export const getAuth = (req: Request) => {
     const authorization = req.headers.authorization;
-    console.log(authorization);
-    
     if (!authorization) {
         throw new AuthenticationError('Contador não selecionado');
     }

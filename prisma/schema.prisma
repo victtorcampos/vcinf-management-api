@@ -37,7 +37,7 @@ model Contador {
   emitentes    ContadorEmitente[]
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
-  endereco     Endereco?
+  enderecos    Endereco[]
   certificados Certificado[]
 }
 
@@ -76,9 +76,9 @@ model Emitente {
   cod_dominio  String?
   nome         String
   razao_social String
-  cnpj         String?
-  cpf          String?
-  ie           String
+  cnpj         String?  @unique
+  cpf          String?  @unique
+  ie           String?
   enderecos    Endereco[]
   contadores   ContadorEmitente[]
   usuarios     UsuarioEmitente[]
@@ -86,7 +86,7 @@ model Emitente {
   updatedAt    DateTime           @updatedAt
 
   @@unique([cnpj, ie])
-  @@unique([cpf, ie])
+  
 }
 
 model Certificado {
@@ -113,7 +113,7 @@ model Endereco {
   uf               String
   codigoIBGEestado String
   contador         Contador? @relation(fields: [contadorId], references: [id], onDelete: Cascade)
-  contadorId       String?  @db.ObjectId
+  contadorId       String?   @db.ObjectId
   emitente         Emitente? @relation(fields: [emitenteId], references: [id], onDelete: Cascade)
   emitenteId       String?   @db.ObjectId
 }

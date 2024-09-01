@@ -58,7 +58,7 @@ export const EmitenteTypeDefs = gql`
 
   type Query {
   # Aqui você pode adicionar queries conforme necessário, por exemplo:
-    Emitentes: [TypeEmitente!]!
+    emitentes: [TypeEmitente]
   }
 
   schema {
