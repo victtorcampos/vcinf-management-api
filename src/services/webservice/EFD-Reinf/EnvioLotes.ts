@@ -10,11 +10,11 @@ export const createLote = async (data: TypeMovimentoReinf): Promise<any> => {
     const { emitente, periodo } = data;
     const evtFechamento = createEvtFechamento(emitente, periodo);
     const xmlEvt = createXml(evtFechamento);
-    const xmlEvtAssinado = await signedXmlEventReinf({ evento: `evtFechaEvPer`, xml: xmlEvt, certificado: emitente.certificado });
-    const xmlevneto = await createLoteEnvioReinf(emitente, periodo, evtFechamento.Reinf);
-    let xmlLote = createXml(xmlevneto);
-    xmlLote = xmlLote.replace(/<insertXML><data>aqui<\/data><\/insertXML>/, xmlEvtAssinado);
-    return xmlLote;
+    //const xmlEvtAssinado = await signedXmlEventReinf({ evento: `evtFechaEvPer`, xml: xmlEvt, certificado: emitente.certificado });
+    //const xmlevneto = await createLoteEnvioReinf(emitente, periodo, evtFechamento.Reinf);
+    //let xmlLote = createXml(xmlevneto);
+    //xmlLote = xmlLote.replace(/<insertXML><data>aqui<\/data><\/insertXML>/, xmlEvtAssinado);
+    return xmlEvt;
 }
 
 const createXml = (evt: any): string => {
