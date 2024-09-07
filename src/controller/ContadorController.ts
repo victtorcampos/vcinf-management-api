@@ -23,10 +23,10 @@ export const createContador = async (data: TypeContadorInput, context: any): Pro
     const contador = await prisma.create({
       data: {
         ...data, usuarios: { create: { usuarioId: usuario.userId } },
-        enderecos: { create: { ...data.endereco } },
+        endereco: { create: { ...data.endereco } },
         certificados: { create: [{ ...data.certificados[0], validade: new Date("2025-12-31T23:59:59Z") }] }
       },
-      include: { enderecos: true, certificados: true, usuarios: true }
+      include: { endereco: true, certificados: true, usuarios: true }
     });
 
     return handleSuccess(contador);

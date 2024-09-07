@@ -11,16 +11,7 @@ export const EmitenteTypeDefs = gql`
     cpf: String
     ie: String
     enderecos: [TypeEndereco]
-    contadores: [TypeContadorEmitente]
-    usuarios: [TypeUsuarioEmitente]
-  }
-
-  type TypeContadorEmitente {
-    contadorId: String
-  }
-
-  type TypeUsuarioEmitente {
-    usuarioId: String
+    contadores: [TypeContador]
   }
 
   type EmitenteResponse {
@@ -46,7 +37,7 @@ export const EmitenteTypeDefs = gql`
     razao_social: String
     cnpj: String
     cpf: String
-    ie  : String
+    IE: String
     enderecos: [EnderecoInput]
   }
 
@@ -58,7 +49,7 @@ export const EmitenteTypeDefs = gql`
 
   type Query {
   # Aqui você pode adicionar queries conforme necessário, por exemplo:
-    emitentes: [TypeEmitente]
+    Emitentes: [TypeEmitente!]!
   }
 
   schema {

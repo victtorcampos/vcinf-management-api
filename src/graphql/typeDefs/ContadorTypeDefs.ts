@@ -18,17 +18,6 @@ type TypeContador {
 }
   type TypeEndereco {
     id: ID!
-    tipo: String
-    logradouro: String
-    nro: String
-    complemento: String
-    bairro: String
-    cep: String
-    nome_cidade: String
-    codigoIBGEcidade: String
-    nome_estado: String
-    uf: String
-    codigoIBGEestado: String
   }
   
   type TypeCertificados {

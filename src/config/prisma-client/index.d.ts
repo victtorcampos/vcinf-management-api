@@ -34,11 +34,6 @@ export type UsuarioContador = $Result.DefaultSelection<Prisma.$UsuarioContadorPa
  */
 export type ContadorEmitente = $Result.DefaultSelection<Prisma.$ContadorEmitentePayload>
 /**
- * Model UsuarioEmitente
- * 
- */
-export type UsuarioEmitente = $Result.DefaultSelection<Prisma.$UsuarioEmitentePayload>
-/**
  * Model Emitente
  * 
  */
@@ -53,6 +48,11 @@ export type Certificado = $Result.DefaultSelection<Prisma.$CertificadoPayload>
  * 
  */
 export type Endereco = $Result.DefaultSelection<Prisma.$EnderecoPayload>
+/**
+ * Model EventoReinf
+ * 
+ */
+export type EventoReinf = $Result.DefaultSelection<Prisma.$EventoReinfPayload>
 
 /**
  * Enums
@@ -67,11 +67,25 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const StatusEventoReinf: {
+  CRIADO: 'CRIADO',
+  ENVIADO: 'ENVIADO',
+  SUCESSO: 'SUCESSO',
+  ERROR: 'ERROR'
+};
+
+export type StatusEventoReinf = (typeof StatusEventoReinf)[keyof typeof StatusEventoReinf]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type StatusEventoReinf = $Enums.StatusEventoReinf
+
+export const StatusEventoReinf: typeof $Enums.StatusEventoReinf
 
 /**
  * ##  Prisma Client ʲˢ
@@ -204,16 +218,6 @@ export class PrismaClient<
   get contadorEmitente(): Prisma.ContadorEmitenteDelegate<ExtArgs>;
 
   /**
-   * `prisma.usuarioEmitente`: Exposes CRUD operations for the **UsuarioEmitente** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more UsuarioEmitentes
-    * const usuarioEmitentes = await prisma.usuarioEmitente.findMany()
-    * ```
-    */
-  get usuarioEmitente(): Prisma.UsuarioEmitenteDelegate<ExtArgs>;
-
-  /**
    * `prisma.emitente`: Exposes CRUD operations for the **Emitente** model.
     * Example usage:
     * ```ts
@@ -242,6 +246,16 @@ export class PrismaClient<
     * ```
     */
   get endereco(): Prisma.EnderecoDelegate<ExtArgs>;
+
+  /**
+   * `prisma.eventoReinf`: Exposes CRUD operations for the **EventoReinf** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EventoReinfs
+    * const eventoReinfs = await prisma.eventoReinf.findMany()
+    * ```
+    */
+  get eventoReinf(): Prisma.EventoReinfDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -299,8 +313,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.19.0
-   * Query Engine version: 5fe21811a6ba0b952a3bc71400666511fe3b902f
+   * Prisma Client JS version: 5.17.0
+   * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
    */
   export type PrismaVersion = {
     client: string
@@ -312,13 +326,51 @@ export namespace Prisma {
    * Utility Types
    */
 
+  /**
+   * From https://github.com/sindresorhus/type-fest/
+   * Matches a JSON object.
+   * This type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from. 
+   */
+  export type JsonObject = {[Key in string]?: JsonValue}
 
-  export import JsonObject = runtime.JsonObject
-  export import JsonArray = runtime.JsonArray
-  export import JsonValue = runtime.JsonValue
-  export import InputJsonObject = runtime.InputJsonObject
-  export import InputJsonArray = runtime.InputJsonArray
-  export import InputJsonValue = runtime.InputJsonValue
+  /**
+   * From https://github.com/sindresorhus/type-fest/
+   * Matches a JSON array.
+   */
+  export interface JsonArray extends Array<JsonValue> {}
+
+  /**
+   * From https://github.com/sindresorhus/type-fest/
+   * Matches any valid JSON value.
+   */
+  export type JsonValue = string | number | boolean | JsonObject | JsonArray | null
+
+  /**
+   * Matches a JSON object.
+   * Unlike `JsonObject`, this type allows undefined and read-only properties.
+   */
+  export type InputJsonObject = {readonly [Key in string]?: InputJsonValue | null}
+
+  /**
+   * Matches a JSON array.
+   * Unlike `JsonArray`, readonly arrays are assignable to this type.
+   */
+  export interface InputJsonArray extends ReadonlyArray<InputJsonValue | null> {}
+
+  /**
+   * Matches any valid value that can be used as an input for operations like
+   * create and update as the value of a JSON field. Unlike `JsonValue`, this
+   * type allows read-only arrays and read-only object properties and disallows
+   * `null` at the top level.
+   *
+   * `null` cannot be used as the value of a JSON field because its meaning
+   * would be ambiguous. Use `Prisma.JsonNull` to store the JSON null value or
+   * `Prisma.DbNull` to clear the JSON value and set the field to the database
+   * NULL value instead.
+   *
+   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-by-null-values
+   */
+  export type InputJsonValue = string | number | boolean | InputJsonObject | InputJsonArray | { toJSON(): unknown }
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
@@ -685,10 +737,10 @@ export namespace Prisma {
     Contador: 'Contador',
     UsuarioContador: 'UsuarioContador',
     ContadorEmitente: 'ContadorEmitente',
-    UsuarioEmitente: 'UsuarioEmitente',
     Emitente: 'Emitente',
     Certificado: 'Certificado',
-    Endereco: 'Endereco'
+    Endereco: 'Endereco',
+    EventoReinf: 'EventoReinf'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -704,7 +756,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "usuario" | "contador" | "usuarioContador" | "contadorEmitente" | "usuarioEmitente" | "emitente" | "certificado" | "endereco"
+      modelProps: "usuario" | "contador" | "usuarioContador" | "contadorEmitente" | "emitente" | "certificado" | "endereco" | "eventoReinf"
       txIsolationLevel: never
     }
     model: {
@@ -1004,80 +1056,6 @@ export namespace Prisma {
           }
         }
       }
-      UsuarioEmitente: {
-        payload: Prisma.$UsuarioEmitentePayload<ExtArgs>
-        fields: Prisma.UsuarioEmitenteFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.UsuarioEmitenteFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.UsuarioEmitenteFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
-          }
-          findFirst: {
-            args: Prisma.UsuarioEmitenteFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.UsuarioEmitenteFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
-          }
-          findMany: {
-            args: Prisma.UsuarioEmitenteFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>[]
-          }
-          create: {
-            args: Prisma.UsuarioEmitenteCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
-          }
-          createMany: {
-            args: Prisma.UsuarioEmitenteCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.UsuarioEmitenteDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
-          }
-          update: {
-            args: Prisma.UsuarioEmitenteUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
-          }
-          deleteMany: {
-            args: Prisma.UsuarioEmitenteDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.UsuarioEmitenteUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.UsuarioEmitenteUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$UsuarioEmitentePayload>
-          }
-          aggregate: {
-            args: Prisma.UsuarioEmitenteAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateUsuarioEmitente>
-          }
-          groupBy: {
-            args: Prisma.UsuarioEmitenteGroupByArgs<ExtArgs>
-            result: $Utils.Optional<UsuarioEmitenteGroupByOutputType>[]
-          }
-          findRaw: {
-            args: Prisma.UsuarioEmitenteFindRawArgs<ExtArgs>
-            result: JsonObject
-          }
-          aggregateRaw: {
-            args: Prisma.UsuarioEmitenteAggregateRawArgs<ExtArgs>
-            result: JsonObject
-          }
-          count: {
-            args: Prisma.UsuarioEmitenteCountArgs<ExtArgs>
-            result: $Utils.Optional<UsuarioEmitenteCountAggregateOutputType> | number
-          }
-        }
-      }
       Emitente: {
         payload: Prisma.$EmitentePayload<ExtArgs>
         fields: Prisma.EmitenteFieldRefs
@@ -1300,6 +1278,80 @@ export namespace Prisma {
           }
         }
       }
+      EventoReinf: {
+        payload: Prisma.$EventoReinfPayload<ExtArgs>
+        fields: Prisma.EventoReinfFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventoReinfFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventoReinfPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventoReinfFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventoReinfPayload>
+          }
+          findFirst: {
+            args: Prisma.EventoReinfFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventoReinfPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventoReinfFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventoReinfPayload>
+          }
+          findMany: {
+            args: Prisma.EventoReinfFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventoReinfPayload>[]
+          }
+          create: {
+            args: Prisma.EventoReinfCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventoReinfPayload>
+          }
+          createMany: {
+            args: Prisma.EventoReinfCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.EventoReinfDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventoReinfPayload>
+          }
+          update: {
+            args: Prisma.EventoReinfUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventoReinfPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventoReinfDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventoReinfUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.EventoReinfUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventoReinfPayload>
+          }
+          aggregate: {
+            args: Prisma.EventoReinfAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEventoReinf>
+          }
+          groupBy: {
+            args: Prisma.EventoReinfGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventoReinfGroupByOutputType>[]
+          }
+          findRaw: {
+            args: Prisma.EventoReinfFindRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          aggregateRaw: {
+            args: Prisma.EventoReinfAggregateRawArgs<ExtArgs>
+            result: JsonObject
+          }
+          count: {
+            args: Prisma.EventoReinfCountArgs<ExtArgs>
+            result: $Utils.Optional<EventoReinfCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1449,12 +1501,10 @@ export namespace Prisma {
 
   export type UsuarioCountOutputType = {
     contadores: number
-    emitentes: number
   }
 
   export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contadores?: boolean | UsuarioCountOutputTypeCountContadoresArgs
-    emitentes?: boolean | UsuarioCountOutputTypeCountEmitentesArgs
   }
 
   // Custom InputTypes
@@ -1475,13 +1525,6 @@ export namespace Prisma {
     where?: UsuarioContadorWhereInput
   }
 
-  /**
-   * UsuarioCountOutputType without action
-   */
-  export type UsuarioCountOutputTypeCountEmitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UsuarioEmitenteWhereInput
-  }
-
 
   /**
    * Count Type ContadorCountOutputType
@@ -1490,14 +1533,12 @@ export namespace Prisma {
   export type ContadorCountOutputType = {
     usuarios: number
     emitentes: number
-    enderecos: number
     certificados: number
   }
 
   export type ContadorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuarios?: boolean | ContadorCountOutputTypeCountUsuariosArgs
     emitentes?: boolean | ContadorCountOutputTypeCountEmitentesArgs
-    enderecos?: boolean | ContadorCountOutputTypeCountEnderecosArgs
     certificados?: boolean | ContadorCountOutputTypeCountCertificadosArgs
   }
 
@@ -1529,13 +1570,6 @@ export namespace Prisma {
   /**
    * ContadorCountOutputType without action
    */
-  export type ContadorCountOutputTypeCountEnderecosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: EnderecoWhereInput
-  }
-
-  /**
-   * ContadorCountOutputType without action
-   */
   export type ContadorCountOutputTypeCountCertificadosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CertificadoWhereInput
   }
@@ -1548,13 +1582,11 @@ export namespace Prisma {
   export type EmitenteCountOutputType = {
     enderecos: number
     contadores: number
-    usuarios: number
   }
 
   export type EmitenteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     enderecos?: boolean | EmitenteCountOutputTypeCountEnderecosArgs
     contadores?: boolean | EmitenteCountOutputTypeCountContadoresArgs
-    usuarios?: boolean | EmitenteCountOutputTypeCountUsuariosArgs
   }
 
   // Custom InputTypes
@@ -1582,11 +1614,35 @@ export namespace Prisma {
     where?: ContadorEmitenteWhereInput
   }
 
+
   /**
-   * EmitenteCountOutputType without action
+   * Count Type EventoReinfCountOutputType
    */
-  export type EmitenteCountOutputTypeCountUsuariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UsuarioEmitenteWhereInput
+
+  export type EventoReinfCountOutputType = {
+    filhos: number
+  }
+
+  export type EventoReinfCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    filhos?: boolean | EventoReinfCountOutputTypeCountFilhosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventoReinfCountOutputType without action
+   */
+  export type EventoReinfCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinfCountOutputType
+     */
+    select?: EventoReinfCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventoReinfCountOutputType without action
+   */
+  export type EventoReinfCountOutputTypeCountFilhosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventoReinfWhereInput
   }
 
 
@@ -1606,7 +1662,6 @@ export namespace Prisma {
 
   export type UsuarioMinAggregateOutputType = {
     id: string | null
-    nome: string | null
     email: string | null
     password: string | null
     role: $Enums.Role | null
@@ -1616,7 +1671,6 @@ export namespace Prisma {
 
   export type UsuarioMaxAggregateOutputType = {
     id: string | null
-    nome: string | null
     email: string | null
     password: string | null
     role: $Enums.Role | null
@@ -1626,7 +1680,6 @@ export namespace Prisma {
 
   export type UsuarioCountAggregateOutputType = {
     id: number
-    nome: number
     email: number
     password: number
     role: number
@@ -1638,7 +1691,6 @@ export namespace Prisma {
 
   export type UsuarioMinAggregateInputType = {
     id?: true
-    nome?: true
     email?: true
     password?: true
     role?: true
@@ -1648,7 +1700,6 @@ export namespace Prisma {
 
   export type UsuarioMaxAggregateInputType = {
     id?: true
-    nome?: true
     email?: true
     password?: true
     role?: true
@@ -1658,7 +1709,6 @@ export namespace Prisma {
 
   export type UsuarioCountAggregateInputType = {
     id?: true
-    nome?: true
     email?: true
     password?: true
     role?: true
@@ -1741,7 +1791,6 @@ export namespace Prisma {
 
   export type UsuarioGroupByOutputType = {
     id: string
-    nome: string
     email: string
     password: string
     role: $Enums.Role
@@ -1768,21 +1817,18 @@ export namespace Prisma {
 
   export type UsuarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    nome?: boolean
     email?: boolean
     password?: boolean
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     contadores?: boolean | Usuario$contadoresArgs<ExtArgs>
-    emitentes?: boolean | Usuario$emitentesArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
 
   export type UsuarioSelectScalar = {
     id?: boolean
-    nome?: boolean
     email?: boolean
     password?: boolean
     role?: boolean
@@ -1792,7 +1838,6 @@ export namespace Prisma {
 
   export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contadores?: boolean | Usuario$contadoresArgs<ExtArgs>
-    emitentes?: boolean | Usuario$emitentesArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -1800,11 +1845,9 @@ export namespace Prisma {
     name: "Usuario"
     objects: {
       contadores: Prisma.$UsuarioContadorPayload<ExtArgs>[]
-      emitentes: Prisma.$UsuarioEmitentePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      nome: string
       email: string
       password: string
       role: $Enums.Role
@@ -2174,7 +2217,6 @@ export namespace Prisma {
   export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     contadores<T extends Usuario$contadoresArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$contadoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findMany"> | Null>
-    emitentes<T extends Usuario$emitentesArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$emitentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2205,7 +2247,6 @@ export namespace Prisma {
    */ 
   interface UsuarioFieldRefs {
     readonly id: FieldRef<"Usuario", 'String'>
-    readonly nome: FieldRef<"Usuario", 'String'>
     readonly email: FieldRef<"Usuario", 'String'>
     readonly password: FieldRef<"Usuario", 'String'>
     readonly role: FieldRef<"Usuario", 'Role'>
@@ -2557,26 +2598,6 @@ export namespace Prisma {
   }
 
   /**
-   * Usuario.emitentes
-   */
-  export type Usuario$emitentesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    where?: UsuarioEmitenteWhereInput
-    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
-    cursor?: UsuarioEmitenteWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
-  }
-
-  /**
    * Usuario without action
    */
   export type UsuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2781,7 +2802,7 @@ export namespace Prisma {
     updatedAt?: boolean
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
     emitentes?: boolean | Contador$emitentesArgs<ExtArgs>
-    enderecos?: boolean | Contador$enderecosArgs<ExtArgs>
+    endereco?: boolean | Contador$enderecoArgs<ExtArgs>
     certificados?: boolean | Contador$certificadosArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contador"]>
@@ -2801,7 +2822,7 @@ export namespace Prisma {
   export type ContadorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     usuarios?: boolean | Contador$usuariosArgs<ExtArgs>
     emitentes?: boolean | Contador$emitentesArgs<ExtArgs>
-    enderecos?: boolean | Contador$enderecosArgs<ExtArgs>
+    endereco?: boolean | Contador$enderecoArgs<ExtArgs>
     certificados?: boolean | Contador$certificadosArgs<ExtArgs>
     _count?: boolean | ContadorCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2811,7 +2832,7 @@ export namespace Prisma {
     objects: {
       usuarios: Prisma.$UsuarioContadorPayload<ExtArgs>[]
       emitentes: Prisma.$ContadorEmitentePayload<ExtArgs>[]
-      enderecos: Prisma.$EnderecoPayload<ExtArgs>[]
+      endereco: Prisma.$EnderecoPayload<ExtArgs> | null
       certificados: Prisma.$CertificadoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3188,7 +3209,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     usuarios<T extends Contador$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioContadorPayload<ExtArgs>, T, "findMany"> | Null>
     emitentes<T extends Contador$emitentesArgs<ExtArgs> = {}>(args?: Subset<T, Contador$emitentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findMany"> | Null>
-    enderecos<T extends Contador$enderecosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$enderecosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany"> | Null>
+    endereco<T extends Contador$enderecoArgs<ExtArgs> = {}>(args?: Subset<T, Contador$enderecoArgs<ExtArgs>>): Prisma__EnderecoClient<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     certificados<T extends Contador$certificadosArgs<ExtArgs> = {}>(args?: Subset<T, Contador$certificadosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CertificadoPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3593,9 +3614,9 @@ export namespace Prisma {
   }
 
   /**
-   * Contador.enderecos
+   * Contador.endereco
    */
-  export type Contador$enderecosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Contador$enderecoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Endereco
      */
@@ -3605,11 +3626,6 @@ export namespace Prisma {
      */
     include?: EnderecoInclude<ExtArgs> | null
     where?: EnderecoWhereInput
-    orderBy?: EnderecoOrderByWithRelationInput | EnderecoOrderByWithRelationInput[]
-    cursor?: EnderecoWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: EnderecoScalarFieldEnum | EnderecoScalarFieldEnum[]
   }
 
   /**
@@ -5470,917 +5486,6 @@ export namespace Prisma {
 
 
   /**
-   * Model UsuarioEmitente
-   */
-
-  export type AggregateUsuarioEmitente = {
-    _count: UsuarioEmitenteCountAggregateOutputType | null
-    _min: UsuarioEmitenteMinAggregateOutputType | null
-    _max: UsuarioEmitenteMaxAggregateOutputType | null
-  }
-
-  export type UsuarioEmitenteMinAggregateOutputType = {
-    id: string | null
-    emitenteId: string | null
-    usuarioId: string | null
-  }
-
-  export type UsuarioEmitenteMaxAggregateOutputType = {
-    id: string | null
-    emitenteId: string | null
-    usuarioId: string | null
-  }
-
-  export type UsuarioEmitenteCountAggregateOutputType = {
-    id: number
-    emitenteId: number
-    usuarioId: number
-    _all: number
-  }
-
-
-  export type UsuarioEmitenteMinAggregateInputType = {
-    id?: true
-    emitenteId?: true
-    usuarioId?: true
-  }
-
-  export type UsuarioEmitenteMaxAggregateInputType = {
-    id?: true
-    emitenteId?: true
-    usuarioId?: true
-  }
-
-  export type UsuarioEmitenteCountAggregateInputType = {
-    id?: true
-    emitenteId?: true
-    usuarioId?: true
-    _all?: true
-  }
-
-  export type UsuarioEmitenteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UsuarioEmitente to aggregate.
-     */
-    where?: UsuarioEmitenteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UsuarioEmitentes to fetch.
-     */
-    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: UsuarioEmitenteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UsuarioEmitentes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UsuarioEmitentes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned UsuarioEmitentes
-    **/
-    _count?: true | UsuarioEmitenteCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: UsuarioEmitenteMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: UsuarioEmitenteMaxAggregateInputType
-  }
-
-  export type GetUsuarioEmitenteAggregateType<T extends UsuarioEmitenteAggregateArgs> = {
-        [P in keyof T & keyof AggregateUsuarioEmitente]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateUsuarioEmitente[P]>
-      : GetScalarType<T[P], AggregateUsuarioEmitente[P]>
-  }
-
-
-
-
-  export type UsuarioEmitenteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: UsuarioEmitenteWhereInput
-    orderBy?: UsuarioEmitenteOrderByWithAggregationInput | UsuarioEmitenteOrderByWithAggregationInput[]
-    by: UsuarioEmitenteScalarFieldEnum[] | UsuarioEmitenteScalarFieldEnum
-    having?: UsuarioEmitenteScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: UsuarioEmitenteCountAggregateInputType | true
-    _min?: UsuarioEmitenteMinAggregateInputType
-    _max?: UsuarioEmitenteMaxAggregateInputType
-  }
-
-  export type UsuarioEmitenteGroupByOutputType = {
-    id: string
-    emitenteId: string
-    usuarioId: string
-    _count: UsuarioEmitenteCountAggregateOutputType | null
-    _min: UsuarioEmitenteMinAggregateOutputType | null
-    _max: UsuarioEmitenteMaxAggregateOutputType | null
-  }
-
-  type GetUsuarioEmitenteGroupByPayload<T extends UsuarioEmitenteGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<UsuarioEmitenteGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof UsuarioEmitenteGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], UsuarioEmitenteGroupByOutputType[P]>
-            : GetScalarType<T[P], UsuarioEmitenteGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type UsuarioEmitenteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    emitenteId?: boolean
-    usuarioId?: boolean
-    emitente?: boolean | EmitenteDefaultArgs<ExtArgs>
-    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["usuarioEmitente"]>
-
-
-  export type UsuarioEmitenteSelectScalar = {
-    id?: boolean
-    emitenteId?: boolean
-    usuarioId?: boolean
-  }
-
-  export type UsuarioEmitenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    emitente?: boolean | EmitenteDefaultArgs<ExtArgs>
-    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
-  }
-
-  export type $UsuarioEmitentePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "UsuarioEmitente"
-    objects: {
-      emitente: Prisma.$EmitentePayload<ExtArgs>
-      usuario: Prisma.$UsuarioPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      emitenteId: string
-      usuarioId: string
-    }, ExtArgs["result"]["usuarioEmitente"]>
-    composites: {}
-  }
-
-  type UsuarioEmitenteGetPayload<S extends boolean | null | undefined | UsuarioEmitenteDefaultArgs> = $Result.GetResult<Prisma.$UsuarioEmitentePayload, S>
-
-  type UsuarioEmitenteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<UsuarioEmitenteFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: UsuarioEmitenteCountAggregateInputType | true
-    }
-
-  export interface UsuarioEmitenteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UsuarioEmitente'], meta: { name: 'UsuarioEmitente' } }
-    /**
-     * Find zero or one UsuarioEmitente that matches the filter.
-     * @param {UsuarioEmitenteFindUniqueArgs} args - Arguments to find a UsuarioEmitente
-     * @example
-     * // Get one UsuarioEmitente
-     * const usuarioEmitente = await prisma.usuarioEmitente.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends UsuarioEmitenteFindUniqueArgs>(args: SelectSubset<T, UsuarioEmitenteFindUniqueArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
-
-    /**
-     * Find one UsuarioEmitente that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {UsuarioEmitenteFindUniqueOrThrowArgs} args - Arguments to find a UsuarioEmitente
-     * @example
-     * // Get one UsuarioEmitente
-     * const usuarioEmitente = await prisma.usuarioEmitente.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends UsuarioEmitenteFindUniqueOrThrowArgs>(args: SelectSubset<T, UsuarioEmitenteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
-
-    /**
-     * Find the first UsuarioEmitente that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UsuarioEmitenteFindFirstArgs} args - Arguments to find a UsuarioEmitente
-     * @example
-     * // Get one UsuarioEmitente
-     * const usuarioEmitente = await prisma.usuarioEmitente.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends UsuarioEmitenteFindFirstArgs>(args?: SelectSubset<T, UsuarioEmitenteFindFirstArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
-
-    /**
-     * Find the first UsuarioEmitente that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UsuarioEmitenteFindFirstOrThrowArgs} args - Arguments to find a UsuarioEmitente
-     * @example
-     * // Get one UsuarioEmitente
-     * const usuarioEmitente = await prisma.usuarioEmitente.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends UsuarioEmitenteFindFirstOrThrowArgs>(args?: SelectSubset<T, UsuarioEmitenteFindFirstOrThrowArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
-
-    /**
-     * Find zero or more UsuarioEmitentes that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UsuarioEmitenteFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all UsuarioEmitentes
-     * const usuarioEmitentes = await prisma.usuarioEmitente.findMany()
-     * 
-     * // Get first 10 UsuarioEmitentes
-     * const usuarioEmitentes = await prisma.usuarioEmitente.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const usuarioEmitenteWithIdOnly = await prisma.usuarioEmitente.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends UsuarioEmitenteFindManyArgs>(args?: SelectSubset<T, UsuarioEmitenteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findMany">>
-
-    /**
-     * Create a UsuarioEmitente.
-     * @param {UsuarioEmitenteCreateArgs} args - Arguments to create a UsuarioEmitente.
-     * @example
-     * // Create one UsuarioEmitente
-     * const UsuarioEmitente = await prisma.usuarioEmitente.create({
-     *   data: {
-     *     // ... data to create a UsuarioEmitente
-     *   }
-     * })
-     * 
-     */
-    create<T extends UsuarioEmitenteCreateArgs>(args: SelectSubset<T, UsuarioEmitenteCreateArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "create">, never, ExtArgs>
-
-    /**
-     * Create many UsuarioEmitentes.
-     * @param {UsuarioEmitenteCreateManyArgs} args - Arguments to create many UsuarioEmitentes.
-     * @example
-     * // Create many UsuarioEmitentes
-     * const usuarioEmitente = await prisma.usuarioEmitente.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends UsuarioEmitenteCreateManyArgs>(args?: SelectSubset<T, UsuarioEmitenteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a UsuarioEmitente.
-     * @param {UsuarioEmitenteDeleteArgs} args - Arguments to delete one UsuarioEmitente.
-     * @example
-     * // Delete one UsuarioEmitente
-     * const UsuarioEmitente = await prisma.usuarioEmitente.delete({
-     *   where: {
-     *     // ... filter to delete one UsuarioEmitente
-     *   }
-     * })
-     * 
-     */
-    delete<T extends UsuarioEmitenteDeleteArgs>(args: SelectSubset<T, UsuarioEmitenteDeleteArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "delete">, never, ExtArgs>
-
-    /**
-     * Update one UsuarioEmitente.
-     * @param {UsuarioEmitenteUpdateArgs} args - Arguments to update one UsuarioEmitente.
-     * @example
-     * // Update one UsuarioEmitente
-     * const usuarioEmitente = await prisma.usuarioEmitente.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends UsuarioEmitenteUpdateArgs>(args: SelectSubset<T, UsuarioEmitenteUpdateArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "update">, never, ExtArgs>
-
-    /**
-     * Delete zero or more UsuarioEmitentes.
-     * @param {UsuarioEmitenteDeleteManyArgs} args - Arguments to filter UsuarioEmitentes to delete.
-     * @example
-     * // Delete a few UsuarioEmitentes
-     * const { count } = await prisma.usuarioEmitente.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends UsuarioEmitenteDeleteManyArgs>(args?: SelectSubset<T, UsuarioEmitenteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more UsuarioEmitentes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UsuarioEmitenteUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many UsuarioEmitentes
-     * const usuarioEmitente = await prisma.usuarioEmitente.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends UsuarioEmitenteUpdateManyArgs>(args: SelectSubset<T, UsuarioEmitenteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one UsuarioEmitente.
-     * @param {UsuarioEmitenteUpsertArgs} args - Arguments to update or create a UsuarioEmitente.
-     * @example
-     * // Update or create a UsuarioEmitente
-     * const usuarioEmitente = await prisma.usuarioEmitente.upsert({
-     *   create: {
-     *     // ... data to create a UsuarioEmitente
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the UsuarioEmitente we want to update
-     *   }
-     * })
-     */
-    upsert<T extends UsuarioEmitenteUpsertArgs>(args: SelectSubset<T, UsuarioEmitenteUpsertArgs<ExtArgs>>): Prisma__UsuarioEmitenteClient<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
-    /**
-     * Find zero or more UsuarioEmitentes that matches the filter.
-     * @param {UsuarioEmitenteFindRawArgs} args - Select which filters you would like to apply.
-     * @example
-     * const usuarioEmitente = await prisma.usuarioEmitente.findRaw({
-     *   filter: { age: { $gt: 25 } } 
-     * })
-     */
-    findRaw(args?: UsuarioEmitenteFindRawArgs): Prisma.PrismaPromise<JsonObject>
-
-    /**
-     * Perform aggregation operations on a UsuarioEmitente.
-     * @param {UsuarioEmitenteAggregateRawArgs} args - Select which aggregations you would like to apply.
-     * @example
-     * const usuarioEmitente = await prisma.usuarioEmitente.aggregateRaw({
-     *   pipeline: [
-     *     { $match: { status: "registered" } },
-     *     { $group: { _id: "$country", total: { $sum: 1 } } }
-     *   ]
-     * })
-     */
-    aggregateRaw(args?: UsuarioEmitenteAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
-
-
-    /**
-     * Count the number of UsuarioEmitentes.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UsuarioEmitenteCountArgs} args - Arguments to filter UsuarioEmitentes to count.
-     * @example
-     * // Count the number of UsuarioEmitentes
-     * const count = await prisma.usuarioEmitente.count({
-     *   where: {
-     *     // ... the filter for the UsuarioEmitentes we want to count
-     *   }
-     * })
-    **/
-    count<T extends UsuarioEmitenteCountArgs>(
-      args?: Subset<T, UsuarioEmitenteCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], UsuarioEmitenteCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a UsuarioEmitente.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UsuarioEmitenteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends UsuarioEmitenteAggregateArgs>(args: Subset<T, UsuarioEmitenteAggregateArgs>): Prisma.PrismaPromise<GetUsuarioEmitenteAggregateType<T>>
-
-    /**
-     * Group by UsuarioEmitente.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {UsuarioEmitenteGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends UsuarioEmitenteGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: UsuarioEmitenteGroupByArgs['orderBy'] }
-        : { orderBy?: UsuarioEmitenteGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, UsuarioEmitenteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsuarioEmitenteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the UsuarioEmitente model
-   */
-  readonly fields: UsuarioEmitenteFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for UsuarioEmitente.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__UsuarioEmitenteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    emitente<T extends EmitenteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EmitenteDefaultArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    usuario<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the UsuarioEmitente model
-   */ 
-  interface UsuarioEmitenteFieldRefs {
-    readonly id: FieldRef<"UsuarioEmitente", 'String'>
-    readonly emitenteId: FieldRef<"UsuarioEmitente", 'String'>
-    readonly usuarioId: FieldRef<"UsuarioEmitente", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * UsuarioEmitente findUnique
-   */
-  export type UsuarioEmitenteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    /**
-     * Filter, which UsuarioEmitente to fetch.
-     */
-    where: UsuarioEmitenteWhereUniqueInput
-  }
-
-  /**
-   * UsuarioEmitente findUniqueOrThrow
-   */
-  export type UsuarioEmitenteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    /**
-     * Filter, which UsuarioEmitente to fetch.
-     */
-    where: UsuarioEmitenteWhereUniqueInput
-  }
-
-  /**
-   * UsuarioEmitente findFirst
-   */
-  export type UsuarioEmitenteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    /**
-     * Filter, which UsuarioEmitente to fetch.
-     */
-    where?: UsuarioEmitenteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UsuarioEmitentes to fetch.
-     */
-    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UsuarioEmitentes.
-     */
-    cursor?: UsuarioEmitenteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UsuarioEmitentes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UsuarioEmitentes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UsuarioEmitentes.
-     */
-    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
-  }
-
-  /**
-   * UsuarioEmitente findFirstOrThrow
-   */
-  export type UsuarioEmitenteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    /**
-     * Filter, which UsuarioEmitente to fetch.
-     */
-    where?: UsuarioEmitenteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UsuarioEmitentes to fetch.
-     */
-    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for UsuarioEmitentes.
-     */
-    cursor?: UsuarioEmitenteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UsuarioEmitentes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UsuarioEmitentes.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UsuarioEmitentes.
-     */
-    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
-  }
-
-  /**
-   * UsuarioEmitente findMany
-   */
-  export type UsuarioEmitenteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    /**
-     * Filter, which UsuarioEmitentes to fetch.
-     */
-    where?: UsuarioEmitenteWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of UsuarioEmitentes to fetch.
-     */
-    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing UsuarioEmitentes.
-     */
-    cursor?: UsuarioEmitenteWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` UsuarioEmitentes from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` UsuarioEmitentes.
-     */
-    skip?: number
-    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
-  }
-
-  /**
-   * UsuarioEmitente create
-   */
-  export type UsuarioEmitenteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    /**
-     * The data needed to create a UsuarioEmitente.
-     */
-    data: XOR<UsuarioEmitenteCreateInput, UsuarioEmitenteUncheckedCreateInput>
-  }
-
-  /**
-   * UsuarioEmitente createMany
-   */
-  export type UsuarioEmitenteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many UsuarioEmitentes.
-     */
-    data: UsuarioEmitenteCreateManyInput | UsuarioEmitenteCreateManyInput[]
-  }
-
-  /**
-   * UsuarioEmitente update
-   */
-  export type UsuarioEmitenteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    /**
-     * The data needed to update a UsuarioEmitente.
-     */
-    data: XOR<UsuarioEmitenteUpdateInput, UsuarioEmitenteUncheckedUpdateInput>
-    /**
-     * Choose, which UsuarioEmitente to update.
-     */
-    where: UsuarioEmitenteWhereUniqueInput
-  }
-
-  /**
-   * UsuarioEmitente updateMany
-   */
-  export type UsuarioEmitenteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update UsuarioEmitentes.
-     */
-    data: XOR<UsuarioEmitenteUpdateManyMutationInput, UsuarioEmitenteUncheckedUpdateManyInput>
-    /**
-     * Filter which UsuarioEmitentes to update
-     */
-    where?: UsuarioEmitenteWhereInput
-  }
-
-  /**
-   * UsuarioEmitente upsert
-   */
-  export type UsuarioEmitenteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    /**
-     * The filter to search for the UsuarioEmitente to update in case it exists.
-     */
-    where: UsuarioEmitenteWhereUniqueInput
-    /**
-     * In case the UsuarioEmitente found by the `where` argument doesn't exist, create a new UsuarioEmitente with this data.
-     */
-    create: XOR<UsuarioEmitenteCreateInput, UsuarioEmitenteUncheckedCreateInput>
-    /**
-     * In case the UsuarioEmitente was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<UsuarioEmitenteUpdateInput, UsuarioEmitenteUncheckedUpdateInput>
-  }
-
-  /**
-   * UsuarioEmitente delete
-   */
-  export type UsuarioEmitenteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    /**
-     * Filter which UsuarioEmitente to delete.
-     */
-    where: UsuarioEmitenteWhereUniqueInput
-  }
-
-  /**
-   * UsuarioEmitente deleteMany
-   */
-  export type UsuarioEmitenteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which UsuarioEmitentes to delete
-     */
-    where?: UsuarioEmitenteWhereInput
-  }
-
-  /**
-   * UsuarioEmitente findRaw
-   */
-  export type UsuarioEmitenteFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
-     */
-    filter?: InputJsonValue
-    /**
-     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
-     */
-    options?: InputJsonValue
-  }
-
-  /**
-   * UsuarioEmitente aggregateRaw
-   */
-  export type UsuarioEmitenteAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
-     */
-    pipeline?: InputJsonValue[]
-    /**
-     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
-     */
-    options?: InputJsonValue
-  }
-
-  /**
-   * UsuarioEmitente without action
-   */
-  export type UsuarioEmitenteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Emitente
    */
 
@@ -6539,12 +5644,12 @@ export namespace Prisma {
 
   export type EmitenteGroupByOutputType = {
     id: string
-    cod_dominio: string | null
+    cod_dominio: string
     nome: string
     razao_social: string
     cnpj: string | null
     cpf: string | null
-    ie: string | null
+    ie: string
     createdAt: Date
     updatedAt: Date
     _count: EmitenteCountAggregateOutputType | null
@@ -6578,7 +5683,6 @@ export namespace Prisma {
     updatedAt?: boolean
     enderecos?: boolean | Emitente$enderecosArgs<ExtArgs>
     contadores?: boolean | Emitente$contadoresArgs<ExtArgs>
-    usuarios?: boolean | Emitente$usuariosArgs<ExtArgs>
     _count?: boolean | EmitenteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emitente"]>
 
@@ -6598,7 +5702,6 @@ export namespace Prisma {
   export type EmitenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     enderecos?: boolean | Emitente$enderecosArgs<ExtArgs>
     contadores?: boolean | Emitente$contadoresArgs<ExtArgs>
-    usuarios?: boolean | Emitente$usuariosArgs<ExtArgs>
     _count?: boolean | EmitenteCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -6607,16 +5710,15 @@ export namespace Prisma {
     objects: {
       enderecos: Prisma.$EnderecoPayload<ExtArgs>[]
       contadores: Prisma.$ContadorEmitentePayload<ExtArgs>[]
-      usuarios: Prisma.$UsuarioEmitentePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      cod_dominio: string | null
+      cod_dominio: string
       nome: string
       razao_social: string
       cnpj: string | null
       cpf: string | null
-      ie: string | null
+      ie: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emitente"]>
@@ -6984,7 +6086,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     enderecos<T extends Emitente$enderecosArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$enderecosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany"> | Null>
     contadores<T extends Emitente$contadoresArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$contadoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findMany"> | Null>
-    usuarios<T extends Emitente$usuariosArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$usuariosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioEmitentePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7389,26 +6490,6 @@ export namespace Prisma {
   }
 
   /**
-   * Emitente.usuarios
-   */
-  export type Emitente$usuariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsuarioEmitente
-     */
-    select?: UsuarioEmitenteSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsuarioEmitenteInclude<ExtArgs> | null
-    where?: UsuarioEmitenteWhereInput
-    orderBy?: UsuarioEmitenteOrderByWithRelationInput | UsuarioEmitenteOrderByWithRelationInput[]
-    cursor?: UsuarioEmitenteWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: UsuarioEmitenteScalarFieldEnum | UsuarioEmitenteScalarFieldEnum[]
-  }
-
-  /**
    * Emitente without action
    */
   export type EmitenteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7438,6 +6519,7 @@ export namespace Prisma {
     requerente: string | null
     validade: Date | null
     fileBase64: string | null
+    password: string | null
     contadorId: string | null
     createdAt: Date | null
   }
@@ -7447,6 +6529,7 @@ export namespace Prisma {
     requerente: string | null
     validade: Date | null
     fileBase64: string | null
+    password: string | null
     contadorId: string | null
     createdAt: Date | null
   }
@@ -7456,6 +6539,7 @@ export namespace Prisma {
     requerente: number
     validade: number
     fileBase64: number
+    password: number
     contadorId: number
     createdAt: number
     _all: number
@@ -7467,6 +6551,7 @@ export namespace Prisma {
     requerente?: true
     validade?: true
     fileBase64?: true
+    password?: true
     contadorId?: true
     createdAt?: true
   }
@@ -7476,6 +6561,7 @@ export namespace Prisma {
     requerente?: true
     validade?: true
     fileBase64?: true
+    password?: true
     contadorId?: true
     createdAt?: true
   }
@@ -7485,6 +6571,7 @@ export namespace Prisma {
     requerente?: true
     validade?: true
     fileBase64?: true
+    password?: true
     contadorId?: true
     createdAt?: true
     _all?: true
@@ -7564,9 +6651,10 @@ export namespace Prisma {
 
   export type CertificadoGroupByOutputType = {
     id: string
-    requerente: string | null
-    validade: Date | null
-    fileBase64: string | null
+    requerente: string
+    validade: Date
+    fileBase64: string
+    password: string
     contadorId: string | null
     createdAt: Date
     _count: CertificadoCountAggregateOutputType | null
@@ -7593,6 +6681,7 @@ export namespace Prisma {
     requerente?: boolean
     validade?: boolean
     fileBase64?: boolean
+    password?: boolean
     contadorId?: boolean
     createdAt?: boolean
     contador?: boolean | Certificado$contadorArgs<ExtArgs>
@@ -7604,6 +6693,7 @@ export namespace Prisma {
     requerente?: boolean
     validade?: boolean
     fileBase64?: boolean
+    password?: boolean
     contadorId?: boolean
     createdAt?: boolean
   }
@@ -7619,9 +6709,10 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      requerente: string | null
-      validade: Date | null
-      fileBase64: string | null
+      requerente: string
+      validade: Date
+      fileBase64: string
+      password: string
       contadorId: string | null
       createdAt: Date
     }, ExtArgs["result"]["certificado"]>
@@ -8021,6 +7112,7 @@ export namespace Prisma {
     readonly requerente: FieldRef<"Certificado", 'String'>
     readonly validade: FieldRef<"Certificado", 'DateTime'>
     readonly fileBase64: FieldRef<"Certificado", 'String'>
+    readonly password: FieldRef<"Certificado", 'String'>
     readonly contadorId: FieldRef<"Certificado", 'String'>
     readonly createdAt: FieldRef<"Certificado", 'DateTime'>
   }
@@ -8217,7 +7309,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Certificado.
      */
-    data?: XOR<CertificadoCreateInput, CertificadoUncheckedCreateInput>
+    data: XOR<CertificadoCreateInput, CertificadoUncheckedCreateInput>
   }
 
   /**
@@ -9441,12 +8533,1036 @@ export namespace Prisma {
 
 
   /**
+   * Model EventoReinf
+   */
+
+  export type AggregateEventoReinf = {
+    _count: EventoReinfCountAggregateOutputType | null
+    _min: EventoReinfMinAggregateOutputType | null
+    _max: EventoReinfMaxAggregateOutputType | null
+  }
+
+  export type EventoReinfMinAggregateOutputType = {
+    id: string | null
+    evento: string | null
+    periodo: Date | null
+    recibo: string | null
+    dateEnvio: Date | null
+    protocoloEnvioLote: string | null
+    xml: string | null
+    status: $Enums.StatusEventoReinf | null
+    paiId: string | null
+    createdAt: Date | null
+  }
+
+  export type EventoReinfMaxAggregateOutputType = {
+    id: string | null
+    evento: string | null
+    periodo: Date | null
+    recibo: string | null
+    dateEnvio: Date | null
+    protocoloEnvioLote: string | null
+    xml: string | null
+    status: $Enums.StatusEventoReinf | null
+    paiId: string | null
+    createdAt: Date | null
+  }
+
+  export type EventoReinfCountAggregateOutputType = {
+    id: number
+    evento: number
+    periodo: number
+    recibo: number
+    dateEnvio: number
+    protocoloEnvioLote: number
+    xml: number
+    status: number
+    paiId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type EventoReinfMinAggregateInputType = {
+    id?: true
+    evento?: true
+    periodo?: true
+    recibo?: true
+    dateEnvio?: true
+    protocoloEnvioLote?: true
+    xml?: true
+    status?: true
+    paiId?: true
+    createdAt?: true
+  }
+
+  export type EventoReinfMaxAggregateInputType = {
+    id?: true
+    evento?: true
+    periodo?: true
+    recibo?: true
+    dateEnvio?: true
+    protocoloEnvioLote?: true
+    xml?: true
+    status?: true
+    paiId?: true
+    createdAt?: true
+  }
+
+  export type EventoReinfCountAggregateInputType = {
+    id?: true
+    evento?: true
+    periodo?: true
+    recibo?: true
+    dateEnvio?: true
+    protocoloEnvioLote?: true
+    xml?: true
+    status?: true
+    paiId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type EventoReinfAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventoReinf to aggregate.
+     */
+    where?: EventoReinfWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventoReinfs to fetch.
+     */
+    orderBy?: EventoReinfOrderByWithRelationInput | EventoReinfOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventoReinfWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventoReinfs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventoReinfs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EventoReinfs
+    **/
+    _count?: true | EventoReinfCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventoReinfMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventoReinfMaxAggregateInputType
+  }
+
+  export type GetEventoReinfAggregateType<T extends EventoReinfAggregateArgs> = {
+        [P in keyof T & keyof AggregateEventoReinf]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEventoReinf[P]>
+      : GetScalarType<T[P], AggregateEventoReinf[P]>
+  }
+
+
+
+
+  export type EventoReinfGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventoReinfWhereInput
+    orderBy?: EventoReinfOrderByWithAggregationInput | EventoReinfOrderByWithAggregationInput[]
+    by: EventoReinfScalarFieldEnum[] | EventoReinfScalarFieldEnum
+    having?: EventoReinfScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventoReinfCountAggregateInputType | true
+    _min?: EventoReinfMinAggregateInputType
+    _max?: EventoReinfMaxAggregateInputType
+  }
+
+  export type EventoReinfGroupByOutputType = {
+    id: string
+    evento: string
+    periodo: Date
+    recibo: string | null
+    dateEnvio: Date | null
+    protocoloEnvioLote: string | null
+    xml: string
+    status: $Enums.StatusEventoReinf
+    paiId: string | null
+    createdAt: Date
+    _count: EventoReinfCountAggregateOutputType | null
+    _min: EventoReinfMinAggregateOutputType | null
+    _max: EventoReinfMaxAggregateOutputType | null
+  }
+
+  type GetEventoReinfGroupByPayload<T extends EventoReinfGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventoReinfGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventoReinfGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventoReinfGroupByOutputType[P]>
+            : GetScalarType<T[P], EventoReinfGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventoReinfSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    evento?: boolean
+    periodo?: boolean
+    recibo?: boolean
+    dateEnvio?: boolean
+    protocoloEnvioLote?: boolean
+    xml?: boolean
+    status?: boolean
+    paiId?: boolean
+    createdAt?: boolean
+    pai?: boolean | EventoReinf$paiArgs<ExtArgs>
+    filhos?: boolean | EventoReinf$filhosArgs<ExtArgs>
+    _count?: boolean | EventoReinfCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventoReinf"]>
+
+
+  export type EventoReinfSelectScalar = {
+    id?: boolean
+    evento?: boolean
+    periodo?: boolean
+    recibo?: boolean
+    dateEnvio?: boolean
+    protocoloEnvioLote?: boolean
+    xml?: boolean
+    status?: boolean
+    paiId?: boolean
+    createdAt?: boolean
+  }
+
+  export type EventoReinfInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    pai?: boolean | EventoReinf$paiArgs<ExtArgs>
+    filhos?: boolean | EventoReinf$filhosArgs<ExtArgs>
+    _count?: boolean | EventoReinfCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $EventoReinfPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EventoReinf"
+    objects: {
+      pai: Prisma.$EventoReinfPayload<ExtArgs> | null
+      filhos: Prisma.$EventoReinfPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      evento: string
+      periodo: Date
+      recibo: string | null
+      dateEnvio: Date | null
+      protocoloEnvioLote: string | null
+      xml: string
+      status: $Enums.StatusEventoReinf
+      paiId: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["eventoReinf"]>
+    composites: {}
+  }
+
+  type EventoReinfGetPayload<S extends boolean | null | undefined | EventoReinfDefaultArgs> = $Result.GetResult<Prisma.$EventoReinfPayload, S>
+
+  type EventoReinfCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<EventoReinfFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: EventoReinfCountAggregateInputType | true
+    }
+
+  export interface EventoReinfDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EventoReinf'], meta: { name: 'EventoReinf' } }
+    /**
+     * Find zero or one EventoReinf that matches the filter.
+     * @param {EventoReinfFindUniqueArgs} args - Arguments to find a EventoReinf
+     * @example
+     * // Get one EventoReinf
+     * const eventoReinf = await prisma.eventoReinf.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventoReinfFindUniqueArgs>(args: SelectSubset<T, EventoReinfFindUniqueArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one EventoReinf that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {EventoReinfFindUniqueOrThrowArgs} args - Arguments to find a EventoReinf
+     * @example
+     * // Get one EventoReinf
+     * const eventoReinf = await prisma.eventoReinf.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventoReinfFindUniqueOrThrowArgs>(args: SelectSubset<T, EventoReinfFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first EventoReinf that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventoReinfFindFirstArgs} args - Arguments to find a EventoReinf
+     * @example
+     * // Get one EventoReinf
+     * const eventoReinf = await prisma.eventoReinf.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventoReinfFindFirstArgs>(args?: SelectSubset<T, EventoReinfFindFirstArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first EventoReinf that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventoReinfFindFirstOrThrowArgs} args - Arguments to find a EventoReinf
+     * @example
+     * // Get one EventoReinf
+     * const eventoReinf = await prisma.eventoReinf.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventoReinfFindFirstOrThrowArgs>(args?: SelectSubset<T, EventoReinfFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more EventoReinfs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventoReinfFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EventoReinfs
+     * const eventoReinfs = await prisma.eventoReinf.findMany()
+     * 
+     * // Get first 10 EventoReinfs
+     * const eventoReinfs = await prisma.eventoReinf.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventoReinfWithIdOnly = await prisma.eventoReinf.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventoReinfFindManyArgs>(args?: SelectSubset<T, EventoReinfFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a EventoReinf.
+     * @param {EventoReinfCreateArgs} args - Arguments to create a EventoReinf.
+     * @example
+     * // Create one EventoReinf
+     * const EventoReinf = await prisma.eventoReinf.create({
+     *   data: {
+     *     // ... data to create a EventoReinf
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventoReinfCreateArgs>(args: SelectSubset<T, EventoReinfCreateArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many EventoReinfs.
+     * @param {EventoReinfCreateManyArgs} args - Arguments to create many EventoReinfs.
+     * @example
+     * // Create many EventoReinfs
+     * const eventoReinf = await prisma.eventoReinf.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventoReinfCreateManyArgs>(args?: SelectSubset<T, EventoReinfCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a EventoReinf.
+     * @param {EventoReinfDeleteArgs} args - Arguments to delete one EventoReinf.
+     * @example
+     * // Delete one EventoReinf
+     * const EventoReinf = await prisma.eventoReinf.delete({
+     *   where: {
+     *     // ... filter to delete one EventoReinf
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventoReinfDeleteArgs>(args: SelectSubset<T, EventoReinfDeleteArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one EventoReinf.
+     * @param {EventoReinfUpdateArgs} args - Arguments to update one EventoReinf.
+     * @example
+     * // Update one EventoReinf
+     * const eventoReinf = await prisma.eventoReinf.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventoReinfUpdateArgs>(args: SelectSubset<T, EventoReinfUpdateArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more EventoReinfs.
+     * @param {EventoReinfDeleteManyArgs} args - Arguments to filter EventoReinfs to delete.
+     * @example
+     * // Delete a few EventoReinfs
+     * const { count } = await prisma.eventoReinf.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventoReinfDeleteManyArgs>(args?: SelectSubset<T, EventoReinfDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventoReinfs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventoReinfUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EventoReinfs
+     * const eventoReinf = await prisma.eventoReinf.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventoReinfUpdateManyArgs>(args: SelectSubset<T, EventoReinfUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one EventoReinf.
+     * @param {EventoReinfUpsertArgs} args - Arguments to update or create a EventoReinf.
+     * @example
+     * // Update or create a EventoReinf
+     * const eventoReinf = await prisma.eventoReinf.upsert({
+     *   create: {
+     *     // ... data to create a EventoReinf
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EventoReinf we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventoReinfUpsertArgs>(args: SelectSubset<T, EventoReinfUpsertArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+    /**
+     * Find zero or more EventoReinfs that matches the filter.
+     * @param {EventoReinfFindRawArgs} args - Select which filters you would like to apply.
+     * @example
+     * const eventoReinf = await prisma.eventoReinf.findRaw({
+     *   filter: { age: { $gt: 25 } } 
+     * })
+     */
+    findRaw(args?: EventoReinfFindRawArgs): Prisma.PrismaPromise<JsonObject>
+
+    /**
+     * Perform aggregation operations on a EventoReinf.
+     * @param {EventoReinfAggregateRawArgs} args - Select which aggregations you would like to apply.
+     * @example
+     * const eventoReinf = await prisma.eventoReinf.aggregateRaw({
+     *   pipeline: [
+     *     { $match: { status: "registered" } },
+     *     { $group: { _id: "$country", total: { $sum: 1 } } }
+     *   ]
+     * })
+     */
+    aggregateRaw(args?: EventoReinfAggregateRawArgs): Prisma.PrismaPromise<JsonObject>
+
+
+    /**
+     * Count the number of EventoReinfs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventoReinfCountArgs} args - Arguments to filter EventoReinfs to count.
+     * @example
+     * // Count the number of EventoReinfs
+     * const count = await prisma.eventoReinf.count({
+     *   where: {
+     *     // ... the filter for the EventoReinfs we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventoReinfCountArgs>(
+      args?: Subset<T, EventoReinfCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventoReinfCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EventoReinf.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventoReinfAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventoReinfAggregateArgs>(args: Subset<T, EventoReinfAggregateArgs>): Prisma.PrismaPromise<GetEventoReinfAggregateType<T>>
+
+    /**
+     * Group by EventoReinf.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventoReinfGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventoReinfGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventoReinfGroupByArgs['orderBy'] }
+        : { orderBy?: EventoReinfGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventoReinfGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventoReinfGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EventoReinf model
+   */
+  readonly fields: EventoReinfFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EventoReinf.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventoReinfClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    pai<T extends EventoReinf$paiArgs<ExtArgs> = {}>(args?: Subset<T, EventoReinf$paiArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    filhos<T extends EventoReinf$filhosArgs<ExtArgs> = {}>(args?: Subset<T, EventoReinf$filhosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EventoReinf model
+   */ 
+  interface EventoReinfFieldRefs {
+    readonly id: FieldRef<"EventoReinf", 'String'>
+    readonly evento: FieldRef<"EventoReinf", 'String'>
+    readonly periodo: FieldRef<"EventoReinf", 'DateTime'>
+    readonly recibo: FieldRef<"EventoReinf", 'String'>
+    readonly dateEnvio: FieldRef<"EventoReinf", 'DateTime'>
+    readonly protocoloEnvioLote: FieldRef<"EventoReinf", 'String'>
+    readonly xml: FieldRef<"EventoReinf", 'String'>
+    readonly status: FieldRef<"EventoReinf", 'StatusEventoReinf'>
+    readonly paiId: FieldRef<"EventoReinf", 'String'>
+    readonly createdAt: FieldRef<"EventoReinf", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EventoReinf findUnique
+   */
+  export type EventoReinfFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    /**
+     * Filter, which EventoReinf to fetch.
+     */
+    where: EventoReinfWhereUniqueInput
+  }
+
+  /**
+   * EventoReinf findUniqueOrThrow
+   */
+  export type EventoReinfFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    /**
+     * Filter, which EventoReinf to fetch.
+     */
+    where: EventoReinfWhereUniqueInput
+  }
+
+  /**
+   * EventoReinf findFirst
+   */
+  export type EventoReinfFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    /**
+     * Filter, which EventoReinf to fetch.
+     */
+    where?: EventoReinfWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventoReinfs to fetch.
+     */
+    orderBy?: EventoReinfOrderByWithRelationInput | EventoReinfOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventoReinfs.
+     */
+    cursor?: EventoReinfWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventoReinfs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventoReinfs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventoReinfs.
+     */
+    distinct?: EventoReinfScalarFieldEnum | EventoReinfScalarFieldEnum[]
+  }
+
+  /**
+   * EventoReinf findFirstOrThrow
+   */
+  export type EventoReinfFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    /**
+     * Filter, which EventoReinf to fetch.
+     */
+    where?: EventoReinfWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventoReinfs to fetch.
+     */
+    orderBy?: EventoReinfOrderByWithRelationInput | EventoReinfOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventoReinfs.
+     */
+    cursor?: EventoReinfWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventoReinfs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventoReinfs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventoReinfs.
+     */
+    distinct?: EventoReinfScalarFieldEnum | EventoReinfScalarFieldEnum[]
+  }
+
+  /**
+   * EventoReinf findMany
+   */
+  export type EventoReinfFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    /**
+     * Filter, which EventoReinfs to fetch.
+     */
+    where?: EventoReinfWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventoReinfs to fetch.
+     */
+    orderBy?: EventoReinfOrderByWithRelationInput | EventoReinfOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EventoReinfs.
+     */
+    cursor?: EventoReinfWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventoReinfs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventoReinfs.
+     */
+    skip?: number
+    distinct?: EventoReinfScalarFieldEnum | EventoReinfScalarFieldEnum[]
+  }
+
+  /**
+   * EventoReinf create
+   */
+  export type EventoReinfCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EventoReinf.
+     */
+    data: XOR<EventoReinfCreateInput, EventoReinfUncheckedCreateInput>
+  }
+
+  /**
+   * EventoReinf createMany
+   */
+  export type EventoReinfCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EventoReinfs.
+     */
+    data: EventoReinfCreateManyInput | EventoReinfCreateManyInput[]
+  }
+
+  /**
+   * EventoReinf update
+   */
+  export type EventoReinfUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EventoReinf.
+     */
+    data: XOR<EventoReinfUpdateInput, EventoReinfUncheckedUpdateInput>
+    /**
+     * Choose, which EventoReinf to update.
+     */
+    where: EventoReinfWhereUniqueInput
+  }
+
+  /**
+   * EventoReinf updateMany
+   */
+  export type EventoReinfUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EventoReinfs.
+     */
+    data: XOR<EventoReinfUpdateManyMutationInput, EventoReinfUncheckedUpdateManyInput>
+    /**
+     * Filter which EventoReinfs to update
+     */
+    where?: EventoReinfWhereInput
+  }
+
+  /**
+   * EventoReinf upsert
+   */
+  export type EventoReinfUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EventoReinf to update in case it exists.
+     */
+    where: EventoReinfWhereUniqueInput
+    /**
+     * In case the EventoReinf found by the `where` argument doesn't exist, create a new EventoReinf with this data.
+     */
+    create: XOR<EventoReinfCreateInput, EventoReinfUncheckedCreateInput>
+    /**
+     * In case the EventoReinf was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventoReinfUpdateInput, EventoReinfUncheckedUpdateInput>
+  }
+
+  /**
+   * EventoReinf delete
+   */
+  export type EventoReinfDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    /**
+     * Filter which EventoReinf to delete.
+     */
+    where: EventoReinfWhereUniqueInput
+  }
+
+  /**
+   * EventoReinf deleteMany
+   */
+  export type EventoReinfDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventoReinfs to delete
+     */
+    where?: EventoReinfWhereInput
+  }
+
+  /**
+   * EventoReinf findRaw
+   */
+  export type EventoReinfFindRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The query predicate filter. If unspecified, then all documents in the collection will match the predicate. ${@link https://docs.mongodb.com/manual/reference/operator/query MongoDB Docs}.
+     */
+    filter?: InputJsonValue
+    /**
+     * Additional options to pass to the `find` command ${@link https://docs.mongodb.com/manual/reference/command/find/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * EventoReinf aggregateRaw
+   */
+  export type EventoReinfAggregateRawArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * An array of aggregation stages to process and transform the document stream via the aggregation pipeline. ${@link https://docs.mongodb.com/manual/reference/operator/aggregation-pipeline MongoDB Docs}.
+     */
+    pipeline?: InputJsonValue[]
+    /**
+     * Additional options to pass to the `aggregate` command ${@link https://docs.mongodb.com/manual/reference/command/aggregate/#command-fields MongoDB Docs}.
+     */
+    options?: InputJsonValue
+  }
+
+  /**
+   * EventoReinf.pai
+   */
+  export type EventoReinf$paiArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    where?: EventoReinfWhereInput
+  }
+
+  /**
+   * EventoReinf.filhos
+   */
+  export type EventoReinf$filhosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    where?: EventoReinfWhereInput
+    orderBy?: EventoReinfOrderByWithRelationInput | EventoReinfOrderByWithRelationInput[]
+    cursor?: EventoReinfWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventoReinfScalarFieldEnum | EventoReinfScalarFieldEnum[]
+  }
+
+  /**
+   * EventoReinf without action
+   */
+  export type EventoReinfDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
   export const UsuarioScalarFieldEnum: {
     id: 'id',
-    nome: 'nome',
     email: 'email',
     password: 'password',
     role: 'role',
@@ -9489,15 +9605,6 @@ export namespace Prisma {
   export type ContadorEmitenteScalarFieldEnum = (typeof ContadorEmitenteScalarFieldEnum)[keyof typeof ContadorEmitenteScalarFieldEnum]
 
 
-  export const UsuarioEmitenteScalarFieldEnum: {
-    id: 'id',
-    emitenteId: 'emitenteId',
-    usuarioId: 'usuarioId'
-  };
-
-  export type UsuarioEmitenteScalarFieldEnum = (typeof UsuarioEmitenteScalarFieldEnum)[keyof typeof UsuarioEmitenteScalarFieldEnum]
-
-
   export const EmitenteScalarFieldEnum: {
     id: 'id',
     cod_dominio: 'cod_dominio',
@@ -9518,6 +9625,7 @@ export namespace Prisma {
     requerente: 'requerente',
     validade: 'validade',
     fileBase64: 'fileBase64',
+    password: 'password',
     contadorId: 'contadorId',
     createdAt: 'createdAt'
   };
@@ -9543,6 +9651,22 @@ export namespace Prisma {
   };
 
   export type EnderecoScalarFieldEnum = (typeof EnderecoScalarFieldEnum)[keyof typeof EnderecoScalarFieldEnum]
+
+
+  export const EventoReinfScalarFieldEnum: {
+    id: 'id',
+    evento: 'evento',
+    periodo: 'periodo',
+    recibo: 'recibo',
+    dateEnvio: 'dateEnvio',
+    protocoloEnvioLote: 'protocoloEnvioLote',
+    xml: 'xml',
+    status: 'status',
+    paiId: 'paiId',
+    createdAt: 'createdAt'
+  };
+
+  export type EventoReinfScalarFieldEnum = (typeof EventoReinfScalarFieldEnum)[keyof typeof EventoReinfScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9609,6 +9733,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'StatusEventoReinf'
+   */
+  export type EnumStatusEventoReinfFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusEventoReinf'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatusEventoReinf[]'
+   */
+  export type ListEnumStatusEventoReinfFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatusEventoReinf[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -9630,26 +9768,22 @@ export namespace Prisma {
     OR?: UsuarioWhereInput[]
     NOT?: UsuarioWhereInput | UsuarioWhereInput[]
     id?: StringFilter<"Usuario"> | string
-    nome?: StringFilter<"Usuario"> | string
     email?: StringFilter<"Usuario"> | string
     password?: StringFilter<"Usuario"> | string
     role?: EnumRoleFilter<"Usuario"> | $Enums.Role
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
     updatedAt?: DateTimeFilter<"Usuario"> | Date | string
     contadores?: UsuarioContadorListRelationFilter
-    emitentes?: UsuarioEmitenteListRelationFilter
   }
 
   export type UsuarioOrderByWithRelationInput = {
     id?: SortOrder
-    nome?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     contadores?: UsuarioContadorOrderByRelationAggregateInput
-    emitentes?: UsuarioEmitenteOrderByRelationAggregateInput
   }
 
   export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -9658,18 +9792,15 @@ export namespace Prisma {
     AND?: UsuarioWhereInput | UsuarioWhereInput[]
     OR?: UsuarioWhereInput[]
     NOT?: UsuarioWhereInput | UsuarioWhereInput[]
-    nome?: StringFilter<"Usuario"> | string
     password?: StringFilter<"Usuario"> | string
     role?: EnumRoleFilter<"Usuario"> | $Enums.Role
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
     updatedAt?: DateTimeFilter<"Usuario"> | Date | string
     contadores?: UsuarioContadorListRelationFilter
-    emitentes?: UsuarioEmitenteListRelationFilter
   }, "id" | "email">
 
   export type UsuarioOrderByWithAggregationInput = {
     id?: SortOrder
-    nome?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -9685,7 +9816,6 @@ export namespace Prisma {
     OR?: UsuarioScalarWhereWithAggregatesInput[]
     NOT?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Usuario"> | string
-    nome?: StringWithAggregatesFilter<"Usuario"> | string
     email?: StringWithAggregatesFilter<"Usuario"> | string
     password?: StringWithAggregatesFilter<"Usuario"> | string
     role?: EnumRoleWithAggregatesFilter<"Usuario"> | $Enums.Role
@@ -9707,7 +9837,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UsuarioContadorListRelationFilter
     emitentes?: ContadorEmitenteListRelationFilter
-    enderecos?: EnderecoListRelationFilter
+    endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
     certificados?: CertificadoListRelationFilter
   }
 
@@ -9722,7 +9852,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     usuarios?: UsuarioContadorOrderByRelationAggregateInput
     emitentes?: ContadorEmitenteOrderByRelationAggregateInput
-    enderecos?: EnderecoOrderByRelationAggregateInput
+    endereco?: EnderecoOrderByWithRelationInput
     certificados?: CertificadoOrderByRelationAggregateInput
   }
 
@@ -9740,7 +9870,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Contador"> | Date | string
     usuarios?: UsuarioContadorListRelationFilter
     emitentes?: ContadorEmitenteListRelationFilter
-    enderecos?: EnderecoListRelationFilter
+    endereco?: XOR<EnderecoNullableRelationFilter, EnderecoWhereInput> | null
     certificados?: CertificadoListRelationFilter
   }, "id" | "cpf" | "regcrc">
 
@@ -9870,71 +10000,21 @@ export namespace Prisma {
     contadorId?: StringWithAggregatesFilter<"ContadorEmitente"> | string
   }
 
-  export type UsuarioEmitenteWhereInput = {
-    AND?: UsuarioEmitenteWhereInput | UsuarioEmitenteWhereInput[]
-    OR?: UsuarioEmitenteWhereInput[]
-    NOT?: UsuarioEmitenteWhereInput | UsuarioEmitenteWhereInput[]
-    id?: StringFilter<"UsuarioEmitente"> | string
-    emitenteId?: StringFilter<"UsuarioEmitente"> | string
-    usuarioId?: StringFilter<"UsuarioEmitente"> | string
-    emitente?: XOR<EmitenteRelationFilter, EmitenteWhereInput>
-    usuario?: XOR<UsuarioRelationFilter, UsuarioWhereInput>
-  }
-
-  export type UsuarioEmitenteOrderByWithRelationInput = {
-    id?: SortOrder
-    emitenteId?: SortOrder
-    usuarioId?: SortOrder
-    emitente?: EmitenteOrderByWithRelationInput
-    usuario?: UsuarioOrderByWithRelationInput
-  }
-
-  export type UsuarioEmitenteWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    emitenteId_usuarioId?: UsuarioEmitenteEmitenteIdUsuarioIdCompoundUniqueInput
-    AND?: UsuarioEmitenteWhereInput | UsuarioEmitenteWhereInput[]
-    OR?: UsuarioEmitenteWhereInput[]
-    NOT?: UsuarioEmitenteWhereInput | UsuarioEmitenteWhereInput[]
-    emitenteId?: StringFilter<"UsuarioEmitente"> | string
-    usuarioId?: StringFilter<"UsuarioEmitente"> | string
-    emitente?: XOR<EmitenteRelationFilter, EmitenteWhereInput>
-    usuario?: XOR<UsuarioRelationFilter, UsuarioWhereInput>
-  }, "id" | "emitenteId_usuarioId">
-
-  export type UsuarioEmitenteOrderByWithAggregationInput = {
-    id?: SortOrder
-    emitenteId?: SortOrder
-    usuarioId?: SortOrder
-    _count?: UsuarioEmitenteCountOrderByAggregateInput
-    _max?: UsuarioEmitenteMaxOrderByAggregateInput
-    _min?: UsuarioEmitenteMinOrderByAggregateInput
-  }
-
-  export type UsuarioEmitenteScalarWhereWithAggregatesInput = {
-    AND?: UsuarioEmitenteScalarWhereWithAggregatesInput | UsuarioEmitenteScalarWhereWithAggregatesInput[]
-    OR?: UsuarioEmitenteScalarWhereWithAggregatesInput[]
-    NOT?: UsuarioEmitenteScalarWhereWithAggregatesInput | UsuarioEmitenteScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"UsuarioEmitente"> | string
-    emitenteId?: StringWithAggregatesFilter<"UsuarioEmitente"> | string
-    usuarioId?: StringWithAggregatesFilter<"UsuarioEmitente"> | string
-  }
-
   export type EmitenteWhereInput = {
     AND?: EmitenteWhereInput | EmitenteWhereInput[]
     OR?: EmitenteWhereInput[]
     NOT?: EmitenteWhereInput | EmitenteWhereInput[]
     id?: StringFilter<"Emitente"> | string
-    cod_dominio?: StringNullableFilter<"Emitente"> | string | null
+    cod_dominio?: StringFilter<"Emitente"> | string
     nome?: StringFilter<"Emitente"> | string
     razao_social?: StringFilter<"Emitente"> | string
     cnpj?: StringNullableFilter<"Emitente"> | string | null
     cpf?: StringNullableFilter<"Emitente"> | string | null
-    ie?: StringNullableFilter<"Emitente"> | string | null
+    ie?: StringFilter<"Emitente"> | string
     createdAt?: DateTimeFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
     contadores?: ContadorEmitenteListRelationFilter
-    usuarios?: UsuarioEmitenteListRelationFilter
   }
 
   export type EmitenteOrderByWithRelationInput = {
@@ -9949,27 +10029,26 @@ export namespace Prisma {
     updatedAt?: SortOrder
     enderecos?: EnderecoOrderByRelationAggregateInput
     contadores?: ContadorEmitenteOrderByRelationAggregateInput
-    usuarios?: UsuarioEmitenteOrderByRelationAggregateInput
   }
 
   export type EmitenteWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     cnpj?: string
-    cpf?: string
     cnpj_ie?: EmitenteCnpjIeCompoundUniqueInput
+    cpf_ie?: EmitenteCpfIeCompoundUniqueInput
     AND?: EmitenteWhereInput | EmitenteWhereInput[]
     OR?: EmitenteWhereInput[]
     NOT?: EmitenteWhereInput | EmitenteWhereInput[]
-    cod_dominio?: StringNullableFilter<"Emitente"> | string | null
+    cod_dominio?: StringFilter<"Emitente"> | string
     nome?: StringFilter<"Emitente"> | string
     razao_social?: StringFilter<"Emitente"> | string
-    ie?: StringNullableFilter<"Emitente"> | string | null
+    cpf?: StringNullableFilter<"Emitente"> | string | null
+    ie?: StringFilter<"Emitente"> | string
     createdAt?: DateTimeFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
     contadores?: ContadorEmitenteListRelationFilter
-    usuarios?: UsuarioEmitenteListRelationFilter
-  }, "id" | "cnpj" | "cpf" | "cnpj_ie">
+  }, "id" | "cnpj" | "cnpj_ie" | "cpf_ie">
 
   export type EmitenteOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9991,12 +10070,12 @@ export namespace Prisma {
     OR?: EmitenteScalarWhereWithAggregatesInput[]
     NOT?: EmitenteScalarWhereWithAggregatesInput | EmitenteScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Emitente"> | string
-    cod_dominio?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
+    cod_dominio?: StringWithAggregatesFilter<"Emitente"> | string
     nome?: StringWithAggregatesFilter<"Emitente"> | string
     razao_social?: StringWithAggregatesFilter<"Emitente"> | string
     cnpj?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
     cpf?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
-    ie?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
+    ie?: StringWithAggregatesFilter<"Emitente"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
   }
@@ -10006,9 +10085,10 @@ export namespace Prisma {
     OR?: CertificadoWhereInput[]
     NOT?: CertificadoWhereInput | CertificadoWhereInput[]
     id?: StringFilter<"Certificado"> | string
-    requerente?: StringNullableFilter<"Certificado"> | string | null
-    validade?: DateTimeNullableFilter<"Certificado"> | Date | string | null
-    fileBase64?: StringNullableFilter<"Certificado"> | string | null
+    requerente?: StringFilter<"Certificado"> | string
+    validade?: DateTimeFilter<"Certificado"> | Date | string
+    fileBase64?: StringFilter<"Certificado"> | string
+    password?: StringFilter<"Certificado"> | string
     contadorId?: StringNullableFilter<"Certificado"> | string | null
     createdAt?: DateTimeFilter<"Certificado"> | Date | string
     contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
@@ -10019,6 +10099,7 @@ export namespace Prisma {
     requerente?: SortOrder
     validade?: SortOrder
     fileBase64?: SortOrder
+    password?: SortOrder
     contadorId?: SortOrder
     createdAt?: SortOrder
     contador?: ContadorOrderByWithRelationInput
@@ -10029,9 +10110,10 @@ export namespace Prisma {
     AND?: CertificadoWhereInput | CertificadoWhereInput[]
     OR?: CertificadoWhereInput[]
     NOT?: CertificadoWhereInput | CertificadoWhereInput[]
-    requerente?: StringNullableFilter<"Certificado"> | string | null
-    validade?: DateTimeNullableFilter<"Certificado"> | Date | string | null
-    fileBase64?: StringNullableFilter<"Certificado"> | string | null
+    requerente?: StringFilter<"Certificado"> | string
+    validade?: DateTimeFilter<"Certificado"> | Date | string
+    fileBase64?: StringFilter<"Certificado"> | string
+    password?: StringFilter<"Certificado"> | string
     contadorId?: StringNullableFilter<"Certificado"> | string | null
     createdAt?: DateTimeFilter<"Certificado"> | Date | string
     contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
@@ -10042,6 +10124,7 @@ export namespace Prisma {
     requerente?: SortOrder
     validade?: SortOrder
     fileBase64?: SortOrder
+    password?: SortOrder
     contadorId?: SortOrder
     createdAt?: SortOrder
     _count?: CertificadoCountOrderByAggregateInput
@@ -10054,9 +10137,10 @@ export namespace Prisma {
     OR?: CertificadoScalarWhereWithAggregatesInput[]
     NOT?: CertificadoScalarWhereWithAggregatesInput | CertificadoScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Certificado"> | string
-    requerente?: StringNullableWithAggregatesFilter<"Certificado"> | string | null
-    validade?: DateTimeNullableWithAggregatesFilter<"Certificado"> | Date | string | null
-    fileBase64?: StringNullableWithAggregatesFilter<"Certificado"> | string | null
+    requerente?: StringWithAggregatesFilter<"Certificado"> | string
+    validade?: DateTimeWithAggregatesFilter<"Certificado"> | Date | string
+    fileBase64?: StringWithAggregatesFilter<"Certificado"> | string
+    password?: StringWithAggregatesFilter<"Certificado"> | string
     contadorId?: StringNullableWithAggregatesFilter<"Certificado"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Certificado"> | Date | string
   }
@@ -10104,6 +10188,7 @@ export namespace Prisma {
 
   export type EnderecoWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    contadorId?: string
     AND?: EnderecoWhereInput | EnderecoWhereInput[]
     OR?: EnderecoWhereInput[]
     NOT?: EnderecoWhereInput | EnderecoWhereInput[]
@@ -10118,11 +10203,10 @@ export namespace Prisma {
     nome_estado?: StringFilter<"Endereco"> | string
     uf?: StringFilter<"Endereco"> | string
     codigoIBGEestado?: StringFilter<"Endereco"> | string
-    contadorId?: StringNullableFilter<"Endereco"> | string | null
     emitenteId?: StringNullableFilter<"Endereco"> | string | null
     contador?: XOR<ContadorNullableRelationFilter, ContadorWhereInput> | null
     emitente?: XOR<EmitenteNullableRelationFilter, EmitenteWhereInput> | null
-  }, "id">
+  }, "id" | "contadorId">
 
   export type EnderecoOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10164,55 +10248,129 @@ export namespace Prisma {
     emitenteId?: StringNullableWithAggregatesFilter<"Endereco"> | string | null
   }
 
+  export type EventoReinfWhereInput = {
+    AND?: EventoReinfWhereInput | EventoReinfWhereInput[]
+    OR?: EventoReinfWhereInput[]
+    NOT?: EventoReinfWhereInput | EventoReinfWhereInput[]
+    id?: StringFilter<"EventoReinf"> | string
+    evento?: StringFilter<"EventoReinf"> | string
+    periodo?: DateTimeFilter<"EventoReinf"> | Date | string
+    recibo?: StringNullableFilter<"EventoReinf"> | string | null
+    dateEnvio?: DateTimeNullableFilter<"EventoReinf"> | Date | string | null
+    protocoloEnvioLote?: StringNullableFilter<"EventoReinf"> | string | null
+    xml?: StringFilter<"EventoReinf"> | string
+    status?: EnumStatusEventoReinfFilter<"EventoReinf"> | $Enums.StatusEventoReinf
+    paiId?: StringNullableFilter<"EventoReinf"> | string | null
+    createdAt?: DateTimeFilter<"EventoReinf"> | Date | string
+    pai?: XOR<EventoReinfNullableRelationFilter, EventoReinfWhereInput> | null
+    filhos?: EventoReinfListRelationFilter
+  }
+
+  export type EventoReinfOrderByWithRelationInput = {
+    id?: SortOrder
+    evento?: SortOrder
+    periodo?: SortOrder
+    recibo?: SortOrder
+    dateEnvio?: SortOrder
+    protocoloEnvioLote?: SortOrder
+    xml?: SortOrder
+    status?: SortOrder
+    paiId?: SortOrder
+    createdAt?: SortOrder
+    pai?: EventoReinfOrderByWithRelationInput
+    filhos?: EventoReinfOrderByRelationAggregateInput
+  }
+
+  export type EventoReinfWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    paiId?: string
+    AND?: EventoReinfWhereInput | EventoReinfWhereInput[]
+    OR?: EventoReinfWhereInput[]
+    NOT?: EventoReinfWhereInput | EventoReinfWhereInput[]
+    evento?: StringFilter<"EventoReinf"> | string
+    periodo?: DateTimeFilter<"EventoReinf"> | Date | string
+    recibo?: StringNullableFilter<"EventoReinf"> | string | null
+    dateEnvio?: DateTimeNullableFilter<"EventoReinf"> | Date | string | null
+    protocoloEnvioLote?: StringNullableFilter<"EventoReinf"> | string | null
+    xml?: StringFilter<"EventoReinf"> | string
+    status?: EnumStatusEventoReinfFilter<"EventoReinf"> | $Enums.StatusEventoReinf
+    createdAt?: DateTimeFilter<"EventoReinf"> | Date | string
+    pai?: XOR<EventoReinfNullableRelationFilter, EventoReinfWhereInput> | null
+    filhos?: EventoReinfListRelationFilter
+  }, "id" | "paiId">
+
+  export type EventoReinfOrderByWithAggregationInput = {
+    id?: SortOrder
+    evento?: SortOrder
+    periodo?: SortOrder
+    recibo?: SortOrder
+    dateEnvio?: SortOrder
+    protocoloEnvioLote?: SortOrder
+    xml?: SortOrder
+    status?: SortOrder
+    paiId?: SortOrder
+    createdAt?: SortOrder
+    _count?: EventoReinfCountOrderByAggregateInput
+    _max?: EventoReinfMaxOrderByAggregateInput
+    _min?: EventoReinfMinOrderByAggregateInput
+  }
+
+  export type EventoReinfScalarWhereWithAggregatesInput = {
+    AND?: EventoReinfScalarWhereWithAggregatesInput | EventoReinfScalarWhereWithAggregatesInput[]
+    OR?: EventoReinfScalarWhereWithAggregatesInput[]
+    NOT?: EventoReinfScalarWhereWithAggregatesInput | EventoReinfScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EventoReinf"> | string
+    evento?: StringWithAggregatesFilter<"EventoReinf"> | string
+    periodo?: DateTimeWithAggregatesFilter<"EventoReinf"> | Date | string
+    recibo?: StringNullableWithAggregatesFilter<"EventoReinf"> | string | null
+    dateEnvio?: DateTimeNullableWithAggregatesFilter<"EventoReinf"> | Date | string | null
+    protocoloEnvioLote?: StringNullableWithAggregatesFilter<"EventoReinf"> | string | null
+    xml?: StringWithAggregatesFilter<"EventoReinf"> | string
+    status?: EnumStatusEventoReinfWithAggregatesFilter<"EventoReinf"> | $Enums.StatusEventoReinf
+    paiId?: StringNullableWithAggregatesFilter<"EventoReinf"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"EventoReinf"> | Date | string
+  }
+
   export type UsuarioCreateInput = {
     id?: string
-    nome: string
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: UsuarioContadorCreateNestedManyWithoutUsuarioInput
-    emitentes?: UsuarioEmitenteCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateInput = {
     id?: string
-    nome: string
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: UsuarioContadorUncheckedCreateNestedManyWithoutUsuarioInput
-    emitentes?: UsuarioEmitenteUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUpdateInput = {
-    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: UsuarioContadorUpdateManyWithoutUsuarioNestedInput
-    emitentes?: UsuarioEmitenteUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateInput = {
-    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: UsuarioContadorUncheckedUpdateManyWithoutUsuarioNestedInput
-    emitentes?: UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioCreateManyInput = {
     id?: string
-    nome: string
     email: string
     password: string
     role?: $Enums.Role
@@ -10221,7 +10379,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateManyMutationInput = {
-    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -10230,7 +10387,6 @@ export namespace Prisma {
   }
 
   export type UsuarioUncheckedUpdateManyInput = {
-    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -10249,7 +10405,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
     emitentes?: ContadorEmitenteCreateNestedManyWithoutContadorInput
-    enderecos?: EnderecoCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoCreateNestedOneWithoutContadorInput
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
 
@@ -10264,7 +10420,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
     emitentes?: ContadorEmitenteUncheckedCreateNestedManyWithoutContadorInput
-    enderecos?: EnderecoUncheckedCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
 
@@ -10278,7 +10434,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
     emitentes?: ContadorEmitenteUpdateManyWithoutContadorNestedInput
-    enderecos?: EnderecoUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
 
@@ -10292,7 +10448,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
     emitentes?: ContadorEmitenteUncheckedUpdateManyWithoutContadorNestedInput
-    enderecos?: EnderecoUncheckedUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
 
@@ -10401,189 +10557,155 @@ export namespace Prisma {
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UsuarioEmitenteCreateInput = {
-    id?: string
-    emitente: EmitenteCreateNestedOneWithoutUsuariosInput
-    usuario: UsuarioCreateNestedOneWithoutEmitentesInput
-  }
-
-  export type UsuarioEmitenteUncheckedCreateInput = {
-    id?: string
-    emitenteId: string
-    usuarioId: string
-  }
-
-  export type UsuarioEmitenteUpdateInput = {
-    emitente?: EmitenteUpdateOneRequiredWithoutUsuariosNestedInput
-    usuario?: UsuarioUpdateOneRequiredWithoutEmitentesNestedInput
-  }
-
-  export type UsuarioEmitenteUncheckedUpdateInput = {
-    emitenteId?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UsuarioEmitenteCreateManyInput = {
-    id?: string
-    emitenteId: string
-    usuarioId: string
-  }
-
-  export type UsuarioEmitenteUpdateManyMutationInput = {
-
-  }
-
-  export type UsuarioEmitenteUncheckedUpdateManyInput = {
-    emitenteId?: StringFieldUpdateOperationsInput | string
-    usuarioId?: StringFieldUpdateOperationsInput | string
-  }
-
   export type EmitenteCreateInput = {
     id?: string
-    cod_dominio?: string | null
+    cod_dominio: string
     nome: string
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie?: string | null
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
     contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
-    usuarios?: UsuarioEmitenteCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateInput = {
     id?: string
-    cod_dominio?: string | null
+    cod_dominio: string
     nome: string
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie?: string | null
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
     contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
-    usuarios?: UsuarioEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUpdateInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    cod_dominio?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
     contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
-    usuarios?: UsuarioEmitenteUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    cod_dominio?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
     contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
-    usuarios?: UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteCreateManyInput = {
     id?: string
-    cod_dominio?: string | null
+    cod_dominio: string
     nome: string
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie?: string | null
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type EmitenteUpdateManyMutationInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    cod_dominio?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EmitenteUncheckedUpdateManyInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    cod_dominio?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CertificadoCreateInput = {
     id?: string
-    requerente?: string | null
-    validade?: Date | string | null
-    fileBase64?: string | null
+    requerente: string
+    validade: Date | string
+    fileBase64: string
+    password: string
     createdAt?: Date | string
     contador?: ContadorCreateNestedOneWithoutCertificadosInput
   }
 
   export type CertificadoUncheckedCreateInput = {
     id?: string
-    requerente?: string | null
-    validade?: Date | string | null
-    fileBase64?: string | null
+    requerente: string
+    validade: Date | string
+    fileBase64: string
+    password: string
     contadorId?: string | null
     createdAt?: Date | string
   }
 
   export type CertificadoUpdateInput = {
-    requerente?: NullableStringFieldUpdateOperationsInput | string | null
-    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    requerente?: StringFieldUpdateOperationsInput | string
+    validade?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileBase64?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contador?: ContadorUpdateOneWithoutCertificadosNestedInput
   }
 
   export type CertificadoUncheckedUpdateInput = {
-    requerente?: NullableStringFieldUpdateOperationsInput | string | null
-    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    requerente?: StringFieldUpdateOperationsInput | string
+    validade?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileBase64?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     contadorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CertificadoCreateManyInput = {
     id?: string
-    requerente?: string | null
-    validade?: Date | string | null
-    fileBase64?: string | null
+    requerente: string
+    validade: Date | string
+    fileBase64: string
+    password: string
     contadorId?: string | null
     createdAt?: Date | string
   }
 
   export type CertificadoUpdateManyMutationInput = {
-    requerente?: NullableStringFieldUpdateOperationsInput | string | null
-    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    requerente?: StringFieldUpdateOperationsInput | string
+    validade?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileBase64?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CertificadoUncheckedUpdateManyInput = {
-    requerente?: NullableStringFieldUpdateOperationsInput | string | null
-    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    requerente?: StringFieldUpdateOperationsInput | string
+    validade?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileBase64?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     contadorId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10601,7 +10723,7 @@ export namespace Prisma {
     nome_estado: string
     uf: string
     codigoIBGEestado: string
-    contador?: ContadorCreateNestedOneWithoutEnderecosInput
+    contador?: ContadorCreateNestedOneWithoutEnderecoInput
     emitente?: EmitenteCreateNestedOneWithoutEnderecosInput
   }
 
@@ -10634,7 +10756,7 @@ export namespace Prisma {
     nome_estado?: StringFieldUpdateOperationsInput | string
     uf?: StringFieldUpdateOperationsInput | string
     codigoIBGEestado?: StringFieldUpdateOperationsInput | string
-    contador?: ContadorUpdateOneWithoutEnderecosNestedInput
+    contador?: ContadorUpdateOneWithoutEnderecoNestedInput
     emitente?: EmitenteUpdateOneWithoutEnderecosNestedInput
   }
 
@@ -10701,6 +10823,96 @@ export namespace Prisma {
     emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type EventoReinfCreateInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    createdAt?: Date | string
+    pai?: EventoReinfCreateNestedOneWithoutFilhosInput
+    filhos?: EventoReinfCreateNestedManyWithoutPaiInput
+  }
+
+  export type EventoReinfUncheckedCreateInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    paiId?: string | null
+    createdAt?: Date | string
+    filhos?: EventoReinfUncheckedCreateNestedManyWithoutPaiInput
+  }
+
+  export type EventoReinfUpdateInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pai?: EventoReinfUpdateOneWithoutFilhosNestedInput
+    filhos?: EventoReinfUpdateManyWithoutPaiNestedInput
+  }
+
+  export type EventoReinfUncheckedUpdateInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    paiId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    filhos?: EventoReinfUncheckedUpdateManyWithoutPaiNestedInput
+  }
+
+  export type EventoReinfCreateManyInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    paiId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type EventoReinfUpdateManyMutationInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventoReinfUncheckedUpdateManyInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    paiId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10740,23 +10952,12 @@ export namespace Prisma {
     none?: UsuarioContadorWhereInput
   }
 
-  export type UsuarioEmitenteListRelationFilter = {
-    every?: UsuarioEmitenteWhereInput
-    some?: UsuarioEmitenteWhereInput
-    none?: UsuarioEmitenteWhereInput
-  }
-
   export type UsuarioContadorOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type UsuarioEmitenteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type UsuarioCountOrderByAggregateInput = {
     id?: SortOrder
-    nome?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -10766,7 +10967,6 @@ export namespace Prisma {
 
   export type UsuarioMaxOrderByAggregateInput = {
     id?: SortOrder
-    nome?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -10776,7 +10976,6 @@ export namespace Prisma {
 
   export type UsuarioMinOrderByAggregateInput = {
     id?: SortOrder
-    nome?: SortOrder
     email?: SortOrder
     password?: SortOrder
     role?: SortOrder
@@ -10848,10 +11047,9 @@ export namespace Prisma {
     none?: ContadorEmitenteWhereInput
   }
 
-  export type EnderecoListRelationFilter = {
-    every?: EnderecoWhereInput
-    some?: EnderecoWhereInput
-    none?: EnderecoWhereInput
+  export type EnderecoNullableRelationFilter = {
+    is?: EnderecoWhereInput | null
+    isNot?: EnderecoWhereInput | null
   }
 
   export type CertificadoListRelationFilter = {
@@ -10861,10 +11059,6 @@ export namespace Prisma {
   }
 
   export type ContadorEmitenteOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type EnderecoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -10985,31 +11179,23 @@ export namespace Prisma {
     contadorId?: SortOrder
   }
 
-  export type UsuarioEmitenteEmitenteIdUsuarioIdCompoundUniqueInput = {
-    emitenteId: string
-    usuarioId: string
+  export type EnderecoListRelationFilter = {
+    every?: EnderecoWhereInput
+    some?: EnderecoWhereInput
+    none?: EnderecoWhereInput
   }
 
-  export type UsuarioEmitenteCountOrderByAggregateInput = {
-    id?: SortOrder
-    emitenteId?: SortOrder
-    usuarioId?: SortOrder
-  }
-
-  export type UsuarioEmitenteMaxOrderByAggregateInput = {
-    id?: SortOrder
-    emitenteId?: SortOrder
-    usuarioId?: SortOrder
-  }
-
-  export type UsuarioEmitenteMinOrderByAggregateInput = {
-    id?: SortOrder
-    emitenteId?: SortOrder
-    usuarioId?: SortOrder
+  export type EnderecoOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type EmitenteCnpjIeCompoundUniqueInput = {
     cnpj: string
+    ie: string
+  }
+
+  export type EmitenteCpfIeCompoundUniqueInput = {
+    cpf: string
     ie: string
   }
 
@@ -11049,18 +11235,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-    isSet?: boolean
-  }
-
   export type ContadorNullableRelationFilter = {
     is?: ContadorWhereInput | null
     isNot?: ContadorWhereInput | null
@@ -11071,6 +11245,7 @@ export namespace Prisma {
     requerente?: SortOrder
     validade?: SortOrder
     fileBase64?: SortOrder
+    password?: SortOrder
     contadorId?: SortOrder
     createdAt?: SortOrder
   }
@@ -11080,6 +11255,7 @@ export namespace Prisma {
     requerente?: SortOrder
     validade?: SortOrder
     fileBase64?: SortOrder
+    password?: SortOrder
     contadorId?: SortOrder
     createdAt?: SortOrder
   }
@@ -11089,23 +11265,9 @@ export namespace Prisma {
     requerente?: SortOrder
     validade?: SortOrder
     fileBase64?: SortOrder
+    password?: SortOrder
     contadorId?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-    isSet?: boolean
   }
 
   export type EmitenteNullableRelationFilter = {
@@ -11164,6 +11326,104 @@ export namespace Prisma {
     emitenteId?: SortOrder
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    isSet?: boolean
+  }
+
+  export type EnumStatusEventoReinfFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusEventoReinf | EnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusEventoReinf[] | ListEnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusEventoReinf[] | ListEnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusEventoReinfFilter<$PrismaModel> | $Enums.StatusEventoReinf
+  }
+
+  export type EventoReinfNullableRelationFilter = {
+    is?: EventoReinfWhereInput | null
+    isNot?: EventoReinfWhereInput | null
+  }
+
+  export type EventoReinfListRelationFilter = {
+    every?: EventoReinfWhereInput
+    some?: EventoReinfWhereInput
+    none?: EventoReinfWhereInput
+  }
+
+  export type EventoReinfOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventoReinfCountOrderByAggregateInput = {
+    id?: SortOrder
+    evento?: SortOrder
+    periodo?: SortOrder
+    recibo?: SortOrder
+    dateEnvio?: SortOrder
+    protocoloEnvioLote?: SortOrder
+    xml?: SortOrder
+    status?: SortOrder
+    paiId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EventoReinfMaxOrderByAggregateInput = {
+    id?: SortOrder
+    evento?: SortOrder
+    periodo?: SortOrder
+    recibo?: SortOrder
+    dateEnvio?: SortOrder
+    protocoloEnvioLote?: SortOrder
+    xml?: SortOrder
+    status?: SortOrder
+    paiId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EventoReinfMinOrderByAggregateInput = {
+    id?: SortOrder
+    evento?: SortOrder
+    periodo?: SortOrder
+    recibo?: SortOrder
+    dateEnvio?: SortOrder
+    protocoloEnvioLote?: SortOrder
+    xml?: SortOrder
+    status?: SortOrder
+    paiId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+    isSet?: boolean
+  }
+
+  export type EnumStatusEventoReinfWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusEventoReinf | EnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusEventoReinf[] | ListEnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusEventoReinf[] | ListEnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusEventoReinfWithAggregatesFilter<$PrismaModel> | $Enums.StatusEventoReinf
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusEventoReinfFilter<$PrismaModel>
+    _max?: NestedEnumStatusEventoReinfFilter<$PrismaModel>
+  }
+
   export type UsuarioContadorCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput> | UsuarioContadorCreateWithoutUsuarioInput[] | UsuarioContadorUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: UsuarioContadorCreateOrConnectWithoutUsuarioInput | UsuarioContadorCreateOrConnectWithoutUsuarioInput[]
@@ -11171,25 +11431,11 @@ export namespace Prisma {
     connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
   }
 
-  export type UsuarioEmitenteCreateNestedManyWithoutUsuarioInput = {
-    create?: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput> | UsuarioEmitenteCreateWithoutUsuarioInput[] | UsuarioEmitenteUncheckedCreateWithoutUsuarioInput[]
-    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutUsuarioInput | UsuarioEmitenteCreateOrConnectWithoutUsuarioInput[]
-    createMany?: UsuarioEmitenteCreateManyUsuarioInputEnvelope
-    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-  }
-
   export type UsuarioContadorUncheckedCreateNestedManyWithoutUsuarioInput = {
     create?: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput> | UsuarioContadorCreateWithoutUsuarioInput[] | UsuarioContadorUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: UsuarioContadorCreateOrConnectWithoutUsuarioInput | UsuarioContadorCreateOrConnectWithoutUsuarioInput[]
     createMany?: UsuarioContadorCreateManyUsuarioInputEnvelope
     connect?: UsuarioContadorWhereUniqueInput | UsuarioContadorWhereUniqueInput[]
-  }
-
-  export type UsuarioEmitenteUncheckedCreateNestedManyWithoutUsuarioInput = {
-    create?: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput> | UsuarioEmitenteCreateWithoutUsuarioInput[] | UsuarioEmitenteUncheckedCreateWithoutUsuarioInput[]
-    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutUsuarioInput | UsuarioEmitenteCreateOrConnectWithoutUsuarioInput[]
-    createMany?: UsuarioEmitenteCreateManyUsuarioInputEnvelope
-    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -11218,20 +11464,6 @@ export namespace Prisma {
     deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
   }
 
-  export type UsuarioEmitenteUpdateManyWithoutUsuarioNestedInput = {
-    create?: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput> | UsuarioEmitenteCreateWithoutUsuarioInput[] | UsuarioEmitenteUncheckedCreateWithoutUsuarioInput[]
-    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutUsuarioInput | UsuarioEmitenteCreateOrConnectWithoutUsuarioInput[]
-    upsert?: UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput | UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput[]
-    createMany?: UsuarioEmitenteCreateManyUsuarioInputEnvelope
-    set?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    disconnect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    delete?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    update?: UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput | UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput[]
-    updateMany?: UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput | UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput[]
-    deleteMany?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
-  }
-
   export type UsuarioContadorUncheckedUpdateManyWithoutUsuarioNestedInput = {
     create?: XOR<UsuarioContadorCreateWithoutUsuarioInput, UsuarioContadorUncheckedCreateWithoutUsuarioInput> | UsuarioContadorCreateWithoutUsuarioInput[] | UsuarioContadorUncheckedCreateWithoutUsuarioInput[]
     connectOrCreate?: UsuarioContadorCreateOrConnectWithoutUsuarioInput | UsuarioContadorCreateOrConnectWithoutUsuarioInput[]
@@ -11244,20 +11476,6 @@ export namespace Prisma {
     update?: UsuarioContadorUpdateWithWhereUniqueWithoutUsuarioInput | UsuarioContadorUpdateWithWhereUniqueWithoutUsuarioInput[]
     updateMany?: UsuarioContadorUpdateManyWithWhereWithoutUsuarioInput | UsuarioContadorUpdateManyWithWhereWithoutUsuarioInput[]
     deleteMany?: UsuarioContadorScalarWhereInput | UsuarioContadorScalarWhereInput[]
-  }
-
-  export type UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioNestedInput = {
-    create?: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput> | UsuarioEmitenteCreateWithoutUsuarioInput[] | UsuarioEmitenteUncheckedCreateWithoutUsuarioInput[]
-    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutUsuarioInput | UsuarioEmitenteCreateOrConnectWithoutUsuarioInput[]
-    upsert?: UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput | UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput[]
-    createMany?: UsuarioEmitenteCreateManyUsuarioInputEnvelope
-    set?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    disconnect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    delete?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    update?: UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput | UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput[]
-    updateMany?: UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput | UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput[]
-    deleteMany?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
   }
 
   export type UsuarioContadorCreateNestedManyWithoutContadorInput = {
@@ -11274,11 +11492,10 @@ export namespace Prisma {
     connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
   }
 
-  export type EnderecoCreateNestedManyWithoutContadorInput = {
-    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput> | EnderecoCreateWithoutContadorInput[] | EnderecoUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput | EnderecoCreateOrConnectWithoutContadorInput[]
-    createMany?: EnderecoCreateManyContadorInputEnvelope
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+  export type EnderecoCreateNestedOneWithoutContadorInput = {
+    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput
+    connect?: EnderecoWhereUniqueInput
   }
 
   export type CertificadoCreateNestedManyWithoutContadorInput = {
@@ -11302,11 +11519,10 @@ export namespace Prisma {
     connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
   }
 
-  export type EnderecoUncheckedCreateNestedManyWithoutContadorInput = {
-    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput> | EnderecoCreateWithoutContadorInput[] | EnderecoUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput | EnderecoCreateOrConnectWithoutContadorInput[]
-    createMany?: EnderecoCreateManyContadorInputEnvelope
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
+  export type EnderecoUncheckedCreateNestedOneWithoutContadorInput = {
+    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput
+    connect?: EnderecoWhereUniqueInput
   }
 
   export type CertificadoUncheckedCreateNestedManyWithoutContadorInput = {
@@ -11349,18 +11565,14 @@ export namespace Prisma {
     deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
-  export type EnderecoUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput> | EnderecoCreateWithoutContadorInput[] | EnderecoUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput | EnderecoCreateOrConnectWithoutContadorInput[]
-    upsert?: EnderecoUpsertWithWhereUniqueWithoutContadorInput | EnderecoUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: EnderecoCreateManyContadorInputEnvelope
-    set?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    disconnect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    delete?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    update?: EnderecoUpdateWithWhereUniqueWithoutContadorInput | EnderecoUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: EnderecoUpdateManyWithWhereWithoutContadorInput | EnderecoUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+  export type EnderecoUpdateOneWithoutContadorNestedInput = {
+    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput
+    upsert?: EnderecoUpsertWithoutContadorInput
+    disconnect?: EnderecoWhereInput | boolean
+    delete?: EnderecoWhereInput | boolean
+    connect?: EnderecoWhereUniqueInput
+    update?: XOR<XOR<EnderecoUpdateToOneWithWhereWithoutContadorInput, EnderecoUpdateWithoutContadorInput>, EnderecoUncheckedUpdateWithoutContadorInput>
   }
 
   export type CertificadoUpdateManyWithoutContadorNestedInput = {
@@ -11405,18 +11617,14 @@ export namespace Prisma {
     deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
-  export type EnderecoUncheckedUpdateManyWithoutContadorNestedInput = {
-    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput> | EnderecoCreateWithoutContadorInput[] | EnderecoUncheckedCreateWithoutContadorInput[]
-    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput | EnderecoCreateOrConnectWithoutContadorInput[]
-    upsert?: EnderecoUpsertWithWhereUniqueWithoutContadorInput | EnderecoUpsertWithWhereUniqueWithoutContadorInput[]
-    createMany?: EnderecoCreateManyContadorInputEnvelope
-    set?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    disconnect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    delete?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    connect?: EnderecoWhereUniqueInput | EnderecoWhereUniqueInput[]
-    update?: EnderecoUpdateWithWhereUniqueWithoutContadorInput | EnderecoUpdateWithWhereUniqueWithoutContadorInput[]
-    updateMany?: EnderecoUpdateManyWithWhereWithoutContadorInput | EnderecoUpdateManyWithWhereWithoutContadorInput[]
-    deleteMany?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+  export type EnderecoUncheckedUpdateOneWithoutContadorNestedInput = {
+    create?: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    connectOrCreate?: EnderecoCreateOrConnectWithoutContadorInput
+    upsert?: EnderecoUpsertWithoutContadorInput
+    disconnect?: EnderecoWhereInput | boolean
+    delete?: EnderecoWhereInput | boolean
+    connect?: EnderecoWhereUniqueInput
+    update?: XOR<XOR<EnderecoUpdateToOneWithWhereWithoutContadorInput, EnderecoUpdateWithoutContadorInput>, EnderecoUncheckedUpdateWithoutContadorInput>
   }
 
   export type CertificadoUncheckedUpdateManyWithoutContadorNestedInput = {
@@ -11489,34 +11697,6 @@ export namespace Prisma {
     update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutEmitentesInput, ContadorUpdateWithoutEmitentesInput>, ContadorUncheckedUpdateWithoutEmitentesInput>
   }
 
-  export type EmitenteCreateNestedOneWithoutUsuariosInput = {
-    create?: XOR<EmitenteCreateWithoutUsuariosInput, EmitenteUncheckedCreateWithoutUsuariosInput>
-    connectOrCreate?: EmitenteCreateOrConnectWithoutUsuariosInput
-    connect?: EmitenteWhereUniqueInput
-  }
-
-  export type UsuarioCreateNestedOneWithoutEmitentesInput = {
-    create?: XOR<UsuarioCreateWithoutEmitentesInput, UsuarioUncheckedCreateWithoutEmitentesInput>
-    connectOrCreate?: UsuarioCreateOrConnectWithoutEmitentesInput
-    connect?: UsuarioWhereUniqueInput
-  }
-
-  export type EmitenteUpdateOneRequiredWithoutUsuariosNestedInput = {
-    create?: XOR<EmitenteCreateWithoutUsuariosInput, EmitenteUncheckedCreateWithoutUsuariosInput>
-    connectOrCreate?: EmitenteCreateOrConnectWithoutUsuariosInput
-    upsert?: EmitenteUpsertWithoutUsuariosInput
-    connect?: EmitenteWhereUniqueInput
-    update?: XOR<XOR<EmitenteUpdateToOneWithWhereWithoutUsuariosInput, EmitenteUpdateWithoutUsuariosInput>, EmitenteUncheckedUpdateWithoutUsuariosInput>
-  }
-
-  export type UsuarioUpdateOneRequiredWithoutEmitentesNestedInput = {
-    create?: XOR<UsuarioCreateWithoutEmitentesInput, UsuarioUncheckedCreateWithoutEmitentesInput>
-    connectOrCreate?: UsuarioCreateOrConnectWithoutEmitentesInput
-    upsert?: UsuarioUpsertWithoutEmitentesInput
-    connect?: UsuarioWhereUniqueInput
-    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutEmitentesInput, UsuarioUpdateWithoutEmitentesInput>, UsuarioUncheckedUpdateWithoutEmitentesInput>
-  }
-
   export type EnderecoCreateNestedManyWithoutEmitenteInput = {
     create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
     connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
@@ -11531,13 +11711,6 @@ export namespace Prisma {
     connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
   }
 
-  export type UsuarioEmitenteCreateNestedManyWithoutEmitenteInput = {
-    create?: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput> | UsuarioEmitenteCreateWithoutEmitenteInput[] | UsuarioEmitenteUncheckedCreateWithoutEmitenteInput[]
-    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutEmitenteInput | UsuarioEmitenteCreateOrConnectWithoutEmitenteInput[]
-    createMany?: UsuarioEmitenteCreateManyEmitenteInputEnvelope
-    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-  }
-
   export type EnderecoUncheckedCreateNestedManyWithoutEmitenteInput = {
     create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
     connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
@@ -11550,13 +11723,6 @@ export namespace Prisma {
     connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutEmitenteInput | ContadorEmitenteCreateOrConnectWithoutEmitenteInput[]
     createMany?: ContadorEmitenteCreateManyEmitenteInputEnvelope
     connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
-  }
-
-  export type UsuarioEmitenteUncheckedCreateNestedManyWithoutEmitenteInput = {
-    create?: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput> | UsuarioEmitenteCreateWithoutEmitenteInput[] | UsuarioEmitenteUncheckedCreateWithoutEmitenteInput[]
-    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutEmitenteInput | UsuarioEmitenteCreateOrConnectWithoutEmitenteInput[]
-    createMany?: UsuarioEmitenteCreateManyEmitenteInputEnvelope
-    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
   }
 
   export type EnderecoUpdateManyWithoutEmitenteNestedInput = {
@@ -11587,20 +11753,6 @@ export namespace Prisma {
     deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
-  export type UsuarioEmitenteUpdateManyWithoutEmitenteNestedInput = {
-    create?: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput> | UsuarioEmitenteCreateWithoutEmitenteInput[] | UsuarioEmitenteUncheckedCreateWithoutEmitenteInput[]
-    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutEmitenteInput | UsuarioEmitenteCreateOrConnectWithoutEmitenteInput[]
-    upsert?: UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput | UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput[]
-    createMany?: UsuarioEmitenteCreateManyEmitenteInputEnvelope
-    set?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    disconnect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    delete?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    update?: UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput | UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput[]
-    updateMany?: UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput | UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput[]
-    deleteMany?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
-  }
-
   export type EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput = {
     create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
     connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
@@ -11629,29 +11781,10 @@ export namespace Prisma {
     deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
-  export type UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput = {
-    create?: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput> | UsuarioEmitenteCreateWithoutEmitenteInput[] | UsuarioEmitenteUncheckedCreateWithoutEmitenteInput[]
-    connectOrCreate?: UsuarioEmitenteCreateOrConnectWithoutEmitenteInput | UsuarioEmitenteCreateOrConnectWithoutEmitenteInput[]
-    upsert?: UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput | UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput[]
-    createMany?: UsuarioEmitenteCreateManyEmitenteInputEnvelope
-    set?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    disconnect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    delete?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    connect?: UsuarioEmitenteWhereUniqueInput | UsuarioEmitenteWhereUniqueInput[]
-    update?: UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput | UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput[]
-    updateMany?: UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput | UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput[]
-    deleteMany?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
-  }
-
   export type ContadorCreateNestedOneWithoutCertificadosInput = {
     create?: XOR<ContadorCreateWithoutCertificadosInput, ContadorUncheckedCreateWithoutCertificadosInput>
     connectOrCreate?: ContadorCreateOrConnectWithoutCertificadosInput
     connect?: ContadorWhereUniqueInput
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-    unset?: boolean
   }
 
   export type ContadorUpdateOneWithoutCertificadosNestedInput = {
@@ -11664,9 +11797,9 @@ export namespace Prisma {
     update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutCertificadosInput, ContadorUpdateWithoutCertificadosInput>, ContadorUncheckedUpdateWithoutCertificadosInput>
   }
 
-  export type ContadorCreateNestedOneWithoutEnderecosInput = {
-    create?: XOR<ContadorCreateWithoutEnderecosInput, ContadorUncheckedCreateWithoutEnderecosInput>
-    connectOrCreate?: ContadorCreateOrConnectWithoutEnderecosInput
+  export type ContadorCreateNestedOneWithoutEnderecoInput = {
+    create?: XOR<ContadorCreateWithoutEnderecoInput, ContadorUncheckedCreateWithoutEnderecoInput>
+    connectOrCreate?: ContadorCreateOrConnectWithoutEnderecoInput
     connect?: ContadorWhereUniqueInput
   }
 
@@ -11676,14 +11809,14 @@ export namespace Prisma {
     connect?: EmitenteWhereUniqueInput
   }
 
-  export type ContadorUpdateOneWithoutEnderecosNestedInput = {
-    create?: XOR<ContadorCreateWithoutEnderecosInput, ContadorUncheckedCreateWithoutEnderecosInput>
-    connectOrCreate?: ContadorCreateOrConnectWithoutEnderecosInput
-    upsert?: ContadorUpsertWithoutEnderecosInput
+  export type ContadorUpdateOneWithoutEnderecoNestedInput = {
+    create?: XOR<ContadorCreateWithoutEnderecoInput, ContadorUncheckedCreateWithoutEnderecoInput>
+    connectOrCreate?: ContadorCreateOrConnectWithoutEnderecoInput
+    upsert?: ContadorUpsertWithoutEnderecoInput
     disconnect?: boolean
     delete?: ContadorWhereInput | boolean
     connect?: ContadorWhereUniqueInput
-    update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutEnderecosInput, ContadorUpdateWithoutEnderecosInput>, ContadorUncheckedUpdateWithoutEnderecosInput>
+    update?: XOR<XOR<ContadorUpdateToOneWithWhereWithoutEnderecoInput, ContadorUpdateWithoutEnderecoInput>, ContadorUncheckedUpdateWithoutEnderecoInput>
   }
 
   export type EmitenteUpdateOneWithoutEnderecosNestedInput = {
@@ -11694,6 +11827,73 @@ export namespace Prisma {
     delete?: EmitenteWhereInput | boolean
     connect?: EmitenteWhereUniqueInput
     update?: XOR<XOR<EmitenteUpdateToOneWithWhereWithoutEnderecosInput, EmitenteUpdateWithoutEnderecosInput>, EmitenteUncheckedUpdateWithoutEnderecosInput>
+  }
+
+  export type EventoReinfCreateNestedOneWithoutFilhosInput = {
+    create?: XOR<EventoReinfCreateWithoutFilhosInput, EventoReinfUncheckedCreateWithoutFilhosInput>
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutFilhosInput
+    connect?: EventoReinfWhereUniqueInput
+  }
+
+  export type EventoReinfCreateNestedManyWithoutPaiInput = {
+    create?: XOR<EventoReinfCreateWithoutPaiInput, EventoReinfUncheckedCreateWithoutPaiInput> | EventoReinfCreateWithoutPaiInput[] | EventoReinfUncheckedCreateWithoutPaiInput[]
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutPaiInput | EventoReinfCreateOrConnectWithoutPaiInput[]
+    createMany?: EventoReinfCreateManyPaiInputEnvelope
+    connect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+  }
+
+  export type EventoReinfUncheckedCreateNestedManyWithoutPaiInput = {
+    create?: XOR<EventoReinfCreateWithoutPaiInput, EventoReinfUncheckedCreateWithoutPaiInput> | EventoReinfCreateWithoutPaiInput[] | EventoReinfUncheckedCreateWithoutPaiInput[]
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutPaiInput | EventoReinfCreateOrConnectWithoutPaiInput[]
+    createMany?: EventoReinfCreateManyPaiInputEnvelope
+    connect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+    unset?: boolean
+  }
+
+  export type EnumStatusEventoReinfFieldUpdateOperationsInput = {
+    set?: $Enums.StatusEventoReinf
+  }
+
+  export type EventoReinfUpdateOneWithoutFilhosNestedInput = {
+    create?: XOR<EventoReinfCreateWithoutFilhosInput, EventoReinfUncheckedCreateWithoutFilhosInput>
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutFilhosInput
+    upsert?: EventoReinfUpsertWithoutFilhosInput
+    disconnect?: boolean
+    delete?: EventoReinfWhereInput | boolean
+    connect?: EventoReinfWhereUniqueInput
+    update?: XOR<XOR<EventoReinfUpdateToOneWithWhereWithoutFilhosInput, EventoReinfUpdateWithoutFilhosInput>, EventoReinfUncheckedUpdateWithoutFilhosInput>
+  }
+
+  export type EventoReinfUpdateManyWithoutPaiNestedInput = {
+    create?: XOR<EventoReinfCreateWithoutPaiInput, EventoReinfUncheckedCreateWithoutPaiInput> | EventoReinfCreateWithoutPaiInput[] | EventoReinfUncheckedCreateWithoutPaiInput[]
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutPaiInput | EventoReinfCreateOrConnectWithoutPaiInput[]
+    upsert?: EventoReinfUpsertWithWhereUniqueWithoutPaiInput | EventoReinfUpsertWithWhereUniqueWithoutPaiInput[]
+    createMany?: EventoReinfCreateManyPaiInputEnvelope
+    set?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    disconnect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    delete?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    connect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    update?: EventoReinfUpdateWithWhereUniqueWithoutPaiInput | EventoReinfUpdateWithWhereUniqueWithoutPaiInput[]
+    updateMany?: EventoReinfUpdateManyWithWhereWithoutPaiInput | EventoReinfUpdateManyWithWhereWithoutPaiInput[]
+    deleteMany?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
+  }
+
+  export type EventoReinfUncheckedUpdateManyWithoutPaiNestedInput = {
+    create?: XOR<EventoReinfCreateWithoutPaiInput, EventoReinfUncheckedCreateWithoutPaiInput> | EventoReinfCreateWithoutPaiInput[] | EventoReinfUncheckedCreateWithoutPaiInput[]
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutPaiInput | EventoReinfCreateOrConnectWithoutPaiInput[]
+    upsert?: EventoReinfUpsertWithWhereUniqueWithoutPaiInput | EventoReinfUpsertWithWhereUniqueWithoutPaiInput[]
+    createMany?: EventoReinfCreateManyPaiInputEnvelope
+    set?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    disconnect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    delete?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    connect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    update?: EventoReinfUpdateWithWhereUniqueWithoutPaiInput | EventoReinfUpdateWithWhereUniqueWithoutPaiInput[]
+    updateMany?: EventoReinfUpdateManyWithWhereWithoutPaiInput | EventoReinfUpdateManyWithWhereWithoutPaiInput[]
+    deleteMany?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -11837,6 +12037,13 @@ export namespace Prisma {
     isSet?: boolean
   }
 
+  export type NestedEnumStatusEventoReinfFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusEventoReinf | EnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusEventoReinf[] | ListEnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusEventoReinf[] | ListEnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusEventoReinfFilter<$PrismaModel> | $Enums.StatusEventoReinf
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -11850,6 +12057,16 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
     isSet?: boolean
+  }
+
+  export type NestedEnumStatusEventoReinfWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatusEventoReinf | EnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    in?: $Enums.StatusEventoReinf[] | ListEnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StatusEventoReinf[] | ListEnumStatusEventoReinfFieldRefInput<$PrismaModel>
+    not?: NestedEnumStatusEventoReinfWithAggregatesFilter<$PrismaModel> | $Enums.StatusEventoReinf
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusEventoReinfFilter<$PrismaModel>
+    _max?: NestedEnumStatusEventoReinfFilter<$PrismaModel>
   }
 
   export type UsuarioContadorCreateWithoutUsuarioInput = {
@@ -11869,25 +12086,6 @@ export namespace Prisma {
 
   export type UsuarioContadorCreateManyUsuarioInputEnvelope = {
     data: UsuarioContadorCreateManyUsuarioInput | UsuarioContadorCreateManyUsuarioInput[]
-  }
-
-  export type UsuarioEmitenteCreateWithoutUsuarioInput = {
-    id?: string
-    emitente: EmitenteCreateNestedOneWithoutUsuariosInput
-  }
-
-  export type UsuarioEmitenteUncheckedCreateWithoutUsuarioInput = {
-    id?: string
-    emitenteId: string
-  }
-
-  export type UsuarioEmitenteCreateOrConnectWithoutUsuarioInput = {
-    where: UsuarioEmitenteWhereUniqueInput
-    create: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput>
-  }
-
-  export type UsuarioEmitenteCreateManyUsuarioInputEnvelope = {
-    data: UsuarioEmitenteCreateManyUsuarioInput | UsuarioEmitenteCreateManyUsuarioInput[]
   }
 
   export type UsuarioContadorUpsertWithWhereUniqueWithoutUsuarioInput = {
@@ -11913,31 +12111,6 @@ export namespace Prisma {
     id?: StringFilter<"UsuarioContador"> | string
     usuarioId?: StringFilter<"UsuarioContador"> | string
     contadorId?: StringFilter<"UsuarioContador"> | string
-  }
-
-  export type UsuarioEmitenteUpsertWithWhereUniqueWithoutUsuarioInput = {
-    where: UsuarioEmitenteWhereUniqueInput
-    update: XOR<UsuarioEmitenteUpdateWithoutUsuarioInput, UsuarioEmitenteUncheckedUpdateWithoutUsuarioInput>
-    create: XOR<UsuarioEmitenteCreateWithoutUsuarioInput, UsuarioEmitenteUncheckedCreateWithoutUsuarioInput>
-  }
-
-  export type UsuarioEmitenteUpdateWithWhereUniqueWithoutUsuarioInput = {
-    where: UsuarioEmitenteWhereUniqueInput
-    data: XOR<UsuarioEmitenteUpdateWithoutUsuarioInput, UsuarioEmitenteUncheckedUpdateWithoutUsuarioInput>
-  }
-
-  export type UsuarioEmitenteUpdateManyWithWhereWithoutUsuarioInput = {
-    where: UsuarioEmitenteScalarWhereInput
-    data: XOR<UsuarioEmitenteUpdateManyMutationInput, UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioInput>
-  }
-
-  export type UsuarioEmitenteScalarWhereInput = {
-    AND?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
-    OR?: UsuarioEmitenteScalarWhereInput[]
-    NOT?: UsuarioEmitenteScalarWhereInput | UsuarioEmitenteScalarWhereInput[]
-    id?: StringFilter<"UsuarioEmitente"> | string
-    emitenteId?: StringFilter<"UsuarioEmitente"> | string
-    usuarioId?: StringFilter<"UsuarioEmitente"> | string
   }
 
   export type UsuarioContadorCreateWithoutContadorInput = {
@@ -12015,23 +12188,21 @@ export namespace Prisma {
     create: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
   }
 
-  export type EnderecoCreateManyContadorInputEnvelope = {
-    data: EnderecoCreateManyContadorInput | EnderecoCreateManyContadorInput[]
-  }
-
   export type CertificadoCreateWithoutContadorInput = {
     id?: string
-    requerente?: string | null
-    validade?: Date | string | null
-    fileBase64?: string | null
+    requerente: string
+    validade: Date | string
+    fileBase64: string
+    password: string
     createdAt?: Date | string
   }
 
   export type CertificadoUncheckedCreateWithoutContadorInput = {
     id?: string
-    requerente?: string | null
-    validade?: Date | string | null
-    fileBase64?: string | null
+    requerente: string
+    validade: Date | string
+    fileBase64: string
+    password: string
     createdAt?: Date | string
   }
 
@@ -12085,40 +12256,45 @@ export namespace Prisma {
     contadorId?: StringFilter<"ContadorEmitente"> | string
   }
 
-  export type EnderecoUpsertWithWhereUniqueWithoutContadorInput = {
-    where: EnderecoWhereUniqueInput
+  export type EnderecoUpsertWithoutContadorInput = {
     update: XOR<EnderecoUpdateWithoutContadorInput, EnderecoUncheckedUpdateWithoutContadorInput>
     create: XOR<EnderecoCreateWithoutContadorInput, EnderecoUncheckedCreateWithoutContadorInput>
+    where?: EnderecoWhereInput
   }
 
-  export type EnderecoUpdateWithWhereUniqueWithoutContadorInput = {
-    where: EnderecoWhereUniqueInput
+  export type EnderecoUpdateToOneWithWhereWithoutContadorInput = {
+    where?: EnderecoWhereInput
     data: XOR<EnderecoUpdateWithoutContadorInput, EnderecoUncheckedUpdateWithoutContadorInput>
   }
 
-  export type EnderecoUpdateManyWithWhereWithoutContadorInput = {
-    where: EnderecoScalarWhereInput
-    data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyWithoutContadorInput>
+  export type EnderecoUpdateWithoutContadorInput = {
+    tipo?: StringFieldUpdateOperationsInput | string
+    logradouro?: StringFieldUpdateOperationsInput | string
+    nro?: StringFieldUpdateOperationsInput | string
+    complemento?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    nome_cidade?: StringFieldUpdateOperationsInput | string
+    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
+    nome_estado?: StringFieldUpdateOperationsInput | string
+    uf?: StringFieldUpdateOperationsInput | string
+    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    emitente?: EmitenteUpdateOneWithoutEnderecosNestedInput
   }
 
-  export type EnderecoScalarWhereInput = {
-    AND?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
-    OR?: EnderecoScalarWhereInput[]
-    NOT?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
-    id?: StringFilter<"Endereco"> | string
-    tipo?: StringFilter<"Endereco"> | string
-    logradouro?: StringFilter<"Endereco"> | string
-    nro?: StringFilter<"Endereco"> | string
-    complemento?: StringNullableFilter<"Endereco"> | string | null
-    bairro?: StringFilter<"Endereco"> | string
-    cep?: StringFilter<"Endereco"> | string
-    nome_cidade?: StringFilter<"Endereco"> | string
-    codigoIBGEcidade?: StringFilter<"Endereco"> | string
-    nome_estado?: StringFilter<"Endereco"> | string
-    uf?: StringFilter<"Endereco"> | string
-    codigoIBGEestado?: StringFilter<"Endereco"> | string
-    contadorId?: StringNullableFilter<"Endereco"> | string | null
-    emitenteId?: StringNullableFilter<"Endereco"> | string | null
+  export type EnderecoUncheckedUpdateWithoutContadorInput = {
+    tipo?: StringFieldUpdateOperationsInput | string
+    logradouro?: StringFieldUpdateOperationsInput | string
+    nro?: StringFieldUpdateOperationsInput | string
+    complemento?: NullableStringFieldUpdateOperationsInput | string | null
+    bairro?: StringFieldUpdateOperationsInput | string
+    cep?: StringFieldUpdateOperationsInput | string
+    nome_cidade?: StringFieldUpdateOperationsInput | string
+    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
+    nome_estado?: StringFieldUpdateOperationsInput | string
+    uf?: StringFieldUpdateOperationsInput | string
+    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
+    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type CertificadoUpsertWithWhereUniqueWithoutContadorInput = {
@@ -12142,33 +12318,30 @@ export namespace Prisma {
     OR?: CertificadoScalarWhereInput[]
     NOT?: CertificadoScalarWhereInput | CertificadoScalarWhereInput[]
     id?: StringFilter<"Certificado"> | string
-    requerente?: StringNullableFilter<"Certificado"> | string | null
-    validade?: DateTimeNullableFilter<"Certificado"> | Date | string | null
-    fileBase64?: StringNullableFilter<"Certificado"> | string | null
+    requerente?: StringFilter<"Certificado"> | string
+    validade?: DateTimeFilter<"Certificado"> | Date | string
+    fileBase64?: StringFilter<"Certificado"> | string
+    password?: StringFilter<"Certificado"> | string
     contadorId?: StringNullableFilter<"Certificado"> | string | null
     createdAt?: DateTimeFilter<"Certificado"> | Date | string
   }
 
   export type UsuarioCreateWithoutContadoresInput = {
     id?: string
-    nome: string
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    emitentes?: UsuarioEmitenteCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutContadoresInput = {
     id?: string
-    nome: string
     email: string
     password: string
     role?: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
-    emitentes?: UsuarioEmitenteUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutContadoresInput = {
@@ -12186,7 +12359,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     emitentes?: ContadorEmitenteCreateNestedManyWithoutContadorInput
-    enderecos?: EnderecoCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoCreateNestedOneWithoutContadorInput
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
 
@@ -12200,7 +12373,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     emitentes?: ContadorEmitenteUncheckedCreateNestedManyWithoutContadorInput
-    enderecos?: EnderecoUncheckedCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
 
@@ -12221,23 +12394,19 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutContadoresInput = {
-    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emitentes?: UsuarioEmitenteUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutContadoresInput = {
-    nome?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    emitentes?: UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type ContadorUpsertWithoutUsuariosInput = {
@@ -12260,7 +12429,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emitentes?: ContadorEmitenteUpdateManyWithoutContadorNestedInput
-    enderecos?: EnderecoUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
 
@@ -12273,36 +12442,34 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     emitentes?: ContadorEmitenteUncheckedUpdateManyWithoutContadorNestedInput
-    enderecos?: EnderecoUncheckedUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
   }
 
   export type EmitenteCreateWithoutContadoresInput = {
     id?: string
-    cod_dominio?: string | null
+    cod_dominio: string
     nome: string
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie?: string | null
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
-    usuarios?: UsuarioEmitenteCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateWithoutContadoresInput = {
     id?: string
-    cod_dominio?: string | null
+    cod_dominio: string
     nome: string
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie?: string | null
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
-    usuarios?: UsuarioEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteCreateOrConnectWithoutContadoresInput = {
@@ -12320,7 +12487,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
-    enderecos?: EnderecoCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoCreateNestedOneWithoutContadorInput
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
 
@@ -12334,7 +12501,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
-    enderecos?: EnderecoUncheckedCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
 
@@ -12355,29 +12522,27 @@ export namespace Prisma {
   }
 
   export type EmitenteUpdateWithoutContadoresInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    cod_dominio?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
-    usuarios?: UsuarioEmitenteUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateWithoutContadoresInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    cod_dominio?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
-    usuarios?: UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type ContadorUpsertWithoutEmitentesInput = {
@@ -12400,7 +12565,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
-    enderecos?: EnderecoUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
 
@@ -12413,136 +12578,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
-    enderecos?: EnderecoUncheckedUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
     certificados?: CertificadoUncheckedUpdateManyWithoutContadorNestedInput
-  }
-
-  export type EmitenteCreateWithoutUsuariosInput = {
-    id?: string
-    cod_dominio?: string | null
-    nome: string
-    razao_social: string
-    cnpj?: string | null
-    cpf?: string | null
-    ie?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
-    contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
-  }
-
-  export type EmitenteUncheckedCreateWithoutUsuariosInput = {
-    id?: string
-    cod_dominio?: string | null
-    nome: string
-    razao_social: string
-    cnpj?: string | null
-    cpf?: string | null
-    ie?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
-    contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
-  }
-
-  export type EmitenteCreateOrConnectWithoutUsuariosInput = {
-    where: EmitenteWhereUniqueInput
-    create: XOR<EmitenteCreateWithoutUsuariosInput, EmitenteUncheckedCreateWithoutUsuariosInput>
-  }
-
-  export type UsuarioCreateWithoutEmitentesInput = {
-    id?: string
-    nome: string
-    email: string
-    password: string
-    role?: $Enums.Role
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    contadores?: UsuarioContadorCreateNestedManyWithoutUsuarioInput
-  }
-
-  export type UsuarioUncheckedCreateWithoutEmitentesInput = {
-    id?: string
-    nome: string
-    email: string
-    password: string
-    role?: $Enums.Role
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    contadores?: UsuarioContadorUncheckedCreateNestedManyWithoutUsuarioInput
-  }
-
-  export type UsuarioCreateOrConnectWithoutEmitentesInput = {
-    where: UsuarioWhereUniqueInput
-    create: XOR<UsuarioCreateWithoutEmitentesInput, UsuarioUncheckedCreateWithoutEmitentesInput>
-  }
-
-  export type EmitenteUpsertWithoutUsuariosInput = {
-    update: XOR<EmitenteUpdateWithoutUsuariosInput, EmitenteUncheckedUpdateWithoutUsuariosInput>
-    create: XOR<EmitenteCreateWithoutUsuariosInput, EmitenteUncheckedCreateWithoutUsuariosInput>
-    where?: EmitenteWhereInput
-  }
-
-  export type EmitenteUpdateToOneWithWhereWithoutUsuariosInput = {
-    where?: EmitenteWhereInput
-    data: XOR<EmitenteUpdateWithoutUsuariosInput, EmitenteUncheckedUpdateWithoutUsuariosInput>
-  }
-
-  export type EmitenteUpdateWithoutUsuariosInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
-    nome?: StringFieldUpdateOperationsInput | string
-    razao_social?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
-    contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
-  }
-
-  export type EmitenteUncheckedUpdateWithoutUsuariosInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
-    nome?: StringFieldUpdateOperationsInput | string
-    razao_social?: StringFieldUpdateOperationsInput | string
-    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
-    contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
-  }
-
-  export type UsuarioUpsertWithoutEmitentesInput = {
-    update: XOR<UsuarioUpdateWithoutEmitentesInput, UsuarioUncheckedUpdateWithoutEmitentesInput>
-    create: XOR<UsuarioCreateWithoutEmitentesInput, UsuarioUncheckedCreateWithoutEmitentesInput>
-    where?: UsuarioWhereInput
-  }
-
-  export type UsuarioUpdateToOneWithWhereWithoutEmitentesInput = {
-    where?: UsuarioWhereInput
-    data: XOR<UsuarioUpdateWithoutEmitentesInput, UsuarioUncheckedUpdateWithoutEmitentesInput>
-  }
-
-  export type UsuarioUpdateWithoutEmitentesInput = {
-    nome?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contadores?: UsuarioContadorUpdateManyWithoutUsuarioNestedInput
-  }
-
-  export type UsuarioUncheckedUpdateWithoutEmitentesInput = {
-    nome?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    contadores?: UsuarioContadorUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type EnderecoCreateWithoutEmitenteInput = {
@@ -12558,7 +12595,7 @@ export namespace Prisma {
     nome_estado: string
     uf: string
     codigoIBGEestado: string
-    contador?: ContadorCreateNestedOneWithoutEnderecosInput
+    contador?: ContadorCreateNestedOneWithoutEnderecoInput
   }
 
   export type EnderecoUncheckedCreateWithoutEmitenteInput = {
@@ -12605,25 +12642,6 @@ export namespace Prisma {
     data: ContadorEmitenteCreateManyEmitenteInput | ContadorEmitenteCreateManyEmitenteInput[]
   }
 
-  export type UsuarioEmitenteCreateWithoutEmitenteInput = {
-    id?: string
-    usuario: UsuarioCreateNestedOneWithoutEmitentesInput
-  }
-
-  export type UsuarioEmitenteUncheckedCreateWithoutEmitenteInput = {
-    id?: string
-    usuarioId: string
-  }
-
-  export type UsuarioEmitenteCreateOrConnectWithoutEmitenteInput = {
-    where: UsuarioEmitenteWhereUniqueInput
-    create: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput>
-  }
-
-  export type UsuarioEmitenteCreateManyEmitenteInputEnvelope = {
-    data: UsuarioEmitenteCreateManyEmitenteInput | UsuarioEmitenteCreateManyEmitenteInput[]
-  }
-
   export type EnderecoUpsertWithWhereUniqueWithoutEmitenteInput = {
     where: EnderecoWhereUniqueInput
     update: XOR<EnderecoUpdateWithoutEmitenteInput, EnderecoUncheckedUpdateWithoutEmitenteInput>
@@ -12638,6 +12656,26 @@ export namespace Prisma {
   export type EnderecoUpdateManyWithWhereWithoutEmitenteInput = {
     where: EnderecoScalarWhereInput
     data: XOR<EnderecoUpdateManyMutationInput, EnderecoUncheckedUpdateManyWithoutEmitenteInput>
+  }
+
+  export type EnderecoScalarWhereInput = {
+    AND?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+    OR?: EnderecoScalarWhereInput[]
+    NOT?: EnderecoScalarWhereInput | EnderecoScalarWhereInput[]
+    id?: StringFilter<"Endereco"> | string
+    tipo?: StringFilter<"Endereco"> | string
+    logradouro?: StringFilter<"Endereco"> | string
+    nro?: StringFilter<"Endereco"> | string
+    complemento?: StringNullableFilter<"Endereco"> | string | null
+    bairro?: StringFilter<"Endereco"> | string
+    cep?: StringFilter<"Endereco"> | string
+    nome_cidade?: StringFilter<"Endereco"> | string
+    codigoIBGEcidade?: StringFilter<"Endereco"> | string
+    nome_estado?: StringFilter<"Endereco"> | string
+    uf?: StringFilter<"Endereco"> | string
+    codigoIBGEestado?: StringFilter<"Endereco"> | string
+    contadorId?: StringNullableFilter<"Endereco"> | string | null
+    emitenteId?: StringNullableFilter<"Endereco"> | string | null
   }
 
   export type ContadorEmitenteUpsertWithWhereUniqueWithoutEmitenteInput = {
@@ -12656,22 +12694,6 @@ export namespace Prisma {
     data: XOR<ContadorEmitenteUpdateManyMutationInput, ContadorEmitenteUncheckedUpdateManyWithoutEmitenteInput>
   }
 
-  export type UsuarioEmitenteUpsertWithWhereUniqueWithoutEmitenteInput = {
-    where: UsuarioEmitenteWhereUniqueInput
-    update: XOR<UsuarioEmitenteUpdateWithoutEmitenteInput, UsuarioEmitenteUncheckedUpdateWithoutEmitenteInput>
-    create: XOR<UsuarioEmitenteCreateWithoutEmitenteInput, UsuarioEmitenteUncheckedCreateWithoutEmitenteInput>
-  }
-
-  export type UsuarioEmitenteUpdateWithWhereUniqueWithoutEmitenteInput = {
-    where: UsuarioEmitenteWhereUniqueInput
-    data: XOR<UsuarioEmitenteUpdateWithoutEmitenteInput, UsuarioEmitenteUncheckedUpdateWithoutEmitenteInput>
-  }
-
-  export type UsuarioEmitenteUpdateManyWithWhereWithoutEmitenteInput = {
-    where: UsuarioEmitenteScalarWhereInput
-    data: XOR<UsuarioEmitenteUpdateManyMutationInput, UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteInput>
-  }
-
   export type ContadorCreateWithoutCertificadosInput = {
     id?: string
     nome: string
@@ -12683,7 +12705,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     usuarios?: UsuarioContadorCreateNestedManyWithoutContadorInput
     emitentes?: ContadorEmitenteCreateNestedManyWithoutContadorInput
-    enderecos?: EnderecoCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoCreateNestedOneWithoutContadorInput
   }
 
   export type ContadorUncheckedCreateWithoutCertificadosInput = {
@@ -12697,7 +12719,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     usuarios?: UsuarioContadorUncheckedCreateNestedManyWithoutContadorInput
     emitentes?: ContadorEmitenteUncheckedCreateNestedManyWithoutContadorInput
-    enderecos?: EnderecoUncheckedCreateNestedManyWithoutContadorInput
+    endereco?: EnderecoUncheckedCreateNestedOneWithoutContadorInput
   }
 
   export type ContadorCreateOrConnectWithoutCertificadosInput = {
@@ -12726,7 +12748,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUpdateManyWithoutContadorNestedInput
     emitentes?: ContadorEmitenteUpdateManyWithoutContadorNestedInput
-    enderecos?: EnderecoUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUpdateOneWithoutContadorNestedInput
   }
 
   export type ContadorUncheckedUpdateWithoutCertificadosInput = {
@@ -12739,10 +12761,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usuarios?: UsuarioContadorUncheckedUpdateManyWithoutContadorNestedInput
     emitentes?: ContadorEmitenteUncheckedUpdateManyWithoutContadorNestedInput
-    enderecos?: EnderecoUncheckedUpdateManyWithoutContadorNestedInput
+    endereco?: EnderecoUncheckedUpdateOneWithoutContadorNestedInput
   }
 
-  export type ContadorCreateWithoutEnderecosInput = {
+  export type ContadorCreateWithoutEnderecoInput = {
     id?: string
     nome: string
     cpf: string
@@ -12756,7 +12778,7 @@ export namespace Prisma {
     certificados?: CertificadoCreateNestedManyWithoutContadorInput
   }
 
-  export type ContadorUncheckedCreateWithoutEnderecosInput = {
+  export type ContadorUncheckedCreateWithoutEnderecoInput = {
     id?: string
     nome: string
     cpf: string
@@ -12770,37 +12792,35 @@ export namespace Prisma {
     certificados?: CertificadoUncheckedCreateNestedManyWithoutContadorInput
   }
 
-  export type ContadorCreateOrConnectWithoutEnderecosInput = {
+  export type ContadorCreateOrConnectWithoutEnderecoInput = {
     where: ContadorWhereUniqueInput
-    create: XOR<ContadorCreateWithoutEnderecosInput, ContadorUncheckedCreateWithoutEnderecosInput>
+    create: XOR<ContadorCreateWithoutEnderecoInput, ContadorUncheckedCreateWithoutEnderecoInput>
   }
 
   export type EmitenteCreateWithoutEnderecosInput = {
     id?: string
-    cod_dominio?: string | null
+    cod_dominio: string
     nome: string
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie?: string | null
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
-    usuarios?: UsuarioEmitenteCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateWithoutEnderecosInput = {
     id?: string
-    cod_dominio?: string | null
+    cod_dominio: string
     nome: string
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie?: string | null
+    ie: string
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
-    usuarios?: UsuarioEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteCreateOrConnectWithoutEnderecosInput = {
@@ -12808,18 +12828,18 @@ export namespace Prisma {
     create: XOR<EmitenteCreateWithoutEnderecosInput, EmitenteUncheckedCreateWithoutEnderecosInput>
   }
 
-  export type ContadorUpsertWithoutEnderecosInput = {
-    update: XOR<ContadorUpdateWithoutEnderecosInput, ContadorUncheckedUpdateWithoutEnderecosInput>
-    create: XOR<ContadorCreateWithoutEnderecosInput, ContadorUncheckedCreateWithoutEnderecosInput>
+  export type ContadorUpsertWithoutEnderecoInput = {
+    update: XOR<ContadorUpdateWithoutEnderecoInput, ContadorUncheckedUpdateWithoutEnderecoInput>
+    create: XOR<ContadorCreateWithoutEnderecoInput, ContadorUncheckedCreateWithoutEnderecoInput>
     where?: ContadorWhereInput
   }
 
-  export type ContadorUpdateToOneWithWhereWithoutEnderecosInput = {
+  export type ContadorUpdateToOneWithWhereWithoutEnderecoInput = {
     where?: ContadorWhereInput
-    data: XOR<ContadorUpdateWithoutEnderecosInput, ContadorUncheckedUpdateWithoutEnderecosInput>
+    data: XOR<ContadorUpdateWithoutEnderecoInput, ContadorUncheckedUpdateWithoutEnderecoInput>
   }
 
-  export type ContadorUpdateWithoutEnderecosInput = {
+  export type ContadorUpdateWithoutEnderecoInput = {
     nome?: StringFieldUpdateOperationsInput | string
     cpf?: StringFieldUpdateOperationsInput | string
     regcrc?: StringFieldUpdateOperationsInput | string
@@ -12832,7 +12852,7 @@ export namespace Prisma {
     certificados?: CertificadoUpdateManyWithoutContadorNestedInput
   }
 
-  export type ContadorUncheckedUpdateWithoutEnderecosInput = {
+  export type ContadorUncheckedUpdateWithoutEnderecoInput = {
     nome?: StringFieldUpdateOperationsInput | string
     cpf?: StringFieldUpdateOperationsInput | string
     regcrc?: StringFieldUpdateOperationsInput | string
@@ -12857,39 +12877,165 @@ export namespace Prisma {
   }
 
   export type EmitenteUpdateWithoutEnderecosInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    cod_dominio?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
-    usuarios?: UsuarioEmitenteUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateWithoutEnderecosInput = {
-    cod_dominio?: NullableStringFieldUpdateOperationsInput | string | null
+    cod_dominio?: StringFieldUpdateOperationsInput | string
     nome?: StringFieldUpdateOperationsInput | string
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
-    usuarios?: UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
+  }
+
+  export type EventoReinfCreateWithoutFilhosInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    createdAt?: Date | string
+    pai?: EventoReinfCreateNestedOneWithoutFilhosInput
+  }
+
+  export type EventoReinfUncheckedCreateWithoutFilhosInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    paiId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type EventoReinfCreateOrConnectWithoutFilhosInput = {
+    where: EventoReinfWhereUniqueInput
+    create: XOR<EventoReinfCreateWithoutFilhosInput, EventoReinfUncheckedCreateWithoutFilhosInput>
+  }
+
+  export type EventoReinfCreateWithoutPaiInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    createdAt?: Date | string
+    filhos?: EventoReinfCreateNestedManyWithoutPaiInput
+  }
+
+  export type EventoReinfUncheckedCreateWithoutPaiInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    createdAt?: Date | string
+    filhos?: EventoReinfUncheckedCreateNestedManyWithoutPaiInput
+  }
+
+  export type EventoReinfCreateOrConnectWithoutPaiInput = {
+    where: EventoReinfWhereUniqueInput
+    create: XOR<EventoReinfCreateWithoutPaiInput, EventoReinfUncheckedCreateWithoutPaiInput>
+  }
+
+  export type EventoReinfCreateManyPaiInputEnvelope = {
+    data: EventoReinfCreateManyPaiInput | EventoReinfCreateManyPaiInput[]
+  }
+
+  export type EventoReinfUpsertWithoutFilhosInput = {
+    update: XOR<EventoReinfUpdateWithoutFilhosInput, EventoReinfUncheckedUpdateWithoutFilhosInput>
+    create: XOR<EventoReinfCreateWithoutFilhosInput, EventoReinfUncheckedCreateWithoutFilhosInput>
+    where?: EventoReinfWhereInput
+  }
+
+  export type EventoReinfUpdateToOneWithWhereWithoutFilhosInput = {
+    where?: EventoReinfWhereInput
+    data: XOR<EventoReinfUpdateWithoutFilhosInput, EventoReinfUncheckedUpdateWithoutFilhosInput>
+  }
+
+  export type EventoReinfUpdateWithoutFilhosInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pai?: EventoReinfUpdateOneWithoutFilhosNestedInput
+  }
+
+  export type EventoReinfUncheckedUpdateWithoutFilhosInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    paiId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventoReinfUpsertWithWhereUniqueWithoutPaiInput = {
+    where: EventoReinfWhereUniqueInput
+    update: XOR<EventoReinfUpdateWithoutPaiInput, EventoReinfUncheckedUpdateWithoutPaiInput>
+    create: XOR<EventoReinfCreateWithoutPaiInput, EventoReinfUncheckedCreateWithoutPaiInput>
+  }
+
+  export type EventoReinfUpdateWithWhereUniqueWithoutPaiInput = {
+    where: EventoReinfWhereUniqueInput
+    data: XOR<EventoReinfUpdateWithoutPaiInput, EventoReinfUncheckedUpdateWithoutPaiInput>
+  }
+
+  export type EventoReinfUpdateManyWithWhereWithoutPaiInput = {
+    where: EventoReinfScalarWhereInput
+    data: XOR<EventoReinfUpdateManyMutationInput, EventoReinfUncheckedUpdateManyWithoutPaiInput>
+  }
+
+  export type EventoReinfScalarWhereInput = {
+    AND?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
+    OR?: EventoReinfScalarWhereInput[]
+    NOT?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
+    id?: StringFilter<"EventoReinf"> | string
+    evento?: StringFilter<"EventoReinf"> | string
+    periodo?: DateTimeFilter<"EventoReinf"> | Date | string
+    recibo?: StringNullableFilter<"EventoReinf"> | string | null
+    dateEnvio?: DateTimeNullableFilter<"EventoReinf"> | Date | string | null
+    protocoloEnvioLote?: StringNullableFilter<"EventoReinf"> | string | null
+    xml?: StringFilter<"EventoReinf"> | string
+    status?: EnumStatusEventoReinfFilter<"EventoReinf"> | $Enums.StatusEventoReinf
+    paiId?: StringNullableFilter<"EventoReinf"> | string | null
+    createdAt?: DateTimeFilter<"EventoReinf"> | Date | string
   }
 
   export type UsuarioContadorCreateManyUsuarioInput = {
     id?: string
     contadorId: string
-  }
-
-  export type UsuarioEmitenteCreateManyUsuarioInput = {
-    id?: string
-    emitenteId: string
   }
 
   export type UsuarioContadorUpdateWithoutUsuarioInput = {
@@ -12904,18 +13050,6 @@ export namespace Prisma {
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UsuarioEmitenteUpdateWithoutUsuarioInput = {
-    emitente?: EmitenteUpdateOneRequiredWithoutUsuariosNestedInput
-  }
-
-  export type UsuarioEmitenteUncheckedUpdateWithoutUsuarioInput = {
-    emitenteId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type UsuarioEmitenteUncheckedUpdateManyWithoutUsuarioInput = {
-    emitenteId?: StringFieldUpdateOperationsInput | string
-  }
-
   export type UsuarioContadorCreateManyContadorInput = {
     id?: string
     usuarioId: string
@@ -12926,27 +13060,12 @@ export namespace Prisma {
     emitenteId: string
   }
 
-  export type EnderecoCreateManyContadorInput = {
-    id?: string
-    tipo?: string
-    logradouro: string
-    nro: string
-    complemento?: string | null
-    bairro: string
-    cep: string
-    nome_cidade: string
-    codigoIBGEcidade: string
-    nome_estado: string
-    uf: string
-    codigoIBGEestado: string
-    emitenteId?: string | null
-  }
-
   export type CertificadoCreateManyContadorInput = {
     id?: string
-    requerente?: string | null
-    validade?: Date | string | null
-    fileBase64?: string | null
+    requerente: string
+    validade: Date | string
+    fileBase64: string
+    password: string
     createdAt?: Date | string
   }
 
@@ -12974,69 +13093,27 @@ export namespace Prisma {
     emitenteId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type EnderecoUpdateWithoutContadorInput = {
-    tipo?: StringFieldUpdateOperationsInput | string
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
-    emitente?: EmitenteUpdateOneWithoutEnderecosNestedInput
-  }
-
-  export type EnderecoUncheckedUpdateWithoutContadorInput = {
-    tipo?: StringFieldUpdateOperationsInput | string
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
-    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type EnderecoUncheckedUpdateManyWithoutContadorInput = {
-    tipo?: StringFieldUpdateOperationsInput | string
-    logradouro?: StringFieldUpdateOperationsInput | string
-    nro?: StringFieldUpdateOperationsInput | string
-    complemento?: NullableStringFieldUpdateOperationsInput | string | null
-    bairro?: StringFieldUpdateOperationsInput | string
-    cep?: StringFieldUpdateOperationsInput | string
-    nome_cidade?: StringFieldUpdateOperationsInput | string
-    codigoIBGEcidade?: StringFieldUpdateOperationsInput | string
-    nome_estado?: StringFieldUpdateOperationsInput | string
-    uf?: StringFieldUpdateOperationsInput | string
-    codigoIBGEestado?: StringFieldUpdateOperationsInput | string
-    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type CertificadoUpdateWithoutContadorInput = {
-    requerente?: NullableStringFieldUpdateOperationsInput | string | null
-    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    requerente?: StringFieldUpdateOperationsInput | string
+    validade?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileBase64?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CertificadoUncheckedUpdateWithoutContadorInput = {
-    requerente?: NullableStringFieldUpdateOperationsInput | string | null
-    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    requerente?: StringFieldUpdateOperationsInput | string
+    validade?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileBase64?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CertificadoUncheckedUpdateManyWithoutContadorInput = {
-    requerente?: NullableStringFieldUpdateOperationsInput | string | null
-    validade?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fileBase64?: NullableStringFieldUpdateOperationsInput | string | null
+    requerente?: StringFieldUpdateOperationsInput | string
+    validade?: DateTimeFieldUpdateOperationsInput | Date | string
+    fileBase64?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13061,11 +13138,6 @@ export namespace Prisma {
     contadorId: string
   }
 
-  export type UsuarioEmitenteCreateManyEmitenteInput = {
-    id?: string
-    usuarioId: string
-  }
-
   export type EnderecoUpdateWithoutEmitenteInput = {
     tipo?: StringFieldUpdateOperationsInput | string
     logradouro?: StringFieldUpdateOperationsInput | string
@@ -13078,7 +13150,7 @@ export namespace Prisma {
     nome_estado?: StringFieldUpdateOperationsInput | string
     uf?: StringFieldUpdateOperationsInput | string
     codigoIBGEestado?: StringFieldUpdateOperationsInput | string
-    contador?: ContadorUpdateOneWithoutEnderecosNestedInput
+    contador?: ContadorUpdateOneWithoutEnderecoNestedInput
   }
 
   export type EnderecoUncheckedUpdateWithoutEmitenteInput = {
@@ -13123,16 +13195,51 @@ export namespace Prisma {
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
-  export type UsuarioEmitenteUpdateWithoutEmitenteInput = {
-    usuario?: UsuarioUpdateOneRequiredWithoutEmitentesNestedInput
+  export type EventoReinfCreateManyPaiInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    createdAt?: Date | string
   }
 
-  export type UsuarioEmitenteUncheckedUpdateWithoutEmitenteInput = {
-    usuarioId?: StringFieldUpdateOperationsInput | string
+  export type EventoReinfUpdateWithoutPaiInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    filhos?: EventoReinfUpdateManyWithoutPaiNestedInput
   }
 
-  export type UsuarioEmitenteUncheckedUpdateManyWithoutEmitenteInput = {
-    usuarioId?: StringFieldUpdateOperationsInput | string
+  export type EventoReinfUncheckedUpdateWithoutPaiInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    filhos?: EventoReinfUncheckedUpdateManyWithoutPaiNestedInput
+  }
+
+  export type EventoReinfUncheckedUpdateManyWithoutPaiInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
@@ -13153,6 +13260,10 @@ export namespace Prisma {
      */
     export type EmitenteCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EmitenteCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use EventoReinfCountOutputTypeDefaultArgs instead
+     */
+    export type EventoReinfCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EventoReinfCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use UsuarioDefaultArgs instead
      */
     export type UsuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UsuarioDefaultArgs<ExtArgs>
@@ -13169,10 +13280,6 @@ export namespace Prisma {
      */
     export type ContadorEmitenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ContadorEmitenteDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use UsuarioEmitenteDefaultArgs instead
-     */
-    export type UsuarioEmitenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UsuarioEmitenteDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use EmitenteDefaultArgs instead
      */
     export type EmitenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EmitenteDefaultArgs<ExtArgs>
@@ -13184,6 +13291,10 @@ export namespace Prisma {
      * @deprecated Use EnderecoDefaultArgs instead
      */
     export type EnderecoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EnderecoDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use EventoReinfDefaultArgs instead
+     */
+    export type EventoReinfArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = EventoReinfDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

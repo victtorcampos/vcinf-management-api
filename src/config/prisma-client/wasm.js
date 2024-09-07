@@ -6,7 +6,7 @@ const {
   objectEnumValues,
   makeStrictEnum,
   Public,
-  getRuntime
+  getRuntime,
 } = require('./runtime/index-browser.js')
 
 
@@ -16,12 +16,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.19.0
- * Query Engine version: 5fe21811a6ba0b952a3bc71400666511fe3b902f
+ * Prisma Client JS version: 5.17.0
+ * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
  */
 Prisma.prismaVersion = {
-  client: "5.19.0",
-  engine: "5fe21811a6ba0b952a3bc71400666511fe3b902f"
+  client: "5.17.0",
+  engine: "4c784e32044a8a016d99474bd02a3b6123742169"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -114,7 +114,6 @@ Prisma.NullTypes = {
 
 exports.Prisma.UsuarioScalarFieldEnum = {
   id: 'id',
-  nome: 'nome',
   email: 'email',
   password: 'password',
   role: 'role',
@@ -145,12 +144,6 @@ exports.Prisma.ContadorEmitenteScalarFieldEnum = {
   contadorId: 'contadorId'
 };
 
-exports.Prisma.UsuarioEmitenteScalarFieldEnum = {
-  id: 'id',
-  emitenteId: 'emitenteId',
-  usuarioId: 'usuarioId'
-};
-
 exports.Prisma.EmitenteScalarFieldEnum = {
   id: 'id',
   cod_dominio: 'cod_dominio',
@@ -168,6 +161,7 @@ exports.Prisma.CertificadoScalarFieldEnum = {
   requerente: 'requerente',
   validade: 'validade',
   fileBase64: 'fileBase64',
+  password: 'password',
   contadorId: 'contadorId',
   createdAt: 'createdAt'
 };
@@ -189,6 +183,19 @@ exports.Prisma.EnderecoScalarFieldEnum = {
   emitenteId: 'emitenteId'
 };
 
+exports.Prisma.EventoReinfScalarFieldEnum = {
+  id: 'id',
+  evento: 'evento',
+  periodo: 'periodo',
+  recibo: 'recibo',
+  dateEnvio: 'dateEnvio',
+  protocoloEnvioLote: 'protocoloEnvioLote',
+  xml: 'xml',
+  status: 'status',
+  paiId: 'paiId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -205,15 +212,22 @@ exports.Role = exports.$Enums.Role = {
   SUPERVISOR: 'SUPERVISOR'
 };
 
+exports.StatusEventoReinf = exports.$Enums.StatusEventoReinf = {
+  CRIADO: 'CRIADO',
+  ENVIADO: 'ENVIADO',
+  SUCESSO: 'SUCESSO',
+  ERROR: 'ERROR'
+};
+
 exports.Prisma.ModelName = {
   Usuario: 'Usuario',
   Contador: 'Contador',
   UsuarioContador: 'UsuarioContador',
   ContadorEmitente: 'ContadorEmitente',
-  UsuarioEmitente: 'UsuarioEmitente',
   Emitente: 'Emitente',
   Certificado: 'Certificado',
-  Endereco: 'Endereco'
+  Endereco: 'Endereco',
+  EventoReinf: 'EventoReinf'
 };
 
 /**

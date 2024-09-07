@@ -16,12 +16,10 @@ datasource db {
 
 model Usuario {
   id         String            @id @default(auto()) @map("_id") @db.ObjectId
-  nome       String
   email      String            @unique
   password   String
   role       Role              @default(NOOB)
   contadores UsuarioContador[]
-  emitentes  UsuarioEmitente[]
   createdAt  DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
 }
@@ -37,7 +35,7 @@ model Contador {
   emitentes    ContadorEmitente[]
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
-  enderecos    Endereco[]
+  endereco     Endereco?
   certificados Certificado[]
 }
 
@@ -61,38 +59,29 @@ model ContadorEmitente {
   @@unique([emitenteId, contadorId])
 }
 
-model UsuarioEmitente {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  emitenteId String   @db.ObjectId
-  usuarioId  String   @db.ObjectId
-  emitente   Emitente @relation(fields: [emitenteId], references: [id], onDelete: Cascade)
-  usuario    Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-
-  @@unique([emitenteId, usuarioId])
-}
-
 model Emitente {
   id           String             @id @default(auto()) @map("_id") @db.ObjectId
-  cod_dominio  String?
+  cod_dominio  String
   nome         String
   razao_social String
   cnpj         String?            @unique
-  cpf          String?            @unique
-  ie           String?
+  cpf          String?
+  ie           String
   enderecos    Endereco[]
   contadores   ContadorEmitente[]
-  usuarios     UsuarioEmitente[]
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
 
   @@unique([cnpj, ie])
+  @@unique([cpf, ie])
 }
 
 model Certificado {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  requerente String?
-  validade   DateTime?
-  fileBase64 String?
+  requerente String
+  validade   DateTime
+  fileBase64 String
+  password   String
   contador   Contador? @relation(fields: [contadorId], references: [id], onDelete: Cascade)
   contadorId String?   @db.ObjectId
   createdAt  DateTime  @default(now())
@@ -112,9 +101,31 @@ model Endereco {
   uf               String
   codigoIBGEestado String
   contador         Contador? @relation(fields: [contadorId], references: [id], onDelete: Cascade)
-  contadorId       String?   @db.ObjectId
+  contadorId       String?   @unique @db.ObjectId
   emitente         Emitente? @relation(fields: [emitenteId], references: [id], onDelete: Cascade)
   emitenteId       String?   @db.ObjectId
+}
+
+model EventoReinf {
+  id                 String            @id @default(auto()) @map("_id") @db.ObjectId
+  evento             String
+  periodo            DateTime
+  recibo             String?
+  dateEnvio          DateTime?
+  protocoloEnvioLote String?
+  xml                String
+  status             StatusEventoReinf @default(CRIADO)
+  paiId              String?           @unique @db.ObjectId
+  pai                EventoReinf?      @relation("EventoPai", fields: [paiId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  filhos             EventoReinf[]     @relation("EventoPai")
+  createdAt          DateTime          @default(now())
+}
+
+enum StatusEventoReinf {
+  CRIADO
+  ENVIADO
+  SUCESSO
+  ERROR
 }
 
 enum Role {
