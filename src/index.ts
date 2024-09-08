@@ -1,12 +1,12 @@
 import { ApolloServer, gql } from 'apollo-server';
 import { PrismaClient } from './config/prisma-client';
-import { AuthTypeDefs, ContadorTypeDefs, EmitenteTypeDefs, ServicesTypeDefs, UsuarioTypeDefs } from './graphql/typeDefs';
-import { AuthResolvers, ContadorResolvers, EmitenteResolvers, ServicesResolvers, UsuarioResolvers } from './graphql/resolvers';
+import { AuthTypeDefs, ContadorTypeDefs, EmitenteTypeDefs, ReinfTypeDefs, UsuarioTypeDefs } from './graphql/typeDefs';
+import { AuthResolvers, ContadorResolvers, EmitenteResolvers, ReinfResolvers, UsuarioResolvers } from './graphql/resolvers';
 
 
 const prisma = new PrismaClient();
-const typeDefs = [UsuarioTypeDefs, ContadorTypeDefs, EmitenteTypeDefs, AuthTypeDefs, ServicesTypeDefs];
-const resolvers = [ContadorResolvers, UsuarioResolvers, EmitenteResolvers, AuthResolvers, ServicesResolvers]
+const typeDefs = [UsuarioTypeDefs, ContadorTypeDefs, EmitenteTypeDefs, AuthTypeDefs, ReinfTypeDefs];
+const resolvers = [ContadorResolvers, UsuarioResolvers, EmitenteResolvers, AuthResolvers, ReinfResolvers]
 
 const server = new ApolloServer({ typeDefs, resolvers, context: ({ req }) => { return { prisma, req, }; }, });
 

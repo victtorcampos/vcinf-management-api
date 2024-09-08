@@ -66,9 +66,10 @@ model Emitente {
   razao_social String
   cnpj         String?            @unique
   cpf          String?
-  ie           String
+  ie           String?
   enderecos    Endereco[]
   contadores   ContadorEmitente[]
+  eventoReinf  EventoReinf[]
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
 
@@ -115,17 +116,23 @@ model EventoReinf {
   protocoloEnvioLote String?
   xml                String
   status             StatusEventoReinf @default(CRIADO)
+  erro               String?
   paiId              String?           @unique @db.ObjectId
   pai                EventoReinf?      @relation("EventoPai", fields: [paiId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   filhos             EventoReinf[]     @relation("EventoPai")
   createdAt          DateTime          @default(now())
+  Emitente           Emitente?         @relation(fields: [emitenteId], references: [id], onDelete: Cascade)
+  emitenteId         String?           @db.ObjectId
 }
 
 enum StatusEventoReinf {
   CRIADO
+  PENDENTE
+  ASSINADO
   ENVIADO
-  SUCESSO
   ERROR
+  CONFIRMADO
+  OUTRO
 }
 
 enum Role {

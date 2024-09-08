@@ -1,1 +1,1 @@
-export * from './EnvioLotes';
+export * from './ServicoReinf';

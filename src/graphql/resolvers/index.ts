@@ -2,4 +2,5 @@ export * from './ContadorResolvers';
 export * from './EmitenteResolvers';
 export * from './UsuarioResolvers';
 export * from './AuthResolvers';
-export * from './ServicesResolvers';
+
+export * from './webservices/EFD-Reinf/ReinfResolvers';

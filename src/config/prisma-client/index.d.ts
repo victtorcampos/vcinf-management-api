@@ -70,9 +70,12 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 export const StatusEventoReinf: {
   CRIADO: 'CRIADO',
+  PENDENTE: 'PENDENTE',
+  ASSINADO: 'ASSINADO',
   ENVIADO: 'ENVIADO',
-  SUCESSO: 'SUCESSO',
-  ERROR: 'ERROR'
+  ERROR: 'ERROR',
+  CONFIRMADO: 'CONFIRMADO',
+  OUTRO: 'OUTRO'
 };
 
 export type StatusEventoReinf = (typeof StatusEventoReinf)[keyof typeof StatusEventoReinf]
@@ -313,8 +316,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.17.0
-   * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
+   * Prisma Client JS version: 5.19.1
+   * Query Engine version: 69d742ee20b815d88e17e54db4a2a7a3b30324e3
    */
   export type PrismaVersion = {
     client: string
@@ -326,51 +329,13 @@ export namespace Prisma {
    * Utility Types
    */
 
-  /**
-   * From https://github.com/sindresorhus/type-fest/
-   * Matches a JSON object.
-   * This type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from. 
-   */
-  export type JsonObject = {[Key in string]?: JsonValue}
 
-  /**
-   * From https://github.com/sindresorhus/type-fest/
-   * Matches a JSON array.
-   */
-  export interface JsonArray extends Array<JsonValue> {}
-
-  /**
-   * From https://github.com/sindresorhus/type-fest/
-   * Matches any valid JSON value.
-   */
-  export type JsonValue = string | number | boolean | JsonObject | JsonArray | null
-
-  /**
-   * Matches a JSON object.
-   * Unlike `JsonObject`, this type allows undefined and read-only properties.
-   */
-  export type InputJsonObject = {readonly [Key in string]?: InputJsonValue | null}
-
-  /**
-   * Matches a JSON array.
-   * Unlike `JsonArray`, readonly arrays are assignable to this type.
-   */
-  export interface InputJsonArray extends ReadonlyArray<InputJsonValue | null> {}
-
-  /**
-   * Matches any valid value that can be used as an input for operations like
-   * create and update as the value of a JSON field. Unlike `JsonValue`, this
-   * type allows read-only arrays and read-only object properties and disallows
-   * `null` at the top level.
-   *
-   * `null` cannot be used as the value of a JSON field because its meaning
-   * would be ambiguous. Use `Prisma.JsonNull` to store the JSON null value or
-   * `Prisma.DbNull` to clear the JSON value and set the field to the database
-   * NULL value instead.
-   *
-   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-by-null-values
-   */
-  export type InputJsonValue = string | number | boolean | InputJsonObject | InputJsonArray | { toJSON(): unknown }
+  export import JsonObject = runtime.JsonObject
+  export import JsonArray = runtime.JsonArray
+  export import JsonValue = runtime.JsonValue
+  export import InputJsonObject = runtime.InputJsonObject
+  export import InputJsonArray = runtime.InputJsonArray
+  export import InputJsonValue = runtime.InputJsonValue
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
@@ -1582,11 +1547,13 @@ export namespace Prisma {
   export type EmitenteCountOutputType = {
     enderecos: number
     contadores: number
+    eventoReinf: number
   }
 
   export type EmitenteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     enderecos?: boolean | EmitenteCountOutputTypeCountEnderecosArgs
     contadores?: boolean | EmitenteCountOutputTypeCountContadoresArgs
+    eventoReinf?: boolean | EmitenteCountOutputTypeCountEventoReinfArgs
   }
 
   // Custom InputTypes
@@ -1612,6 +1579,13 @@ export namespace Prisma {
    */
   export type EmitenteCountOutputTypeCountContadoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContadorEmitenteWhereInput
+  }
+
+  /**
+   * EmitenteCountOutputType without action
+   */
+  export type EmitenteCountOutputTypeCountEventoReinfArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventoReinfWhereInput
   }
 
 
@@ -5649,7 +5623,7 @@ export namespace Prisma {
     razao_social: string
     cnpj: string | null
     cpf: string | null
-    ie: string
+    ie: string | null
     createdAt: Date
     updatedAt: Date
     _count: EmitenteCountAggregateOutputType | null
@@ -5683,6 +5657,7 @@ export namespace Prisma {
     updatedAt?: boolean
     enderecos?: boolean | Emitente$enderecosArgs<ExtArgs>
     contadores?: boolean | Emitente$contadoresArgs<ExtArgs>
+    eventoReinf?: boolean | Emitente$eventoReinfArgs<ExtArgs>
     _count?: boolean | EmitenteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["emitente"]>
 
@@ -5702,6 +5677,7 @@ export namespace Prisma {
   export type EmitenteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     enderecos?: boolean | Emitente$enderecosArgs<ExtArgs>
     contadores?: boolean | Emitente$contadoresArgs<ExtArgs>
+    eventoReinf?: boolean | Emitente$eventoReinfArgs<ExtArgs>
     _count?: boolean | EmitenteCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5710,6 +5686,7 @@ export namespace Prisma {
     objects: {
       enderecos: Prisma.$EnderecoPayload<ExtArgs>[]
       contadores: Prisma.$ContadorEmitentePayload<ExtArgs>[]
+      eventoReinf: Prisma.$EventoReinfPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5718,7 +5695,7 @@ export namespace Prisma {
       razao_social: string
       cnpj: string | null
       cpf: string | null
-      ie: string
+      ie: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["emitente"]>
@@ -6086,6 +6063,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     enderecos<T extends Emitente$enderecosArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$enderecosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnderecoPayload<ExtArgs>, T, "findMany"> | Null>
     contadores<T extends Emitente$contadoresArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$contadoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContadorEmitentePayload<ExtArgs>, T, "findMany"> | Null>
+    eventoReinf<T extends Emitente$eventoReinfArgs<ExtArgs> = {}>(args?: Subset<T, Emitente$eventoReinfArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6487,6 +6465,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContadorEmitenteScalarFieldEnum | ContadorEmitenteScalarFieldEnum[]
+  }
+
+  /**
+   * Emitente.eventoReinf
+   */
+  export type Emitente$eventoReinfArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventoReinf
+     */
+    select?: EventoReinfSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventoReinfInclude<ExtArgs> | null
+    where?: EventoReinfWhereInput
+    orderBy?: EventoReinfOrderByWithRelationInput | EventoReinfOrderByWithRelationInput[]
+    cursor?: EventoReinfWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventoReinfScalarFieldEnum | EventoReinfScalarFieldEnum[]
   }
 
   /**
@@ -8551,8 +8549,10 @@ export namespace Prisma {
     protocoloEnvioLote: string | null
     xml: string | null
     status: $Enums.StatusEventoReinf | null
+    erro: string | null
     paiId: string | null
     createdAt: Date | null
+    emitenteId: string | null
   }
 
   export type EventoReinfMaxAggregateOutputType = {
@@ -8564,8 +8564,10 @@ export namespace Prisma {
     protocoloEnvioLote: string | null
     xml: string | null
     status: $Enums.StatusEventoReinf | null
+    erro: string | null
     paiId: string | null
     createdAt: Date | null
+    emitenteId: string | null
   }
 
   export type EventoReinfCountAggregateOutputType = {
@@ -8577,8 +8579,10 @@ export namespace Prisma {
     protocoloEnvioLote: number
     xml: number
     status: number
+    erro: number
     paiId: number
     createdAt: number
+    emitenteId: number
     _all: number
   }
 
@@ -8592,8 +8596,10 @@ export namespace Prisma {
     protocoloEnvioLote?: true
     xml?: true
     status?: true
+    erro?: true
     paiId?: true
     createdAt?: true
+    emitenteId?: true
   }
 
   export type EventoReinfMaxAggregateInputType = {
@@ -8605,8 +8611,10 @@ export namespace Prisma {
     protocoloEnvioLote?: true
     xml?: true
     status?: true
+    erro?: true
     paiId?: true
     createdAt?: true
+    emitenteId?: true
   }
 
   export type EventoReinfCountAggregateInputType = {
@@ -8618,8 +8626,10 @@ export namespace Prisma {
     protocoloEnvioLote?: true
     xml?: true
     status?: true
+    erro?: true
     paiId?: true
     createdAt?: true
+    emitenteId?: true
     _all?: true
   }
 
@@ -8704,8 +8714,10 @@ export namespace Prisma {
     protocoloEnvioLote: string | null
     xml: string
     status: $Enums.StatusEventoReinf
+    erro: string | null
     paiId: string | null
     createdAt: Date
+    emitenteId: string | null
     _count: EventoReinfCountAggregateOutputType | null
     _min: EventoReinfMinAggregateOutputType | null
     _max: EventoReinfMaxAggregateOutputType | null
@@ -8734,10 +8746,13 @@ export namespace Prisma {
     protocoloEnvioLote?: boolean
     xml?: boolean
     status?: boolean
+    erro?: boolean
     paiId?: boolean
     createdAt?: boolean
+    emitenteId?: boolean
     pai?: boolean | EventoReinf$paiArgs<ExtArgs>
     filhos?: boolean | EventoReinf$filhosArgs<ExtArgs>
+    Emitente?: boolean | EventoReinf$EmitenteArgs<ExtArgs>
     _count?: boolean | EventoReinfCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["eventoReinf"]>
 
@@ -8751,13 +8766,16 @@ export namespace Prisma {
     protocoloEnvioLote?: boolean
     xml?: boolean
     status?: boolean
+    erro?: boolean
     paiId?: boolean
     createdAt?: boolean
+    emitenteId?: boolean
   }
 
   export type EventoReinfInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     pai?: boolean | EventoReinf$paiArgs<ExtArgs>
     filhos?: boolean | EventoReinf$filhosArgs<ExtArgs>
+    Emitente?: boolean | EventoReinf$EmitenteArgs<ExtArgs>
     _count?: boolean | EventoReinfCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -8766,6 +8784,7 @@ export namespace Prisma {
     objects: {
       pai: Prisma.$EventoReinfPayload<ExtArgs> | null
       filhos: Prisma.$EventoReinfPayload<ExtArgs>[]
+      Emitente: Prisma.$EmitentePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8776,8 +8795,10 @@ export namespace Prisma {
       protocoloEnvioLote: string | null
       xml: string
       status: $Enums.StatusEventoReinf
+      erro: string | null
       paiId: string | null
       createdAt: Date
+      emitenteId: string | null
     }, ExtArgs["result"]["eventoReinf"]>
     composites: {}
   }
@@ -9143,6 +9164,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     pai<T extends EventoReinf$paiArgs<ExtArgs> = {}>(args?: Subset<T, EventoReinf$paiArgs<ExtArgs>>): Prisma__EventoReinfClient<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     filhos<T extends EventoReinf$filhosArgs<ExtArgs> = {}>(args?: Subset<T, EventoReinf$filhosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventoReinfPayload<ExtArgs>, T, "findMany"> | Null>
+    Emitente<T extends EventoReinf$EmitenteArgs<ExtArgs> = {}>(args?: Subset<T, EventoReinf$EmitenteArgs<ExtArgs>>): Prisma__EmitenteClient<$Result.GetResult<Prisma.$EmitentePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9180,8 +9202,10 @@ export namespace Prisma {
     readonly protocoloEnvioLote: FieldRef<"EventoReinf", 'String'>
     readonly xml: FieldRef<"EventoReinf", 'String'>
     readonly status: FieldRef<"EventoReinf", 'StatusEventoReinf'>
+    readonly erro: FieldRef<"EventoReinf", 'String'>
     readonly paiId: FieldRef<"EventoReinf", 'String'>
     readonly createdAt: FieldRef<"EventoReinf", 'DateTime'>
+    readonly emitenteId: FieldRef<"EventoReinf", 'String'>
   }
     
 
@@ -9543,6 +9567,21 @@ export namespace Prisma {
   }
 
   /**
+   * EventoReinf.Emitente
+   */
+  export type EventoReinf$EmitenteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Emitente
+     */
+    select?: EmitenteSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EmitenteInclude<ExtArgs> | null
+    where?: EmitenteWhereInput
+  }
+
+  /**
    * EventoReinf without action
    */
   export type EventoReinfDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9662,8 +9701,10 @@ export namespace Prisma {
     protocoloEnvioLote: 'protocoloEnvioLote',
     xml: 'xml',
     status: 'status',
+    erro: 'erro',
     paiId: 'paiId',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    emitenteId: 'emitenteId'
   };
 
   export type EventoReinfScalarFieldEnum = (typeof EventoReinfScalarFieldEnum)[keyof typeof EventoReinfScalarFieldEnum]
@@ -10010,11 +10051,12 @@ export namespace Prisma {
     razao_social?: StringFilter<"Emitente"> | string
     cnpj?: StringNullableFilter<"Emitente"> | string | null
     cpf?: StringNullableFilter<"Emitente"> | string | null
-    ie?: StringFilter<"Emitente"> | string
+    ie?: StringNullableFilter<"Emitente"> | string | null
     createdAt?: DateTimeFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
     contadores?: ContadorEmitenteListRelationFilter
+    eventoReinf?: EventoReinfListRelationFilter
   }
 
   export type EmitenteOrderByWithRelationInput = {
@@ -10029,6 +10071,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     enderecos?: EnderecoOrderByRelationAggregateInput
     contadores?: ContadorEmitenteOrderByRelationAggregateInput
+    eventoReinf?: EventoReinfOrderByRelationAggregateInput
   }
 
   export type EmitenteWhereUniqueInput = Prisma.AtLeast<{
@@ -10043,11 +10086,12 @@ export namespace Prisma {
     nome?: StringFilter<"Emitente"> | string
     razao_social?: StringFilter<"Emitente"> | string
     cpf?: StringNullableFilter<"Emitente"> | string | null
-    ie?: StringFilter<"Emitente"> | string
+    ie?: StringNullableFilter<"Emitente"> | string | null
     createdAt?: DateTimeFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeFilter<"Emitente"> | Date | string
     enderecos?: EnderecoListRelationFilter
     contadores?: ContadorEmitenteListRelationFilter
+    eventoReinf?: EventoReinfListRelationFilter
   }, "id" | "cnpj" | "cnpj_ie" | "cpf_ie">
 
   export type EmitenteOrderByWithAggregationInput = {
@@ -10075,7 +10119,7 @@ export namespace Prisma {
     razao_social?: StringWithAggregatesFilter<"Emitente"> | string
     cnpj?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
     cpf?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
-    ie?: StringWithAggregatesFilter<"Emitente"> | string
+    ie?: StringNullableWithAggregatesFilter<"Emitente"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Emitente"> | Date | string
   }
@@ -10260,10 +10304,13 @@ export namespace Prisma {
     protocoloEnvioLote?: StringNullableFilter<"EventoReinf"> | string | null
     xml?: StringFilter<"EventoReinf"> | string
     status?: EnumStatusEventoReinfFilter<"EventoReinf"> | $Enums.StatusEventoReinf
+    erro?: StringNullableFilter<"EventoReinf"> | string | null
     paiId?: StringNullableFilter<"EventoReinf"> | string | null
     createdAt?: DateTimeFilter<"EventoReinf"> | Date | string
+    emitenteId?: StringNullableFilter<"EventoReinf"> | string | null
     pai?: XOR<EventoReinfNullableRelationFilter, EventoReinfWhereInput> | null
     filhos?: EventoReinfListRelationFilter
+    Emitente?: XOR<EmitenteNullableRelationFilter, EmitenteWhereInput> | null
   }
 
   export type EventoReinfOrderByWithRelationInput = {
@@ -10275,10 +10322,13 @@ export namespace Prisma {
     protocoloEnvioLote?: SortOrder
     xml?: SortOrder
     status?: SortOrder
+    erro?: SortOrder
     paiId?: SortOrder
     createdAt?: SortOrder
+    emitenteId?: SortOrder
     pai?: EventoReinfOrderByWithRelationInput
     filhos?: EventoReinfOrderByRelationAggregateInput
+    Emitente?: EmitenteOrderByWithRelationInput
   }
 
   export type EventoReinfWhereUniqueInput = Prisma.AtLeast<{
@@ -10294,9 +10344,12 @@ export namespace Prisma {
     protocoloEnvioLote?: StringNullableFilter<"EventoReinf"> | string | null
     xml?: StringFilter<"EventoReinf"> | string
     status?: EnumStatusEventoReinfFilter<"EventoReinf"> | $Enums.StatusEventoReinf
+    erro?: StringNullableFilter<"EventoReinf"> | string | null
     createdAt?: DateTimeFilter<"EventoReinf"> | Date | string
+    emitenteId?: StringNullableFilter<"EventoReinf"> | string | null
     pai?: XOR<EventoReinfNullableRelationFilter, EventoReinfWhereInput> | null
     filhos?: EventoReinfListRelationFilter
+    Emitente?: XOR<EmitenteNullableRelationFilter, EmitenteWhereInput> | null
   }, "id" | "paiId">
 
   export type EventoReinfOrderByWithAggregationInput = {
@@ -10308,8 +10361,10 @@ export namespace Prisma {
     protocoloEnvioLote?: SortOrder
     xml?: SortOrder
     status?: SortOrder
+    erro?: SortOrder
     paiId?: SortOrder
     createdAt?: SortOrder
+    emitenteId?: SortOrder
     _count?: EventoReinfCountOrderByAggregateInput
     _max?: EventoReinfMaxOrderByAggregateInput
     _min?: EventoReinfMinOrderByAggregateInput
@@ -10327,8 +10382,10 @@ export namespace Prisma {
     protocoloEnvioLote?: StringNullableWithAggregatesFilter<"EventoReinf"> | string | null
     xml?: StringWithAggregatesFilter<"EventoReinf"> | string
     status?: EnumStatusEventoReinfWithAggregatesFilter<"EventoReinf"> | $Enums.StatusEventoReinf
+    erro?: StringNullableWithAggregatesFilter<"EventoReinf"> | string | null
     paiId?: StringNullableWithAggregatesFilter<"EventoReinf"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"EventoReinf"> | Date | string
+    emitenteId?: StringNullableWithAggregatesFilter<"EventoReinf"> | string | null
   }
 
   export type UsuarioCreateInput = {
@@ -10564,11 +10621,12 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie: string
+    ie?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
     contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
+    eventoReinf?: EventoReinfCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateInput = {
@@ -10578,11 +10636,12 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie: string
+    ie?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
     contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
+    eventoReinf?: EventoReinfUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUpdateInput = {
@@ -10591,11 +10650,12 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: StringFieldUpdateOperationsInput | string
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
     contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
+    eventoReinf?: EventoReinfUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateInput = {
@@ -10604,11 +10664,12 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: StringFieldUpdateOperationsInput | string
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
     contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
+    eventoReinf?: EventoReinfUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteCreateManyInput = {
@@ -10618,7 +10679,7 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie: string
+    ie?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10629,7 +10690,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: StringFieldUpdateOperationsInput | string
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10640,7 +10701,7 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: StringFieldUpdateOperationsInput | string
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10832,9 +10893,11 @@ export namespace Prisma {
     protocoloEnvioLote?: string | null
     xml: string
     status?: $Enums.StatusEventoReinf
+    erro?: string | null
     createdAt?: Date | string
     pai?: EventoReinfCreateNestedOneWithoutFilhosInput
     filhos?: EventoReinfCreateNestedManyWithoutPaiInput
+    Emitente?: EmitenteCreateNestedOneWithoutEventoReinfInput
   }
 
   export type EventoReinfUncheckedCreateInput = {
@@ -10846,8 +10909,10 @@ export namespace Prisma {
     protocoloEnvioLote?: string | null
     xml: string
     status?: $Enums.StatusEventoReinf
+    erro?: string | null
     paiId?: string | null
     createdAt?: Date | string
+    emitenteId?: string | null
     filhos?: EventoReinfUncheckedCreateNestedManyWithoutPaiInput
   }
 
@@ -10859,9 +10924,11 @@ export namespace Prisma {
     protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
     xml?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pai?: EventoReinfUpdateOneWithoutFilhosNestedInput
     filhos?: EventoReinfUpdateManyWithoutPaiNestedInput
+    Emitente?: EmitenteUpdateOneWithoutEventoReinfNestedInput
   }
 
   export type EventoReinfUncheckedUpdateInput = {
@@ -10872,8 +10939,10 @@ export namespace Prisma {
     protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
     xml?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
     paiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
     filhos?: EventoReinfUncheckedUpdateManyWithoutPaiNestedInput
   }
 
@@ -10886,8 +10955,10 @@ export namespace Prisma {
     protocoloEnvioLote?: string | null
     xml: string
     status?: $Enums.StatusEventoReinf
+    erro?: string | null
     paiId?: string | null
     createdAt?: Date | string
+    emitenteId?: string | null
   }
 
   export type EventoReinfUpdateManyMutationInput = {
@@ -10898,6 +10969,7 @@ export namespace Prisma {
     protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
     xml?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10909,8 +10981,10 @@ export namespace Prisma {
     protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
     xml?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
     paiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -11185,7 +11259,17 @@ export namespace Prisma {
     none?: EnderecoWhereInput
   }
 
+  export type EventoReinfListRelationFilter = {
+    every?: EventoReinfWhereInput
+    some?: EventoReinfWhereInput
+    none?: EventoReinfWhereInput
+  }
+
   export type EnderecoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EventoReinfOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11350,16 +11434,6 @@ export namespace Prisma {
     isNot?: EventoReinfWhereInput | null
   }
 
-  export type EventoReinfListRelationFilter = {
-    every?: EventoReinfWhereInput
-    some?: EventoReinfWhereInput
-    none?: EventoReinfWhereInput
-  }
-
-  export type EventoReinfOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type EventoReinfCountOrderByAggregateInput = {
     id?: SortOrder
     evento?: SortOrder
@@ -11369,8 +11443,10 @@ export namespace Prisma {
     protocoloEnvioLote?: SortOrder
     xml?: SortOrder
     status?: SortOrder
+    erro?: SortOrder
     paiId?: SortOrder
     createdAt?: SortOrder
+    emitenteId?: SortOrder
   }
 
   export type EventoReinfMaxOrderByAggregateInput = {
@@ -11382,8 +11458,10 @@ export namespace Prisma {
     protocoloEnvioLote?: SortOrder
     xml?: SortOrder
     status?: SortOrder
+    erro?: SortOrder
     paiId?: SortOrder
     createdAt?: SortOrder
+    emitenteId?: SortOrder
   }
 
   export type EventoReinfMinOrderByAggregateInput = {
@@ -11395,8 +11473,10 @@ export namespace Prisma {
     protocoloEnvioLote?: SortOrder
     xml?: SortOrder
     status?: SortOrder
+    erro?: SortOrder
     paiId?: SortOrder
     createdAt?: SortOrder
+    emitenteId?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -11711,6 +11791,13 @@ export namespace Prisma {
     connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
   }
 
+  export type EventoReinfCreateNestedManyWithoutEmitenteInput = {
+    create?: XOR<EventoReinfCreateWithoutEmitenteInput, EventoReinfUncheckedCreateWithoutEmitenteInput> | EventoReinfCreateWithoutEmitenteInput[] | EventoReinfUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutEmitenteInput | EventoReinfCreateOrConnectWithoutEmitenteInput[]
+    createMany?: EventoReinfCreateManyEmitenteInputEnvelope
+    connect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+  }
+
   export type EnderecoUncheckedCreateNestedManyWithoutEmitenteInput = {
     create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
     connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
@@ -11723,6 +11810,13 @@ export namespace Prisma {
     connectOrCreate?: ContadorEmitenteCreateOrConnectWithoutEmitenteInput | ContadorEmitenteCreateOrConnectWithoutEmitenteInput[]
     createMany?: ContadorEmitenteCreateManyEmitenteInputEnvelope
     connect?: ContadorEmitenteWhereUniqueInput | ContadorEmitenteWhereUniqueInput[]
+  }
+
+  export type EventoReinfUncheckedCreateNestedManyWithoutEmitenteInput = {
+    create?: XOR<EventoReinfCreateWithoutEmitenteInput, EventoReinfUncheckedCreateWithoutEmitenteInput> | EventoReinfCreateWithoutEmitenteInput[] | EventoReinfUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutEmitenteInput | EventoReinfCreateOrConnectWithoutEmitenteInput[]
+    createMany?: EventoReinfCreateManyEmitenteInputEnvelope
+    connect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
   }
 
   export type EnderecoUpdateManyWithoutEmitenteNestedInput = {
@@ -11753,6 +11847,20 @@ export namespace Prisma {
     deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
   }
 
+  export type EventoReinfUpdateManyWithoutEmitenteNestedInput = {
+    create?: XOR<EventoReinfCreateWithoutEmitenteInput, EventoReinfUncheckedCreateWithoutEmitenteInput> | EventoReinfCreateWithoutEmitenteInput[] | EventoReinfUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutEmitenteInput | EventoReinfCreateOrConnectWithoutEmitenteInput[]
+    upsert?: EventoReinfUpsertWithWhereUniqueWithoutEmitenteInput | EventoReinfUpsertWithWhereUniqueWithoutEmitenteInput[]
+    createMany?: EventoReinfCreateManyEmitenteInputEnvelope
+    set?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    disconnect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    delete?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    connect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    update?: EventoReinfUpdateWithWhereUniqueWithoutEmitenteInput | EventoReinfUpdateWithWhereUniqueWithoutEmitenteInput[]
+    updateMany?: EventoReinfUpdateManyWithWhereWithoutEmitenteInput | EventoReinfUpdateManyWithWhereWithoutEmitenteInput[]
+    deleteMany?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
+  }
+
   export type EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput = {
     create?: XOR<EnderecoCreateWithoutEmitenteInput, EnderecoUncheckedCreateWithoutEmitenteInput> | EnderecoCreateWithoutEmitenteInput[] | EnderecoUncheckedCreateWithoutEmitenteInput[]
     connectOrCreate?: EnderecoCreateOrConnectWithoutEmitenteInput | EnderecoCreateOrConnectWithoutEmitenteInput[]
@@ -11779,6 +11887,20 @@ export namespace Prisma {
     update?: ContadorEmitenteUpdateWithWhereUniqueWithoutEmitenteInput | ContadorEmitenteUpdateWithWhereUniqueWithoutEmitenteInput[]
     updateMany?: ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput | ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput[]
     deleteMany?: ContadorEmitenteScalarWhereInput | ContadorEmitenteScalarWhereInput[]
+  }
+
+  export type EventoReinfUncheckedUpdateManyWithoutEmitenteNestedInput = {
+    create?: XOR<EventoReinfCreateWithoutEmitenteInput, EventoReinfUncheckedCreateWithoutEmitenteInput> | EventoReinfCreateWithoutEmitenteInput[] | EventoReinfUncheckedCreateWithoutEmitenteInput[]
+    connectOrCreate?: EventoReinfCreateOrConnectWithoutEmitenteInput | EventoReinfCreateOrConnectWithoutEmitenteInput[]
+    upsert?: EventoReinfUpsertWithWhereUniqueWithoutEmitenteInput | EventoReinfUpsertWithWhereUniqueWithoutEmitenteInput[]
+    createMany?: EventoReinfCreateManyEmitenteInputEnvelope
+    set?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    disconnect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    delete?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    connect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
+    update?: EventoReinfUpdateWithWhereUniqueWithoutEmitenteInput | EventoReinfUpdateWithWhereUniqueWithoutEmitenteInput[]
+    updateMany?: EventoReinfUpdateManyWithWhereWithoutEmitenteInput | EventoReinfUpdateManyWithWhereWithoutEmitenteInput[]
+    deleteMany?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
   }
 
   export type ContadorCreateNestedOneWithoutCertificadosInput = {
@@ -11842,6 +11964,12 @@ export namespace Prisma {
     connect?: EventoReinfWhereUniqueInput | EventoReinfWhereUniqueInput[]
   }
 
+  export type EmitenteCreateNestedOneWithoutEventoReinfInput = {
+    create?: XOR<EmitenteCreateWithoutEventoReinfInput, EmitenteUncheckedCreateWithoutEventoReinfInput>
+    connectOrCreate?: EmitenteCreateOrConnectWithoutEventoReinfInput
+    connect?: EmitenteWhereUniqueInput
+  }
+
   export type EventoReinfUncheckedCreateNestedManyWithoutPaiInput = {
     create?: XOR<EventoReinfCreateWithoutPaiInput, EventoReinfUncheckedCreateWithoutPaiInput> | EventoReinfCreateWithoutPaiInput[] | EventoReinfUncheckedCreateWithoutPaiInput[]
     connectOrCreate?: EventoReinfCreateOrConnectWithoutPaiInput | EventoReinfCreateOrConnectWithoutPaiInput[]
@@ -11880,6 +12008,16 @@ export namespace Prisma {
     update?: EventoReinfUpdateWithWhereUniqueWithoutPaiInput | EventoReinfUpdateWithWhereUniqueWithoutPaiInput[]
     updateMany?: EventoReinfUpdateManyWithWhereWithoutPaiInput | EventoReinfUpdateManyWithWhereWithoutPaiInput[]
     deleteMany?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
+  }
+
+  export type EmitenteUpdateOneWithoutEventoReinfNestedInput = {
+    create?: XOR<EmitenteCreateWithoutEventoReinfInput, EmitenteUncheckedCreateWithoutEventoReinfInput>
+    connectOrCreate?: EmitenteCreateOrConnectWithoutEventoReinfInput
+    upsert?: EmitenteUpsertWithoutEventoReinfInput
+    disconnect?: boolean
+    delete?: EmitenteWhereInput | boolean
+    connect?: EmitenteWhereUniqueInput
+    update?: XOR<XOR<EmitenteUpdateToOneWithWhereWithoutEventoReinfInput, EmitenteUpdateWithoutEventoReinfInput>, EmitenteUncheckedUpdateWithoutEventoReinfInput>
   }
 
   export type EventoReinfUncheckedUpdateManyWithoutPaiNestedInput = {
@@ -12453,10 +12591,11 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie: string
+    ie?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
+    eventoReinf?: EventoReinfCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateWithoutContadoresInput = {
@@ -12466,10 +12605,11 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie: string
+    ie?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
+    eventoReinf?: EventoReinfUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteCreateOrConnectWithoutContadoresInput = {
@@ -12527,10 +12667,11 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: StringFieldUpdateOperationsInput | string
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
+    eventoReinf?: EventoReinfUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateWithoutContadoresInput = {
@@ -12539,10 +12680,11 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: StringFieldUpdateOperationsInput | string
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
+    eventoReinf?: EventoReinfUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type ContadorUpsertWithoutEmitentesInput = {
@@ -12642,6 +12784,45 @@ export namespace Prisma {
     data: ContadorEmitenteCreateManyEmitenteInput | ContadorEmitenteCreateManyEmitenteInput[]
   }
 
+  export type EventoReinfCreateWithoutEmitenteInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    erro?: string | null
+    createdAt?: Date | string
+    pai?: EventoReinfCreateNestedOneWithoutFilhosInput
+    filhos?: EventoReinfCreateNestedManyWithoutPaiInput
+  }
+
+  export type EventoReinfUncheckedCreateWithoutEmitenteInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    erro?: string | null
+    paiId?: string | null
+    createdAt?: Date | string
+    filhos?: EventoReinfUncheckedCreateNestedManyWithoutPaiInput
+  }
+
+  export type EventoReinfCreateOrConnectWithoutEmitenteInput = {
+    where: EventoReinfWhereUniqueInput
+    create: XOR<EventoReinfCreateWithoutEmitenteInput, EventoReinfUncheckedCreateWithoutEmitenteInput>
+  }
+
+  export type EventoReinfCreateManyEmitenteInputEnvelope = {
+    data: EventoReinfCreateManyEmitenteInput | EventoReinfCreateManyEmitenteInput[]
+  }
+
   export type EnderecoUpsertWithWhereUniqueWithoutEmitenteInput = {
     where: EnderecoWhereUniqueInput
     update: XOR<EnderecoUpdateWithoutEmitenteInput, EnderecoUncheckedUpdateWithoutEmitenteInput>
@@ -12692,6 +12873,40 @@ export namespace Prisma {
   export type ContadorEmitenteUpdateManyWithWhereWithoutEmitenteInput = {
     where: ContadorEmitenteScalarWhereInput
     data: XOR<ContadorEmitenteUpdateManyMutationInput, ContadorEmitenteUncheckedUpdateManyWithoutEmitenteInput>
+  }
+
+  export type EventoReinfUpsertWithWhereUniqueWithoutEmitenteInput = {
+    where: EventoReinfWhereUniqueInput
+    update: XOR<EventoReinfUpdateWithoutEmitenteInput, EventoReinfUncheckedUpdateWithoutEmitenteInput>
+    create: XOR<EventoReinfCreateWithoutEmitenteInput, EventoReinfUncheckedCreateWithoutEmitenteInput>
+  }
+
+  export type EventoReinfUpdateWithWhereUniqueWithoutEmitenteInput = {
+    where: EventoReinfWhereUniqueInput
+    data: XOR<EventoReinfUpdateWithoutEmitenteInput, EventoReinfUncheckedUpdateWithoutEmitenteInput>
+  }
+
+  export type EventoReinfUpdateManyWithWhereWithoutEmitenteInput = {
+    where: EventoReinfScalarWhereInput
+    data: XOR<EventoReinfUpdateManyMutationInput, EventoReinfUncheckedUpdateManyWithoutEmitenteInput>
+  }
+
+  export type EventoReinfScalarWhereInput = {
+    AND?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
+    OR?: EventoReinfScalarWhereInput[]
+    NOT?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
+    id?: StringFilter<"EventoReinf"> | string
+    evento?: StringFilter<"EventoReinf"> | string
+    periodo?: DateTimeFilter<"EventoReinf"> | Date | string
+    recibo?: StringNullableFilter<"EventoReinf"> | string | null
+    dateEnvio?: DateTimeNullableFilter<"EventoReinf"> | Date | string | null
+    protocoloEnvioLote?: StringNullableFilter<"EventoReinf"> | string | null
+    xml?: StringFilter<"EventoReinf"> | string
+    status?: EnumStatusEventoReinfFilter<"EventoReinf"> | $Enums.StatusEventoReinf
+    erro?: StringNullableFilter<"EventoReinf"> | string | null
+    paiId?: StringNullableFilter<"EventoReinf"> | string | null
+    createdAt?: DateTimeFilter<"EventoReinf"> | Date | string
+    emitenteId?: StringNullableFilter<"EventoReinf"> | string | null
   }
 
   export type ContadorCreateWithoutCertificadosInput = {
@@ -12804,10 +13019,11 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie: string
+    ie?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
+    eventoReinf?: EventoReinfCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteUncheckedCreateWithoutEnderecosInput = {
@@ -12817,10 +13033,11 @@ export namespace Prisma {
     razao_social: string
     cnpj?: string | null
     cpf?: string | null
-    ie: string
+    ie?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
+    eventoReinf?: EventoReinfUncheckedCreateNestedManyWithoutEmitenteInput
   }
 
   export type EmitenteCreateOrConnectWithoutEnderecosInput = {
@@ -12882,10 +13099,11 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: StringFieldUpdateOperationsInput | string
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
+    eventoReinf?: EventoReinfUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EmitenteUncheckedUpdateWithoutEnderecosInput = {
@@ -12894,10 +13112,11 @@ export namespace Prisma {
     razao_social?: StringFieldUpdateOperationsInput | string
     cnpj?: NullableStringFieldUpdateOperationsInput | string | null
     cpf?: NullableStringFieldUpdateOperationsInput | string | null
-    ie?: StringFieldUpdateOperationsInput | string
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
+    eventoReinf?: EventoReinfUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type EventoReinfCreateWithoutFilhosInput = {
@@ -12909,8 +13128,10 @@ export namespace Prisma {
     protocoloEnvioLote?: string | null
     xml: string
     status?: $Enums.StatusEventoReinf
+    erro?: string | null
     createdAt?: Date | string
     pai?: EventoReinfCreateNestedOneWithoutFilhosInput
+    Emitente?: EmitenteCreateNestedOneWithoutEventoReinfInput
   }
 
   export type EventoReinfUncheckedCreateWithoutFilhosInput = {
@@ -12922,8 +13143,10 @@ export namespace Prisma {
     protocoloEnvioLote?: string | null
     xml: string
     status?: $Enums.StatusEventoReinf
+    erro?: string | null
     paiId?: string | null
     createdAt?: Date | string
+    emitenteId?: string | null
   }
 
   export type EventoReinfCreateOrConnectWithoutFilhosInput = {
@@ -12940,8 +13163,10 @@ export namespace Prisma {
     protocoloEnvioLote?: string | null
     xml: string
     status?: $Enums.StatusEventoReinf
+    erro?: string | null
     createdAt?: Date | string
     filhos?: EventoReinfCreateNestedManyWithoutPaiInput
+    Emitente?: EmitenteCreateNestedOneWithoutEventoReinfInput
   }
 
   export type EventoReinfUncheckedCreateWithoutPaiInput = {
@@ -12953,7 +13178,9 @@ export namespace Prisma {
     protocoloEnvioLote?: string | null
     xml: string
     status?: $Enums.StatusEventoReinf
+    erro?: string | null
     createdAt?: Date | string
+    emitenteId?: string | null
     filhos?: EventoReinfUncheckedCreateNestedManyWithoutPaiInput
   }
 
@@ -12964,6 +13191,39 @@ export namespace Prisma {
 
   export type EventoReinfCreateManyPaiInputEnvelope = {
     data: EventoReinfCreateManyPaiInput | EventoReinfCreateManyPaiInput[]
+  }
+
+  export type EmitenteCreateWithoutEventoReinfInput = {
+    id?: string
+    cod_dominio: string
+    nome: string
+    razao_social: string
+    cnpj?: string | null
+    cpf?: string | null
+    ie?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enderecos?: EnderecoCreateNestedManyWithoutEmitenteInput
+    contadores?: ContadorEmitenteCreateNestedManyWithoutEmitenteInput
+  }
+
+  export type EmitenteUncheckedCreateWithoutEventoReinfInput = {
+    id?: string
+    cod_dominio: string
+    nome: string
+    razao_social: string
+    cnpj?: string | null
+    cpf?: string | null
+    ie?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    enderecos?: EnderecoUncheckedCreateNestedManyWithoutEmitenteInput
+    contadores?: ContadorEmitenteUncheckedCreateNestedManyWithoutEmitenteInput
+  }
+
+  export type EmitenteCreateOrConnectWithoutEventoReinfInput = {
+    where: EmitenteWhereUniqueInput
+    create: XOR<EmitenteCreateWithoutEventoReinfInput, EmitenteUncheckedCreateWithoutEventoReinfInput>
   }
 
   export type EventoReinfUpsertWithoutFilhosInput = {
@@ -12985,8 +13245,10 @@ export namespace Prisma {
     protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
     xml?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     pai?: EventoReinfUpdateOneWithoutFilhosNestedInput
+    Emitente?: EmitenteUpdateOneWithoutEventoReinfNestedInput
   }
 
   export type EventoReinfUncheckedUpdateWithoutFilhosInput = {
@@ -12997,8 +13259,10 @@ export namespace Prisma {
     protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
     xml?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
     paiId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EventoReinfUpsertWithWhereUniqueWithoutPaiInput = {
@@ -13017,20 +13281,41 @@ export namespace Prisma {
     data: XOR<EventoReinfUpdateManyMutationInput, EventoReinfUncheckedUpdateManyWithoutPaiInput>
   }
 
-  export type EventoReinfScalarWhereInput = {
-    AND?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
-    OR?: EventoReinfScalarWhereInput[]
-    NOT?: EventoReinfScalarWhereInput | EventoReinfScalarWhereInput[]
-    id?: StringFilter<"EventoReinf"> | string
-    evento?: StringFilter<"EventoReinf"> | string
-    periodo?: DateTimeFilter<"EventoReinf"> | Date | string
-    recibo?: StringNullableFilter<"EventoReinf"> | string | null
-    dateEnvio?: DateTimeNullableFilter<"EventoReinf"> | Date | string | null
-    protocoloEnvioLote?: StringNullableFilter<"EventoReinf"> | string | null
-    xml?: StringFilter<"EventoReinf"> | string
-    status?: EnumStatusEventoReinfFilter<"EventoReinf"> | $Enums.StatusEventoReinf
-    paiId?: StringNullableFilter<"EventoReinf"> | string | null
-    createdAt?: DateTimeFilter<"EventoReinf"> | Date | string
+  export type EmitenteUpsertWithoutEventoReinfInput = {
+    update: XOR<EmitenteUpdateWithoutEventoReinfInput, EmitenteUncheckedUpdateWithoutEventoReinfInput>
+    create: XOR<EmitenteCreateWithoutEventoReinfInput, EmitenteUncheckedCreateWithoutEventoReinfInput>
+    where?: EmitenteWhereInput
+  }
+
+  export type EmitenteUpdateToOneWithWhereWithoutEventoReinfInput = {
+    where?: EmitenteWhereInput
+    data: XOR<EmitenteUpdateWithoutEventoReinfInput, EmitenteUncheckedUpdateWithoutEventoReinfInput>
+  }
+
+  export type EmitenteUpdateWithoutEventoReinfInput = {
+    cod_dominio?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    razao_social?: StringFieldUpdateOperationsInput | string
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enderecos?: EnderecoUpdateManyWithoutEmitenteNestedInput
+    contadores?: ContadorEmitenteUpdateManyWithoutEmitenteNestedInput
+  }
+
+  export type EmitenteUncheckedUpdateWithoutEventoReinfInput = {
+    cod_dominio?: StringFieldUpdateOperationsInput | string
+    nome?: StringFieldUpdateOperationsInput | string
+    razao_social?: StringFieldUpdateOperationsInput | string
+    cnpj?: NullableStringFieldUpdateOperationsInput | string | null
+    cpf?: NullableStringFieldUpdateOperationsInput | string | null
+    ie?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    enderecos?: EnderecoUncheckedUpdateManyWithoutEmitenteNestedInput
+    contadores?: ContadorEmitenteUncheckedUpdateManyWithoutEmitenteNestedInput
   }
 
   export type UsuarioContadorCreateManyUsuarioInput = {
@@ -13138,6 +13423,20 @@ export namespace Prisma {
     contadorId: string
   }
 
+  export type EventoReinfCreateManyEmitenteInput = {
+    id?: string
+    evento: string
+    periodo: Date | string
+    recibo?: string | null
+    dateEnvio?: Date | string | null
+    protocoloEnvioLote?: string | null
+    xml: string
+    status?: $Enums.StatusEventoReinf
+    erro?: string | null
+    paiId?: string | null
+    createdAt?: Date | string
+  }
+
   export type EnderecoUpdateWithoutEmitenteInput = {
     tipo?: StringFieldUpdateOperationsInput | string
     logradouro?: StringFieldUpdateOperationsInput | string
@@ -13195,6 +13494,47 @@ export namespace Prisma {
     contadorId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type EventoReinfUpdateWithoutEmitenteInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    pai?: EventoReinfUpdateOneWithoutFilhosNestedInput
+    filhos?: EventoReinfUpdateManyWithoutPaiNestedInput
+  }
+
+  export type EventoReinfUncheckedUpdateWithoutEmitenteInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
+    paiId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    filhos?: EventoReinfUncheckedUpdateManyWithoutPaiNestedInput
+  }
+
+  export type EventoReinfUncheckedUpdateManyWithoutEmitenteInput = {
+    evento?: StringFieldUpdateOperationsInput | string
+    periodo?: DateTimeFieldUpdateOperationsInput | Date | string
+    recibo?: NullableStringFieldUpdateOperationsInput | string | null
+    dateEnvio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
+    xml?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
+    paiId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type EventoReinfCreateManyPaiInput = {
     id?: string
     evento: string
@@ -13204,7 +13544,9 @@ export namespace Prisma {
     protocoloEnvioLote?: string | null
     xml: string
     status?: $Enums.StatusEventoReinf
+    erro?: string | null
     createdAt?: Date | string
+    emitenteId?: string | null
   }
 
   export type EventoReinfUpdateWithoutPaiInput = {
@@ -13215,8 +13557,10 @@ export namespace Prisma {
     protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
     xml?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     filhos?: EventoReinfUpdateManyWithoutPaiNestedInput
+    Emitente?: EmitenteUpdateOneWithoutEventoReinfNestedInput
   }
 
   export type EventoReinfUncheckedUpdateWithoutPaiInput = {
@@ -13227,7 +13571,9 @@ export namespace Prisma {
     protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
     xml?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
     filhos?: EventoReinfUncheckedUpdateManyWithoutPaiNestedInput
   }
 
@@ -13239,7 +13585,9 @@ export namespace Prisma {
     protocoloEnvioLote?: NullableStringFieldUpdateOperationsInput | string | null
     xml?: StringFieldUpdateOperationsInput | string
     status?: EnumStatusEventoReinfFieldUpdateOperationsInput | $Enums.StatusEventoReinf
+    erro?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    emitenteId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

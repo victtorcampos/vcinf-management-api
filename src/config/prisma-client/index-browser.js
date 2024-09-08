@@ -6,7 +6,7 @@ const {
   objectEnumValues,
   makeStrictEnum,
   Public,
-  getRuntime,
+  getRuntime
 } = require('./runtime/index-browser.js')
 
 
@@ -16,12 +16,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.17.0
- * Query Engine version: 4c784e32044a8a016d99474bd02a3b6123742169
+ * Prisma Client JS version: 5.19.1
+ * Query Engine version: 69d742ee20b815d88e17e54db4a2a7a3b30324e3
  */
 Prisma.prismaVersion = {
-  client: "5.17.0",
-  engine: "4c784e32044a8a016d99474bd02a3b6123742169"
+  client: "5.19.1",
+  engine: "69d742ee20b815d88e17e54db4a2a7a3b30324e3"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -192,8 +192,10 @@ exports.Prisma.EventoReinfScalarFieldEnum = {
   protocoloEnvioLote: 'protocoloEnvioLote',
   xml: 'xml',
   status: 'status',
+  erro: 'erro',
   paiId: 'paiId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  emitenteId: 'emitenteId'
 };
 
 exports.Prisma.SortOrder = {
@@ -214,9 +216,12 @@ exports.Role = exports.$Enums.Role = {
 
 exports.StatusEventoReinf = exports.$Enums.StatusEventoReinf = {
   CRIADO: 'CRIADO',
+  PENDENTE: 'PENDENTE',
+  ASSINADO: 'ASSINADO',
   ENVIADO: 'ENVIADO',
-  SUCESSO: 'SUCESSO',
-  ERROR: 'ERROR'
+  ERROR: 'ERROR',
+  CONFIRMADO: 'CONFIRMADO',
+  OUTRO: 'OUTRO'
 };
 
 exports.Prisma.ModelName = {
