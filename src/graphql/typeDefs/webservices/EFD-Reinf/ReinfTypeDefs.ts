@@ -27,6 +27,16 @@ export const ReinfTypeDefs = gql`
         emitenteId: ID
     }
 
+    type EnvioReinfType2{
+        id: ID!
+        erro: String
+        emitente: emitenteType
+    }
+
+    type emitenteType {
+        cnpj: String
+        razao_social: String
+    }
     enum StatusEventoReinf {
         CRIADO
         PENDENTE
@@ -44,7 +54,7 @@ export const ReinfTypeDefs = gql`
     }
 
     type Query {
-        enviarReinfTotal: [EnvioReinfType!]
+        enviarReinfTotal: [EnvioReinfType2!]
     }
 
     schema {

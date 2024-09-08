@@ -47,15 +47,18 @@ export const ReinfResolvers = {
 
             });
 
-            const result = await prisma.eventoReinf.findMany({ where: { status: "ERROR" }, include: { Emitente: true } })
+            const result1 = await prisma.eventoReinf.findMany({ where: { status: "ENVIADO" }, include: { Emitente: true } });
+            console.log(result1.length);
+            
+            const result = await prisma.eventoReinf.findMany({ where: { status: "ERROR" }, include: { Emitente: true } });
             const retorno = result.map((evento) => {
                 return { id: evento.id, erro: evento.erro, emitente: { cnpj: evento.Emitente?.cnpj, razao_social: evento.Emitente?.razao_social } }
             })
 
-            console.log(retorno);
+            console.log(retorno.length);
+            
 
-
-            return await prisma.eventoReinf.findMany({ where: { status: "ERROR" }, include: { Emitente: true } });
+            return retorno;
 
         }
     },
