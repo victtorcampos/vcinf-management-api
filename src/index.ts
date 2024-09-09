@@ -1,15 +1,44 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer, gql } from 'apollo-server-express';
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 import { PrismaClient } from './config/prisma-client';
 import { AuthTypeDefs, ContadorTypeDefs, EmitenteTypeDefs, ReinfTypeDefs, UsuarioTypeDefs } from './graphql/typeDefs';
-import { AuthResolvers, ContadorResolvers, EmitenteResolvers, ReinfResolvers, UsuarioResolvers } from './graphql/resolvers';
-
+import { AuthResolvers, ContadorResolvers, EmitenteResolvers, MovimentoFiscalResolvers, ReinfResolvers, UsuarioResolvers } from './graphql/resolvers';
+import { readFileSync } from 'fs';
 
 const prisma = new PrismaClient();
-const typeDefs = [UsuarioTypeDefs, ContadorTypeDefs, EmitenteTypeDefs, AuthTypeDefs, ReinfTypeDefs];
-const resolvers = [ContadorResolvers, UsuarioResolvers, EmitenteResolvers, AuthResolvers, ReinfResolvers]
+const schemaTypeDefs = readFileSync('./src/graphql/typeDefs/schema.graphql', { encoding: 'utf-8' });
 
-const server = new ApolloServer({ typeDefs, resolvers, context: ({ req }) => { return { prisma, req, }; }, });
+const typeDefs = [UsuarioTypeDefs, ContadorTypeDefs, EmitenteTypeDefs, AuthTypeDefs, ReinfTypeDefs, schemaTypeDefs];
+const resolvers = [ContadorResolvers, UsuarioResolvers, EmitenteResolvers, AuthResolvers, ReinfResolvers, MovimentoFiscalResolvers];
 
-server.listen().then(({ url }) => {
-    console.log(`🚀 Server ready at ${url}`);
+// Configurando o servidor Express
+const app = express();
+
+// Habilitando CORS
+app.use(cors({
+    origin: '*', // Permite que qualquer origem faça requisições
+    methods: 'GET,POST,PUT,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization',
+}));
+
+// Ajustando o limite de tamanho do body
+app.use(bodyParser.json({ limit: '100mb' })); // Ajuste o limite conforme necessário
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
+
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+
+    context: ({ req }) => { return { prisma, req }; },
+});
+
+// Aplicando o middleware do Apollo Server ao Express
+server.start().then(() => {
+    server.applyMiddleware({ app });
+
+    app.listen({ port: 4000 }, () =>
+        console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+    );
 });

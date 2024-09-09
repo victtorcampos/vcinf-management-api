@@ -1,0 +1,22 @@
+input FilesPeriodoInput {
+  periodo: String!
+  tipoDoc: TipoDoc!
+  fileExcelZip: fileInput
+  fileXmlZip: fileInput
+}
+
+input fileInput {
+  mime: String
+  data: String
+}
+
+enum TipoDoc {
+  NFCE
+  NFE
+  CTE
+  NFSE
+}
+
+type Mutation {
+  getExcelSefaz(data: FilesPeriodoInput): String
+}
