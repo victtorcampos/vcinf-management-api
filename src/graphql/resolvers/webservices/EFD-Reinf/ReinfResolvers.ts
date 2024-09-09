@@ -4,7 +4,7 @@ import { $Enums, Certificado, Contador, PrismaClient, type EventoReinf } from ".
 import { ApolloError, AuthenticationError } from "apollo-server";
 import { getAuth } from "../../../../services/authService";
 import { createLote } from "../../../../services/webservice/EFD-Reinf";
-import { createFile, sendReinfLote, signReinfLote } from "../../../../controller/webservices/EFD-Reinf/ReinfContoller";
+import { consultaRecibo, createFile, sendReinfLote, signReinfLote } from "../../../../controller/webservices/EFD-Reinf/ReinfContoller";
 
 const prisma = new PrismaClient({});
 
@@ -28,37 +28,17 @@ export const ReinfResolvers = {
     Date: DateScalar,
     Query: {
         enviarReinfTotal: async (parent: any, args: any, context: any) => {
-            const emitenteWithIdOnly = await prisma.emitente.findMany({ select: { id: true, eventoReinf: true, razao_social: true, cnpj: true }, take: 1 })
-            emitenteWithIdOnly.forEach(async (emitente) => {
 
-                //  const result = await createFile({ periodo: "2024-08-01T00:00:00Z", cnpj: emitente?.cnpj }, context);
+            const result1 = await prisma.eventoReinf.findMany({ include: { Emitente: true }, orderBy: { Emitente: { cod_dominio: 'asc' } } });
 
-                const dataEspecifica = new Date('2024-08-01T00:00:00Z');
-                const registrosFiltrados = emitente.eventoReinf.filter(registro =>
-                    registro.periodo.getTime() === dataEspecifica.getTime()
-                );
 
-                console.log(emitente.id, registrosFiltrados[0].id);
-
-                //const result = await signReinfLote({ id: registrosFiltrados[0].id }, context);
-                // const result = await sendReinfLote({ id: registrosFiltrados[0].id }, context);
-
-                // console.log(result);
-
-            });
-
-            const result1 = await prisma.eventoReinf.findMany({ where: { status: "ENVIADO" }, include: { Emitente: true } });
-            console.log(result1.length);
-            
             const result = await prisma.eventoReinf.findMany({ where: { status: "ERROR" }, include: { Emitente: true } });
             const retorno = result.map((evento) => {
                 return { id: evento.id, erro: evento.erro, emitente: { cnpj: evento.Emitente?.cnpj, razao_social: evento.Emitente?.razao_social } }
             })
 
-            console.log(retorno.length);
-            
 
-            return retorno;
+            return result1;
 
         }
     },

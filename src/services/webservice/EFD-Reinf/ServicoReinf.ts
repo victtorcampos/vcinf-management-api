@@ -15,6 +15,26 @@ export const createLote = async (data: TypeMovimentoReinf): Promise<any> => {
     return evtFechamento;
 }
 
+export const consultaReciboReinf = async (protocolo: string, certificado: TypeCertificadoReinf): Promise<any> => {
+    try {
+        let decodedCertificado = Buffer.from(certificado.fileBase64, 'base64');
+        const response = await axios.get(`https://reinf.receita.economia.gov.br/consulta/lotes/${protocolo}`, { httpsAgent: new https.Agent({ pfx: decodedCertificado, passphrase: certificado.password, rejectUnauthorized: false, noDelay: false }), headers: { 'Content-Type': 'application/xml' } })
+        const reciboMatch = response.data.match(/<nrRecArqBase>([^<]+)<\/nrRecArqBase>/);
+        const codRespMatch = response.data.match(/<codResp>([^<]+)<\/codResp>/);
+         
+        return {
+            recibo: reciboMatch ? reciboMatch[1] : null,
+            codResp: codRespMatch ? codRespMatch[1] : null,
+        }
+
+    } catch (error) {
+        return {
+            recibo: null,
+            codResp: null
+        }
+    }
+}
+
 export const enviarReinf = async (xml: string, certificado: TypeCertificadoReinf): Promise<any> => {
     try {
         let decodedString = Buffer.from(xml, 'base64').toString('utf8');

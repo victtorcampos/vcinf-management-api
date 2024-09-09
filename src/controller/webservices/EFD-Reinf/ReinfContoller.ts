@@ -1,7 +1,7 @@
 import { ApolloError, ValidationError } from "apollo-server";
 import { getAuth } from "../../../services/authService";
 import { $Enums, PrismaClient, type EventoReinf } from "../../../config/prisma-client";
-import { createLote, enviarReinf, signFile } from "../../../services/webservice/EFD-Reinf";
+import { consultaReciboReinf, createLote, enviarReinf, signFile } from "../../../services/webservice/EFD-Reinf";
 import { AxiosError } from "axios";
 
 const prisma = new PrismaClient({});
@@ -73,7 +73,7 @@ export const createFile = async (data: any, context: any): Promise<EventoReinf> 
 
         };
 
-        
+
 
         const xmlLote = await createLote({ periodo: periodo, emitente });
 
@@ -107,7 +107,7 @@ export const signReinfLote = async (data: any, context: any): Promise<EventoRein
     try {
 
         const { userId, contadorId, role } = getAuth(context.req);
-        
+
 
         let contadorFind = await prisma.contador.findUnique({ where: { id: contadorId }, include: { certificados: true } });
 
@@ -115,8 +115,8 @@ export const signReinfLote = async (data: any, context: any): Promise<EventoRein
         if (!contadorFind?.certificados) { throw new ApolloError('Certificado não encontrador.', 'NOT_FOUND'); };
 
         let evento = await prisma.eventoReinf.findUnique({ where: { id: data.id } });
-        
-        
+
+
         if (!evento) { throw new ValidationError('ID não fornecido.'); }
         if (evento.status !== "CRIADO") { throw new ValidationError('ID não fornecido.'); }
 
@@ -145,6 +145,80 @@ export const signReinfLote = async (data: any, context: any): Promise<EventoRein
             emitenteId: "",
         }
 
+    }
+}
+
+export const consultaRecibo = async (data: any, context: any): Promise<EventoReinf> => {
+    try {
+        const { userId, contadorId, role } = getAuth(context.req);
+        let evento = await prisma.eventoReinf.findUnique({ where: { id: data.id }, include: { Emitente: true } })
+        let contadorFind = await prisma.contador.findUnique({ where: { id: contadorId }, include: { certificados: true } });
+
+        if (!contadorFind) { throw new ApolloError('Contador não encontrado.', 'NOT_FOUND'); }
+        if (!contadorFind.certificados) { throw new ApolloError('Certificado não encontrador.', 'NOT_FOUND'); };
+
+        if (!evento) { throw new ApolloError('Evento não encotrado.', 'NOT_FOUND'); }
+        if (!evento.Emitente) { throw new ApolloError('Emitente não encotrado.', 'NOT_FOUND'); }
+
+        let prot = null;
+        let result = null;
+        if (evento.erro) {
+            const erroMatch = evento.erro.match(/Protocolo: (\d+\.\d+\.\d+)/);
+            prot = erroMatch ? erroMatch[1].length === 18 ? erroMatch[1] : null : null;
+        }
+
+        if (!evento.protocoloEnvioLote) {
+            if (!prot) {
+                throw new ApolloError('Protocolo não encontrador.', 'NOT_FOUND');
+
+            } else {
+                evento.protocoloEnvioLote = prot;
+            }
+        }
+
+        if (evento.status !== "ERROR") { throw new ApolloError('Evento não enviado.', 'NOT_FOUND'); }
+
+        result = await consultaReciboReinf(evento.protocoloEnvioLote, contadorFind.certificados[0]);
+
+        if (result.recibo) {
+            return await prisma.eventoReinf.update({ where: { id: data.id }, data: { recibo: result.recibo, status: "CONFIRMADO" }, include: { Emitente: true } })
+        }
+
+        if (result.codResp === "MS1078") {
+            return await prisma.eventoReinf.update({ where: { id: data.id }, data: { recibo: result.recibo, status: "OUTRO", erro: `MS1078: A EFD já foi fechada para o período informado, ou existe um evento de fechamento em processamento` }, include: { Emitente: true } })
+        }
+
+        if (result.codResp === "MS0015") {
+            return await prisma.eventoReinf.update({ where: { id: data.id }, data: { recibo: result.recibo, status: "ERROR", erro: `MS0015: Operação não permitida. Para pessoa jurídica, deve ser utilizado certificado digital: da matriz do CNPJ declarante, ou cujo CPF pertença ao representante legal do CNPJ da matriz do declarante, ou que pertença a um procurador do CNPJ da matriz do declarante devidamente habilitado no sistema de Procuração Eletrônica da RFB.` }, include: { Emitente: true } })
+        }
+
+        if (result.codResp === "MS1009") {
+            return await prisma.eventoReinf.update({ where: { id: data.id }, data: { recibo: result.recibo, status: "ERROR", erro: `MS1009: Não existem Informações do Contribuinte vigentes na data do evento. Verifique o evento R-1000 - Informações do contribuinte.` }, include: { Emitente: true } })
+        }
+
+        if (result.codResp === "MS1234") {
+            return await prisma.eventoReinf.update({ where: { id: data.id }, data: { recibo: result.recibo, status: "OUTRO", erro: `MS1234: O CNPJ está baixado no período de apuração. O mês/ano de referência das informações é maior que o mês/ano da data da baixa registrada no sistema CNPJ.` }, include: { Emitente: true } })
+        }
+
+        return evento;
+
+    } catch (error) {
+        console.log(error);
+
+        return {
+            id: "",
+            evento: "",
+            periodo: new Date(),
+            recibo: "",
+            dateEnvio: new Date(),
+            erro: "",
+            protocoloEnvioLote: "",
+            xml: "",
+            status: $Enums.StatusEventoReinf.ERROR,
+            paiId: "",
+            createdAt: new Date(),
+            emitenteId: "",
+        }
     }
 }
 

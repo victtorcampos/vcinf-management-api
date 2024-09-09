@@ -37,7 +37,7 @@ export const EmitenteTypeDefs = gql`
     razao_social: String
     cnpj: String
     cpf: String
-    IE: String
+    ie: String
     enderecos: [EnderecoInput]
   }
 
@@ -45,6 +45,7 @@ export const EmitenteTypeDefs = gql`
     createEmitente(data : EmitenteInputCreate): EmitenteResponse
     findIdEmitente(id: ID!): EmitenteResponse
     deleteIdEmitente(id: ID!): deleteEmitenteResponse
+    conslutaReceitaws(cnpj: String): EmitenteResponse
   }
 
   type Query {

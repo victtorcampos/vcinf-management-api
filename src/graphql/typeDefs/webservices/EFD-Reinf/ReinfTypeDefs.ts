@@ -30,11 +30,16 @@ export const ReinfTypeDefs = gql`
     type EnvioReinfType2{
         id: ID!
         erro: String
-        emitente: emitenteType
+        periodo: String
+        recibo: String
+        protocoloEnvioLote: String
+        status: String
+        Emitente: emitenteType
     }
 
     type emitenteType {
         cnpj: String
+        cod_dominio: String
         razao_social: String
     }
     enum StatusEventoReinf {
