@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Reinf</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <style>
+        .sub-line {
+            font-style: italic;
+            color: red;
+        }
+		th{
+			
+		}
+		.my-striped-table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Cor para linhas ímpares */
+}
+
+.my-striped-table tbody tr:nth-child(even) {
+    background-color: #ffffff; /* Cor para linhas pares, opcional se quiser uma cor diferente da padrão */
+}
+
+
+		th:nth-child(6), td:nth-child(6) {
+			width: 260px; 
+		}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Relatório de Reinf</h3>
+    <div class="input-group mb-3" style="width: 200px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Período</span>
+        </div>
+        <input type="text" id="periodPicker" class="form-control" placeholder="Mês/Ano" aria-label="Period" aria-describedby="basic-addon1">
+    </div>
+    <button id="loadReport" class="btn btn-primary">Carregar Relatório</button>
+    <table class="table table-sm table-bordered my-striped-table">
+        <thead>
+            <tr class="table-active">
+				<th scope="col">#</th>
+                <th scope="col">Código Domínio</th>
+                <th scope="col">Razão Social</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col">Status</th>
+                <th scope="col">Recibo</th>
+            </tr>
+        </thead>
+        <tbody id="reportTableBody">
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+    function loadReport(period) {
+	const [ano, mes] = period.split('-');
+        fetch('http://localhost:4000', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmNlNmM2MWFhNzBlNzBmNzYzZTY4OTMiLCJyb2xlIjoiQURNSU4iLCJjb250YWRvcklkIjoiNjZjZmU5YTRmMDgwMTA2Yjc0OTEwNTgwIiwiaWF0IjoxNzI1ODM1NTE1LCJleHAiOjE3MjU5MjE5MTV9.yLPu6L7q5gazapOIas0afXlepH4x8VpiwcRl3kHLM0o' // Substitua 'token' pelo seu token real
+            },
+            body: JSON.stringify({
+                query: `mutation {
+					resultado: relatorioReinf(periodo: "${period}") {
+                        id
+                        erro
+                        recibo
+                        periodo
+                        protocolo: protocoloEnvioLote
+                        status
+                        emitente: Emitente {
+                            cnpj
+                            razao_social
+                            cod_dominio
+                        }
+                    }
+                }`
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            $('#reportTableBody').empty(); // Limpa a tabela antes de adicionar novos dados
+            const entries = data.data.resultado;
+			let count = 1;
+            entries.forEach(entry => {
+                let row = `<tr>
+					<td scope="row">${count++}</td>
+                    <td>${entry.emitente.cod_dominio}</td>
+                    <td>${entry.emitente.razao_social}</td>
+                    <td>${entry.emitente.cnpj}</td>
+                    <td>${entry.status}</td>
+                    <td>${entry.recibo || 'N/A'}</td>
+                </tr>`;
+                if (entry.status === 'ERROR') {
+                    row += `<tr class="sub-line" ><td colspan="6">${entry.erro}</td></tr>`;
+                }
+                $('#reportTableBody').append(row);
+            });
+        })
+        .catch(error => console.error('Error fetching data: ', error));
+    }
+
+    $(document).ready(function() {
+        $('#loadReport').on('click', function() {
+            const period = $('#periodPicker').val();
+            if (period) {
+                loadReport(period);
+            } else {
+                M.toast({html: 'Por favor, escolha um período para carregar o relatório!'});
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#periodPicker').datepicker({
+            format: "mm/yyyy",
+            startView: "months", 
+            minViewMode: "months",
+            autoclose: true
+        });
+
+        $('#loadReport').on('click', function() {
+            const period = $('#periodPicker').val();
+            if (period) {
+                // Aqui você pode adicionar a chamada para a função que carrega o relatório
+                console.log('Período selecionado:', period);
+            } else {
+                alert('Por favor, escolha um período para carregar o relatório!');
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -30,7 +30,7 @@ export const ReinfTypeDefs = gql`
     type EnvioReinfType2{
         id: ID!
         erro: String
-        periodo: String
+        periodo: Date
         recibo: String
         protocoloEnvioLote: String
         status: String
@@ -56,6 +56,7 @@ export const ReinfTypeDefs = gql`
         createReinfR2099(data: createReinfR2099Input): EnvioReinfType
         sendReinfR2099(id: ID!): EnvioReinfType
         signReinfR2099(id: ID!): EnvioReinfType
+        relatorioReinf(periodo: String): [EnvioReinfType2!]
     }
 
     type Query {

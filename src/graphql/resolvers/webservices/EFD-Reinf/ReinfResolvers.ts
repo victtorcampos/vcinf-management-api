@@ -4,7 +4,7 @@ import { $Enums, Certificado, Contador, PrismaClient, type EventoReinf } from ".
 import { ApolloError, AuthenticationError } from "apollo-server";
 import { getAuth } from "../../../../services/authService";
 import { createLote } from "../../../../services/webservice/EFD-Reinf";
-import { consultaRecibo, createFile, sendReinfLote, signReinfLote } from "../../../../controller/webservices/EFD-Reinf/ReinfContoller";
+import { consultaRecibo, createFile, relatorioReinf, sendReinfLote, signReinfLote } from "../../../../controller/webservices/EFD-Reinf/ReinfContoller";
 
 const prisma = new PrismaClient({});
 
@@ -28,17 +28,8 @@ export const ReinfResolvers = {
     Date: DateScalar,
     Query: {
         enviarReinfTotal: async (parent: any, args: any, context: any) => {
-
-            const result1 = await prisma.eventoReinf.findMany({ include: { Emitente: true }, orderBy: { Emitente: { cod_dominio: 'asc' } } });
-
-
-            const result = await prisma.eventoReinf.findMany({ where: { status: "ERROR" }, include: { Emitente: true } });
-            const retorno = result.map((evento) => {
-                return { id: evento.id, erro: evento.erro, emitente: { cnpj: evento.Emitente?.cnpj, razao_social: evento.Emitente?.razao_social } }
-            })
-
-
-            return result1;
+            const findEventoReinf = await prisma.eventoReinf.findMany({ include: { Emitente: true }, orderBy: { Emitente: { cod_dominio: 'asc' } } });
+            return findEventoReinf;
 
         }
     },
@@ -48,6 +39,7 @@ export const ReinfResolvers = {
         },
         sendReinfR2099: async (_: any, id: string, context: any) => await sendReinfLote(id, context),
         signReinfR2099: async (_: any, id: string, context: any) => await signReinfLote(id, context),
+        relatorioReinf: async (_: any, periodo: string, context: any) => await relatorioReinf(periodo, context),
     },
 }
 

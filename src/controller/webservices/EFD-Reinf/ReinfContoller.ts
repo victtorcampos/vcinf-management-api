@@ -6,6 +6,16 @@ import { AxiosError } from "axios";
 
 const prisma = new PrismaClient({});
 
+export const relatorioReinf = async (data: any, context: any) => {
+
+    const [mes, ano] = data.periodo.split('/');
+    const periodo = new Date(`${ano}-${mes}-01T00:00:00Z`);
+
+
+    const findEventoReinf = await prisma.eventoReinf.findMany({ where: { periodo: periodo }, include: { Emitente: true }, orderBy: { Emitente: { cod_dominio: 'asc' } } });
+    return findEventoReinf;
+}
+
 export const createFile = async (data: any, context: any): Promise<EventoReinf> => {
     try {
         const { periodo, cnpj } = data;
