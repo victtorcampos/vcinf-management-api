@@ -1,13 +1,29 @@
+scalar Upload
+
+type Nota {
+  dataEmissao: Date!
+  serie: String!
+  numero: String!
+  chave: String!
+  protocolo: String!
+  dataAutorizacao: Date!
+  situacao: String!
+  valor: Float!
+  xml: Boolean
+}
+
+type MovimentoFiscal {
+  inscricao: String!
+  nome: String!
+  cnpj: String!
+  notas: [Nota!]!
+}
+
 input FilesPeriodoInput {
   periodo: String!
   tipoDoc: TipoDoc!
-  fileExcelZip: fileInput
-  fileXmlZip: fileInput
-}
-
-input fileInput {
-  mime: String
-  data: String
+  fileExcelZip: Upload!
+  fileXmlZip: Upload!
 }
 
 enum TipoDoc {
@@ -18,5 +34,5 @@ enum TipoDoc {
 }
 
 type Mutation {
-  getExcelSefaz(data: FilesPeriodoInput): String
+  getExcelSefaz(data: FilesPeriodoInput): MovimentoFiscal
 }

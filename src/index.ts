@@ -6,7 +6,7 @@ import { PrismaClient } from './config/prisma-client';
 import { AuthTypeDefs, ContadorTypeDefs, EmitenteTypeDefs, ReinfTypeDefs, UsuarioTypeDefs } from './graphql/typeDefs';
 import { AuthResolvers, ContadorResolvers, EmitenteResolvers, MovimentoFiscalResolvers, ReinfResolvers, UsuarioResolvers } from './graphql/resolvers';
 import { readFileSync } from 'fs';
-
+import { graphqlUploadExpress } from 'graphql-upload-ts';
 const prisma = new PrismaClient();
 const schemaTypeDefs = readFileSync('./src/graphql/typeDefs/schema.graphql', { encoding: 'utf-8' });
 
@@ -23,9 +23,15 @@ app.use(cors({
     allowedHeaders: 'Content-Type, Authorization',
 }));
 
+// Middleware para uploads
+app.use(graphqlUploadExpress({
+    maxFileSize: 210000000, // 210MB de limite por arquivo
+    maxFiles: 10 // Permitir até 10 arquivos
+}));
 // Ajustando o limite de tamanho do body
-app.use(bodyParser.json({ limit: '100mb' })); // Ajuste o limite conforme necessário
-app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
+app.use(bodyParser.json({ limit: '210mb' }));
+app.use(bodyParser.urlencoded({ limit: '210mb', extended: true }));
+
 
 const server = new ApolloServer({
     typeDefs,
